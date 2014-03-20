@@ -1,0 +1,91 @@
+<html>
+<head>
+    <title>\\*</title>
+    <style>
+
+	body {
+		background-color:#FFF;
+	}
+        canvas{
+	}
+        .subdiv{
+		width: 200px;
+	}
+        .text{
+		margin: auto; 
+		width: 190px;
+	}
+
+    </style>
+ 
+    <script type="text/javascript">
+        var can, ctx, step = 50, steps = 255; delay = 20;
+	var rgbstep = 50;
+ 
+        function init() {
+            can = document.getElementById("canvas1");
+            ctx= can.getContext("2d");
+            ctx.fillStyle = "black";
+            ctx.font = "32pt Monaco";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            Textfadeup();        
+	}
+ 
+          function Textfadeup() {
+            rgbstep++;
+            ctx.clearRect(0, 0, can.width, can.height);
+
+            ctx.fillStyle = "rgb(" + rgbstep + "," + rgbstep + "," + rgbstep + ")";
+            ctx.fillText("\\", 150, 100);
+
+		rgbstep2=rgbstep-20;
+            ctx.fillStyle = "rgb(" + rgbstep2 + "," + rgbstep2 + "," + rgbstep2 + ")";
+            ctx.fillText("\\", 180, 100);
+
+		rgbstep3=rgbstep-40;
+            ctx.fillStyle = "rgb(" + rgbstep3 + "," + rgbstep3 + "," + rgbstep3 + ")";
+            ctx.fillText("*", 210, 100);
+
+            if (rgbstep < 255) {
+                var t = setTimeout('Textfadeup()', 10);
+            }
+		if (rgbstep == 255) {
+                Textfadedown();
+            }
+        }
+
+        function Textfadedown() {
+	    rgbstep=rgbstep-1;
+            ctx.clearRect(0, 0, can.width, can.height);
+
+            ctx.fillStyle = "rgb(" + rgbstep + "," + rgbstep + "," + rgbstep + ")";
+            ctx.fillText("\\", 150, 100);
+
+		rgbstep2=rgbstep+20;
+            ctx.fillStyle = "rgb(" + rgbstep2 + "," + rgbstep2 + "," + rgbstep2 + ")";
+            ctx.fillText("\\", 180, 100);
+
+		rgbstep3=rgbstep+40;
+            ctx.fillStyle = "rgb(" + rgbstep3 + "," + rgbstep3 + "," + rgbstep3 + ")";
+            ctx.fillText("*", 210, 100);
+
+            if (rgbstep > 80) {
+                var t = setTimeout('Textfadedown()', 10);
+		}
+            if (rgbstep == 80) {
+                Textfadeup();
+            }
+        }  
+    </script>
+ 
+</head>
+<body onload="init();">
+	<div class="subdiv">
+        	<canvas id="canvas1" width="300" height="200"> 
+		This browser or document mode doesn't support canvas object
+		</canvas>
+	</div>
+</body>
+</html>
+
