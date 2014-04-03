@@ -41,6 +41,10 @@ canvas {
         font-family: Helvetica, Arial, sans-serif;
         }
 
+.red {
+        color:#F00;
+        }
+
 .mainContainer {
         }
 

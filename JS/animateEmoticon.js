@@ -1,4 +1,4 @@
-	var totalCanvas = 11;
+	var totalCanvas = 12;
 	var thisCanvas = new Array();
 	var thisContext = new Array();
 	var thisFrames = new Array();
@@ -7,7 +7,7 @@
         var messages = new Array();
         var xPos = 0;	// canvas width varies
         var yPos = 18;	// 36 px canvas height
-	var delayAdjust = .8;	// to adjust global speed
+	var delayAdjust = 1;	// to adjust global speed
 
         function init() {
 
@@ -140,14 +140,14 @@
 		thisDelay[7] = 100;
 
 		messages[8] = 	[
-				"Wattis",
-				"aWttis",
-				"ittasW",
-				"statiW",
-				"tWiats"
+				"Next Door",
+				"eNxt oDor",
+				"tweN ooDr",
+				"Ntwe Droo",
+				"etwN oorD"
 				];
 
-		thisDelay[8] = 250;
+		thisDelay[8] = 200;
 
 		messages[9] = 	[
 				"+++++++",
@@ -181,6 +181,13 @@
 				];
 
 		thisDelay[10] = 1000;
+
+		messages[11] = 	[
+				"!",
+				"."
+				];
+
+		thisDelay[11] = 150;
 
 		for (var j = 0; j < totalCanvas; j++) {
 
