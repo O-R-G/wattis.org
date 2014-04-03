@@ -1,0 +1,55 @@
+a {
+        color: #000;
+        text-decoration: none;
+        border-bottom: solid 3px;
+        }
+
+a:hover {
+        color:#FFF;
+        border-bottom: solid 3px #000;
+        }
+
+body {
+        color: #000;
+        }
+
+canvas {
+        background: #FFF;
+        }
+
+.big {
+        font-size:38px;
+        }
+
+.medium {
+        font-size:34px;
+        }
+
+.small {
+        font-size:10px;
+        }
+
+.monaco {
+        font-family: Monaco, "Lucida Console", monospace;
+        }
+
+.times {
+        font-family: "Times New Roman", Times, serif;
+        }
+
+.helvetica {
+        font-family: Helvetica, Arial, sans-serif;
+        }
+
+.mainContainer {
+        }
+
+.mainContainer:hover {
+        }
+
+.textContainer {
+        top: 0px;
+        left: 0px;
+        /*display: block;*/
+        float:left;
+        }

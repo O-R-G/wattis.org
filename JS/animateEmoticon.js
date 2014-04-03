@@ -1,178 +1,202 @@
-	var numberofCanvas = 4;
+	var totalCanvas = 11;
 	var thisCanvas = new Array();
 	var thisContext = new Array();
 	var thisFrames = new Array();
         var thisDelay = new Array();
         var thisCounter = new Array();
-        var xPos, yPos, spacer;
+        var messages = new Array();
+        var xPos = 0;	// canvas width varies
+        var yPos = 18;	// 36 px canvas height
+	var delayAdjust = .8;	// to adjust global speed
 
         function init() {
 
-		for (var i = 0; i < numberofCanvas; i++) {
+		for (var i = 0; i < totalCanvas; i++) {
 
 			thisCanvas[i] = document.getElementById("canvas"+i);
 			thisContext[i] = thisCanvas[i].getContext("2d");
 			thisContext[i].fillstyle = "black";
 			thisContext[i].font = "34px Monaco";
-			thisContext[i].textAlign = "center";
+			thisContext[i].textAlign = "left";
 			thisContext[i].textBaseline = "middle";
 			thisCounter[i] = 0;
 		}        
 	
-		// initialize frames per canvas
+		// init array of arrays per canvas animation 
 
-		thisFrames[0] = 9;
+		messages[0] = 	[
+				"// ",
+				"\\/ ",
+				"\\\\ ",
+				"\\\\*",
+				"\\\\ ",
+				"\\\\*"
+				];
+
 		thisDelay[0] = 500;
 
-		thisFrames[1] = 2;
+		messages[1] = 	[
+				"‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀",
+				"⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿",
+				];
+
 		thisDelay[1] = 250;
 
-		thisFrames[2] = 3;
+		messages[2] = 	[
+				"      ",
+				"  ()  ",
+				" (()) ",
+				"((()))",
+				" (()) ",
+				"  ()  ",
+				"      ",
+				"  ()  "
+				];
+
 		thisDelay[2] = 500;
 
-		thisFrames[3] = 2;
+		messages[3] = 	[
+				" * ",
+				"!*!",
+				"! !"
+				];
+
 		thisDelay[3] = 250;
 
-                xPos = 20;
-                yPos = 24;
-                spacer = 22;
-                animateCanvas0(0);
-                animateCanvas1(1);
-                animateCanvas2(2);
-                animateCanvas3(3);
+		messages[4] = 	[
+				"[   ]",
+				"[*  ]",
+				"[ ! ]",
+				"[  #]",
+				"[ ! ]",
+				"[*  ]",
+				"[   ]",
+				"[   ]",
+				"     ",
+				"     ",
+				"[   ]",
+				"[   ]",
+				"     ",
+				"     "
+				];
+
+		thisDelay[4] = 100;
+
+		messages[5] = 	[
+				".    ",
+ 				". .  ",
+				". . .",
+				"    .",
+				"  . .",
+				"  .  ",
+				".    "
+				];
+
+		thisDelay[5] = 250;
+
+		messages[6] = 	[
+				":>",
+ 				":|"
+				];
+
+		thisDelay[6] = 500;
+
+		messages[7] = 	[
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<<⅂",
+				"<  ",
+				">  ",
+				"<  ",
+				">  ",
+				"<  ",
+				">  ",
+				"<  ",
+				">  ",
+				"<  ",
+				">  ",
+				"<  ",
+				">  ",
+				"<  ",
+				">  ",
+				"<  ",
+				">  ",
+				"<  ",
+				">  ",
+				"<  ",
+				"<< ",
+				];
+
+		thisDelay[7] = 100;
+
+		messages[8] = 	[
+				"Wattis",
+				"aWttis",
+				"ittasW",
+				"statiW",
+				"tWiats"
+				];
+
+		thisDelay[8] = 250;
+
+		messages[9] = 	[
+				"+++++++",
+				"xxxxxxx",
+				"-------",
+				"///////",
+				"\\\\\\\\\\\\\\",
+				"///////",
+				"\\\\\\\\\\\\\\",
+				"///////",
+				"\\\\\\\\\\\\\\",
+				"///////",
+				"\\\\\\\\\\\\\\",
+				"+++++++",
+				"x+x+x+x",
+				"#-oeuw0",
+				"w98djkj",
+				"))dskh9",
+				"+786&6*",
+				"^^^^^^^",
+				"odjdvy%",
+				"$$$$$$$"
+				];
+
+		thisDelay[9] = 50;
+
+		messages[10] = 	[
+				"°_°",
+				"°.°",
+				"°_°"
+				];
+
+		thisDelay[10] = 1000;
+
+		for (var j = 0; j < totalCanvas; j++) {
+
+                	animateCanvas(j, messages);
+		}
         }
 
-        function animateCanvas0(thisCanvasID) {
-		thisCounter[thisCanvasID]++;
-                thisContext[thisCanvasID].clearRect(0, 0, thisCanvas[thisCanvasID].width, thisCanvas[thisCanvasID].height);
+        function animateCanvas(thisCanvasID, thisMessage) {
 
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 0) {
-                        thisContext[thisCanvasID].fillText("/", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("/", xPos+spacer, yPos);
-                        thisContext[thisCanvasID].fillText("*", xPos+2*spacer, yPos);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 1) {
-                        thisContext[thisCanvasID].fillText("/", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("/", xPos+spacer, yPos);
-                        thisContext[thisCanvasID].fillText("*", xPos+2*spacer, yPos);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 2) {
-                        thisContext[thisCanvasID].fillText("\\", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("/", xPos+spacer, yPos);
-                        thisContext[thisCanvasID].fillText("*", xPos+2*spacer, yPos);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 3) {
-                        thisContext[thisCanvasID].fillText("\\", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("\\", xPos+spacer, yPos);
-                        thisContext[thisCanvasID].fillText("*", xPos+2*spacer, yPos);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 4) {
-                        thisContext[thisCanvasID].fillText("\\", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("\\", xPos+spacer, yPos);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 5) {
-                        thisContext[thisCanvasID].fillText("\\", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("\\", xPos+spacer, yPos);
-                        thisContext[thisCanvasID].fillText("*", xPos+2*spacer, yPos);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 6) {
-                        thisContext[thisCanvasID].fillText("\\", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("\\", xPos+spacer, yPos);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 7) {
-                        thisContext[thisCanvasID].fillText("\\", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("\\", xPos+spacer, yPos);
-                        thisContext[thisCanvasID].fillText("*", xPos+2*spacer, yPos);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 8) {
-                        thisContext[thisCanvasID].fillText("\\", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("\\", xPos+spacer, yPos);
-                        thisContext[thisCanvasID].fillText("*", xPos+2*spacer, yPos);
-                }
-
-                var t = setTimeout('animateCanvas0(0)', thisDelay[thisCanvasID]);
-        }
-
-        function animateCanvas1(thisCanvasID) {
                 thisCounter[thisCanvasID]++;
                 thisContext[thisCanvasID].clearRect(0, 0, thisCanvas[thisCanvasID].width, thisCanvas[thisCanvasID].height);
 
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 0) {
-                        thisContext[thisCanvasID].fillText("‿", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("⁀", xPos+spacer, yPos);
-                        thisContext[thisCanvasID].fillText("‿", xPos+2*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("⁀", xPos+3*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("‿", xPos+4*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("⁀", xPos+5*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("‿", xPos+6*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("⁀", xPos+7*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("‿", xPos+8*spacer, yPos);
-                }
+		// frame number returns modulus to loop through messages array
+		frameNumber = thisCounter[thisCanvasID] % messages[thisCanvasID].length;
+		thisContext[thisCanvasID].fillText(thisMessage[thisCanvasID][frameNumber], xPos, yPos);
 
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 1) {
-                        thisContext[thisCanvasID].fillText("⁀", xPos, yPos);
-                        thisContext[thisCanvasID].fillText("‿", xPos+spacer, yPos);
-                        thisContext[thisCanvasID].fillText("⁀", xPos+2*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("‿", xPos+3*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("⁀", xPos+4*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("‿", xPos+5*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("⁀", xPos+6*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("‿", xPos+7*spacer, yPos);
-                        thisContext[thisCanvasID].fillText("⁀", xPos+8*spacer, yPos);
-                }
-
-                var t = setTimeout('animateCanvas1(1)', thisDelay[thisCanvasID]);
-        }
-
-        function animateCanvas2(thisCanvasID) {
-                thisCounter[thisCanvasID]++;
-                thisContext[thisCanvasID].clearRect(0, 0, thisCanvas[thisCanvasID].width, thisCanvas[thisCanvasID].height);
-
-		yOffset = 6;
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 0) {
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 1) {
-                        thisContext[thisCanvasID].fillText("(", xPos+spacer, yPos-yOffset);
-                        thisContext[thisCanvasID].fillText(")", xPos+2*spacer, yPos-yOffset);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 2) {
-                        thisContext[thisCanvasID].fillText("(", xPos, yPos-yOffset);
-                        thisContext[thisCanvasID].fillText("(", xPos+spacer, yPos-yOffset);
-                        thisContext[thisCanvasID].fillText(")", xPos+2*spacer, yPos-yOffset);
-                        thisContext[thisCanvasID].fillText(")", xPos+3*spacer, yPos-yOffset);
-                }
-
-                var t = setTimeout('animateCanvas2(2)', thisDelay[thisCanvasID]);
-        }
-
-        function animateCanvas3(thisCanvasID) {
-                thisCounter[thisCanvasID]++;
-                thisContext[thisCanvasID].clearRect(0, 0, thisCanvas[thisCanvasID].width, thisCanvas[thisCanvasID].height);
-
-		yOffset = 0;
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 0) {
-                        thisContext[thisCanvasID].fillText("*", xPos, yPos-yOffset);
-                        thisContext[thisCanvasID].fillText("!", xPos+spacer, yPos-yOffset);
-                        thisContext[thisCanvasID].fillText("*", xPos+2*spacer, yPos-yOffset);
-                }
-
-                if (thisCounter[thisCanvasID] % thisFrames[thisCanvasID] == 1) {
-                        thisContext[thisCanvasID].fillText("*", xPos, yPos-yOffset);
-                        thisContext[thisCanvasID].fillText("*", xPos+2*spacer, yPos-yOffset);
-                }
-
-                var t = setTimeout('animateCanvas3(3)', thisDelay[thisCanvasID]);
-        }
-
+		// scope issue and could be written more elegantly as a callback, but fast enough for now
+		var t = setTimeout("animateCanvas("+thisCanvasID+", messages)", thisDelay[thisCanvasID]*delayAdjust);
+ 	}
