@@ -17,6 +17,11 @@ canvas {
         background: #FFF;
         }
 
+p {
+        margin-left:100px;
+        margin-right:200px;
+        }
+
 .big {
         font-size:38px;
         }
@@ -58,9 +63,51 @@ canvas {
         float:left;
         }
 
+.instructionContainer {
+        margin-right: 10px;
+	}
+
+.symbol {
+        }
+
+
+/* utility */
+
 .thumb {
 	width:200px;        
 	}
 .pad {
 	padding:30px;  
 	}
+
+
+/* added */
+
+
+
+/* colors */
+
+.white {
+        color: #FFF;
+        }
+
+.red {
+        color: #F00;
+        }
+
+.red a {
+	color:#000;
+        border-bottom: solid 3px #FFF;
+        }
+
+.red a:hover {
+        border-bottom: solid 3px #F00;
+        }
+
+.black {
+        color: #000;
+        }
+
+.black a {
+        color: #000;
+        }
