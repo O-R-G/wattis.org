@@ -1,4 +1,4 @@
-	var totalCanvas = 12;
+	var totalCanvas = 16;
 	var thisCanvas = new Array();
 	var thisContext = new Array();
 	var thisFrames = new Array();
@@ -188,6 +188,42 @@
 				];
 
 		thisDelay[11] = 150;
+
+		messages[12] = 	[
+				"’",
+				"‘"
+				];
+
+		thisDelay[12] = 150;
+
+		messages[13] = 	[
+				".",
+				""
+				];
+
+		thisDelay[13] = 150;
+
+		messages[14] = 	[
+				"",
+				"The ",
+				"The exhibition",
+				"The exhibition opens",
+				"The exhibition opens tomorrow" 
+				];
+
+		thisDelay[14] = 300;
+
+		messages[15] = 	[
+				"",
+				"I",
+				"2",
+				"3",
+				"4", 
+				"5", 
+				"6" 
+				];
+
+		thisDelay[15] = 50;
 
 		for (var j = 0; j < totalCanvas; j++) {
 
