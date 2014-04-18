@@ -205,13 +205,13 @@
 
 		messages[14] = 	[
 				"",
-				"The ",
-				"The exhibition",
-				"The exhibition opens",
-				"The exhibition opens tomorrow" 
+				"!",
+				".",
+				"!",
+				"." 
 				];
 
-		thisDelay[14] = 300;
+		thisDelay[14] = 150;
 
 		messages[15] = 	[
 				"",
