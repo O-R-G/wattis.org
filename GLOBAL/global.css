@@ -62,6 +62,97 @@ p {
         float:left;
         }
 
+.wattisContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding:20px;
+        width: 30%;
+        }
+
+.programContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 150px;
+        width: 20%;
+        }
+
+.newsContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 50px;
+        width: 10%;
+        }
+
+.weatherContainer {
+        top: 10px;
+        left: 10px;
+        float:left;
+        padding: 10px;
+        width: 30%;
+        }
+
+.nextdoorContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 100px;
+        width: 25%;
+        }
+
+.byappointmentContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 70px;
+        width: 35%;
+        }
+
+.meanwhileContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 60px;
+        width: 35%;
+        }
+
+.socialContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 100px;
+        width: 10%;
+        }
+
+.scheduleContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 20px;
+        width: 30%;
+        }
+
+.dateContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 60px;
+        width: 30%;
+        }
+
+.detailContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 150px;
+        width: 50%;
+        }
+
+
+
+
 .instructionContainer {
         margin-right: 10px;
 	}
