@@ -6,7 +6,7 @@
         var thisCounter = new Array();
         var messages = new Array();
         var xPos = 0;	// canvas width varies
-        var yPos = 19;	// ?? px canvas height
+        var yPos = 14;	// ?? px canvas height
 	var delayAdjust = 1;	// to adjust global speed
 
 
@@ -19,7 +19,7 @@
 			thisCanvas[i] = document.getElementById("canvas"+i);
 			thisContext[i] = thisCanvas[i].getContext("2d");
 			thisContext[i].fillstyle = "black";
-			thisContext[i].font = "26px Menlo";
+			thisContext[i].font = "24px Menlo";
 			thisContext[i].textAlign = "left";
 			thisContext[i].textBaseline = "middle";
 			thisCounter[i] = 0;

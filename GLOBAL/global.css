@@ -9,8 +9,14 @@ a:hover {
         border-bottom: solid 3px #FFF;
         }
 
+a:active {
+        color:#FFF;
+        border-bottom: solid 3px #FFF;
+        }
+
 body {
         color: #000;
+        background: #FFF;
         }
 
 canvas {
@@ -23,12 +29,12 @@ p {
         }
 
 .big {
-        font-size:32px;
-	/* line-height:40px; */
+        font-size:24px;
+	/* line-height:26px; */
         }
 
 .medium {
-        font-size:34px;
+        font-size:16px;
         }
 
 .small {
@@ -43,8 +49,16 @@ p {
         font-family: "Times New Roman", Times, serif;
         }
 
+.baskerville {
+        font-family: "Baskerville", Times, serif;
+        }
+
 .helvetica {
         font-family: Helvetica, Arial, sans-serif;
+        }
+
+.microsoft {
+        font-family: "Microsoft Sans Serif", Arial, sans-serif;
         }
 
 /* containers */
@@ -134,11 +148,19 @@ p {
         width: 30%;
         }
 
+.archiveContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 150px;
+        width: 20%;
+        }
+
 .dateContainer {
         top: 0px;
         left: 0px;
         float:left;
-        padding: 60px;
+        padding: 40px;
         width: 30%;
         }
 
@@ -194,8 +216,8 @@ p {
         }
 
 .red a {
-	color:#000;
-        border-bottom: solid 3px #FFF;
+	color:#F00;
+        border-bottom: solid 3px #000;
         }
 
 .red a:hover {
