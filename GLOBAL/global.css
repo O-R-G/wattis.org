@@ -5,12 +5,12 @@ a {
         }
 
 a:hover {
-        color:#F00;
+        color:#FFF;
         border-bottom: solid 3px #FFF;
         }
 
 a:active {
-        color:#FFF;
+        color: #F00;
         border-bottom: solid 3px #FFF;
         }
 
@@ -34,7 +34,7 @@ p {
         }
 
 .medium {
-        font-size:16px;
+        font-size:17px;
         }
 
 .small {
@@ -76,6 +76,14 @@ p {
         float:left;
         }
 
+.listContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding:20px;
+        width: 29%;
+	}
+        
 .wattisContainer {
         top: 0px;
         left: 0px;
@@ -112,31 +120,31 @@ p {
         top: 0px;
         left: 0px;
         float:left;
-        padding: 100px;
-        width: 25%;
+        padding: 120px;
+        width: 30%;
         }
 
 .byappointmentContainer {
         top: 0px;
         left: 0px;
         float:left;
-        padding: 70px;
-        width: 35%;
+	padding: 60px;        
+	width: 35%;
         }
 
 .meanwhileContainer {
         top: 0px;
         left: 0px;
         float:left;
-        padding: 60px;
-        width: 35%;
+        padding: 100px;
+        width: 20%;
         }
 
 .socialContainer {
         top: 0px;
         left: 0px;
         float:left;
-        padding: 100px;
+        padding: 80px;
         width: 10%;
         }
 
@@ -154,6 +162,14 @@ p {
         float:left;
         padding: 150px;
         width: 20%;
+        }
+
+.newsletterContainer {
+        top: 0px;
+        left: 0px;
+        float:left;
+        padding: 90px;
+        width: 25%;
         }
 
 .dateContainer {

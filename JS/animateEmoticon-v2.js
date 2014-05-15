@@ -6,7 +6,7 @@
         var thisCounter = new Array();
         var messages = new Array();
         var xPos = 0;	// canvas width varies
-        var yPos = 14;	// ?? px canvas height
+        var yPos = 12;	// ?? px canvas height
 	var delayAdjust = 1;	// to adjust global speed
 
 
@@ -39,8 +39,8 @@
 		thisDelay[0] = 500;
 
 		messages[1] = 	[
-				"‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀",
-				"⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿",
+				"‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀",
+				"⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿",
 				];
 
 		thisDelay[1] = 250;
