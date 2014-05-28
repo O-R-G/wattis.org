@@ -1,41 +1,6 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<!-- <META http-equiv="refresh" content="5;URL=index-7.html"> -->
-<title>CCA Wattis Institute for Contemporary Arts</title>
-<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
-<style>
-
-body {
-	color: #FFF;
-        }
-
-a {
-	color: #000;
-        }
-
-canvas {
-	/* background: #FFF; */
-        }
-     
-</style>
-
-<script type="text/javascript" src="JS/animateEmoticon-v2.js"></script>
-<!-- <script type="text/javascript" src="JS/animateSentences.js"></script> -->
-
-</head>
-<body onload="initEmoticons(1);">
-
-<div class="mainContainer times big black">
-
-<canvas id="canvas0" width="70" height="32" class="times show comment">\\\\*</canvas><span id="sentence0"> ... </span>
-
-<span id="sentence10">In the next three months, there are <a 
-href="detail-17.html">six events</a> planned. <i>Here they 
-are:</i></span>
-
-<br /> 
-<br /> 
+<?php
+require_once("GLOBAL/head.php");
+?>
 
 <span class="listContainer times show comment"><span
 class="monaco">&+}</span> Capp Street Project . . .<br/><br/>
@@ -83,7 +48,6 @@ learn about the artists who created them, and experience these works
 anew.<br/><br/>
 </span>
 
-</div>
-
-</body>
-</html>
+<?php
+require_once("GLOBAL/foot.php");
+?>

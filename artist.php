@@ -1,35 +1,6 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<!-- <META http-equiv="refresh" content="5;URL=index-7.html"> -->
-<title>CCA Wattis Institute for Contemporary Arts</title>
-<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
-<style>
-
-body {
-	color: #FFF;
-        }
-
-a {
-	color: #000;
-        }
-
-canvas {
-	/* background: #FFF; */
-        }
-     
-</style>
-
-<script type="text/javascript" src="JS/animateEmoticon-v2.js"></script>
-<!-- <script type="text/javascript" src="JS/animateSentences.js"></script> -->
-
-</head>
-<body onload="initEmoticons(1);">
-
-<div class="wattisContainer times big black">
-<canvas id="canvas0" width="70" height="32" 
-class="show">\\\\*</canvas><span id="sentence0"> ... </span></div>
-
+<?php
+require_once("GLOBAL/head.php");
+?>
 
 <div class="programContainer times big black" style="width:50%;"> <span 
 id="sentence5"><a href="detail-17.html">Markus Schinwald</a> gives 
@@ -69,6 +40,6 @@ href="index-17.html" class="instructionContainer helvetica small red">GO
 HOME.</a> <span id="sentence13" class="helvetica small">20142615</span> 
 </span>
 
-</div>
-</body>
-</html>
+<?php
+require_once("GLOBAL/foot.php");
+?>

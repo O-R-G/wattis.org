@@ -216,6 +216,10 @@ p {
         visibility: visible;
         }
 
+.clear {
+	clear:both;      
+        }
+
 
 /* added */
 
