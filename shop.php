@@ -11,7 +11,6 @@ Buy Catalogues . . .<br/><br/></span>
 <span class="listContainer doublewide times show comment"> 
 
 <a href="shop-detail.php"><img src="IMAGES/books.gif"></a>
-lkkkkjkhasdjkhdskj daskjhads khdaskhkhk kjhas khkasdhkasdhkjhkjah jhasdkjhdksjh askjhasd jkhdskjh dsakjhk asjh askjash askjh askjdhaksjdh kasjh kasjhkasjhdkjahskj skjh asjkadsh kasjh adskjhads kjhs kjsah 
 </span>
 
 
