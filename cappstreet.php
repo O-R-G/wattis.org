@@ -2,10 +2,15 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<span class="listContainer times show comment"><span
-class="monaco">&+}</span> Capp Street Project . . .<br/><br/>
+<div class="mainContainer times big black">
 
-<img src="IMAGES/capp.jpg"><br/><br/>
+<span class="listContainer times show comment">
+<canvas id="canvas1" width="46" height="22" class="show">% )</canvas>
+Capp Street Project . . .<br/><br/>
+
+<img id="image1" src="IMAGES/capp.jpg" width="75%" onclick="expandImageSize('image1', '100%', '75%');">
+
+<br/><br/>
 
 <span class="monaco medium">
 65 Capp Street<br/>
@@ -47,6 +52,25 @@ website, present-day audiences may view projects as they once existed,
 learn about the artists who created them, and experience these works 
 anew.<br/><br/>
 </span>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                "&+}",
+                                "&  ",
+                                "&+}",
+                                " + ", 
+                                "&+}",
+                                "  }" 
+                                ];
+
+                delay[1] = 500;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
+
 
 <?php
 require_once("GLOBAL/foot.php");

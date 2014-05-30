@@ -2,8 +2,11 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<span class="listContainer times show comment"><span
-class="monaco">:o</span> Intern at the Wattis . . .</span> 
+<div class="mainContainer times big black">
+
+<span class="listContainer times show comment">
+<canvas id="canvas1" width="46" height="22" class="show">% )</canvas>
+Intern at the Wattis . . .<br/><br/></span>
 
 <span class="listContainer times show comment"> 
 Being an intern at the Wattis is an opportunity to experience a 
@@ -33,6 +36,33 @@ E-mail wattis@cca.edu<br/>
 <i>To apply for an internship, <br/>please send a resume with a cover letter to 
 Rita Souther at rsouther@cca.edu.<br/><br/></i>
 </span>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                ":*",
+                                ":*",
+                                ":*",
+                                ":*",
+                                ":*",
+                                ":*",
+                                ":/",
+                                ":|",
+                                ":\\",
+                                ":/",
+                                ":|",
+                                ":\\",
+                                ":/",
+                                ":|",
+                                ":\\",
+                                ];
+
+                delay[1] = 100;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
 
 <?php
 require_once("GLOBAL/foot.php");

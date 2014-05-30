@@ -58,24 +58,18 @@
 	<meta http-equiv="Title" content="<?php echo $documentTitle; ?>" />		
 	<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 	<script type="text/javascript" src="GLOBAL/global.js"></script>
-	<script type="text/javascript" src="JS/animateEmoticon-v2.js"></script>
+        <script type="text/javascript" src="JS/animateEmoticon.js"></script>
+        <script type="text/javascript" src="JS/animateEmoticon-src.js"></script>
 </head>
 
-<body onload="initEmoticons(1);">
-
-
-<!-- THIS IS THE WATTIS -->
-
-<div class="mainContainer times big black">
+<body>
 
 <!-- WATTIS -->
 
-<div class="wattisContainer"><canvas id="canvas0" width="60" height="22" 
-class="show" onclick="showBones();">\\\\*</canvas> ... This is <a 
-href="index-.php">The Wattis</a>.</div>
-
-</div>
+<div class="wattisContainer times big black fixed"><a href="index-.php"><canvas id="canvas0" width="46" 
+height="22" class="show" onclick="showBones();">\\\\*</canvas></a> . . .  This is <a 
+href="main.php">The Wattis</a>.</div>
 
 <div class="clear"></div>
 
-<div class="mainContainer times big black">
+

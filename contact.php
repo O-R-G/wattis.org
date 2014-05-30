@@ -2,8 +2,11 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<span class="listContainer times show comment"><span
-class="monaco">(( ))</span> Contact the Wattis . . .</span> 
+<div class="mainContainer times big black">
+
+<span class="listContainer times show comment">
+<canvas id="canvas1" width="46" height="22" class="show">% )</canvas>
+Contact the Wattis . . .<br/><br/></span>
 
 <span class="listContainer times show comment">
 Please address all postal and FedEx mail to:<br/> <br/>
@@ -90,6 +93,25 @@ Graphic design and web design<br/>
 <i>Please book a guided tour with 
 Rita Souther at 415.355.9673 or <a href="">rsouther@cca.edu</a>.</i></span>
 </span>
+
+<script type="text/javascript">
+window.onload=initEmoticons(1, message, delay);
+</script>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                "(-)",
+                                "(+)",
+                                "(*)",
+                                ];
+
+                delay[1] = 300;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
 
 <?php
 require_once("GLOBAL/foot.php");

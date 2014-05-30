@@ -2,8 +2,10 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<span class="listContainer times show comment"><span
-class="monaco">% )</span> Support the Wattis . . .<br/><br/>	
+<div class="mainContainer times big black">
+
+<span class="listContainer times show comment"><canvas id="canvas1" width="46" 
+height="22" class="show">% )</canvas> Support the Wattis . . .<br/><br/>
 
 The Wattis offers a two-level Membership Program.<br/><br/>
 
@@ -81,6 +83,21 @@ Join here: <img src="IMAGES/paypal.png" width="35%"><br/>
 <span class="listContainer times show comment">
 
 </span>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                "% )",
+                                "% )",
+                                "% |"
+                                ];
+
+                delay[1] = 500;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
 
 <?php
 require_once("GLOBAL/foot.php");

@@ -2,9 +2,11 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<span class="listContainer times show comment"><span
-class="monaco">$-$</span> Buy Catalogues . . .<br /><br />
-</span> 
+<div class="mainContainer times big black">
+
+<span class="listContainer times show comment">
+<canvas id="canvas1" width="46" height="22" class="show">% )</canvas>
+<a href="shop.php">Buy Catalogues</a> . . .<br/><br/></span>
 
 <span class="listContainer times show comment"> 
 
@@ -49,6 +51,22 @@ Order now here: <img src="IMAGES/paypal.png" width="35%"><br/>
 
 </span>
 </span>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                "|||",
+                                ".||",
+                                "..|",
+                                "..."
+                                ];
+
+                delay[1] = 250;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
 
 <?php
 require_once("GLOBAL/foot.php");

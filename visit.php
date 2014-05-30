@@ -2,8 +2,11 @@
 require_once("GLOBAL/head.php"); 
 ?>
 
-<span class="listContainer times show comment"><span
-class="monaco">/\/\/</span> Visit the Wattis . . .</span> 
+<div class="mainContainer times big black">
+
+<span class="listContainer times show comment">
+<canvas id="canvas1" width="46" height="22" class="show">\/\</canvas>
+Visit the Wattis . . .<br/><br/></span>
 
 <span class="listContainer times show comment">
 The Wattis Institute is located in San Francisco. It is open and free to 
@@ -42,6 +45,22 @@ road.<br/><br/>
 <i>Please book a guided tour with 
 Rita Souther at 415.355.9673 or <a href="">rsouther@cca.edu</a>.</i></span>
 </span>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                "\\/\\",
+                                "/\\/",
+                                "\\\\\\",
+                                "///"
+                                ];
+
+                delay[1] = 100;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
 
 <?php 
 require_once("GLOBAL/foot.php"); 

@@ -2,9 +2,17 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<span class="listContainer times show comment"><span
-class="monaco">$-$</span> Buy Limited Editions . . .<br /><br />
-</span> 
+<div class="mainContainer times big black">
+
+
+<span class="listContainer times show comment">
+<canvas id="canvas1" width="46" height="22" class="show">% )</canvas>
+<a href="editions.php">Buy Limited Editions</a> . . .<br/><br/>
+
+<i>All proceeds for the sale of editions go directly toward the support
+of Wattis exhibitions, programs, and research.</i>
+
+</span>
 
 <span class="listContainer times show comment"> 
 
@@ -34,6 +42,23 @@ Order now here: <img src="IMAGES/paypal.png" width="35%"><br/>
 
 </span>
 </span>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                "#.#",
+                                "...",
+                                "..#",
+                                "#..",
+                                ".#."
+                                ];
+
+                delay[1] = 200;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
 
 <?php
 require_once("GLOBAL/foot.php");

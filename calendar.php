@@ -2,14 +2,15 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<span class="listContainer times show comment"><span
-class="monaco">+++</span> Calendar . . .<br /><br />
+<div class="mainContainer times big black">
 
-</span> 
+<span class="listContainer times show comment">
+<canvas id="canvas1" width="46" height="22" class="show">+++</canvas>
+Calendar . . .<br/><br/></span> 
 
 <span class="listContainer times show comment"> 
 
-<a href="">Thursday, October 22</a> . . . We are showing two films by Joan 
+<a href="calendar-detail.php">Thursday, October 22</a> . . . We are showing two films by Joan 
 Jonas Next Door.<br /><br />
 
 <a href="">Friday, October 23</a> . . . Ed Ruscha comes to the Wattis 
@@ -35,6 +36,22 @@ be at the Wattis. Stop by for lunch and a casual conversation.<br /><br
 />
 
 </span>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                "+++",
+                                "-++",
+                                "+-+",
+                                "++-",
+                                ];
+
+                delay[1] = 300;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
 
 <?php
 require_once("GLOBAL/foot.php");

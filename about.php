@@ -2,16 +2,19 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<div class="programContainer times big black" style="width:50%;"> <span 
-id="sentence5"><a href="detail-17.html">The CCA Wattis Institute</a> is 
-a nonprofit exhibition venue and research institute dedicated to 
-contemporary art. It was founded in 1998, at the <a 
-href="http://www.cca.edu"> California College of the Arts</a> in San 
-Francisco. 
+<div class="mainContainer times big black">
 
-<br/><br/> The Wattis asks itself three (related) questions: 
-What are artists making today? What are artists thinking about today? 
-And how do artists inform (or disrupt) the way we think today? 
+
+<span class="listContainer times show comment">
+<canvas id="canvas1" width="46" height="22" class="show">% )</canvas>
+About the Wattis . . .<br/><br/></span>
+
+<div class="listContainer doublewide times big black"><a href="detail-17.html">The CCA Wattis Institute</a> is a 
+nonprofit exhibition venue and research institute dedicated to contemporary art. It was founded in 1998, at 
+the <a href="http://www.cca.edu"> California College of the Arts</a> in San Francisco.
+
+<br/><br/> The Wattis asks itself three (related) questions: What are artists making today? What are artists 
+thinking about today? And how do artists inform (or disrupt) the way we think today?
 
 <br/><br/> These are not easy questions, and to address each one 
 requires time, attention, risk, and commitment. And so we prefer to work 
@@ -45,6 +48,21 @@ helvetica small red">CHECK OUT UPCOMING EVENTS</a><a
 href="index-17.html" class="instructionContainer helvetica small red">GO 
 HOME.</a> <span id="sentence13" class="helvetica small">20142615</span> 
 </span>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                "[*]",
+                                "[.]",
+                                "[!]"
+                                ];
+
+                delay[1] = 100;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
 
 <?php
 require_once("GLOBAL/foot.php");

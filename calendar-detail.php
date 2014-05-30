@@ -2,10 +2,11 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<span class="listContainer times show comment"><span
-class="monaco">+++</span> Calendar . . .<br /><br />
+<div class="mainContainer times big black">
 
-</span> 
+<span class="listContainer times show comment">
+<canvas id="canvas1" width="46" height="22" class="show">+++</canvas>
+<a href="calendar.php">Calendar</a> . . .<br/><br/></span>
 
 <span class="listContainer times show comment"> 
 
@@ -37,6 +38,22 @@ work.<br /><br />
 The second film, also by Jonas, will be a surprise. See you then.
 
 </span>
+
+</div>
+
+<script type="text/javascript">
+
+                message[1] =    [
+                                "+++",
+                                "-++",
+                                "+-+",
+                                "++-",
+                                ];
+
+                delay[1] = 300;
+
+window.onload=initEmoticons(2, message, delay);
+</script>
 
 <?php
 require_once("GLOBAL/foot.php");

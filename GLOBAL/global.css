@@ -1,3 +1,8 @@
+body { 
+	/* workaround for fixed div rendering in safari */
+	-webkit-font-smoothing: subpixel-antialiased; 
+	}
+
 a {
         color: #000;
         text-decoration: none;
@@ -20,7 +25,7 @@ body {
         }
 
 canvas {
-        background: #FFF;
+        /* background: transparent; */
         }
 
 p {
@@ -63,11 +68,21 @@ p {
 
 /* containers */
 
-.mainContainer {
+.wattisContainer {
+	z-index:99;
+        top: 10px;
+        left: 10px;
+        float:left;
+        padding:20px;
+        width: 30%;
         }
 
-.mainContainer:hover {
-        }
+.mainContainer {
+	position: absolute;
+	top: 200px;
+	width: 100%;
+        overflow: hidden; 
+	}
 
 .textContainer {
         top: 0px;
@@ -77,20 +92,20 @@ p {
         }
 
 .listContainer {
-        top: 0px;
-        left: 0px;
         float:left;
         padding:20px;
         width: 29%;
 	}
-        
-.wattisContainer {
-        top: 0px;
-        left: 0px;
-        float:left;
-        padding:20px;
-        width: 30%;
-        }
+
+.imageContainer {
+	padding: 100px;
+	}
+
+.imageContainerWrapper {
+	float:left;
+	width:30%;
+	padding: 10px;
+	}
 
 .programContainer {
         top: 0px;
@@ -219,6 +234,33 @@ p {
 .clear {
 	clear:both;      
         }
+
+.fixed {
+	position: fixed;      
+        }
+
+.doublewide {
+        width:58%;
+	}
+
+.triplewide {
+        width:90%;
+	}
+
+.centered {
+	margin-left: auto;
+	margin-right: auto;        
+	}
+
+.dev {
+	background-color: #F9F;
+	opacity: .5;
+	}
+
+.dev2 {
+	background-color: #F99;
+	opacity: .5;
+	}
 
 
 /* added */

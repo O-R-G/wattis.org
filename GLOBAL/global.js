@@ -35,12 +35,27 @@ function displayTime() {
 
 function expandImage(thisId,originalSize,newSize) {
 
-	if (document.getElementById(thisId).style.padding == originalSize) {
+        if (document.getElementById(thisId).style.padding == originalSize) {
 
-		document.getElementById(thisId).style.padding = newSize;		// set
+                document.getElementById(thisId).style.padding = newSize;                // set
+        } else {
+
+                document.getElementById(thisId).style.padding = originalSize;           // reset
+        }
+        return true;
+}
+
+
+// expand image (toggle size)
+
+function expandImageSize(thisId,originalSize,newSize) {
+
+	if (document.getElementById(thisId).style.width == originalSize) {
+
+		document.getElementById(thisId).style.width = newSize;		// set
 	} else {
 
-		document.getElementById(thisId).style.padding = originalSize;		// reset
+		document.getElementById(thisId).style.width = originalSize;		// reset
 	}
 	return true;
 }

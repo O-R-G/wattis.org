@@ -1,7 +1,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<!-- <META http-equiv="refresh" content="5;URL=index-7.html"> -->
 <title>CCA Wattis Institute for Contemporary Arts</title>
 <link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 <style>
@@ -25,27 +24,26 @@ canvas {
 
 <script type="text/javascript" src="JS/animateEmoticon-v2.js"></script>
 <script type="text/javascript" src="JS/animateSentences.js"></script>
+<script type="text/javascript" src="GLOBAL/global.js"></script>
 
 <script type="text/javascript">
-
- function showBones() {
-        window.location.assign("index-30.php");
+        window.onclick = function showBones() {
+                window.location.assign("index.php");
         }
 </script>
 
+
 </head>
 
-<!-- <body onload="initEmoticons(16); initSentences();"> -->
 <body onload="initEmoticons(16);">
 
-<!-- <div class="mainContainer baskerville big black hide"> -->
-<div class="mainContainer <?php echo $type; ?> big black">
+<div class="times big black">
 
 <!-- WATTIS -->
 
 <div class="wattisContainer"><canvas id="canvas0" width="60" height="22"
 class="show" onclick="showBones();">\\\\*</canvas><span id="sentence0"> ... This is <a 
-href="detail-12-0.html">The Wattis</a><canvas id="canvas13" width="10" 
+href="main.php">The Wattis</a><canvas id="canvas13" width="10" 
 height="22">.</canvas></span><br /><span id="sentence1">We<canvas 
 id="canvas12" width="12" height="22">&#8217</canvas>re in San 
 Francisco,</span> <span id="sentence2">a few blocks away from <a 
@@ -54,12 +52,12 @@ href="http://www.cca.edu" target="new">California College of the Arts</a>
 
 <!-- PROGRAM -->
 
-<div class="programContainer"><span id="sentence5"><a href="detail-21.html">Markus 
+<div class="programContainer"><span id="sentence5"><a href="artist.php">Markus 
 Schinwald</a> <i>is in the gallery</i>,<canvas id="canvas4" width="90" 
-height="22">[*!#]</canvas></span> <span id="sentence7"><a href="detail-17.html">Nairy 
+height="22">[*!#]</canvas></span> <span id="sentence7"><a href="">Nairy 
 Baghramian</a> <i>is in the apartment</i>, <canvas id="canvas5" width="80" height="22">. 
 . .</canvas></span> <canvas id="canvas6" width="32" height="22">;></canvas><span 
-id="sentence8"> and, <a href="detail-17.html">Joan Jonas</a> <i>is on our 
+id="sentence8"> and, <a href="">Joan Jonas</a> <i>is on our 
 mind</i>.<canvas id="canvas3" width="50" height="22">*!*</canvas></span></div>
 
 <!-- NEWS 
@@ -93,7 +91,7 @@ height="22">!</canvas></div> -->
 <!-- NEXT DOOR -->
 
 <div class="nextdoorContainer"><span id="sentence9"><a 
-href="detail-17.html" class="animoticon"><canvas id="canvas8" 
+href="" class="animoticon"><canvas id="canvas8" 
 width="130" height="22" style="top:-0px;">Next Door</canvas></a>, on 
 Tuesday, October 12, philosopher \ : | Michel Serres will (( . . . 
 )).</span></div>
@@ -102,7 +100,7 @@ Tuesday, October 12, philosopher \ : | Michel Serres will (( . . .
 
 <div class="byappointmentContainer"><span id="sentence9"><canvas 
 id="canvas9" width="120" height="22">. . .</canvas><a 
-href="detail-17.html">By appointment</a>, there is also a painting by 
+href="">By appointment</a>, there is also a painting by 
 Avery Singer, a film from Loretta Fahrenholz, a text by Lars Bang 
 Larsen, and John Zorn's newest record.</span></div>
 
@@ -119,21 +117,21 @@ height="22">(())</canvas></span></div>
 <!-- SCHEDULE -->
 
 <div class="scheduleContainer"><span id="sentence10">In the next three 
-months, there are <a href="detail-17.html">six events</a> 
+months, there are <a href="calendar.php">six events</a> 
 planned. <canvas id="canvas15" width="20" 
 height="22">6</canvas></span></div>
 
 <!-- MEANWHILE -->
 
 <div class="meanwhileContainer"><span id="sentence11"><i><a 
-href="detail-17.html">Meanwhile</a>, an exhibition by Marie Angeletti 
+href="">Meanwhile</a>, an exhibition by Marie Angeletti 
 opened four days ago at Castillo Corrales</a>.</i></span></div>
 
 <!-- ARCHIVE -->
 
 <div class="archiveContainer"><span id="sentence11"><i>Or, have a look 
 </i> <span class="monaco">o-o</span> <i>at what we’ve done before in our 
-<a href="detail-17.html">archive</a>.</i></span></div>
+<a href="">archive</a>.</i></span></div>
 
 <!-- SOCIAL -->
 
