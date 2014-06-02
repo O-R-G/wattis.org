@@ -1,8 +1,7 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>CCA Wattis Institute for Contemporary Arts</title>
-<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
+<?php
+require_once("GLOBAL/head.php");
+?>
+
 <style>
 
 body {
@@ -22,27 +21,21 @@ canvas {
      
 </style>
 
-<script type="text/javascript" src="JS/animateEmoticon-v2.js"></script>
-<script type="text/javascript" src="JS/animateSentences.js"></script>
-<script type="text/javascript" src="GLOBAL/global.js"></script>
 
 <script type="text/javascript">
-        window.onclick = function showBones() {
+	function showBones() {
                 window.location.assign("index.php");
         }
 </script>
 
 
-</head>
-
-<body onload="initEmoticons(16);">
 
 <div class="times big black">
 
 <!-- WATTIS -->
 
 <div class="wattisContainer"><canvas id="canvas0" width="60" height="22"
-class="show" onclick="showBones();">\\\\*</canvas><span id="sentence0"> ... This is <a 
+class="show" onclick="showBones();">\\\\*</canvas><span id="sentence0">. . . This is <a 
 href="main.php">The Wattis</a><canvas id="canvas13" width="10" 
 height="22">.</canvas></span><br /><span id="sentence1">We<canvas 
 id="canvas12" width="12" height="22">&#8217</canvas>re in San 
@@ -131,7 +124,7 @@ opened four days ago at Castillo Corrales</a>.</i></span></div>
 
 <div class="archiveContainer"><span id="sentence11"><i>Or, have a look 
 </i> <span class="monaco">o-o</span> <i>at what we’ve done before in our 
-<a href="">archive</a>.</i></span></div>
+<a href="archive.php">archive</a>.</i></span></div>
 
 <!-- SOCIAL -->
 
@@ -151,6 +144,11 @@ value='Subscribe' /></form></span></div>
 <div class="dateContainer"><span id="sentence13" class="helvetica small">CCA WATTIS 
 INSTITUTE FOR CONTEMPORARY ARTS<br />360 KANSAS STREET / SAN FRANCISCO CA 94103<br /> 
 20142615</span></div>
+
+
+<script type="text/javascript">
+window.onload=initEmoticons(16, message, delay);
+</script>
 
 </div>
 </body>

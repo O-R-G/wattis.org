@@ -83,7 +83,7 @@ wattisintern@cca.edu<br/>
 <br/>
 
 David Reinfurt<br/>
-Graphic design and web design<br/>
+Graphic design<br/>
 
 
 </span>

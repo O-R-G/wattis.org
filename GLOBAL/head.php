@@ -7,7 +7,7 @@
 	require_once("_Library/displayMedia.php"); 
 	*/
 
-	/*
+	
 	// Parse $id
 
 	$id = $_REQUEST['id'];		// no register globals	
@@ -16,7 +16,6 @@
 	$idFull = $id;
 	$id = $ids[count($ids) - 1];
 	$pageName = basename($_SERVER['PHP_SELF'], ".php");
-	/*	
 
 	/*
 	// Live?
@@ -64,6 +63,10 @@
 
 <body>
 
+<?php 
+if (($pageName != "index") && ($pageName != "index-")) {
+?>
+
 <!-- WATTIS -->
 
 <div class="wattisContainer times big black fixed"><a href="index-.php"><canvas id="canvas0" width="46" 
@@ -72,4 +75,6 @@ href="main.php">The Wattis</a>.</div>
 
 <div class="clear"></div>
 
-
+<?php
+} 
+?>

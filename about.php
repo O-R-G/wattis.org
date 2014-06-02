@@ -9,9 +9,11 @@ require_once("GLOBAL/head.php");
 <canvas id="canvas1" width="46" height="22" class="show">% )</canvas>
 About the Wattis . . .<br/><br/></span>
 
-<div class="listContainer doublewide times big black"><a href="detail-17.html">The CCA Wattis Institute</a> is a 
-nonprofit exhibition venue and research institute dedicated to contemporary art. It was founded in 1998, at 
-the <a href="http://www.cca.edu"> California College of the Arts</a> in San Francisco.
+<div class="listContainer doublewide times big black">The CCA Wattis 
+Institute</a> is a nonprofit exhibition venue and research institute 
+dedicated to contemporary art. It was founded in 1998, at the <a 
+href="http://www.cca.edu"> California College of the Arts</a> in San 
+Francisco.
 
 <br/><br/> The Wattis asks itself three (related) questions: What are artists making today? What are artists 
 thinking about today? And how do artists inform (or disrupt) the way we think today?
@@ -35,19 +37,18 @@ contemporary culture.
 <br/><br/><i> Our main idea is to spend more time with art, more time with artists, and
 more time with each other.</i>
 
-<br/><br/> <a href="IMAGES/Thisisthewattis-pdf.jpg" target="new"><img 
+<br/><br/> <a href="" target="new"><img 
 src="IMAGES/Thisisthewattis-pdf.jpg" class="thumb"></a><br/><span 
 id="sentence13" class="helvetica small"><a href="">DOWNLOAD THIS IS THE WATTIS PDF</a></span>
 	
 <br/><br/> <br/>
 
-<span id="sentence13" class="helvetica small"> <a href="index-17.html" 
+<span id="sentence13" class="helvetica small"> <a href="archive.php" 
 class="instructionContainer helvetica small red">VISIT THE WATTIS 
-ARCHIVE</a> <a href="index-17.html" class="instructionContainer 
-helvetica small red">CHECK OUT UPCOMING EVENTS</a><a 
-href="index-17.html" class="instructionContainer helvetica small red">GO 
-HOME.</a> <span id="sentence13" class="helvetica small">20142615</span> 
-</span>
+ARCHIVE</a> <a href="calendar.php" class="instructionContainer 
+helvetica small red">CHECK OUT UPCOMING EVENTS</a><a href="index-.php" 
+class="instructionContainer helvetica small red">GO HOME.</a> <span 
+id="sentence13" class="helvetica small">20142615</span> </span>
 
 </div>
 

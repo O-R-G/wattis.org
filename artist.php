@@ -36,10 +36,14 @@ style="padding: 100px;">
 </div>
 </div>
 
-<div class="imageContainerWrapper">
-<div id="image2" class="imageContainer" onclick="expandImage('image2','60px', '0px');"
-style="padding: 60px;">
-<img src="IMAGES/schinwald03.jpg" style="width: 100%">
+<div class="imageContainerWrapper"> <div id="image2" 
+class="imageContainer" style="padding-left: 10px; padding-top:90px;">
+
+<iframe width="280" height="157"  
+src="//www.youtube.com/embed/1ySU74TMsEQ?rel=0" frameborder="0" 
+allowfullscreen></iframe>
+
+<!-- <img src="IMAGES/schinwald03.jpg" style="width: 100%"> -->
 </div>
 </div>
 
@@ -55,16 +59,18 @@ style="padding: 60px;">
 
 <div class="doublewide centered times big black"> 
 
-<span class='times'><i>The show opens tomorrow.</i> <a href="index-17.html" 
-class="instructionContainer helvetica small red">SEE MORE IMAGES FROM 
-MARKUS SCHINWALD</a><a href="index-17.html" class="instructionContainer 
-helvetica small red">SEE PAST EXHIBITIONS</a><a href="index-17.html" 
+<span class='times'><i>The show opens tomorrow.</i> <a 
+href="https://www.google.com/search?q=markus+schinwald&client=safari&rls=en&source=lnms&tbm=isch&sa=X&ei=sIiMU6KgEcPNsQTEqYCgBA&ved=0CAgQ_AUoAQ&biw=1353&bih=825" 
+class="instructionContainer helvetica small red" target="new">SEE MORE IMAGES FROM 
+MARKUS SCHINWALD</a><a href="archive.php" class="instructionContainer 
+helvetica small red">SEE PAST EXHIBITIONS</a><a href="" 
 class="instructionContainer helvetica small red">READ A TEXT BY LARS 
-BANG LARSEN</a><a href="index-17.html" class="instructionContainer 
+BANG LARSEN</a><a href="calendar.php" class="instructionContainer 
 helvetica small red">CHECK OUT UPCOMING EVENTS</a><a 
-href="index-17.html" class="instructionContainer helvetica small red">GO 
-HOME.</a> <span id="sentence13" class="helvetica small">20142615</span> 
-</span>
+href="index-.php" class="instructionContainer helvetica small red">GO 
+HOME</a> <span id="sentence13" class="helvetica small">20142615<br/> 
+<br/> <br/> </span> </span>
+
 
 </div>
 

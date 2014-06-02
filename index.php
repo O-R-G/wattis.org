@@ -1,16 +1,7 @@
-<html>
-
-<?php 
-        require_once("_Library/systemCookie.php");
-        $type = $_REQUEST['type'];
-        $type = systemCookie("typeCookie", $type, 0);
-	// if (!$type) $type="times"
+<?php
+require_once("GLOBAL/head.php");
 ?>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>CCA Wattis Institute for Contemporary Arts</title>
-<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 <style>
 
 body {
@@ -23,15 +14,11 @@ a {
 
 canvas {
 	position: relative;
-	/*background: #FFC;*/
 	background-color: transparent;
 	top:4px;
         }
      
 </style>
-
-<script type="text/javascript" src="JS/animateEmoticon-v2alt.js"></script>
-<script type="text/javascript" src="JS/animateSentences.js"></script>
 
 <script type="text/javascript"> 
 	window.onclick = function showBones() { 
@@ -39,16 +26,13 @@ canvas {
 	} 
 </script>
 
-</head>
-
-<body onload="initEmoticons(16);">
 
 <div class="times big black">
 
 <!-- WATTIS -->
 
 <div class="wattisContainer"><canvas id="canvas0" width="60" height="22" 
-class="show">\\\\*</canvas><span id="sentence0"> ... This is <a 
+class="show">\\\\*</canvas><span id="sentence0">. . . This is <a 
 href="main.php">The Wattis</a><canvas id="canvas13" width="10" 
 height="22">.</canvas></span><br /><span id="sentence1"><span 
 class="white"> We<canvas id="canvas12" width="12" 
@@ -192,5 +176,10 @@ INSTITUTE FOR CONTEMPORARY ARTS<br />360 KANSAS STREET / SAN FRANCISCO CA 94103<
 20142615</span></div>
 
 </div>
+
+<script type="text/javascript">
+window.onload=initEmoticons(16, message, delay);
+</script>
+
 </body>
 </html>
