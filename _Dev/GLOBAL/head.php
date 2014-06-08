@@ -1,12 +1,9 @@
 <?php 
-	/*
 	// date_default_timezone_set('Asia/Kuwait');
 	require_once("_Library/systemDatabase.php"); 
 	require_once("_Library/systemCookie.php");
 	require_once("_Library/displayNavigation.php"); 
 	require_once("_Library/displayMedia.php"); 
-	*/
-
 	
 	// Parse $id
 
@@ -55,6 +52,13 @@
 	<title><?php echo $documentTitle; ?></title>
 	<meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
 	<meta http-equiv="Title" content="<?php echo $documentTitle; ?>" />		
+
+	<!-- ** fix viewport and possibly responsiveness ** -->
+
+	<!-- <meta name="viewport" content="width=device-width"> -->
+	<!-- <meta name="viewport" content="width=700"> -->
+	<!-- <meta name="viewport" content="initial-scale=1.0">-->
+
 	<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 	<script type="text/javascript" src="GLOBAL/global.js"></script>
         <script type="text/javascript" src="JS/animateEmoticon.js"></script>
