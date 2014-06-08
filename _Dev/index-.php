@@ -13,6 +13,8 @@ require_once("_Library/orgRSSParse.php");
 </script>
 
 
+
+
 <?php
 	
 	// Build weatherString
@@ -82,6 +84,10 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 window.onload=initEmoticons(16, message, delay);
 </script>
+
+        
+<script type="text/javascript" src="JS/newsTicker.js"></script>
+
 
 </div>
 </body>
