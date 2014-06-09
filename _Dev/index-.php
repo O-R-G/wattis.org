@@ -3,19 +3,11 @@ require_once("GLOBAL/head.php");
 require_once("_Library/orgRSSParse.php");
 ?>
 
-
-<script type="text/javascript">
-
-	function showBones() {
-                window.location.assign("index.php");
-        }
-	
-</script>
-
-
-
+<script type="text/javascript" src="JS/newsTicker.js"></script>
 
 <?php
+	
+	// put this in head.php?
 	
 	// Build weatherString
 	// currently using old version of orgRSSParse
@@ -29,6 +21,7 @@ require_once("_Library/orgRSSParse.php");
 
 
 <!-- *todo* add homecontainer wrapper -->
+
 <div class="times big black">
 
 	<?php
@@ -54,14 +47,30 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 	?>
         
-<!-- DATE -->
+	<!-- DATE -->
 
-<div class="dateContainer helvetica small">
-	CCA WATTIS INSTITUTE FOR CONTEMPORARY ARTS<br />360 KANSAS STREET / SAN FRANCISCO CA 94103<br />
-	20142615
+	<div class="dateContainer helvetica small">
+		CCA WATTIS INSTITUTE FOR CONTEMPORARY ARTS<br />360 KANSAS STREET / SAN FRANCISCO CA 94103<br />
+		20142615
+	</div>
 </div>
 
-</div>
+
+
+
+
+
+
+<!-- JS -->
+
+
+<script type="text/javascript">
+
+	function showBones() {
+                window.location.assign("index.php");
+        }
+
+</script>
 
 
 <script type="text/javascript">
@@ -73,21 +82,33 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
                 delay[1] = 400;
 
-                message[8] =    [
+               
+		message[8] =    [
                                 "()",
                                 "(.)",
                                 "(..)",
                                 "(...)"
-                                ];
+				];
 
-                delay[8] = 100;
+		delay[8] = 100;
 
-window.onload=initEmoticons(16, message, delay);
+	window.onload=initEmoticons(16, message, delay);
+
 </script>
 
-        
-<script type="text/javascript" src="JS/newsTicker.js"></script>
 
+<script type="text/javascript">
+
+       	newsItem = new Array(
+			"The exhibition opens <a href='' >tomorrow</a>.",
+			"*New* limited edition from Ed Ruscha — <a href=''>get it now</a>!",
+			"<a href=''>Friday</a>, we are showing Joan Jonas films. Come."
+			);
+	
+	newsTicker(newsItem[0]);
+
+</script>
+        
 
 </div>
 </body>

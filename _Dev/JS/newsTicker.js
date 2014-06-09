@@ -1,38 +1,29 @@
 	// globals
 	
-	newsCounter = 0;
-	newsItem = new Array("ok", "and", "this", "too"); 	// better wrapped into function
-
-	thisNewsTickerDiv = document.getElementById("news");
+	newsCounter = 0;	// *fix* could be wrapped
 
         function newsTicker(thisnewsItem) {
-
-                // thisCounter[thisCanvasID]++;
-                // thisContext[thisCanvasID].clearRect(0, 0, thisCanvas[thisCanvasID].width, thisCanvas[thisCanvasID].height);
-
-		// modulus select in message array
-		// frameNumber = thisCounter[thisCanvasID] % message[thisCanvasID].length;
-		// thisContext[thisCanvasID].fillText(thisMessage[thisCanvasID][frameNumber], xPos, yPos);
 	
 		// rewrite innerhtml
 
-		// thisNewsTickerDiv.innerHTML = "HELLO, WORLD!";
-		thisNewsTickerDiv.innerHTML = newsItem[newsCounter];
+		thisinnerhtml = "<div id='news' class='newsContainer red'><canvas id='canvas14' width='20' height='24'>!</canvas>";
+		thisinnerhtml += thisnewsItem;
+		thisinnerhtml += "<canvas id='canvas11' width='12' height='24'>!</canvas></div>";
+		document.getElementById("news").innerHTML = thisinnerhtml;
+
+		// increment pointer 
+
+		if ( newsCounter >= newsItem.length - 1 ) {
+
+			newsCounter=0;
+
+		} else {
+		
+			newsCounter++;
+		}
 
 		// set timeout
-		// scope issue and could be written more elegantly as a callback, but fast enough for now
-		
-var tt = setTimeout("newsTicker(newsItem[newsCounter])", 500);
+		// scope issue *fix*
 
-if ( newsCounter >= 3 ) {
-newsCounter=0;
-
-} else {
-newsCounter++;
-
-}
-
-
+		var tt = setTimeout("newsTicker(newsItem[newsCounter])", 3000);
  	}
-
-	newsTicker("Testing");
