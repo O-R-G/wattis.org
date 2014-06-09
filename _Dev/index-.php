@@ -14,9 +14,10 @@ require_once("_Library/orgRSSParse.php");
 
 	$weatherString .= orgRSSParse("http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
 	$weatherString = str_replace(" at San Francisco Intl Airport, CA", "", $weatherString);
-	$weatherString = str_replace(" F", "&deg;", $weatherString);
+	// $weatherString = str_replace(" F", "&deg;", $weatherString);
+	$weatherString = preg_replace("/\d+/", "$0&deg;", $weatherString);
 	$weatherString = str_replace("and", "and currently ", $weatherString);
-	$weatherString = "Today it is " . strtolower($weatherString);
+	$weatherString = "Today, " . strtolower($weatherString) . ".";
 ?>
 
 
