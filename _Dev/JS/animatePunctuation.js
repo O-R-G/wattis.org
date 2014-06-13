@@ -2,39 +2,53 @@
 	
 	punctuationCounter = 0;	// *fix* could be wrapped
  	stubSymbol = ",";	// *fix* scope issue
+ 	stubClass = " monaco big black";	// *fix* scope issue
 
-        function animatePunctuation(thisAddedSymbol) {
+        function animatePunctuation() {
 	
+		// could rewrite this all as an object
 
 		// troll thru DOM
 
-		// document.getElementById("punctuation").innerHTML += thisAddedSymbol;	
-		document.getElementById("punctuation").innerHTML = thisAddedSymbol;	
+		// here, build this off of animateEmoticons logic, copy and paste
+		// this a rough quick fix
 
-		// need to figure out how to move thru the DOM and whether it is ok to have multiple ids that are the same
+		for (i = 1; i < 60; i++) {
 
-		/*
-		//while ( document.getElementById("punctuation").innerHTML ) {
-		while ( document.getElementById("punctuation") ) {
+			thisElement = "punctuation" + i;
 
-			// rewrite innerhtml
-			thisinnerhtml = "p";
-			// thisinnerhtml += "hello";	
-			// punctuationCounter++;
-
-		};
-		*/
+			// document.getElementById(eval(thisElement)).innerHTML = stubSymbol;	
+			// document.getElementById("punctuation"+i).innerHTML = stubSymbol;	
+			document.getElementById("punctuation"+i).className = stubClass;
+		}
 
 
 		// set timeout
+
 		// definitely a scope issue *fix* -- perhaps solved with callbacks
+		// scope issue is bc setTimeout is a method of window object and 
+		// so then more abstract than document object
+		// two workarounds:
+		// 1. anonyomous function wrapper / function reference
+		// 2. closure using object this encapsulated by local function var
 
 		if (stubSymbol == ",") {
-		stubSymbol = "*";
+			stubSymbol = "&nbsp;";
 		} else {
-		stubSymbol = ",";
+			stubSymbol = ",";
 		}
 
-		var tt = setTimeout("animatePunctuation(stubSymbol)", 200);
+		if (stubClass == " monaco big black") {
+			stubClass = " monaco big white";
+		} else {
+			stubClass = " monaco big black";
+		}
+		
+		// better to use second version bc first just evals that code
+		// var tt = setTimeout("animatePunctuation(stubSymbol)", 200);
+		// var tt = setTimeout(animatePunctuation, 200);
+		var thisRandomDelay = Math.floor((Math.random() * 100) + 1);
+		// var tt = setTimeout(animatePunctuation, thisRandomDelay);
+		var tt = setTimeout(function(){animatePunctuation(stubSymbol);}, 400);
 
  	}

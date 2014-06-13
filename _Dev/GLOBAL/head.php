@@ -68,7 +68,7 @@
 <body>
 
 <?php 
-if (($pageName != "index") && ($pageName != "index-")) {
+if (($pageName != "index") && ($pageName != "index-") && ($pageName != "punctuation")) {
 ?>
 
 <!-- WATTIS -->

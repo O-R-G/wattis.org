@@ -1,28 +1,26 @@
 <?php
 require_once("GLOBAL/head.php");
-require_once("_Library/orgRSSParse.php");
 ?>
-
 
 <?php
-	
-	// put this in head.php?
-	
-	// Build weatherString
-	// currently using old version of orgRSSParse
-
-	$weatherString .= orgRSSParse("http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
-	$weatherString = str_replace(" at San Francisco Intl Airport, CA", "", $weatherString);
-	// $weatherString = str_replace(" F", "&deg;", $weatherString);
-	$weatherString = preg_replace("/\d+/", "$0&deg;", $weatherString);
-	$weatherString = str_replace("and", "and currently ", $weatherString);
-	$weatherString = "Today, " . strtolower($weatherString) . ".";
+	$textcolor = $_REQUEST['textcolor'];          // no register globals
+	if (!$textcolor) $textcolor="black";
 ?>
 
+</style>
 
 <!-- *todo* add homecontainer wrapper -->
 
-<div class="times big black">
+
+<!-- WATTIS -->
+
+<div class="wattisContainer times big black fixed"> <a href="punctuation.php?textcolor=<?php 
+echo ($textcolor=='white') ? 'black' : 'white' ; ?>"><canvas id="canvas0" 
+width="46"height="22" class="show" onclick="showBones();">\\\\*</canvas></a> . . .  This is <a 
+href="main.php">The Wattis</a>.</div>
+
+
+<div class="times big <?php echo $textcolor; ?>">
 
 	<?php
                         
@@ -34,31 +32,42 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 	$myrow  =  MYSQL_FETCH_ARRAY($result);
 	$html = "";
 
-// find all punctuation and then animate it
+	// find all punctuation and then animate it
 
-// + preg_replace searches for any punctuation marks
-// + then wraps that in div with monaco type
-// + next, must troll the DOM and find all the elements of id="punctuation" 
-//   and put these into an array so that can cycle thru each of these and trigger animations
-// + then the script modifies the innerHTML of these, based on punctuations but then evolving
-// "/[^!-~]/" matches all punctuation, but probably only once -- this is a character range
-// likely i want more control but will start here
-         
+	// + preg_replace searches for any punctuation marks
+	// + then wraps that in div with monaco type
+	// + next, must troll the DOM and find all the elements of id="punctuation" 
+	//   and put these into an array so that can cycle thru each of these and trigger animations
+	// + then the script modifies the innerHTML of these, based on punctuations but then evolving
+	// + "/[^!-~]/" matches all punctuation, but probably only once -- as a character range
+	// element ids need to be unique so have to figure out how to loop thru and write diff 
+ 
 	$html .= "<div class='triplewide centered'>";
-
+	$html .= "<br /><br /><br /><br /><br /><br /><br />";
 	$punctuationString = $myrow["body"];
 
-	// element ids need to be unique so have to figure out how to loop thru and write diff ids or somehow id these all so can search for them
-	// clearly trick is to use preg_match_all which returns matches in an array
+	// preg_replace_callback executes the callback function each time it finds a match
+	
+	$thisCount = 0;
 
-	// then can use that to adjust ids 
-	// or there may be a smarter way of trolling the DOM and looking for a class or something else
- 
-        // $punctuationString = preg_replace("/[^!-~]/", "A", $punctuationString);
-        $punctuationString = preg_replace("/[,\*\.\(\)?]/", "<span id='punctuation' class='monaco big red'>$0</span>", $punctuationString);
+	$result = preg_replace_callback("/[,\*\.\(\)?]/", function($matches){
+    	
+		static $count = 0;
+	    	$count++;
+	    	$thisCount = $count;
+		// could harvest all punctuation and use that to make a new symbol !!
+    		// $harvest .= $matches[0] . "ok";	// not working
+    		// print_r($matches[0]);		// this just prints out matches immediately
+		$thisWrappedMatch = "<span id='punctuation" . $count . "' class='monaco big red'>" . $matches[0] . "</span>";
+    		return !empty($matches[0]) ? $thisWrappedMatch : '';
 
-	$html .= $punctuationString;
+	}, $punctuationString);
 
+	// scope issue in the callback function to get out what it finds to elsewhere
+	// $html .= $harvest;
+	// $html .= "++ thisCount = " . $thisCount . " ++";
+
+	$html .= $result;
 	$html .= "</div>";
 
 	echo nl2br($html);
