@@ -2,7 +2,7 @@
 	
 	newsCounter = 0;	// *fix* could be wrapped
 
-        function newsTicker(thisnewsItem) {
+        function animateNewsTicker(thisnewsItem) {
 	
 		// rewrite innerhtml
 
@@ -25,5 +25,5 @@
 		// set timeout
 		// scope issue *fix*
 
-		var tt = setTimeout("newsTicker(newsItem[newsCounter])", 3000);
+		var tt = setTimeout("animateNewsTicker(newsItem[newsCounter])", 3000);
  	}

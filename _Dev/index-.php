@@ -3,7 +3,7 @@ require_once("GLOBAL/head.php");
 require_once("_Library/orgRSSParse.php");
 ?>
 
-<script type="text/javascript" src="JS/newsTicker.js"></script>
+<script type="text/javascript" src="JS/animateNewsTicker.js"></script>
 
 <?php
 	
@@ -106,7 +106,7 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 			"<a href=''>Friday</a>, we are showing Joan Jonas films. Come."
 			);
 	
-	newsTicker(newsItem[0]);
+	animateNewsTicker(newsItem[0]);
 
 </script>
         
