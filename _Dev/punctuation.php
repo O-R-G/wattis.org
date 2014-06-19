@@ -48,24 +48,20 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 	// preg_replace_callback executes the callback function each time it finds a match
 	
-	$thisCount = 0;
-
-	$result = preg_replace_callback("/[,\*\.\(\)?]/", function($matches){
+	$result = preg_replace_callback("/[,\*\.\(\)\/\-?]/", function($matches){
     	
 		static $count = 0;
+	    	global $count;		// needed to declare in the function explicitly
+		global $harvest;	// string to keep list of matches comma separated
 	    	$count++;
-	    	$thisCount = $count;
-		// could harvest all punctuation and use that to make a new symbol !!
-    		// $harvest .= $matches[0] . "ok";	// not working
-    		// print_r($matches[0]);		// this just prints out matches immediately
-		$thisWrappedMatch = "<span id='punctuation" . $count . "' class='monaco big red'>" . $matches[0] . "</span>";
+    		$harvest .= $matches[0] . ",";	
+		$thisWrappedMatch = "<span id='punctuation" . $count . "' class='monaco big black'>" . $matches[0] . "</span>";
     		return !empty($matches[0]) ? $thisWrappedMatch : '';
-
 	}, $punctuationString);
 
-	// scope issue in the callback function to get out what it finds to elsewhere
-	// $html .= $harvest;
-	// $html .= "++ thisCount = " . $thisCount . " ++";
+	// debug
+	// echo $count; 
+	// echo $harvest; 
 
 	$html .= $result;
 	$html .= "</div>";
@@ -88,15 +84,19 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 
 
-
 <!-- JS -->
 
 <script type="text/javascript" src="JS/animatePunctuation.js"></script>
 <script>
 
-addedSymbol="!";
+// make an array from the php string 
+// possible to pass array from php to js? probably more work than it's worth
 
-animatePunctuation(addedSymbol);
+harveststring = "<?php echo $harvest; ?>";
+var harvest = harveststring.split(',');		
+
+animatePunctuation(<?php echo $count; ?>, harvest);
+
 </script>
 
 
