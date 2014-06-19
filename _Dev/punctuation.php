@@ -5,6 +5,9 @@ require_once("GLOBAL/head.php");
 <?php
 	$textcolor = $_REQUEST['textcolor'];          // no register globals
 	if (!$textcolor) $textcolor="black";
+
+	$summary = $_REQUEST['summary'];          // no register globals
+	if (!$summary) $summary=null;
 ?>
 
 </style>
@@ -63,8 +66,16 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 	// echo $count; 
 	// echo $harvest; 
 
-	$html .= $result;
-	$html .= "</div>";
+	if (!$summary) {
+
+		$html .= $result;
+	} else {
+
+		$html .= "<span id='punctuationsummary' class='monaco big black'>...</span>";
+	}
+	
+
+$html .= "</div>";
 
 	echo nl2br($html);
 

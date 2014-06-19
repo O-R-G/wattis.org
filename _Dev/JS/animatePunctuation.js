@@ -18,7 +18,10 @@
 
 			// document.getElementById("punctuation"+i).innerHTML = stubSymbol;	
 			// document.getElementById("punctuation"+i).className = stubClass;
-			document.getElementById("punctuation"+i).innerHTML = harvest[i];	
+			// document.getElementById("punctuation"+i).innerHTML = harvest[i];	
+			// document.getElementById("punctuation"+i).innerHTML = harvest[i] + harvest[i+1] + harvest [i+2];	
+			document.getElementById("punctuationsummary").innerHTML = harvest[i] + harvest[i+1] + harvest [i+2];	
+			// document.getElementById("punctuationsummary").innerHTML = harvest[i];	
 			// document.getElementById("punctuation"+i).innerHTML = harvest[randomIndex];	
 		}
 
