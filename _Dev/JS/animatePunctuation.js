@@ -51,5 +51,5 @@
 		var thisRandomDelay = Math.floor((Math.random() * 100) + 1);
 		// var tt = setTimeout(animatePunctuation, thisRandomDelay);
 		// this one wraps it in an anonyomous function
-		var tt = setTimeout(function(){animatePunctuation(count,harvest);}, 300);
+		var tt = setTimeout(function(){animatePunctuation(count,harvest);}, 100);
  	}
