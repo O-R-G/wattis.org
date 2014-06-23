@@ -10,26 +10,61 @@ require_once("GLOBAL/head.php");
 	if (!$summary) $summary=null;
 ?>
 
+<style>
+
+body {
+background-color:#000;
+}
+
+.black a {
+color:#FFF;
+}
+
+.black {
+color:#FFF;
+}
+
+.monaco {
+
+/*font-family: "BubbledotICG-CoarsePos";*/
+}
+
+</style>
 
 <!-- *todo* add homecontainer wrapper -->
 
 
 <!-- WATTIS -->
-<!--
-<div class="wattisContainer times big black fixed"> <a href="punctuation.php?textcolor=<?php 
-echo ($textcolor=='white') ? 'black' : 'white' ; ?>"><canvas id="canvas0" 
-width="46"height="22" class="show" onclick="showBones();">\\\\*</canvas></a> . . .  This is <a 
-href="main.php">The Wattis</a>.</div>
--->
+
+<div class="triplewide centered times big black"> 
+
+<br/><br/>
+
+<span class='monaco'>//* . . . </span>This is <a href=''>The Wattis</a><span 
+class='monaco'>.</span> We<span class='monaco'>’</span>re a few blocks away from 
+California College of the Arts <span class='monaco'><<⅂</span> at 360 Kansas Street <span 
+class='monaco'>(</span>b<span class='monaco'>/</span>t 16th <span class='monaco'>&</span> 
+17th<span class='monaco'>),</span> SF<span class='monaco'>,</span> CA 94013<span 
+class='monaco'>.</span> Today<span class='monaco'>,</span> it is kind of foggy and 
+currently 78<span class='monaco'>°</span> F<span class='monaco'>.</span> ((())) www<span class='monaco'>.</span>wattis<span class='monaco'>.</span>org
+
+<br/><br/>
+
+We are open T–F 12 to 7 / S 12 to 5. 
+
+<br/><br/>
+
+</div>
+
 
 <div class="times big <?php echo $textcolor; ?>">
 
 	<?php
                         
 	// SQL object 
-	// hack to only read from Punctuation record
-
-	$sql = "SELECT * FROM objects, wires WHERE objects.id='20' AND wires.toid = objects.id 
+	// hacked to read only from "Sign" object
+		
+	$sql = "SELECT * FROM objects, wires WHERE objects.id='21' AND wires.toid = objects.id 
 AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 	$result =  MYSQL_QUERY($sql);
 	$myrow  =  MYSQL_FETCH_ARRAY($result);

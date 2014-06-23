@@ -16,13 +16,17 @@
 			thisElement = "punctuation" + i;
 			randomIndex = Math.floor((Math.random() * count) + 1);
 
-			// document.getElementById("punctuation"+i).innerHTML = stubSymbol;	
-			// document.getElementById("punctuation"+i).className = stubClass;
-			// document.getElementById("punctuation"+i).innerHTML = harvest[i];	
-			// document.getElementById("punctuation"+i).innerHTML = harvest[i] + harvest[i+1] + harvest [i+2];	
-			document.getElementById("punctuationsummary").innerHTML = harvest[i] + harvest[i+1] + harvest [i+2];	
-			// document.getElementById("punctuationsummary").innerHTML = harvest[i];	
-			// document.getElementById("punctuation"+i).innerHTML = harvest[randomIndex];	
+			if (document.getElementById("punctuation"+i)){
+				// document.getElementById("punctuation"+i).className = stubClass;
+				document.getElementById("punctuation"+i).innerHTML = harvest[i];	
+				// document.getElementById("punctuation"+i).innerHTML = harvest[i] + harvest[i+1] + harvest [i+2];	
+			}			
+			if (document.getElementById("punctuationsummary")){
+				// document.getElementById("punctuationsummary").innerHTML = harvest[i];	
+				document.getElementById("punctuationsummary").innerHTML = harvest[i] + harvest[i+1] + harvest [i+2];	
+				// document.getElementById("punctuation"+i).innerHTML = harvest[randomIndex];	
+			}
+
 		}
 
 		// pop/push the array
