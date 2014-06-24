@@ -51,7 +51,7 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 	// preg_replace_callback executes the callback function each time it finds a match
 	
-	$result = preg_replace_callback("/[,\*\.\(\)\/\-?]/", function($matches){
+	$result = preg_replace_callback("/[,\*\.\(\)\/\-?+=]/", function($matches){
     	
 		static $count = 0;
 	    	global $count;		// needed to declare in the function explicitly
