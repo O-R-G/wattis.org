@@ -1,15 +1,20 @@
-	// globals
-		
- 	stubClass = " monaco big black";	// *fix* scope issue
+	// requires .php for text parsing
+	// requires divs named "punctuation[#]" in sequence
+	// these are produced by .php parsing script
+	// could rewrite this all as an object, even perhaps parse in .js
+	
+	// may want the individual chunks to animate at different speeds?
+	// or individual punctuation to animate at different speeds
+	// or at least separate chunks behave coherent to themselves only
+
+	// in which case, should implement second funtion that sets timeout so it may be done asynchronously like animateEmoticons.js
+
+	// globals		
+
+	displaylength = 3;	// might likely be passed to function / object
+	displaytimeout = 200;	// might likely be passed to function / object
 
         function animatePunctuation(count,harvest) {
-	
-		// could rewrite this all as an object
-
-		// troll thru DOM
-
-		// here, build this off of animateEmoticons logic, copy and paste
-		// this a rough quick fix
 
 		for (i = 1; i <= count; i++) {
 
@@ -17,16 +22,26 @@
 			randomIndex = Math.floor((Math.random() * count) + 1);
 
 			if (document.getElementById("punctuation"+i)){
-				// document.getElementById("punctuation"+i).className = stubClass;
-				document.getElementById("punctuation"+i).innerHTML = harvest[i];	
+
+   				document.getElementById("punctuation"+i).innerHTML = harvest[i];	
+
+				for (j = 1; j < displaylength; j++) {
+
+	   				document.getElementById("punctuation"+i).innerHTML += harvest[i+j];
+				}	
+
 				// document.getElementById("punctuation"+i).innerHTML = harvest[i] + harvest[i+1] + harvest [i+2];	
-			}			
-			if (document.getElementById("punctuationsummary")){
-				// document.getElementById("punctuationsummary").innerHTML = harvest[i];	
-				document.getElementById("punctuationsummary").innerHTML = harvest[i] + harvest[i+1] + harvest [i+2];	
-				// document.getElementById("punctuation"+i).innerHTML = harvest[randomIndex];	
 			}
 
+			if (document.getElementById("punctuationsummary")){
+
+				document.getElementById("punctuationsummary").innerHTML = harvest[i];	
+
+				for (j = 1; j < displaylength; j++) {
+
+					document.getElementById("punctuationsummary").innerHTML += harvest[i+j];	
+				}	
+			}
 		}
 
 		// pop/push the array
@@ -44,19 +59,13 @@
 		// two workarounds:
 		// 1. anonyomous function wrapper / function reference
 		// 2. closure using object this encapsulated by local function var
-
-		if (stubClass == " monaco big black") {
-			stubClass = " monaco big white";
-		} else {
-			stubClass = " monaco big black";
-		}
 		
 		// better to use second version bc first just evals that code
 		// whereas the second passes a reference to the js function
-		// var tt = setTimeout("animatePunctuation(stubSymbol)", 200);
 		// var tt = setTimeout(animatePunctuation, 200);
-		var thisRandomDelay = Math.floor((Math.random() * 100) + 1);
-		// var tt = setTimeout(animatePunctuation, thisRandomDelay);
+
 		// this one wraps it in an anonyomous function
-		var tt = setTimeout(function(){animatePunctuation(count,harvest);}, 100);
+		var tt = setTimeout(function(){animatePunctuation(count,harvest);}, displaytimeout);
+		// var thisRandomDelay = Math.floor((Math.random() * 200) + 100);
+		// var tt = setTimeout(function(){animatePunctuation(count,harvest);}, thisRandomDelay);
  	}

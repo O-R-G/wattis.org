@@ -8,6 +8,9 @@ require_once("GLOBAL/head.php");
 
 	$summary = $_REQUEST['summary'];          // no register globals
 	if (!$summary) $summary=null;
+
+	$regex = $_REQUEST['regex'];          // no register globals
+	if (!$regex) $regex=null;
 ?>
 
 
@@ -51,7 +54,17 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 	// preg_replace_callback executes the callback function each time it finds a match
 	
-	$result = preg_replace_callback("/[,\*\.\(\)\/\-?+=]/", function($matches){
+	// [ ] not found in regex
+
+	if ($regex) {
+
+		$regex = "/[,\*\.\(\)\/\-\{\}?+=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ ]/";
+	} else {
+
+		$regex = "/[,\*\.\(\)\/\-\{\}?+=]/";
+	}
+
+	$result = preg_replace_callback($regex, function($matches){
     	
 		static $count = 0;
 	    	global $count;		// needed to declare in the function explicitly
@@ -74,8 +87,7 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 		$html .= "<span id='punctuationsummary' class='monaco big black'>...</span>";
 	}
 	
-
-$html .= "</div>";
+	$html .= "</div>";
 
 	echo nl2br($html);
 
