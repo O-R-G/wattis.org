@@ -54,13 +54,17 @@ We are open T–F 12 to 7 / S 12 to 5.
 
 <br/><br/>
 
-<span class='monaco'>//*...</span> <a href=''>The Wattis</a> Institute for Contemporary Art
+<span class='monaco'>//*...</span> <a href=''>The Wattis</a> Institute for Contemporary Art</span>
 
 <br/><br/>
 
 <a href=''>The<br/>Wattis</a> Institute<br/> <br/>for Contemporary Art
 
+<br/><br/>
+<br/><br/>
 
+<a href=''>WE ARE CLOSED FOR NOW</a> <span class='monaco'>:</span> 
+Re<span class='monaco'>-</span>opening 9<span class='monaco'>.</span>9<span class='monaco'>/</span>2014<span class='monaco'> #!*</span> 
 
 </div>
 
