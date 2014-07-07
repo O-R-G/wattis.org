@@ -19,7 +19,6 @@
 -- Table structure for table `media`
 --
 
-DROP TABLE IF EXISTS `media`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `media` (
@@ -49,7 +48,6 @@ UNLOCK TABLES;
 -- Table structure for table `objects`
 --
 
-DROP TABLE IF EXISTS `objects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `objects` (
@@ -95,7 +93,6 @@ UNLOCK TABLES;
 -- Table structure for table `wires`
 --
 
-DROP TABLE IF EXISTS `wires`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `wires` (
