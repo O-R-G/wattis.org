@@ -39,18 +39,9 @@ AND wires.toid = objects.id AND media.object = objects.id AND objects.active = '
 		$body = $myrow['body'];
 	}
 
-	// deck
-
-	// * fix * convases
-	// $html .= "<span class='listContainer times show comment'><canvas id='canvas1' width='46' height='22' class='show'>[*]</canvas>";
-	$html .= "<span class='listContainer times show comment'>";
-	$html .= "<span class='monaco'>[*]</span> ";	                  
-	$html .= "<a href=''>" . $name . "</a> ";	
-	$html .= "</span>";	
-
 	// body
 
-	$html .= "<span class='listContainer doublewide times'>";
+	$html .= "<span class='doublewide centered times big black'>";
 	$html .= $body;	
 	$html .= "</span>";	
                   
