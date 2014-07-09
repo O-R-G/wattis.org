@@ -1,100 +1,98 @@
-<?php 
-require_once("GLOBAL/head.php"); 
-?>
-
-        <!-- MAIN -->
-
-        <div id='main' class='<?php echo ($language == "en") ? "englishMainContainer" : "arabicMainContainer" ?>'>
-
-        <!-- MENU -->
-
-        <div id='menu' class='<?php echo ($language == "en") ? "englishMenuContainer blue " : "arabicMenuContainer red " ?> tahoma'>
-
-                <p dir="rtl" lang="AR" class="tahoma green">
-
-                <ul>
-                        <?php
-                                if ( $language == "en" ) $path = "14";
-                                if ( $language == "ar" ) $path = "15";
-                                $limit = 1;
-                                $selection = $idFull;
-                                // $linkPageName = $pageName;
-                                $linkPageName = "detail";                       // probably want to fix this and set using O-R$
-                                $breadcrumbsMode = FALSE;
-                                $multiColumn = 0;
-                                $stub = FALSE;
-                                $breadcrumbsMode = FALSE;
-                                $thisLanguage = $language;
-                                if (!$breadcrumbsMode) ($id) ? $breadcrumbsMode = TRUE : $breadcrumbsMode = FALSE;
-
-                                displayNavigation($path, $limit, $selection, $linkPageName, $stub, $breadcrumbsMode, $multiColumn, $thisLanguage);
-                        ?>
-                </ul>
-        </p>
-        </div>
-
-	<!-- TEXT COLUMN --> 
-
-	<div id='text' <?php echo ($language == "en") ? "class='leftContainer courier medium'" : "class='rightContainer courier 
-mediumadjust' dir='rtl' lang='AR'" ?>>
-
-		<?php
-	
-			// SQL object only
-				
-			$sql    = "SELECT * FROM objects WHERE objects.id = $id;";
-			$result =  MYSQL_QUERY($sql);
-			$myrow  =  MYSQL_FETCH_ARRAY($result);
-			$deck = $myrow["deck"];
-			$body = $myrow["body"];
-
-			// replace [ and ] with footnote style
-
-			$bodyParsed = str_replace("]", "</span>", str_replace("[", "<span class='footnote'>", $body));
-
-			$html = $bodyParsed;
-                        echo nl2br($html);
-		?>
-	</div>
-	
-
-	<!-- IMAGES COLUMN --> 
-
-	<div id='images' <?php echo ($language == "en") ? "class='rightContainer tahoma green'" : "class='leftContainer tahoma green' dir='rtl' lang='AR'" ?>>
-
-		<?php
-
-			// SQL object plus media	
-
-			$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, objects.rank as objectsRank, 
-wires.fromid, wires.toid, wires.active, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, media.active, media.rank FROM objects, 
-wires, media WHERE objects.id = $id AND wires.toid = objects.id AND media.object = objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = 
-'1' ORDER BY media.rank;";
-			$result =  MYSQL_QUERY($sql);
-			$html = "";
-			$i = 0;
-
-			while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-							
-				$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-				$mediaCaption = strip_tags($myrow["caption"]);
-				$mediaStyle = "width: 100%;";
-				$html .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
-				$html .= "\n	". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-				$html .= "<div class = 'captionContainer caption'>";
-				$html .= $mediaCaption . "<br /><br />";
-				$html .= "</div>";
-				$html .= "</div>";
-				$i++;
-			}
-	
-			echo nl2br($html);
-		?>
-	</div>
-	</div> 
-
-	<!-- /MAIN -->
-
 <?php
-	require_once("GLOBAL/foot.php"); 
+require_once("GLOBAL/head.php");
 ?>
+
+
+<div class="mainContainer times big black">
+
+	<?php
+                
+	// SQL object plus media
+                     
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, objects.rank as objectsRank, wires.fromid, wires.toid, 
+wires.active, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, media.active, media.rank FROM objects, wires, media WHERE objects.id = $id 
+AND wires.toid = objects.id AND media.object = objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = '1' ORDER BY media.rank;";
+
+	$result = MYSQL_QUERY($sql);
+	$html = "";
+	// $images[];
+	$i=0;
+
+	// collect images
+
+	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+
+		$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
+		$mediaCaption = strip_tags($myrow["caption"]);
+		$mediaStyle = "width: 100%;";
+		$images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
+		$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+		$images[$i] .= "<div class = 'captionContainer caption'>";
+		$images[$i] .= $mediaCaption . "<br /><br />";
+		$images[$i] .= "</div>";
+		$images[$i] .= "</div>";
+		$i++;
+
+		// this could work better if only checked first time thru this loop
+		// also, query should return hits even if no media attached (see LEFT JOIN in some previous website ... hmm, zenazezza? cluster?)
+		$name = $myrow['name1'];
+		$body = $myrow['body'];
+	}
+
+	// deck
+
+	// * fix * convases
+	// $html .= "<span class='listContainer times show comment'><canvas id='canvas1' width='46' height='22' class='show'>[*]</canvas>";
+	$html .= "<span class='listContainer times show comment'>";
+	$html .= "<span class='monaco'>[*]</span> ";	                  
+	$html .= "<a href=''>" . $name . "</a> ";	
+	$html .= "</span>";	
+
+	// body
+
+	$html .= "<span class='listContainer doublewide times'>";
+	$html .= $body;	
+	$html .= "</span>";	
+                  
+	// images
+
+	for ( $j = 0; $j < count($images); $j++) {
+	
+		$html .= $images[$j];
+	}
+
+	echo nl2br($html);
+
+	?>
+        
+	<!-- DATE -->
+	<!-- move this to foot.php? -->
+
+	<div class="dateContainer helvetica small">
+		CCA WATTIS INSTITUTE FOR CONTEMPORARY ARTS<br />360 KANSAS STREET / SAN FRANCISCO CA 94103<br />
+		20142615
+	</div>
+</div>
+
+
+<!-- JS -->
+
+<script type="text/javascript">
+	
+	message[1] =    [
+			"[.]",
+			"[+]",
+			"[-]",
+			"[!]",
+			"[*]"
+			];
+
+	delay[1] = 400;
+
+	window.onload=initEmoticons(1, message, delay);
+
+</script>
+
+</div>
+</body>
+</html>

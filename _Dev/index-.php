@@ -7,19 +7,16 @@ require_once("_Library/orgRSSParse.php");
 
 <?php
 	
-	// put this in head.php?
-	
 	// Build weatherString
 	// currently using old version of orgRSSParse
+	// put this in head.php?
 
 	$weatherString .= orgRSSParse("http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
 	$weatherString = str_replace(" at San Francisco Intl Airport, CA", "", $weatherString);
-	// $weatherString = str_replace(" F", "&deg;", $weatherString);
 	$weatherString = preg_replace("/\d+/", "$0&deg;", $weatherString);
 	$weatherString = str_replace("and", "and currently ", $weatherString);
 	$weatherString = "Today, " . strtolower($weatherString) . ".";
 ?>
-
 
 <!-- *todo* add homecontainer wrapper -->
 
@@ -57,13 +54,7 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 </div>
 
 
-
-
-
-
-
 <!-- JS -->
-
 
 <script type="text/javascript">
 

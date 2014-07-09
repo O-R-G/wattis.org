@@ -300,3 +300,8 @@ p {
 .black a {
         color: #000;
         }
+
+.greybox {
+        background-color: #CCC;
+	border: 1px dotted #EEE;
+        }
