@@ -84,7 +84,10 @@ if (($pageName != "index")
 && ($pageName != "punctuation")  
 && ($pageName != "sign") 
 && ($pageName != "ad") 
-&& ($pageName != "ad-2")) {
+&& ($pageName != "ad-frieze")
+&& ($pageName != "ad-artforum")
+&& ($pageName != "ad-afterall")) 
+{
 ?>
 
 <!-- WATTIS -->
