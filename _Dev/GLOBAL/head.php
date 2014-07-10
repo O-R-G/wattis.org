@@ -86,7 +86,10 @@ if (($pageName != "index")
 && ($pageName != "ad") 
 && ($pageName != "ad-frieze")
 && ($pageName != "ad-artforum")
-&& ($pageName != "ad-afterall")) 
+&& ($pageName != "ad-afterall")
+&& ($pageName != "ad-artpractical")
+&& ($pageName != "ad-kqed")
+&& ($pageName != "ad-may"))
 {
 ?>
 

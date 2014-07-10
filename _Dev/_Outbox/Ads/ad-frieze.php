@@ -1,26 +1,46 @@
-<?php
-require_once("GLOBAL/head.php");
-?>
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-tran$
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <base href="/WATTIS/_Dev/">
+
+        <title><?php echo $documentTitle; ?></title>
+        <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+        <meta http-equiv="Title" content="<?php echo $documentTitle; ?>" />
+
+        <!-- ** fix viewport and possibly responsiveness ** -->
+
+        <!-- <meta name="viewport" content="width=device-width"> -->
+        <!-- <meta name="viewport" content="width=700"> -->
+        <!-- <meta name="viewport" content="initial-scale=1.0">-->
+
+        <link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
+        <script type="text/javascript" src="GLOBAL/global.js"></script>
+        <script type="text/javascript" src="JS/animateEmoticon.js"></script>
+        <script type="text/javascript" src="JS/animateEmoticon-src.js"></script>
+</head>
 
 <style>
 
 body {
 /*background-color:#333;*/
-background-image: url("MEDIA/afterall.jpg");
+background-image: url("MEDIA/frieze.jpg");
 }
 
 .wattisContainer {
 	position: absolute;
         z-index:99;
-        top: 276px;
-        left: 980px;
-        padding-top:30px;
+        top: 300px;
+        left: 900px;
+        padding-top:60px;
         padding-left:60px;
-        width: 84px;
-	height: 36px;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #000;
+        width: 78px;
+	height: 78px;
+   border-style: solid;
+    border-width: 1px;
+    border-color: #000;
 	background-color:#FFF;
         }
 
