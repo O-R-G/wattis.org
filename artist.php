@@ -2,83 +2,88 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<div class="mainContainer times big black ">
 
-<div class="doublewide centered times big black"> 
+<div class="mainContainer times big black">
 
-<a href="">Markus Schinwald</a> gives 
-inanimate objects a personality of their own: they have good moods, bad 
-moods, nervous tics, and psychological baggage. His paintings, 
-sculptures, and installations have *issues*, in the way that most 
-relationships do. Conversely, he also imagines a world where a state of 
-mind could give rise to an object. *What if*, the work asks, *a moment 
-of anxiety could generate a neck brace*. Clearly, this gives a whole new 
-meaning to what we say when we talk about prosthetics.
-<br/>
-<br/>
-<i>Markus Schinwald (b. 1973, Austria) presents an installation of new
-work, on view September 11–December 13, 2014</i>
+	<?php
+                
+	// SQL object plus media
+	
+	// *fix* query should return hits even if no media attached (see LEFT JOIN in some previous website ... hmm, zenazezza? cluster?)
+                     
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, objects.rank as objectsRank, wires.fromid, wires.toid, 
+wires.active, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, media.active, media.rank FROM objects, wires, media WHERE objects.id = $id 
+AND wires.toid = objects.id AND media.object = objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = '1' ORDER BY media.rank;";
+
+	$result = MYSQL_QUERY($sql);
+	$html = "";
+	$i=0;
+
+	// collect images
+
+	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+
+		$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
+		$mediaCaption = strip_tags($myrow["caption"]);
+		$mediaStyle = "width: 100%;";
+		$images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
+		$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+		$images[$i] .= "<div class = 'captionContainer caption'>";
+		$images[$i] .= $mediaCaption . "<br /><br />";
+		$images[$i] .= "</div>";
+		$images[$i] .= "</div>";
+		$i++;
+
+		// this could work better if only checked first time thru this loop
+		$name = $myrow['name1'];
+		$body = $myrow['body'];
+	}
+
+	// body
+
+	$html .= "<span class='doublewide centered times big black'>";
+	$html .= $body;	
+	$html .= "</span>";	
+                  
+	// images
+
+	for ( $j = 0; $j < count($images); $j++) {
+	
+		$html .= $images[$j];
+	}
+
+	echo nl2br($html);
+
+	?>
+        
+	<!-- DATE -->
+	<!-- move this to foot.php? -->
+
+	<div class="dateContainer helvetica small">
+		CCA WATTIS INSTITUTE FOR CONTEMPORARY ARTS<br />360 KANSAS STREET / SAN FRANCISCO CA 94103<br />
+		20142615
+	</div>
 </div>
 
-<div class="triplewide centered">
 
-<div class="imageContainerWrapper">
-<div id="image0" class="imageContainer" onclick="expandImage('image0','50px', '0px');"
-style="padding: 50px;">
-<img src="IMAGES/schinwald01.jpg" style="width: 100%">
-</div>
-</div>
-
-<div class="imageContainerWrapper">
-<div id="image1" class="imageContainer" onclick="expandImage('image1','100px', '10px');"
-style="padding: 100px;">
-<img src="IMAGES/schinwald02.jpg" style="width: 100%">
-</div>
-</div>
-
-<div class="imageContainerWrapper"> <div id="image2" 
-class="imageContainer" style="padding-left: 10px; padding-top:90px;">
-
-<iframe width="280" height="157"  
-src="//www.youtube.com/embed/1ySU74TMsEQ?rel=0" frameborder="0" 
-allowfullscreen></iframe>
-
-<!-- <img src="IMAGES/schinwald03.jpg" style="width: 100%"> -->
-</div>
-</div>
-
-</div>
-
-<div class="clear">
-</div>
-
-
-<br /> 
-<br /> 
-<br /> 
-
-<div class="doublewide centered times big black"> 
-
-<span class='times'><i>The show opens tomorrow.</i> <a 
-href="https://www.google.com/search?q=markus+schinwald&client=safari&rls=en&source=lnms&tbm=isch&sa=X&ei=sIiMU6KgEcPNsQTEqYCgBA&ved=0CAgQ_AUoAQ&biw=1353&bih=825" 
-class="instructionContainer helvetica small red" target="new">SEE MORE IMAGES FROM 
-MARKUS SCHINWALD</a><a href="archive.php" class="instructionContainer 
-helvetica small red">SEE PAST EXHIBITIONS</a><a href="" 
-class="instructionContainer helvetica small red">READ A TEXT BY LARS 
-BANG LARSEN</a><a href="calendar.php" class="instructionContainer 
-helvetica small red">CHECK OUT UPCOMING EVENTS</a><a 
-href="index-.php" class="instructionContainer helvetica small red">GO 
-HOME</a> <span id="sentence13" class="helvetica small">20142615<br/> 
-<br/> <br/> </span> </span>
-
-
-</div>
-
+<!-- JS -->
 
 <script type="text/javascript">
-window.onload=initEmoticons(1, message, delay);
+	
+	message[1] =    [
+			"[.]",
+			"[+]",
+			"[-]",
+			"[!]",
+			"[*]"
+			];
+
+	delay[1] = 400;
+
+	window.onload=initEmoticons(1, message, delay);
+
 </script>
 
-<?php
-require_once("GLOBAL/foot.php");
-?>
+</div>
+</body>
+</html>

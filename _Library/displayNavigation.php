@@ -95,10 +95,8 @@ function displayNavigation( $path = "0", $limit = null, $selection = null, $page
 		// $html .= " " . $first . " / " . $final . " > " . $depth . " = " . $selection . " - " . count($selects) . " bc = " . $breadcrumbsMode;	// debug
 		$html .= "</a></div>";
 		
-		
-		
 
-		if ( ($breadcrumbsMode) && ($depth <= count($selects)) ) {
+		if ( ($breadcrumbsMode) && ($depth <= count($selects))) {
 
 			if ( $selected ) echo $html;
 			
@@ -110,7 +108,7 @@ function displayNavigation( $path = "0", $limit = null, $selection = null, $page
 	
 		//  Find children of current node
 	
-		if ( (($limit > 0 || $limit === null) || $selected) && !$stub ) {
+		if ( (($limit > 0 || $limit === null) || $selected)) {
 	
 			$sql = "
 				SELECT objects.id AS objectsId FROM wires, objects 
@@ -127,11 +125,12 @@ function displayNavigation( $path = "0", $limit = null, $selection = null, $page
 			if ( $multiColumn && $depth!=0 ) echo "<div style='padding-left:" . $multiColumn . "px;'>";
 
 						
-			// ** Casco-specific hack **
+			// ** Acquiring Modernity-specific hack **
 			
 			if ($final && $depth>0) $breadcrumbsMode=TRUE;
 			
-			while ($row = MYSQL_FETCH_ARRAY($res)) {	
+			while (($row = MYSQL_FETCH_ARRAY($res))) {	
+			// while (($row = MYSQL_FETCH_ARRAY($res)) && !$stub) {	
 
 				$tmp = $path .",". $row["objectsId"];
 				$limitTemp = ($selected) ? $limit : $limitNext;

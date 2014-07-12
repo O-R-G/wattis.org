@@ -119,10 +119,8 @@ p {
         top: 0px;
         left: 0px;
         float:left;
-        padding: 10px;
+        padding: 50px;
         width: 10%;
-	height: 350px;
-	/* overflow:auto; */
         }
 
 .weatherContainer {
@@ -279,18 +277,13 @@ p {
         color: #F00;
         }
 
-.red a:link {
+.red a {
 	color:#F00;
-        border-bottom: solid 3px #F00;
-        }
-
-.red a:visited {
-	color:#F00;
-        border-bottom: solid 3px #F00;
+        border-bottom: solid 3px #000;
         }
 
 .red a:hover {
-        border-bottom: solid 3px #FFF;
+        border-bottom: solid 3px #F00;
         }
 
 .black {
@@ -299,9 +292,4 @@ p {
 
 .black a {
         color: #000;
-        }
-
-.greybox {
-        background-color: #CCC;
-	border: 1px dotted #EEE;
         }

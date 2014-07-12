@@ -7,19 +7,16 @@
  //  RSS Parser  //
 //////////////////
 
-function orgRSSParse($url, $limit) {
+function orgRSSParse($url) {
 
 	require_once("_Library/orgTextParse.php");
 	$headline = null;
 	$raw = orgTextParse($url);
-	
-	//echo $raw; 
 
 	$items = explode("<item>", $raw);
 	$title = array();
 	$link  = array();
-		
-	for ($i = 1; $i <= $limit; $i++) {
+	for ($i = 1; $i < sizeof($items); $i++) {
 
 
 		//  Titles
@@ -35,12 +32,11 @@ function orgRSSParse($url, $limit) {
 		$linkEnd   = strpos(substr($items[$i], $linkStart), "</link>");
 		$link[$i]  = trim(strip_tags(substr($items[$i], $linkStart, $linkEnd))); // use "eregi" instead?
 
-		echo "\n\n<a href='". $link[$i] ."' target='_blank'>". $title[$i] ."</a><br />";
+		//echo "\n\n<a href='". $link[$i] ."' target='_blank'>". $title[$i] ."</a><br />";
 	}
-	
 	$headline = $title[rand(1, sizeof($title))];
 
-	//return $headline;
+	return $headline;
 }
 
 

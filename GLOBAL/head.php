@@ -1,12 +1,9 @@
 <?php 
-	/*
 	// date_default_timezone_set('Asia/Kuwait');
 	require_once("_Library/systemDatabase.php"); 
 	require_once("_Library/systemCookie.php");
 	require_once("_Library/displayNavigation.php"); 
 	require_once("_Library/displayMedia.php"); 
-	*/
-
 	
 	// Parse $id
 
@@ -55,6 +52,13 @@
 	<title><?php echo $documentTitle; ?></title>
 	<meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
 	<meta http-equiv="Title" content="<?php echo $documentTitle; ?>" />		
+
+	<!-- ** fix viewport and possibly responsiveness ** -->
+
+	<!-- <meta name="viewport" content="width=device-width"> -->
+	<!-- <meta name="viewport" content="width=700"> -->
+	<!-- <meta name="viewport" content="initial-scale=1.0">-->
+
 	<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 	<script type="text/javascript" src="GLOBAL/global.js"></script>
         <script type="text/javascript" src="JS/animateEmoticon.js"></script>
@@ -63,8 +67,30 @@
 
 <body>
 
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N8MCCT"
+height="0" width="0"
+style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N8MCCT');</script>
+<!-- End Google Tag Manager -->
+
 <?php 
-if (($pageName != "index") && ($pageName != "index-")) {
+if (($pageName != "index") 
+&& ($pageName != "index-") 
+&& ($pageName != "punctuation")  
+&& ($pageName != "sign") 
+&& ($pageName != "ad") 
+&& ($pageName != "ad-frieze")
+&& ($pageName != "ad-artforum")
+&& ($pageName != "ad-afterall")
+&& ($pageName != "ad-artpractical")
+&& ($pageName != "ad-kqed")
+&& ($pageName != "ad-may"))
+{
 ?>
 
 <!-- WATTIS -->
