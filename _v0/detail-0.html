@@ -1,0 +1,185 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CCA Wattis Institute for Contemporary Arts</title>
+<style>
+
+a {
+	color: #000;
+	text-decoration: none;
+	border-bottom: solid 3px;
+	}
+
+a:hover {
+	color:#FFF;
+	border-bottom: solid 3px #000;
+	}
+
+canvas{
+	/* background: #BBB */;
+        }
+     
+.big {
+	font-size:38px;
+	}
+
+.medium {
+	font-size:34px;
+	}
+
+.small {
+	font-size:10px;
+	}
+
+.monaco {
+	font-family: Monaco, "Lucida Console", monospace;
+	}
+
+.times {
+	font-family: "Times New Roman", Times, serif;
+	}
+
+.helvetica {
+	font-family: Helvetica, Arial, sans-serif;
+	}
+
+.textContainer {
+	top: 0px;
+	left: 0px;
+	/*display: block;*/
+	float:left;
+	}
+
+</style>
+
+    <script type="text/javascript">
+        var can, ctx, step, steps, frames;
+        var delay = 500;
+        var counter = 0;
+        var xPos, yPos, spacer;
+
+        function init() {
+                can = document.getElementById("canvas1");
+                ctx= can.getContext("2d");
+                ctx.fillStyle = "black";
+                ctx.font = "34px Monaco";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                frames = 9;
+                xPos = 20;
+                yPos = 24;
+                spacer = 24;
+                animateText();
+        }
+
+        function animateText() {
+                counter++;
+                ctx.clearRect(0, 0, can.width, can.height);
+                ctx.fillStyle = "black";
+
+                if (counter % frames == 0) {
+                        ctx.fillText("/", xPos, yPos);
+                        ctx.fillText("/", xPos+spacer, yPos);
+                        ctx.fillText("*", xPos+2*spacer, yPos);
+                }
+
+                if (counter % frames == 1) {
+                        ctx.fillText("/", xPos, yPos);
+                        ctx.fillText("/", xPos+spacer, yPos);
+                        ctx.fillText("*", xPos+2*spacer, yPos);
+                }
+
+                if (counter % frames == 2) {
+                        ctx.fillText("\\", xPos, yPos);
+                        ctx.fillText("/", xPos+spacer, yPos);
+                        ctx.fillText("*", xPos+2*spacer, yPos);
+                }
+
+                if (counter % frames == 3) {
+                        ctx.fillText("\\", xPos, yPos);
+                        ctx.fillText("\\", xPos+spacer, yPos);
+                        ctx.fillText("*", xPos+2*spacer, yPos);
+                }
+
+                if (counter % frames == 4) {
+                        ctx.fillText("\\", xPos, yPos);
+                        ctx.fillText("\\", xPos+spacer, yPos);
+                }
+
+                if (counter % frames == 5) {
+                        ctx.fillText("\\", xPos, yPos);
+                        ctx.fillText("\\", xPos+spacer, yPos);
+                        ctx.fillText("*", xPos+2*spacer, yPos);
+                }
+
+                if (counter % frames == 6) {
+                        ctx.fillText("\\", xPos, yPos);
+                        ctx.fillText("\\", xPos+spacer, yPos);
+                }
+
+                if (counter % frames == 7) {
+                        ctx.fillText("\\", xPos, yPos);
+                        ctx.fillText("\\", xPos+spacer, yPos);
+                        ctx.fillText("*", xPos+2*spacer, yPos);
+                }
+
+                if (counter % frames == 8) {
+                        ctx.fillText("\\", xPos, yPos);
+                        ctx.fillText("\\", xPos+spacer, yPos);
+                        ctx.fillText("*", xPos+2*spacer, yPos);
+                }
+
+                var t = setTimeout('animateText()', delay);
+        }
+    </script>
+
+</head>
+<body onload="init();">
+
+<div>
+
+<canvas id="canvas1" width="80" height="40">This browser or document mode doesn't support 
+canvas object</canvas>
+
+<span class="times big"> ... This is <a href="detail-1.html">The 
+Wattis</a>.</span>
+
+<span class="times big">We&#8217;re in San Francisco, a few blocks away from <a 
+href="http://www.cca.edu" target="new">California College of Arts</a> at 360 Kansas 
+Street (between 16th & 17th).<span>
+
+<span class="times big"><i> Today [03/19/14], it is kind of foggy and currently 
+78&#176; F.</i><span>
+
+<span class="times big">We are open until 7pm.<span>
+
+<span class="helvetica big">Right now, <a href="detail-0.html">Marcus Schwinvald</a> is showing new work in the 
+gallery.</span> <span class="monaco medium">;|</span>
+
+<img src="IMAGES/markus-schinwald.jpg" style="width:300px;">&nbsp;<a href="index-2.html" 
+class="helvetica small">CLOSE</a>
+
+<span class="times big"><i><a href="detail-2.html">Nairy Baghramian</a> is in the apartment for the next six 
+months, thinking and working towards an exhibition sometime in 
+December.</i></span> <span class="monaco medium">>:o</span>
+
+<span class="helvetica big">And, for the next year, <a href="detail-3.html">Joan Jonas</a> is on our mind. 
+^*</span>
+
+<span class="times big"><i>Meanwhile, an exhibition by Marie Angeletti opened four 
+days ago at Castillo Corrales. Have a look <a 
+href="http://castillocorrales.fr" target="new">here</a></i>. <span class="monaco 
+medium">//</span></span>
+
+<span class="times big">And Next Door at the Wattis, by appointment, is Avery Singer, Loretta Fahrenholz, <a href="http://worker01.e-flux.com/pdf/article_131.pdf" target="new">Lars Bang Larsen</a>, and 
+John Zorn.<span class="monaco medium">...</span></span>
+
+<span class="times big"><i>We are a nonprofit institution established in 1998 as a 
+forum for the presentation and discussion of international contemporary art and 
+curatorial practice.</i></span>
+
+<span class="helvetica small">20142615 / EDIT</span>
+
+</div>
+</body>
+</html>

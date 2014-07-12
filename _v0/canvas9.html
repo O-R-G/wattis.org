@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>\\*</title>
+    <style>
+
+	body {
+		background-color:#FFF;
+	}
+        canvas{
+	}
+        .subdiv{
+		width: 200px;
+	}
+
+    </style>
+ 
+    <script type="text/javascript">
+        var can, ctx, step, steps = 0; 
+	var delay = 10;
+	var counter = 0;
+ 
+        function init() {
+		can = document.getElementById("canvas1");
+		ctx= can.getContext("2d");
+		ctx.fillStyle = "black";
+		ctx.font = "32pt Monaco";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		step=0;
+		steps=can.height+0;
+		animateText();        
+	}
+
+	function animateText() {
+		step++;
+		ctx.clearRect(0, 0, can.width, can.height);
+		ctx.save();
+		ctx.translate(can.width / 2, step);
+		ctx.fillStyle = "black";
+		ctx.fillText("^", 0, 0);
+		ctx.restore();
+		ctx.fillText("+", 180, 50);
+
+		if (step == steps) step = 0;
+		if (step < steps) {
+			var t = setTimeout('animateText()', delay);
+		}
+	}
+    </script>
+ 
+</head>
+<body onload="init();">
+	<div class="subdiv">
+        	<canvas id="canvas1" width="300" height="80"> 
+		This browser or document mode doesn't support canvas object
+		</canvas>
+	</div>
+</body>
+</html>
+
