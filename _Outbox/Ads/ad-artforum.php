@@ -32,12 +32,12 @@ background-image: url("MEDIA/artforum.jpg");
 .wattisContainer {
 	position: absolute;
         z-index:99;
-        top: 18px;
-        left: 120px;
-        padding-top:20px;
-        padding-left:100px;
-        width: 116px;
-	/*height: 60px;*/
+        top: 19px;
+        left: 122px;
+        padding-top:17px;
+        padding-left:97px;
+        width: 115px;
+	height: 21px;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #000;
@@ -87,7 +87,7 @@ background-image: url("MEDIA/artforum.jpg");
                                 "//* ",
                                 ];
 
-                delay[0] = 3000;
+                delay[0] = 1000;
 
 window.onload=initEmoticons(1, message, delay);
 </script>
@@ -96,4 +96,3 @@ window.onload=initEmoticons(1, message, delay);
 </div>
 </body>
 </html>
- 
