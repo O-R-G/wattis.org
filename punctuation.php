@@ -61,7 +61,8 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 		$regex = "/[,\*\.\(\)\/\-\{\}?+=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ ]/";
 	} else {
 
-		$regex = "/[,\*\.\(\)\/\-\{\}?+=]/";
+		// $regex = "/[,\*\.\(\)\/\-\{\}?+=]/";
+		$regex = '/[\[\],’\*\.\(\)\/\-\{\}?+=]/';
 	}
 
 	$result = preg_replace_callback($regex, function($matches){
