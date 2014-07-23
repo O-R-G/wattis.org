@@ -112,10 +112,10 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 
 
-
-<!-- testDiv -->
-
 <script type="text/javascript" src="JS/animatePunctuation.js"></script>
+
+
+<!-- testDiv 
 	
 <div id="testDiv" class="helvetica big red">
 Hello, Page.
@@ -137,16 +137,73 @@ The Wattis
 360 Kansas Street
 SF, CA 94013
 </div>
+-->
 
+<div id="Punct-0" class="helvetica big red">
+-+=
+</div>
 
-<div id="testDiv2" class="helvetica big red">
--+=*
+<div id="Punct-1" class="helvetica big red">
+\\*
+</div>
+
+<div id="Punct-2" class="helvetica big red">
+!*=
+</div>
+
+<!--
+<div id="Punct-3" class="helvetica big red">
++=*
+</div>
+
+<div id="Punct-4" class="helvetica big red">
++-}
+</div>
+
+<div id="Punct-5" class="helvetica big red">
+•#%
+</div>
+
+<div id="Punct-6" class="helvetica big red">
+!*=
+</div>
+-->
+
+<!-- fake divs -->
+
+<div id="Punct-0-0" class="helvetica big red">
+</div>
+<div id="Punct-0-1" class="helvetica big red">
+</div>
+<div id="Punct-0-2" class="helvetica big red">
+</div>
+
+<div id="Punct-1-0" class="helvetica big red">
+</div>
+<div id="Punct-1-1" class="helvetica big red">
+</div>
+<div id="Punct-1-2" class="helvetica big red">
+</div>
+
+<div id="Punct-2-0" class="helvetica big red">
+</div>
+<div id="Punct-2-1" class="helvetica big red">
+</div>
+<div id="Punct-2-2" class="helvetica big red">
+</div>
+
+<div id="Punct-3-0" class="helvetica big red">
+</div>
+<div id="Punct-3-1" class="helvetica big red">
+</div>
+<div id="Punct-3-2" class="helvetica big red">
 </div>
 
 	
 <script>
-	// initPunctuation("testDiv");
-	initPunctuation("testDiv2");
+	// initPunctuation("Punct-0");
+	initPunctuation("Punct-1");
+	// initPunctuation("Punct-2");
 </script>
 
 
@@ -168,12 +225,6 @@ var harvest = harveststring.split('@');
 // animatePunctuation(<?php echo $count; ?>, harvest);
 
 </script>
-
-
-
-
-	
-
 
 
 

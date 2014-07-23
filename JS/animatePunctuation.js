@@ -1,9 +1,3 @@
-	// may want the individual chunks to animate at different speeds?
-	// or individual punctuation to animate at different speeds
-	// or at least separate chunks behave coherent to themselves only
-	// in which case, should implement second funtion that sets timeout 
-	// so it may be done asynchronously like animateEmoticons.js
-
 	// init should be called within the context of a div, and within then you look for the punctuation
 	// in fact, the php page could for now feed this js the raw text, with no tags
 	// or can work on a regex to ignore the tags
@@ -12,85 +6,84 @@
 
 	// globals		
 
-	displaylength = 1;	// might likely be passed to function / object
-	displaytimeout = 200;	// might likely be passed to function / object
+	var displaylength = 1;	// might likely be passed to function / object
+	var displaytimeout = 200;	// might likely be passed to function / object
 
-        function initPunctuation(divId) {
+        var divs = new Array();		// div refs 
+        var message = new Array();	// unused
+        var delay = new Array();	// unused
+        var thisCounter = new Array();	// unused
 
-		if (document.getElementById(divId)){
 
-			// will have to clean up <br/>, <a href> and other tags first before regex otherwise searching
-			// should be easy to do with a regex already made for the task
+        function initPunctuation(ok) {
 
-			str = document.getElementById(divId).innerHTML;
-			re = /[!"#$%&()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑⁔‿⁀⁐⁖∗∘∙∴∵≀∪∩⊂⊃┌┐]/g; 
-			count = 0;
-			// harvest = "";
+		var divPrefix = "Punct";  	// this could be passed as a parameter to initPunctuation (better)
+		var divCount = 0;
 
-			// match returns an array with all matches
-			// need to collect a harvest array
-		
-			// should be easy enough to do both things at once, to match a regex and return an array of refs
-			// sloppy would be with a global array, but i suspect a cleaner way here:
-			// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
-			// also need to sort out what we need in the array
-	
-			var harvest = str.match(re);
+		// populate divs[]
 
-			// replace with callback
-			// might replace count with a passed callback parameter
-				
+
+		while (divs[divCount] = document.getElementById(divPrefix+"-"+divCount)){
+
+			// find punctuation
+
+                        str = divs[divCount].innerHTML;
+                        re = /[!"#$%&()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑ ‿⁀⁐ ∗∘∙∴∵≀∪∩⊂⊃┌┐]/g;
+                        spanCount = 0;
+
+			// build array of matches		
+
+			var harvest = str.match(re);		// do this same time as replace?
+
+			// add <span>
+
 			var result = str.replace(re, function(match)
 			{
-				// harvest += match + "@";	// this is the sloppy way, globals
-				count++;			// also sloppy global used to trigger animatePunctuation
-				return  "<span id='punctuation" + count + "' class='monaco big black'>" + match + "</span>";
+				var replaced = "<span id='"+ divPrefix + "-" + divCount + "-" + spanCount + "' class='monaco big black'>" + match + "</span>";
+				spanCount++;	// could just count harvest also sloppy global used to trigger animatePunctuation
+				return replaced;
 			});
 
-			document.getElementById(divId).innerHTML = result;
-			// console.log(result);	
-	
-			animatePunctuation(count,harvest);
+                        divs[divCount].innerHTML = result;
+			console.log(divs[divCount]);
+			divCount++;
+
+			divId = divPrefix + "-" + divCount;
+			// divId = "Punct-2";
+
+			animatePunctuation(divs[divCount],harvest,divId);
 		}
 	}
 
 
-	// this can work on multiple divs using logic from animateEmoticons
+        function animatePunctuation(thisDiv,harvest,thisDivId) {
 
-        function animatePunctuation(count,harvest) {
+		// this can work on multiple divs using logic from animateEmoticons
 
-		for (i = 1; i <= count; i++) {
+		// for safety?
+		// if (thisDiv != null){
 
-			thisElement = "punctuation" + i;
-			randomIndex = Math.floor((Math.random() * count) + 1);
+		// spans
 
-			if (document.getElementById("punctuation"+i)){
+		for (i = 0; i < harvest.length; i++) {
 
-   				document.getElementById("punctuation"+i).innerHTML = harvest[i];	
+			// characters
+			// best to use js find children of div from div[]
 
-				for (j = 1; j < displaylength; j++) {
+// currently cannot find these elements if added to innerHTML rather than in doc proper
+// so i have fake divs in punctuation.php
+// will require figuring out how to troll DOM and find these subelements, should beeasy enough
+thisSpanId = "" + thisDivId + "-" + i;
+// thisSpanId = "Punct-2-1";
+// thisSpanId = thisDivId;
+// console.log(thisSpanId);
 
-	   				document.getElementById("punctuation"+i).innerHTML += harvest[i+j];
-				}	
-
-				// document.getElementById("punctuation"+i).innerHTML = harvest[i] + harvest[i+1] + harvest [i+2];	
-			}
-
-			if (document.getElementById("punctuationsummary")){
-
-				document.getElementById("punctuationsummary").innerHTML = harvest[i];	
-
-				for (j = 1; j < displaylength; j++) {
-
-					document.getElementById("punctuationsummary").innerHTML += harvest[i+j];	
-				}	
-			}
+	   		document.getElementById(thisSpanId).innerHTML = harvest[i];
+	   		// document.getElementById(thisDivId+"-"+i).innerHTML = harvest[i];
+	   		// document.getElementById("Punct-2-1").innerHTML = harvest[i];
 		}
 
-		// pop/push the array
-
-		// remove and return first element of array then add it to the end
-		// http://stackoverflow.com/questions/8073673/how-can-i-add-new-array-elements-at-the-top-of-an-array-in-javascript
+		// push/pop
 
 		harvest.push(harvest.shift());
 
@@ -101,14 +94,11 @@
 		// so then more abstract than document object
 		// two workarounds:
 		// 1. anonyomous function wrapper / function reference
-		// 2. closure using object this encapsulated by local function var
-		
+		// 2. closure using object this encapsulated by local function var	
 		// better to use second version bc first just evals that code
 		// whereas the second passes a reference to the js function
 		// var tt = setTimeout(animatePunctuation, 200);
 
 		// this one wraps it in an anonyomous function
-		var tt = setTimeout(function(){animatePunctuation(count,harvest);}, displaytimeout);
-		// var thisRandomDelay = Math.floor((Math.random() * 200) + 100);
-		// var tt = setTimeout(function(){animatePunctuation(count,harvest);}, thisRandomDelay);
+		var tt = setTimeout(function(){animatePunctuation(thisDiv,harvest,thisDivId);}, displaytimeout);
  	}

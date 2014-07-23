@@ -9,7 +9,6 @@
         var delay = new Array();
 	var thisCanvas = new Array();
 	var thisContext = new Array();
-	var thisFrames = new Array();
         var thisCounter = new Array();        
 
 	function initEmoticons(totalCanvas, message, delay) {
