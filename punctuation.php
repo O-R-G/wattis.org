@@ -8,9 +8,6 @@ require_once("GLOBAL/head.php");
 
 	$summary = $_REQUEST['summary'];          // no register globals
 	if (!$summary) $summary=null;
-
-	$regex = $_REQUEST['regex'];          // no register globals
-	if (!$regex) $regex=null;
 ?>
 
 
@@ -25,7 +22,9 @@ width="46"height="22" class="show" onclick="showBones();">\\\\*</canvas></a> . .
 href="main.php">The Wattis</a>.</div>
 -->
 
+
 <div class="times big <?php echo $textcolor; ?>">
+
 
 	<?php
                         
@@ -54,16 +53,21 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 	// preg_replace_callback executes the callback function each time it finds a match
 	
-	// [ ] not found in regex
+	// $regex = "/[!\\\"#$%&()*+,\\-.\\/:;<=>?@\\[\\\\\\]^_`\\{|\\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑⁔‿⁀⁐⁖∗∘∙∴∵≀∪∩⊂⊃┌┐]/";
 
-	if ($regex) {
+	// regex array for pattern matching because of php weirdness in the regex above (prob re escaping)
 
-		$regex = "/[,\*\.\(\)\/\-\{\}?+=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\ ]/";
-	} else {
-
-		// $regex = "/[,\*\.\(\)\/\-\{\}?+=]/";
-		$regex = '/[\[\],’\*\.\(\)\/\-\{\}?+=]/';
-	}
+	// $regex[0] = '/[[!\\$()*+\\-.\\/:;<=>?\\[\\\\\\]^_`\\{|\\}]/';	// first batch
+	$regex[0] = '/\,/';
+	$regex[1] = '/\./';
+	//$regex[2] = '/#/';
+	//$regex[3] = '/%/';
+	//$regex[4] = '/&/';
+	//$regex[5] = '/,/';
+	//$regex[6] = '/\"/';
+	
+	// $regex = "/[,\*\.\(\)\/\-\{\}?+=]/";
+	// $regex = '/[\[\],’\*\.\(\)\/\-\{\}?+=]/';
 
 	$result = preg_replace_callback($regex, function($matches){
     	
@@ -71,12 +75,13 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 	    	global $count;		// needed to declare in the function explicitly
 		global $harvest;	// string to keep list of matches comma separated
 	    	$count++;
-    		$harvest .= $matches[0] . ",";	
+    		$harvest .= $matches[0] . "@";	
 		$thisWrappedMatch = "<span id='punctuation" . $count . "' class='monaco big black'>" . $matches[0] . "</span>";
     		return !empty($matches[0]) ? $thisWrappedMatch : '';
 	}, $punctuationString);
 
 	// debug
+	// $result = preg_replace($regex, "+", $punctuationString);
 	// echo $count; 
 	// echo $harvest; 
 
@@ -90,10 +95,9 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 	
 	$html .= "</div>";
 
-	echo nl2br($html);
+	// echo nl2br($html);
 
 	?>
-        
 	
 	<!-- DATE -->
 	<!--
@@ -102,27 +106,75 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 		20142615
 	</div>
 	-->
+
 </div>
 
 
 
 
 
+<!-- testDiv -->
+
+<script type="text/javascript" src="JS/animatePunctuation.js"></script>
+	
+<div id="testDiv" class="helvetica big red">
+Hello, Page.
+!"#$%()*+,\-.\/:;=?@\[\\\]^_`\{|\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑⁔‿⁀⁐⁖∗∘∙∴∵≀∪∩⊂⊃┌┐
+
+“People" like to sit still, but bodies don’t. Mirrors have a way of putting the 
+arm where the leg should be and the arm where the leg should be.  { Joan Jonas } 
+has been spent a lot of time taking herself apart and putting herself back 
+together again in the company of others. + * - ?
+
+Joan Jonas, Vertical Roll from >1971, and Standing Sideways, >1978. Both deal 
+with the way the body conforms to story telling. Art historian {Pamela Lee} 
+hosts a conversation before and after the screening. Drinks will be served.
+
+Next Tuesday, September 24
+>7pm
+
+The Wattis
+360 Kansas Street
+SF, CA 94013
+</div>
+
+
+<div id="testDiv2" class="helvetica big red">
+-+=*
+</div>
+
+	
+<script>
+	// initPunctuation("testDiv");
+	initPunctuation("testDiv2");
+</script>
+
+
+
 
 <!-- JS -->
 
-<script type="text/javascript" src="JS/animatePunctuation.js"></script>
+<!-- <script type="text/javascript" src="JS/animatePunctuation.js"></script> -->
+
+
 <script>
 
 // make an array from the php string 
 // possible to pass array from php to js? probably more work than it's worth
 
 harveststring = "<?php echo $harvest; ?>";
-var harvest = harveststring.split(',');		
+var harvest = harveststring.split('@');		
 
-animatePunctuation(<?php echo $count; ?>, harvest);
+// animatePunctuation(<?php echo $count; ?>, harvest);
 
 </script>
+
+
+
+
+	
+
+
 
 
 

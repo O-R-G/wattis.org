@@ -1,18 +1,61 @@
-	// requires .php for text parsing
-	// requires divs named "punctuation[#]" in sequence
-	// these are produced by .php parsing script
-	// could rewrite this all as an object, even perhaps parse in .js
-	
 	// may want the individual chunks to animate at different speeds?
 	// or individual punctuation to animate at different speeds
 	// or at least separate chunks behave coherent to themselves only
+	// in which case, should implement second funtion that sets timeout 
+	// so it may be done asynchronously like animateEmoticons.js
 
-	// in which case, should implement second funtion that sets timeout so it may be done asynchronously like animateEmoticons.js
+	// init should be called within the context of a div, and within then you look for the punctuation
+	// in fact, the php page could for now feed this js the raw text, with no tags
+	// or can work on a regex to ignore the tags
+	// http://nadeausoftware.com/articles/2007/9/php_tip_how_strip_punctuation_characters_web_page
+	// http://stackoverflow.com/questions/5233734/how-to-strip-punctuation-in-php
 
 	// globals		
 
-	displaylength = 3;	// might likely be passed to function / object
+	displaylength = 1;	// might likely be passed to function / object
 	displaytimeout = 200;	// might likely be passed to function / object
+
+        function initPunctuation(divId) {
+
+		if (document.getElementById(divId)){
+
+			// will have to clean up <br/>, <a href> and other tags first before regex otherwise searching
+			// should be easy to do with a regex already made for the task
+
+			str = document.getElementById(divId).innerHTML;
+			re = /[!"#$%&()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑⁔‿⁀⁐⁖∗∘∙∴∵≀∪∩⊂⊃┌┐]/g; 
+			count = 0;
+			// harvest = "";
+
+			// match returns an array with all matches
+			// need to collect a harvest array
+		
+			// should be easy enough to do both things at once, to match a regex and return an array of refs
+			// sloppy would be with a global array, but i suspect a cleaner way here:
+			// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
+			// also need to sort out what we need in the array
+	
+			var harvest = str.match(re);
+
+			// replace with callback
+			// might replace count with a passed callback parameter
+				
+			var result = str.replace(re, function(match)
+			{
+				// harvest += match + "@";	// this is the sloppy way, globals
+				count++;			// also sloppy global used to trigger animatePunctuation
+				return  "<span id='punctuation" + count + "' class='monaco big black'>" + match + "</span>";
+			});
+
+			document.getElementById(divId).innerHTML = result;
+			// console.log(result);	
+	
+			animatePunctuation(count,harvest);
+		}
+	}
+
+
+	// this can work on multiple divs using logic from animateEmoticons
 
         function animatePunctuation(count,harvest) {
 
