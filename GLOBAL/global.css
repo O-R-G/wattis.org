@@ -207,7 +207,6 @@ p {
 
 
 
-
 .instructionContainer {
         margin-right: 10px;
 	}
@@ -263,6 +262,12 @@ p {
 	background-color: #F99;
 	opacity: .5;
 	}
+
+.floatPad {
+        float:left;
+        padding:50px;
+        width: 50px;
+        }
 
 
 /* added */

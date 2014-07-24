@@ -1,104 +1,61 @@
-	// init should be called within the context of a div, and within then you look for the punctuation
-	// in fact, the php page could for now feed this js the raw text, with no tags
-	// or can work on a regex to ignore the tags
-	// http://nadeausoftware.com/articles/2007/9/php_tip_how_strip_punctuation_characters_web_page
-	// http://stackoverflow.com/questions/5233734/how-to-strip-punctuation-in-php
-
-	// globals		
-
-	var displaylength = 1;	// might likely be passed to function / object
-	var displaytimeout = 200;	// might likely be passed to function / object
-
-        var divs = new Array();		// div refs 
-        var message = new Array();	// unused
-        var delay = new Array();	// unused
-        var thisCounter = new Array();	// unused
+	// + todo	
+	//
+	//   - strip existing tags from the div before the search (or ignore them anyway via regex)
+	//     http://nadeausoftware.com/articles/2007/9/php_tip_how_strip_punctuation_characters_web_page
+	//     http://stackoverflow.com/questions/5233734/how-to-strip-punctuation-in-php
+	//   - if three punct are found next to each other, then that identfies a zone to animate
+	//   - second animation pattern for solo punctuation marks
+	//   - how many it takes to identify the animation could also be a parameter	
 
 
-        function initPunctuation(ok) {
+        function initPunctuation(divId) {
 
-		var divPrefix = "Punct";  	// this could be passed as a parameter to initPunctuation (better)
-		var divCount = 0;
+        	var message = new Array();	
+		var div = document.querySelectorAll("[id^=" + divId + "]");
+		var delay = new Array();	
 
-		// populate divs[]
+		// find punctuation
 
+		for (var i = 0; i < div.length; i++) {
 
-		while (divs[divCount] = document.getElementById(divPrefix+"-"+divCount)){
-
-			// find punctuation
-
-                        str = divs[divCount].innerHTML;
-                        re = /[!"#$%&()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑ ‿⁀⁐ ∗∘∙∴∵≀∪∩⊂⊃┌┐]/g;
                         spanCount = 0;
+                        str = div[i].innerHTML;
+                        re = /[!"#$%&()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑ ‿⁀⁐ ∗∘∙∴∵≀∪∩⊂⊃┌┐]/g;
+			var harvest = str.match(re);
+			message[i] = harvest;
 
-			// build array of matches		
+			var result = str.replace(re, function(match){
 
-			var harvest = str.match(re);		// do this same time as replace?
-
-			// add <span>
-
-			var result = str.replace(re, function(match)
-			{
-				var replaced = "<span id='"+ divPrefix + "-" + divCount + "-" + spanCount + "' class='monaco big black'>" + match + "</span>";
-				spanCount++;	// could just count harvest also sloppy global used to trigger animatePunctuation
+				var replaced = "<span id='" + div[i].id + "-" + spanCount + "' class='monaco big black'>" + match + "</span>";
+				spanCount++;	
 				return replaced;
 			});
 
-                        divs[divCount].innerHTML = result;
-			console.log(divs[divCount]);
-			divCount++;
-
-			divId = divPrefix + "-" + divCount;
-			// divId = "Punct-2";
-
-			animatePunctuation(divs[divCount],harvest,divId);
+                        div[i].innerHTML = result;
+			delay[i] = 200;
+			// delay[i] = (10 * i)+90;
+			// console.log(div[i]);
+			// console.log(message[i]);
+			// console.log(delay[i]);
 		}
+
+		// start animations
+
+                for (var j = 0; j < div.length; j++) {
+
+			animatePunctuation(div[j],message[j], delay[j]);
+                }
 	}
 
 
-        function animatePunctuation(thisDiv,harvest,thisDivId) {
+        function animatePunctuation(div,message, delay) {
 
-		// this can work on multiple divs using logic from animateEmoticons
-
-		// for safety?
-		// if (thisDiv != null){
-
-		// spans
-
-		for (i = 0; i < harvest.length; i++) {
-
-			// characters
-			// best to use js find children of div from div[]
-
-// currently cannot find these elements if added to innerHTML rather than in doc proper
-// so i have fake divs in punctuation.php
-// will require figuring out how to troll DOM and find these subelements, should beeasy enough
-thisSpanId = "" + thisDivId + "-" + i;
-// thisSpanId = "Punct-2-1";
-// thisSpanId = thisDivId;
-// console.log(thisSpanId);
-
-	   		document.getElementById(thisSpanId).innerHTML = harvest[i];
-	   		// document.getElementById(thisDivId+"-"+i).innerHTML = harvest[i];
-	   		// document.getElementById("Punct-2-1").innerHTML = harvest[i];
+		for (i = 0; i < message.length; i++) {
+			
+			thisSpanId = div.id + "-" + i;
+	   		document.getElementById(thisSpanId).innerHTML = message[i];
 		}
 
-		// push/pop
-
-		harvest.push(harvest.shift());
-
-		// set timeout
-
-		// definitely a scope issue *fix* -- perhaps solved with callbacks
-		// scope issue is bc setTimeout is a method of window object and 
-		// so then more abstract than document object
-		// two workarounds:
-		// 1. anonyomous function wrapper / function reference
-		// 2. closure using object this encapsulated by local function var	
-		// better to use second version bc first just evals that code
-		// whereas the second passes a reference to the js function
-		// var tt = setTimeout(animatePunctuation, 200);
-
-		// this one wraps it in an anonyomous function
-		var tt = setTimeout(function(){animatePunctuation(thisDiv,harvest,thisDivId);}, displaytimeout);
- 	}
+		message.push(message.shift());		// push / pop
+		var tt = setTimeout(function(){animatePunctuation(div,message,delay);}, delay);
+	}

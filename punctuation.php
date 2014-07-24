@@ -139,71 +139,40 @@ SF, CA 94013
 </div>
 -->
 
-<div id="Punct-0" class="helvetica big red">
+<div id="Punct-ok" class="helvetica big">
+.+*
+</div>
+
+<div id="Punct-0" class="helvetica big">
 -+=
 </div>
 
-<div id="Punct-1" class="helvetica big red">
+<div id="Punct-22" class="helvetica big">
+‹›÷
+</div>
+
+<div id="Punct-1" class="helvetica big">
 \\*
 </div>
 
-<div id="Punct-2" class="helvetica big red">
+<div id="Punct-2" class="helvetica big">
 !*=
 </div>
 
-<!--
-<div id="Punct-3" class="helvetica big red">
+<div id="Punct-3" class="helvetica big">
 +=*
 </div>
 
-<div id="Punct-4" class="helvetica big red">
-+-}
+<div id="Punct-4" class="helvetica big">
+∪∩⊂
 </div>
 
-<div id="Punct-5" class="helvetica big red">
-•#%
+<div id="Punct-e" class="helvetica big">
+,(;
 </div>
-
-<div id="Punct-6" class="helvetica big red">
-!*=
-</div>
--->
-
-<!-- fake divs -->
-
-<div id="Punct-0-0" class="helvetica big red">
-</div>
-<div id="Punct-0-1" class="helvetica big red">
-</div>
-<div id="Punct-0-2" class="helvetica big red">
-</div>
-
-<div id="Punct-1-0" class="helvetica big red">
-</div>
-<div id="Punct-1-1" class="helvetica big red">
-</div>
-<div id="Punct-1-2" class="helvetica big red">
-</div>
-
-<div id="Punct-2-0" class="helvetica big red">
-</div>
-<div id="Punct-2-1" class="helvetica big red">
-</div>
-<div id="Punct-2-2" class="helvetica big red">
-</div>
-
-<div id="Punct-3-0" class="helvetica big red">
-</div>
-<div id="Punct-3-1" class="helvetica big red">
-</div>
-<div id="Punct-3-2" class="helvetica big red">
-</div>
-
 	
 <script>
-	// initPunctuation("Punct-0");
-	initPunctuation("Punct-1");
-	// initPunctuation("Punct-2");
+	initPunctuation("Punct");
 </script>
 
 

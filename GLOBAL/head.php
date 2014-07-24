@@ -82,6 +82,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 if (($pageName != "index") 
 && ($pageName != "index-") 
 && ($pageName != "punctuation")  
+&& ($pageName != "logo")  
 && ($pageName != "sign") 
 && ($pageName != "ad") 
 && ($pageName != "ad-frieze")
