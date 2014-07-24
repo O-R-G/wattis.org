@@ -14,7 +14,7 @@
 		var div = document.querySelectorAll("[id^=" + divId + "]");
 		var delay = new Array();	
 
-		// find punctuation
+		//* find punctuation
 
 		for (var i = 0; i < div.length; i++) {
 
