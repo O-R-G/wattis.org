@@ -9,15 +9,16 @@ require_once("GLOBAL/head.php");
                 
 	// SQL object
 
-	$sql = "SELECT objects.id, objects.name1 FROM objects WHERE objects.id = $id AND objects.active = 1;";
+	$sql = "SELECT objects.id, objects.name1, objects.body FROM objects WHERE objects.id = $id AND objects.active = 1;";
         $result = MYSQL_QUERY($sql);
 	$myrow  = MYSQL_FETCH_ARRAY($result);
 	$rootname = $myrow["name1"];
+	$rootbody = $myrow["body"];
 
 
 	// SQL objects attached plus media
 
-	$sql = "SELECT objects.id, objects.name1, objects.deck, objects.body, objects.rank, wires.fromid, 
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, wires.fromid, 
 wires.toid, media.id AS mediaId, media.object, media.caption, media.type FROM wires, objects LEFT JOIN media ON 
 objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT objects.id FROM objects WHERE 
 objects.name1 LIKE '$rootname') AND wires.toid=objects.id ORDER By objects.rank;";
@@ -33,13 +34,14 @@ objects.name1 LIKE '$rootname') AND wires.toid=objects.id ORDER By objects.rank;
 		$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
 		$mediaCaption = strip_tags($myrow["caption"]);
 		$mediaStyle = "width: 100%;";
-		// $images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
-		$images[$i] .= "<div id='image".$i."' class = 'imageContainerGrid greybox'>";
+		$images[$i] .= "<a href='grid2detail.php?id=" . $myrow['objectsId'] . "'>";
+		$images[$i] .= "<div id='image".$i."' class = 'listContainer twocolumn'>";
 		$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 		$images[$i] .= "<div class = 'captionContainer monaco small'>";
 		$images[$i] .= $mediaCaption;
 		$images[$i] .= "</div>";
 		$images[$i] .= "</div>";
+		$images[$i] .= "</a>";
 
 		// this could work better if only checked first time thru this loop
 		$name = $myrow['name1'];
@@ -57,6 +59,7 @@ objects.name1 LIKE '$rootname') AND wires.toid=objects.id ORDER By objects.rank;
 	$html .= "<div class='listContainer times'>";
 	$html .= "<span class='monaco'>[*]</span> ";	                  
 	$html .= "<a href=''>" . $rootname . "</a> ";	
+	$html .= "<br /><br />" . $rootbody;
 	$html .= "</div>";	
 
    

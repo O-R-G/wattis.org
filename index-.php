@@ -45,12 +45,6 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 	?>
         
-	<!-- DATE -->
-
-	<div class="dateContainer helvetica small">
-		CCA WATTIS INSTITUTE FOR CONTEMPORARY ARTS<br />360 KANSAS STREET / SAN FRANCISCO CA 94103<br />
-		20142615
-	</div>
 </div>
 
 
@@ -101,7 +95,10 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 </script>
         
-
 </div>
-</body>
-</html>
+
+
+<?php
+require_once("GLOBAL/foot.php");
+?>
+

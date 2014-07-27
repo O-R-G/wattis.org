@@ -31,7 +31,12 @@ WHERE name1 LIKE 'Main' AND objects.active=1) AND wires.toid = objects.id AND ob
 	        $i++;
 		if ( $i % 3 == 0) $html .= "<div class='clear'></div>"; 	// clear floats
 	}
-                       
+
+	$html .= "<div class='helvetica small'>";
+	$html .= "<a href='calendar.php' class='instructionContainer'>SEE UPCOMING EVENTS</a>";
+	$html .= "<a href='index.php' class='instructionContainer'>GO HOME</a>";
+	$html .= "</div>";	
+	
 	echo nl2br($html);
 	?>
 </div>

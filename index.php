@@ -20,11 +20,6 @@ canvas {
      
 </style>
 
-<script type="text/javascript"> 
-	window.onclick = function showBones() { 
-		window.location.assign("index-.php");
-	} 
-</script>
 
 
 <div class="times big black">
@@ -32,8 +27,8 @@ canvas {
 <!-- WATTIS -->
 
 <div class="wattisContainer"><canvas id="canvas0" width="60" height="22" 
-class="show">\\\\*</canvas><span id="sentence0">. . . This is <a 
-href="main.php">The Wattis</a><canvas id="canvas13" width="10" 
+class="show">\\\\*</canvas><span id="sentence0">. . . <a 
+href="main.php">The Wattis Institute</a><canvas id="canvas13" width="10" 
 height="22">.</canvas></span><br /><span id="sentence1"><span 
 class="white"> We<canvas id="canvas12" width="12" 
 height="22">&#8217</canvas>re in San Francisco</span>,</span> <span 
@@ -169,17 +164,41 @@ method='post' style='margin: 0; padding: 0;'><textarea name='sender'
 cols='30' rows='1'class='Mono'></textarea><input name='subscribe' 
 type='submit' value='Subscribe' /></form></span></div>
 
-<!-- DATE? -->
+<!-- CLICK ANYWHERE -->
 
-<div class="dateContainer"><span id="sentence13" class="helvetica small">CCA WATTIS 
-INSTITUTE FOR CONTEMPORARY ARTS<br />360 KANSAS STREET / SAN FRANCISCO CA 94103<br /> 
-20142615</span></div>
-
+<div class="fullContainer" onclick="window.location.assign('index-.php');">
 </div>
+
+<script type="text/javascript"> 
+
+        /*
+
+        // still not the best way to do this, either here or above
+        // better to use an eventHandler probably and capture click
+
+	window.onclick = function showBones() { 
+		window.location.assign("index-.php");
+	} 
+
+        // or
+
+        document.body.onclick = function() { 
+	        window.location.assign("index-.php");
+        } 
+
+        */
+        
+</script>
+
 
 <script type="text/javascript">
 window.onload=initEmoticons(16, message, delay);
 </script>
 
-</body>
-</html>
+
+
+
+
+<?php
+require_once("GLOBAL/foot.php");
+?>

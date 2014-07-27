@@ -52,17 +52,17 @@ AND wires.toid = objects.id AND media.object = objects.id AND objects.active = '
 		$html .= $images[$j];
 	}
 
+        $html .= "<div class='helvetica small'>";
+        $html .= "<a href='readmore.php' class='instructionContainer'>READ MORE</a>";
+        $html .= "<a href='calendar.php' class='instructionContainer'>SEE UPCOMING EVENTS</a>";
+        $html .= "<a href='archive.php' class='instructionContainer'>CONSULT THE ARCHIVE</a>";
+        $html .= "<a href='index.php' class='instructionContainer'>GO HOME</a>";
+        $html .= "</div>";
+
 	echo nl2br($html);
 
 	?>
         
-	<!-- DATE -->
-	<!-- move this to foot.php? -->
-
-	<div class="dateContainer helvetica small">
-		CCA WATTIS INSTITUTE FOR CONTEMPORARY ARTS<br />360 KANSAS STREET / SAN FRANCISCO CA 94103<br />
-		20142615
-	</div>
 </div>
 
 
@@ -85,5 +85,8 @@ AND wires.toid = objects.id AND media.object = objects.id AND objects.active = '
 </script>
 
 </div>
-</body>
-</html>
+
+
+<?php
+require_once("GLOBAL/head.php");
+?>
