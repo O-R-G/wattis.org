@@ -36,9 +36,9 @@
 	$myrow  =  MYSQL_FETCH_ARRAY($result);
 	$deck = $myrow["deck"];
 	if ( $deck == 'TRUE' ) $live = TRUE;
-	*/
-	
-	$documentTitle = "CCA Wattis Institute for Contemporary Arts";	
+	*/	
+
+	$documentTitle = ( $pageName == "index" ) ? "CCA Wattis Institute for Contemporary Arts" : "CCA Wattis Institute for Contemporary Arts / " . $pageName;
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"; 
 ?>
 

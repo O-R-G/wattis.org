@@ -38,12 +38,6 @@ media.type, media.caption, media.active, media.rank FROM objects LEFT JOIN media
 	}
 
 
-        // Check for column breaks
-
-	$pattern = "/\/\/\//";
-	if ( preg_match($pattern, $body) == 1 ) $columns = preg_split($pattern, $body);
-
-   
 	// deck
 
 	$html .= "<div class='listContainer times'>";
@@ -51,31 +45,12 @@ media.type, media.caption, media.active, media.rank FROM objects LEFT JOIN media
 	$html .= "<a href=''>" . $name . "</a> ";	
 	$html .= "</div>";	
 
-
 	// body
 
-	if ($columns) {
-
-		// column 2
-	
-		$html .= "<div class='listContainer times'>";
-		$html .= $columns[0];	
-		$html .= "</div>";	
-                  	
-		// column 3
-	
-		$html .= "<div class='listContainer times'>";
-		$html .= $columns[1];	
-		$html .= "</div>";	
-                  	
-	} else {
-
-        	$html .= "<div class='listContainer doublewide times'>";
-        	$html .= $body;
-        	$html .= "</div>";
-	}
-
-
+	$html .= "<div class='listContainer doublewide times'>";
+	$html .= $body;	
+	$html .= "</div>";	
+                  
 	// images
 
 	for ( $j = 0; $j < count($images); $j++) {

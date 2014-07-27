@@ -81,6 +81,7 @@ p {
 	position: absolute;
 	top: 200px;
 	width: 100%;
+	padding:20px;
         overflow: hidden; 
 	}
 
@@ -93,12 +94,14 @@ p {
 
 .listContainer {
         float:left;
-        padding:20px;
-        width: 29%;
+        padding-right:2%;
+        padding-bottom:50px;
+        width: 30%;
 	}
 
 .imageContainer {
 	padding: 100px;
+	width: 200px;
 	}
 
 .imageContainerWrapper {
