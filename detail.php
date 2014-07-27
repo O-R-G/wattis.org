@@ -35,6 +35,8 @@ media.type, media.caption, media.active, media.rank FROM objects LEFT JOIN media
 		// this could work better if only checked first time thru this loop
 		$name = $myrow['name1'];
 		$body = $myrow['body'];
+
+		$i++;
 	}
 
 
