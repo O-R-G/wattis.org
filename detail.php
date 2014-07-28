@@ -32,9 +32,11 @@ media.type, media.caption, media.active, media.rank FROM objects LEFT JOIN media
 		$images[$i] .= "</div>";
 		$images[$i] .= "</div>";
 
-		// this could work better if only checked first time thru this loop
-		$name = $myrow['name1'];
-		$body = $myrow['body'];
+		if ( $i == 0 ) {
+
+			$name = $myrow['name1'];
+			$body = $myrow['body'];
+		}
 
 		$i++;
 	}

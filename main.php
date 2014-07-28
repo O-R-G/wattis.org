@@ -9,8 +9,9 @@ require_once("GLOBAL/head.php");
                         
 	// SQL object 
 	
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects 
-WHERE name1 LIKE 'Main' AND objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url FROM objects, wires WHERE wires.fromid=(SELECT 
+objects.id FROM objects WHERE name1 LIKE 'Main' AND objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND 
+wires.active = '1' ORDER BY objects.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -25,6 +26,7 @@ WHERE name1 LIKE 'Main' AND objects.active=1) AND wires.toid = objects.id AND ob
 		$URL = ($URL) ? "$URL" : "detail";     // normal
 
 		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
+		// $html .= "<a href='" . $myrow['name1'] . "'>" . $myrow['name1'] . "</a> ";	
 		$html .= "<i>" . $myrow['deck'] . "</i>";	
 		$html .= "</div>";	
 
