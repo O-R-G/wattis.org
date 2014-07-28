@@ -2,11 +2,28 @@ Options +Indexes
 RewriteEngine On
 # RewriteBase  /WATTIS/
 
+# these are conditions for the rules that follow
+# rules only apply if the url matches these criteria
+# see http://www.addedbytes.com/articles/for-beginners/url-rewriting-for-beginners/
+# for details
+
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 
+# make short url work
+# first part is pattern, second part is substitution
+
 RewriteRule    ^about$  detail.php?id=22 [L]
 RewriteRule    ^about/$  detail.php?id=22 [L]
+
+# change long to short url in address bar
+
+RewriteRule    ^detail\.php$ /WATTIS/about [R] 
+
+# but this may be a better solution, to use condition plus rule:
+# http://stackoverflow.com/questions/21528797/change-how-url-appears-in-address-bar-through-htaccess
+
+
 
 # RewriteRule ^([a-zA-Z0-9]+)/$ detail.php?page=$1
 
