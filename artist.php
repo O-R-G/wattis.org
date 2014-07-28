@@ -8,12 +8,11 @@ require_once("GLOBAL/head.php");
 	<?php
                 
 	// SQL object plus media
-	
-	// *fix* query should return hits even if no media attached (see LEFT JOIN in some previous website ... hmm, zenazezza? cluster?)
-                     
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, objects.rank as objectsRank, wires.fromid, wires.toid, 
-wires.active, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, media.active, media.rank FROM objects, wires, media WHERE objects.id = $id 
-AND wires.toid = objects.id AND media.object = objects.id AND objects.active = '1' AND wires.active = '1' AND media.active = '1' ORDER BY media.rank;";
+	                     
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, 
+objects.rank as objectsRank, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, 
+media.active, media.rank FROM objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 
+WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -32,32 +31,61 @@ AND wires.toid = objects.id AND media.object = objects.id AND objects.active = '
 		$images[$i] .= $mediaCaption . "<br /><br />";
 		$images[$i] .= "</div>";
 		$images[$i] .= "</div>";
-		$i++;
 
-		// this could work better if only checked first time thru this loop
-		$name = $myrow['name1'];
-		$body = $myrow['body'];
+		if ( $i == 0 ) {
+
+			$name = $myrow['name1'];
+			$body = $myrow['body'];
+		}
+
+		$i++;
 	}
+
+
+        // Check for column breaks
+
+	$pattern = "/\/\/\//";
+	if ( preg_match($pattern, $body) == 1 ) $columns = preg_split($pattern, $body);
+
+   
+	// deck
+
+	$html .= "<div class='listContainer times'>";
+	$html .= "<span class='monaco'>[*]</span> ";	                  
+	$html .= "<a href=''>" . $name . "</a> ";	
+	$html .= "</div>";	
+
 
 	// body
 
-	$html .= "<span class='doublewide centered times big black'>";
-	$html .= $body;	
-	$html .= "</span>";	
-                  
+	if ($columns) {
+
+		// column 2
+	
+		$html .= "<div class='listContainer times'>";
+		$html .= $columns[0];	
+		$html .= "</div>";	
+                  	
+		// column 3
+	
+		$html .= "<div class='listContainer times'>";
+		$html .= $columns[1];	
+		$html .= "</div>";	
+                  	
+	} else {
+
+        	$html .= "<div class='listContainer doublewide centered times'>";
+        	$html .= $body;
+        	$html .= "</div>";
+	}
+
+
 	// images
 
 	for ( $j = 0; $j < count($images); $j++) {
 	
 		$html .= $images[$j];
 	}
-
-        $html .= "<div class='helvetica small'>";
-        $html .= "<a href='readmore.php' class='instructionContainer'>READ MORE</a>";
-        $html .= "<a href='calendar.php' class='instructionContainer'>SEE UPCOMING EVENTS</a>";
-        $html .= "<a href='archive.php' class='instructionContainer'>CONSULT THE ARCHIVE</a>";
-        $html .= "<a href='index.php' class='instructionContainer'>GO HOME</a>";
-        $html .= "</div>";
 
 	echo nl2br($html);
 
@@ -83,8 +111,6 @@ AND wires.toid = objects.id AND media.object = objects.id AND objects.active = '
 	window.onload=initEmoticons(1, message, delay);
 
 </script>
-
-</div>
 
 
 <?php
