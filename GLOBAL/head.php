@@ -59,6 +59,11 @@
 	<!-- <meta name="viewport" content="width=700"> -->
 	<!-- <meta name="viewport" content="initial-scale=1.0">-->
 
+	<!-- ** this is for .htaccess rewrites with trailing slash ** -->
+	<!-- ** for now, while local i leave this turned off ** -->
+	<!-- b/c live server base will be "/" -->
+	<!-- <base href="/WATTIS/" /> -->
+
 	<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 	<script type="text/javascript" src="GLOBAL/global.js"></script>
         <script type="text/javascript" src="JS/animateEmoticon.js"></script>

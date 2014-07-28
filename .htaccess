@@ -1,1 +1,12 @@
 Options +Indexes
+RewriteEngine On
+# RewriteBase  /WATTIS/
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule    ^about$  detail.php?id=22 [L]
+RewriteRule    ^about/$  detail.php?id=22 [L]
+
+# RewriteRule ^([a-zA-Z0-9]+)/$ detail.php?page=$1
+
