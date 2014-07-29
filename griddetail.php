@@ -2,6 +2,13 @@
 require_once("GLOBAL/head.php");
 ?>
 
+<?php
+
+        // temporary animateEmoticon hack
+
+        $thisCanvas = 1;
+?>
+
 
 <div class="mainContainer times big black">
 
@@ -57,7 +64,8 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 	// nav
 
 	$html .= "<div class='listContainer times'>";
-	$html .= "<span class='monaco'>[*]</span> ";	                  
+        $html .= "<canvas id='canvas" . ($thisCanvas) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
+	// $html .= "<span class='monaco'>[*]</span> ";	                  
 	$html .= "<a href=''>" . $name . "</a> ";	
 	$html .= "</div>";	
 
@@ -110,7 +118,8 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 
 	delay[1] = 400;
 
-	window.onload=initEmoticons(1, message, delay);
+	// window.onload=initEmoticons(1, message, delay);
+	window.onload=initEmoticons(2, message, delay);
 
 </script>
 

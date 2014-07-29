@@ -2,6 +2,13 @@
 require_once("GLOBAL/head.php");
 ?>
 
+<?php
+
+        // temporary animateEmoticon hack
+
+        $thisCanvas = 1;
+?>
+
 
 <div class="mainContainer times big black">
 
@@ -61,7 +68,8 @@ objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT obje
 	// nav
 
 	$html .= "<div class='listContainer times'>";
-	$html .= "<span class='monaco'>[*]</span> ";	                  
+        $html .= "<canvas id='canvas" . ($thisCanvas) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
+	// $html .= "<span class='monaco'>[*]</span> ";	                  
 	$html .= "<a href=''>" . $rootname . "</a> ";	
 	$html .= "<br /><br />" . $rootbody;
 	$html .= "</div>";	
@@ -93,14 +101,13 @@ objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT obje
 	message[1] =    [
 			"[.]",
 			"[+]",
-			"[-]",
-			"[!]",
 			"[*]"
 			];
 
 	delay[1] = 400;
 
-	window.onload=initEmoticons(1, message, delay);
+	// window.onload=initEmoticons(1, message, delay);
+	window.onload=initEmoticons(2, message, delay);
 
 </script>
 

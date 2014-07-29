@@ -2,6 +2,49 @@
 require_once("GLOBAL/head.php");
 ?>
 
+<?php
+
+	// temporary animateEmoticon hack
+
+	$thisCanvas = 1;
+
+/*
+switch ($id) {
+    case 22:
+	$thisCanvas = 1;
+        break;
+    case 25:
+	$thisCanvas = 2;
+        break;
+    case 30:
+	$thisCanvas = 3;
+        break;
+    case 23:
+	$thisCanvas = 4;
+        break;
+    case 26:
+	$thisCanvas = 5;
+        break;
+    case 31:
+	$thisCanvas = 6;
+        break;
+    case 24:
+	$thisCanvas = 7;
+        break;
+    case 27:
+	$thisCanvas = 8;
+        break;
+    case 29:
+	$thisCanvas = 9;
+        break;
+    case 28:
+	$thisCanvas = 10;
+        break;
+}
+*/
+
+?>
+
 
 <div class="mainContainer times big black">
 
@@ -33,7 +76,6 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 			$images[$i] .= $mediaCaption;
 			$images[$i] .= "</div>";
 			$images[$i] .= "</div>";
-	
 		}
 
 		if ( $i == 0 ) {
@@ -55,7 +97,8 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 	// deck
 
 	$html .= "<div class='listContainer times'>";
-	$html .= "<span class='monaco'>[*]</span> ";	                  
+	$html .= "<canvas id='canvas" . ($thisCanvas) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
+	// $html .= "<span class='monaco'>[*]</span> ";	                  
 	$html .= "<a href=''>" . $name . "</a> ";	
 	$html .= "</div>";	
 
@@ -91,7 +134,6 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 
 	echo nl2br($html);
 
-
 	?>
         
 </div>
@@ -100,18 +142,21 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 <!-- JS -->
 
 <script type="text/javascript">
-	
+
 	message[1] =    [
 			"[.]",
 			"[+]",
-			"[-]",
-			"[!]",
 			"[*]"
 			];
 
 	delay[1] = 400;
 
-	window.onload=initEmoticons(1, message, delay);
+	// window.onload=initEmoticons(1, message, delay);
+	window.onload=initEmoticons(2, message, delay);
+
+</script>
+
+
 
 </script>
 

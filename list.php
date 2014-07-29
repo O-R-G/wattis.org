@@ -8,9 +8,9 @@ require_once("GLOBAL/head.php");
 	<?php
                         
 	// SQL object 
-	
+
 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url FROM 
-objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE name1 LIKE 'Main' AND 
+objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE name1 = 'ByAppointment' AND 
 objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER 
 BY objects.rank;";
 
@@ -18,13 +18,25 @@ BY objects.rank;";
 	$html = "";
 	$i = 0;
 
+
+        // deck
+	// * fix * -- this should follow the pattern from grid.php and griddetail.php
+
+        $html .= "<div class='listContainer times'>";
+        // $html .= "<canvas id='canvas" . ($thisCanvas) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
+        $html .= "<span class='monaco'>[*]</span> ";
+        // $html .= "<a href=''>" . $name . "</a> ";
+        $html .= "<a href=''>Calendar</a> ";
+        $html .= "</div>";
+
+        $html .= "<div class='listContainer doublewide times'>";
+
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 			
-		$html .= "<div class='listContainer times'>";
-		$html .= "<canvas id='canvas" . ($i+1) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
+		$html .= "<div class='listContainer twocolumn'>";
 
                 $URL = $myrow["url"];
-		$URL = ($URL) ? "$URL" : "detail";
+		$URL = ($URL) ? "$URL" : "artist";
 
 		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 		$html .= "<i>" . $myrow['deck'] . "</i>";	
@@ -34,6 +46,7 @@ BY objects.rank;";
 		if ( $i % 3 == 0) $html .= "<div class='clear'></div>"; 	// clear floats
 	}
 
+
 	// nav bottom
 
 	$html .= "<div class='helvetica small'>";
@@ -41,6 +54,8 @@ BY objects.rank;";
 	$html .= "<a href='index.php' class='instructionContainer'>GO HOME</a>";
 	$html .= "</div>";	
 	
+        $html .= "</div>";
+
 	echo nl2br($html);
 	?>
 </div>

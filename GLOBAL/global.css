@@ -93,23 +93,22 @@ p {
         float:left;
         }
 
-.listContainer {
-        float:left;
+.listContainer {  
+	float:left;
         padding-right:2%;
         padding-bottom:50px;
         width: 30%;
 	}
 
 .imageContainer {
-	padding: 100px;
-	width: 200px;
-	}
+        padding: 20%;
+        }
 
 .imageContainerWrapper {
 	float:left;
-	width:30%;
-	padding: 10px;
-	}
+        width:30%;
+        padding: 10px;
+        }
 
 .captionContainer {
 	padding-top: 10px;
@@ -330,6 +329,21 @@ p {
 
 .greybox {
         background-color: #CCC;
+	border: 1px dotted #333;
+        }
+
+.redbox {
+        background-color: #FCC;
+	border: 1px dotted #333;
+        }
+
+.bluebox {
+        background-color: #CCF;
+	border: 1px dotted #333;
+        }
+
+.greenbox {
+        background-color: #CFC;
 	border: 1px dotted #333;
         }
 

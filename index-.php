@@ -86,9 +86,9 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 <script type="text/javascript">
 
        	newsItem = new Array(
-			"The exhibition opens <a href='' >tomorrow</a>.",
-			"*New* limited edition from Ed Ruscha — <a href=''>get it now</a>!",
-			"<a href=''>Friday</a>, we are showing Joan Jonas films. Come."
+			"The exhibition opens <a href='artist.php?id=32'>tomorrow</a>.",
+			"*New* limited edition from Ed Ruscha — <a href='griddetail.php?id=33'>get it now</a>!",
+			"<a href='artist.php?id=92'>Friday</a>, we are showing Joan Jonas films. Come."
 			);
 	
 	animateNewsTicker(newsItem[0]);

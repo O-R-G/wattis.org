@@ -11,8 +11,8 @@ require_once("GLOBAL/head.php");
 	                     
 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, 
 objects.rank as objectsRank, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, 
-media.active, media.rank FROM objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 
-WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
+media.active AS mediaActive, media.rank FROM objects LEFT JOIN media ON objects.id = media.object AND 
+media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -22,16 +22,21 @@ WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
 
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
-		$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-		$mediaCaption = strip_tags($myrow["caption"]);
-		$mediaStyle = "width: 100%;";
-		$images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
-		$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-		$images[$i] .= "<div class = 'captionContainer caption'>";
-		$images[$i] .= $mediaCaption . "<br /><br />";
-		$images[$i] .= "</div>";
-		$images[$i] .= "</div>";
+                if ($myrow['mediaActive'] != null) {
 
+			$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
+			$mediaCaption = strip_tags($myrow["caption"]);
+			$mediaStyle = "width: 100%;";
+			$images[$i] .= "<div class = 'imageContainerWrapper'>";
+			$images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"20%\", \"0\");'>";
+			$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+			$images[$i] .= "<div class = 'captionContainer caption'>";
+			$images[$i] .= $mediaCaption . "<br /><br />";
+			$images[$i] .= "</div>";
+			$images[$i] .= "</div>";
+			$images[$i] .= "</div>";
+		}
+		
 		if ( $i == 0 ) {
 
 			$name = $myrow['name1'];
@@ -81,11 +86,27 @@ WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
 
 
 	// images
+        	
+	$html .= "<div class='listContainer triplewide centered'>";
 
 	for ( $j = 0; $j < count($images); $j++) {
 	
 		$html .= $images[$j];
 	}
+
+        $html .= "</div>";
+
+
+        // nav bottom 
+
+	$html .= "<div class='listContainer triplewide centered'>";
+        $html .= "<div class='helvetica small'>";
+        $html .= "<a href='read' class='instructionContainer'>READ MORE</a>";
+        $html .= "<a href='calendar' class='instructionContainer'>SEE UPCOMING EVENTS</a>";
+        $html .= "<a href='archive' class='instructionContainer'>CONSULT THE ARCHIVE</a>";
+        $html .= "<a href='index.php' class='instructionContainer'>GO HOME</a>";
+        $html .= "</div>";
+        $html .= "</div>";
 
 	echo nl2br($html);
 
