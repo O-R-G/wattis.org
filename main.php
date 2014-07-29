@@ -26,7 +26,6 @@ wires.active = '1' ORDER BY objects.rank;";
 		$URL = ($URL) ? "$URL" : "detail";     // normal
 
 		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
-		// $html .= "<a href='" . $myrow['name1'] . "'>" . $myrow['name1'] . "</a> ";	
 		$html .= "<i>" . $myrow['deck'] . "</i>";	
 		$html .= "</div>";	
 

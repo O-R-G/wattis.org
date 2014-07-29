@@ -102,8 +102,8 @@ if (($pageName != "index")
 <!-- WATTIS -->
 
 <div class="wattisContainer times big black fixed"><a href="index-.php"><canvas id="canvas0" width="46" 
-height="22" class="show" onclick="showBones();">\\\\*</canvas></a> . . .  <a 
-href="main">The Wattis Institute</a>.</div>
+height="22" class="show" onclick="showBones();">\\\\*</canvas></a> <a 
+href="main">The. Wattis+ Institute*</a></div>
 
 <div class="clear"></div>
 
