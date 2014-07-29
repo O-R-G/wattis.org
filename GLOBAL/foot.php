@@ -1,4 +1,4 @@
-        <div class='navbottomContainer greybox'>
+        <div class='navbottomContainer'>
 	        <div class='helvetica small'>
         		<a href='main' class='instructionContainer'>ABOUT</a>
         		<a href='visit' class='instructionContainer'>VISIT</a>
