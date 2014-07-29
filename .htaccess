@@ -1,6 +1,6 @@
 Options +Indexes
 RewriteEngine On
-RewriteBase  /WATTIS/
+RewriteBase  /
 
 # 0. if full url != marker 
 # 1. rewrite full url  --> clean url
@@ -63,13 +63,6 @@ RewriteCond %{QUERY_STRING} id=27
 RewriteRule ^grid\.php$ catalogs? [R,L]
 RewriteRule ^catalogs$ grid.php?marker&id=27 [L]
 
-# catalogs
-
-RewriteCond %{QUERY_STRING} !marker
-RewriteCond %{QUERY_STRING} id=27
-RewriteRule ^grid\.php$ catalogs? [R,L]
-RewriteRule ^catalogs$ grid.php?marker&id=27 [L]
-
 # archive
 
 RewriteCond %{QUERY_STRING} !marker
@@ -97,3 +90,10 @@ RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=7
 RewriteRule ^list\.php$ intern? [R,L]
 RewriteRule ^calendar$ list.php?marker&id=7 [L]
+
+# exhibitions
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=93
+RewriteRule ^detail\.php$ exhibitions? [R,L]
+RewriteRule ^exhibitions$ detail.php?marker&id=93 [L]

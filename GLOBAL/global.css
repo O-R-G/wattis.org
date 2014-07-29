@@ -114,6 +114,11 @@ p {
 	padding-top: 10px;
 	}
 
+.navbottomContainer {  
+	clear: both; 
+        width: 400px;
+	}
+
 .programContainer {
         top: 0px;
         left: 0px;

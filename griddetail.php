@@ -101,7 +101,6 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 
 	?>
         
-</div>
 
 
 <!-- JS -->
@@ -125,5 +124,5 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 
 
 <?php
-require_once("GLOBAL/head.php");
+require_once("GLOBAL/foot.php");
 ?>

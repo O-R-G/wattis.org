@@ -96,23 +96,10 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 
         $html .= "</div>";
 
-
-        // nav bottom 
-
-	$html .= "<div class='listContainer triplewide centered'>";
-        $html .= "<div class='helvetica small'>";
-        $html .= "<a href='read' class='instructionContainer'>READ MORE</a>";
-        $html .= "<a href='calendar' class='instructionContainer'>SEE UPCOMING EVENTS</a>";
-        $html .= "<a href='archive' class='instructionContainer'>CONSULT THE ARCHIVE</a>";
-        $html .= "<a href='index.php' class='instructionContainer'>GO HOME</a>";
-        $html .= "</div>";
-        $html .= "</div>";
-
 	echo nl2br($html);
 
 	?>
         
-</div>
 
 
 <!-- JS -->
@@ -135,5 +122,5 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 
 
 <?php
-require_once("GLOBAL/head.php");
+require_once("GLOBAL/foot.php");
 ?>

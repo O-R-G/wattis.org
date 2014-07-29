@@ -34,16 +34,8 @@ BY objects.rank;";
 		if ( $i % 3 == 0) $html .= "<div class='clear'></div>"; 	// clear floats
 	}
 
-	// nav bottom
-
-	$html .= "<div class='helvetica small'>";
-	$html .= "<a href='calendar' class='instructionContainer'>SEE UPCOMING EVENTS</a>";
-	$html .= "<a href='index.php' class='instructionContainer'>GO HOME</a>";
-	$html .= "</div>";	
-	
 	echo nl2br($html);
 	?>
-</div>
 
 
 <!-- JS -->
@@ -153,7 +145,5 @@ window.onload=initEmoticons(11, message, delay);
 </script>
 
 <?php
-require_once("GLOBAL/head.php");
+require_once("GLOBAL/foot.php");
 ?>
-
-

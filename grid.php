@@ -54,7 +54,7 @@ objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT obje
 			$images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
 			$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 			$images[$i] .= "<div class = 'captionContainer monaco small'>";
-			$images[$i] .= $mediaCaption;
+			$images[$i] .= $myrow['name1'];
 			$images[$i] .= "</div>";
 			$images[$i] .= "</div>";
 			$images[$i] .= "</a>";
@@ -91,7 +91,6 @@ objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT obje
 
 	?>
         
-</div>
 
 
 <!-- JS -->
@@ -113,5 +112,5 @@ objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT obje
 
 
 <?php
-require_once("GLOBAL/head.php");
+require_once("GLOBAL/foot.php");
 ?>

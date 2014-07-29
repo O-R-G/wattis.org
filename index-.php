@@ -78,7 +78,7 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 		delay[8] = 100;
 
-	window.onload=initEmoticons(16, message, delay);
+	window.onload=initEmoticons(15, message, delay);
 
 </script>
 
@@ -95,7 +95,6 @@ AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 </script>
         
-</div>
 
 
 <?php
