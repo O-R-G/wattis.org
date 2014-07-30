@@ -28,7 +28,7 @@
 	// Alt for dev options
 	
 	$alt = $_REQUEST['alt'];
-	$alt = systemCookie("alt", $alt, 0);
+	// $alt = systemCookie("alt", $alt, 0);
 
 	/*
 	$staging = $_REQUEST['staging'];
@@ -101,7 +101,7 @@ if (($pageName != "index")
 ?>
 
 <?php
-if ($alt) {
+if ($alt == 1) {
 ?>
 
 <!-- THE.WATTIS+INSTITUTE* -->
