@@ -1,10 +1,17 @@
 body { 
 	/* workaround for fixed div rendering in safari */
 	-webkit-font-smoothing: subpixel-antialiased; 
+        color: #000;
+        background: #FFF;
 	}
 
 a {
         color: #000;
+        text-decoration: none;
+        border-bottom: solid 3px;
+        }
+
+a:active {
         text-decoration: none;
         border-bottom: solid 3px;
         }
@@ -19,23 +26,27 @@ a:active {
         border-bottom: solid 3px #FFF;
         }
 
-body {
-        color: #000;
-        background: #FFF;
+
+/* types */
+
+.monaco {
+        font-family: Monaco, "Lucida Console", monospace;
         }
 
-canvas {
-        /* background: transparent; */
+.times {
+        font-family: "Times New Roman", Times, serif;
         }
 
-p {
-        margin-left:100px;
-        margin-right:200px;
+.helvetica {
+        font-family: Helvetica, Arial, sans-serif;
         }
+
+
+/* sizes */
 
 .big {
         font-size:24px;
-        line-height:26px;
+        /* line-height:26px; */
 	}
 
 .medium {
@@ -46,26 +57,13 @@ p {
         font-size:10px;
         }
 
-.monaco {
-        font-family: Monaco, "Lucida Console", monospace;
+/*
+div.times a {
+        color: #FFF;
+        text-decoration: none;
+        border-bottom: solid 3px;
         }
-
-.times {
-        font-family: "Times New Roman", Times, serif;
-        }
-
-.baskerville {
-        font-family: "Baskerville", Times, serif;
-        }
-
-.helvetica {
-        font-family: Helvetica, Arial, sans-serif;
-        }
-
-.microsoft {
-        font-family: "Microsoft Sans Serif", Arial, sans-serif;
-        }
-
+*/
 
 /* containers */
 
@@ -309,6 +307,8 @@ p {
 .red {
         color: #F00;
         }
+ 
+/* would be good to trim this down to "a" value only w/o pseudoselectors */
 
 .red a:link {
 	color:#F00;

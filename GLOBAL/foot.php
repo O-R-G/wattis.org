@@ -1,5 +1,5 @@
         <div class='navbottomContainer'>
-	        <div class='helvetica small'>
+	        <div class='helvetica small black'>
         		<a href='main' class='instructionContainer'>ABOUT</a>
         		<a href='visit' class='instructionContainer'>VISIT</a>
         		<a href='exhibitions' class='instructionContainer'>PROGRAM</a>

@@ -25,11 +25,12 @@
 	// if (!$dev) die('Under construction . . .');
 	*/
 
-	/*
 	// Alt for dev options
 	
 	$alt = $_REQUEST['alt'];
+	$alt = systemCookie("alt", $alt, 0);
 
+	/*
 	$staging = $_REQUEST['staging'];
 	$sql    = "SELECT deck FROM objects WHERE objects.name1 LIKE 'Live';";
 	$result =  MYSQL_QUERY($sql);
@@ -99,11 +100,42 @@ if (($pageName != "index")
 {
 ?>
 
-<!-- WATTIS -->
+<?php
+if ($alt) {
+?>
 
-<div class="wattisContainer times big black fixed"><a href="index-.php"><canvas id="canvas0" width="46" 
-height="22" class="show" onclick="showBones();">\\\\*</canvas></a> <a 
-href="main">The. Wattis+ Institute*</a></div>
+<!-- THE.WATTIS+INSTITUTE* -->
+
+<div class="wattisContainer times big black fixed">
+
+<canvas id="canvas0" width="1" height="22" class="show" 
+onclick="showBones();">\\\\*</canvas></a>
+
+<a href="main">The<span class='monaco blacktemp'>.</span>Wattis<span 
+class='monaco blacktemp'>+</span>Institute</a><span class='monaco 
+blacktemp'>*</span>
+
+</div>
+
+<?php
+} else {
+?>
+
+<!-- .+* THE WATTIS INSTITUTE -->
+
+<div class="wattisContainer times big black fixed">
+
+<canvas id="canvas0" width="46" height="22" class="show" 
+onclick="showBones();">\\\\*</canvas></a>
+
+<a href="main">The Wattis Institute</a>
+
+</div>
+
+<?php
+}
+?>
+
 
 <div class="clear"></div>
 
