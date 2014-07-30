@@ -126,9 +126,9 @@ blacktemp'>*</span>
 <div class="wattisContainer times big black fixed">
 
 <canvas id="canvas0" width="46" height="22" class="show" 
-onclick="showBones();">\\\\*</canvas></a>
+onclick="showBones();">.+*</canvas></a>
 
-<a href="main">The Wattis Institute</a>
+<a href="index-.php">The Wattis Institute</a>
 
 </div>
 

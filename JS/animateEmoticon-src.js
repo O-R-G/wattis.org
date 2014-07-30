@@ -2,6 +2,7 @@
 		// loaded external and then overwritten as req'd
 		// this is the master list of animations, and can be added to
 
+		/*
 		message[0] = 	[
 				"// ",
 				"\\/ ",
@@ -10,8 +11,20 @@
 				"\\\\ ",
 				"\\\\*"
 				];
+		*/
 
-		delay[0] = 500;
+		message[0] = 	[
+				".+*",
+				"+.*",
+				"*+.",
+				"+*.",
+				"+.*",
+				"*.+",
+				"*+.",
+				".+*"
+				];
+
+		delay[0] = 200;
 
 		message[1] = 	[
 				"‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀‿⁀",
