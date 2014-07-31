@@ -1,9 +1,78 @@
 <?php
-require_once("GLOBAL/head.php");
+        require_once("_Library/systemDatabase.php");
+        require_once("_Library/displayMedia.php");
+
+	// Parse $id
+
+        $id = $_REQUEST['id'];          // no register globals
+        if (!$id) $id = "0";
+        $ids = explode(",", $id);
+        $idFull = $id;
+        $id = $ids[count($ids) - 1];
+        $pageName = basename($_SERVER['PHP_SELF'], ".php");
 ?>
 
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
-<div class="mainContainer times big black">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>CCA Wattis Institute for Contemporary Arts / email</title>
+	<style>
+
+body {
+        color: #FFF;
+        background: #000;
+        }
+
+a {
+        color: #FFF;
+        text-decoration: none;
+        border-bottom: solid 3px;
+        }
+
+a:active {
+        text-decoration: none;
+        border-bottom: solid 3px;
+        }
+
+a:hover {
+        color:#000;
+        border-bottom: solid 3px #FFF;
+        }
+
+a:active {
+        color: #F00;
+        border-bottom: solid 3px #FFF;
+        }
+
+table {
+	width: 100%;
+	}
+
+.times {
+        font-family: "Times New Roman", Times, serif;
+        }
+
+.monaco {
+        font-family: Monaco, "Lucida Console", monospace;
+	line-height:20px;
+        }
+
+.big {
+	font-size:24px;
+        }
+
+.spacer {
+	width:30%;
+        }
+
+	</style>
+
+</head>
+
+<body>
 
 	<?php
                 
@@ -44,39 +113,7 @@ media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id A
 		$i++;
 	}
 
-
-        // Check for column breaks
-
-	$pattern = "/\/\/\//";
-	if ( preg_match($pattern, $body) == 1 ) $columns = preg_split($pattern, $body);
-
-   
-	// deck
-
-	$html .= "<div class='emailHeaderContainer times'>";
-	$html .= "<a href=''>" . $deck . "</a> ";	
-	$html .= "</div>";	
-
-
-	// body
-
-	if ($columns) {
-
-		for ($i = 0; $i < count($columns); $i++) {
-		
-			$html .= "<div class='listContainer times'>";
-			$html .= $columns[$i];	
-			$html .= "</div>";	
-		}
-
-	} else {
-
-        	$html .= "<div class='listContainer doublewide times'>";
-        	$html .= $body;
-        	$html .= "</div>";
-	}
-
-
+	/*
 	// images
 
 	if ( !$images ) {
@@ -87,11 +124,47 @@ media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id A
 		}
 	}
 
-	echo nl2br($html);
+	// echo nl2br($html);
+	*/
 
 	?>
         
 
+<table border="0" cellspacing="0">
+<tr>
+<td class='spacer'>
 <?php
-require_once("GLOBAL/foot.php");
+echo $deck;
 ?>
+</td>
+<td>
+</td>
+<td class='spacer'>
+</td>
+</tr>
+
+<tr>
+<td class='spacer'>
+</td>
+<td class='times big'>
+<?php
+echo nl2br($body);
+?>
+</td>
+<td class='spacer'>
+</td>
+</tr>
+
+<tr>
+<td class='spacer'>
+</td>
+<td>
+</td>
+<td class='spacer'>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>

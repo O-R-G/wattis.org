@@ -8,60 +8,61 @@
 	//   - how many it takes to identify the animation could also be a parameter	
 
 
-        function initPunctuation(divId) {
+        function initPunctuation(id, delay, animate) {
 
-        	var message = new Array();	
-		var div = document.querySelectorAll("[id^=" + divId + "]");
-		var delay = new Array();	
+        	var messages = new Array();	
+		var divs = document.querySelectorAll("[id^=" + id + "]");
+		var delays = new Array();	
 
 		//* find punctuation
 
-		for (var i = 0; i < div.length; i++) {
+		for (var i = 0; i < divs.length; i++) {
 
-
-console.log(1);
                         spanCount = 0;
-                        str = div[i].innerHTML;
+                        str = divs[i].innerHTML;
                         re = /[!"#$%&()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑‿⁀⁐ ∗∘∙∴∵≀∪∩⊂⊃┌┐]/g;
                         //re = /[,.]/g;	// minimal
 			var harvest = str.match(re);
-			message[i] = harvest;
+			messages[i] = harvest;
 
 			var result = str.replace(re, function(match){
 
-				var replaced = "<span id='" + div[i].id + "-" + spanCount + "' class='monaco big black'>" + match + "</span>";
-				spanCount++;	
+				var replaced = "<span id='" + divs[i].id + "-" + spanCount + "' class='monaco big black'>" + match + "</span>";
+				spanCount++;
 				return replaced;
 			});
-console.log(2);
 
-                        div[i].innerHTML = result;
-			delay[i] = 200;
-			// delay[i] = (10 * i)+90;
-			// console.log(div[i]);
-			// console.log(message[i]);
-			// console.log(delay[i]);
+                        divs[i].innerHTML = result;
+			delays[i] = delay;
+			// delays[i] = 2000;
+			// delays[i] = (10 * i)+90;
+			// console.log(divs[i]);
+			// console.log(messages[i]);
+			// console.log(delays[i]);
 		}
-
-console.log(3);
 
 		// start animations
 
-                for (var j = 0; j < div.length; j++) {
+		if (animate) {
 
-			animatePunctuation(div[j],message[j], delay[j]);
-                }
+                	for (var j = 0; j < divs.length; j++) {
+
+				animatePunctuation(divs[j],messages[j], delays[j]);
+                	}
+		}
 	}
 
 
-        function animatePunctuation(div,message, delay) {
+        function animatePunctuation(divs, messages, delays) {
 
-		for (i = 0; i < message.length; i++) {
+		for (i = 0; i < messages.length; i++) {
 			
-			thisSpanId = div.id + "-" + i;
-	   		document.getElementById(thisSpanId).innerHTML = message[i];
+			thisSpanId = divs.id + "-" + i;
+	   		document.getElementById(thisSpanId).innerHTML = messages[i];
 		}
 
-		message.push(message.shift());		// push / pop
-		var tt = setTimeout(function(){animatePunctuation(div,message,delay);}, delay);
+		messages.push(messages.shift());		// push / pop
+		var tt = setTimeout(function(){animatePunctuation(divs,messages,delays);}, delays); 	// surely something funny in how this sets delays as is passing an array (!) ** fix **
+		// var tt = setTimeout(function(){animatePunctuation(divs,messages,delays);}, delays[i]); 	// but this one doesnt work either
+		// refer to animatePunctuation logic to sort this out
 	}

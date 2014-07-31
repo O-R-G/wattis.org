@@ -37,7 +37,7 @@ require_once("GLOBAL/head.php");
 <script type="text/javascript" src="JS/animatePunctuation.js"></script>
 
 <script>
-	initPunctuation("Punct");
+	initPunctuation('Punct', 200, true);
 </script>
 
 </div>
