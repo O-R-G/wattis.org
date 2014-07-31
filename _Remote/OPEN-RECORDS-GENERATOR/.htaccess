@@ -1,0 +1,4 @@
+AuthUserFile /opt/html/wattis-stage/.htpasswd
+AuthName "OPEN-RECORDS-GENERATOR"
+AuthType Basic
+Require valid-user
