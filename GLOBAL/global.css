@@ -227,6 +227,20 @@ div.times a {
 	margin: 0px;
 	}
 
+
+/* this is lazily done */
+/* clean up */
+
+.emailHeaderContainer {
+	position: fixed;  
+	top:10px;
+	left: 20%;
+        width: 50px;
+	padding-top: 60px;
+	padding-bottom: 60px;
+	}
+
+
 .symbol {
         }
 

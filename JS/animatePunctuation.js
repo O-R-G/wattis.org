@@ -18,10 +18,12 @@
 
 		for (var i = 0; i < div.length; i++) {
 
+
+console.log(1);
                         spanCount = 0;
                         str = div[i].innerHTML;
-                        // re = /[!"#$%&()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑‿⁀⁐ ∗∘∙∴∵≀∪∩⊂⊃┌┐]/g;
-                        re = /[,.]/g;	// minimal
+                        re = /[!"#$%&()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞±≤≥¿¡«»–—“”‘’÷‹›¦−×⁏⁑‿⁀⁐ ∗∘∙∴∵≀∪∩⊂⊃┌┐]/g;
+                        //re = /[,.]/g;	// minimal
 			var harvest = str.match(re);
 			message[i] = harvest;
 
@@ -31,6 +33,7 @@
 				spanCount++;	
 				return replaced;
 			});
+console.log(2);
 
                         div[i].innerHTML = result;
 			delay[i] = 200;
@@ -39,6 +42,8 @@
 			// console.log(message[i]);
 			// console.log(delay[i]);
 		}
+
+console.log(3);
 
 		// start animations
 

@@ -78,8 +78,8 @@ require_once("_Library/orgRSSParse.php");
                         
 	// SQL object 
 	
-	$sql = "SELECT * FROM objects, wires WHERE wires.fromid='1' AND wires.toid = objects.id 
-AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
+        $sql = "SELECT * FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 LIKE 'Home' AND
+objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 	$result =  MYSQL_QUERY($sql);
 	$html = "";
 
