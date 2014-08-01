@@ -17,11 +17,15 @@ require_once("GLOBAL/head.php");
 
 
 
-<!--
-<div id="Punct-0" class="floatPad helvetica big">
+<?php 
+if ($alt == 0) {
+?>
+<div id="Punct-100" class="floatPad helvetica big">
 .+*
 </div>
--->
+<?php 
+}
+?>
 
 <?php 
 if ($alt == 1) {
@@ -77,7 +81,7 @@ if ($alt == 5) {
 if ($alt == 6) {
 ?>
 <div id="Punct-5" class="floatPad times big black">
-#%$ VIP / Members Event
+:”/ VIP Members Event
 </div>
 <?php
 }
@@ -98,7 +102,7 @@ _•° Notes From the Field
 <script type="text/javascript" src="JS/animatePunctuation.js"></script>
 
 <script>
-	initPunctuation('Punct', 200, true);
+	initPunctuation('Punct', 1000, true);
 </script>
 
 </div>
