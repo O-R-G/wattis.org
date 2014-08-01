@@ -15,7 +15,7 @@ require_once("GLOBAL/head.php");
 
 </div>
 
-
+<!-- -->
 
 <?php 
 if ($alt == 0) {
