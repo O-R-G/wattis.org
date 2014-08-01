@@ -57,13 +57,12 @@ a:active {
         font-size:10px;
         }
 
-/*
-div.times a {
-        color: #FFF;
-        text-decoration: none;
+/* styled */
+
+.underlined {
         border-bottom: solid 3px;
-        }
-*/
+	}
+
 
 /* containers */
 
@@ -291,25 +290,20 @@ div.times a {
 	margin-right: auto;        
 	}
 
-.dev {
-	background-color: #F9F;
-	opacity: .5;
-	}
-
-.dev2 {
-	background-color: #F99;
-	opacity: .5;
-	}
-
 .floatPad {
         float:left;
         padding:50px;
         width: 50px;
         }
 
+.floatPadwide {
+        float:left;
+        padding:50px;
+        width: 400px;
+       }
+
 
 /* added */
-
 
 
 /* colors */
@@ -369,3 +363,5 @@ div.times a {
 .transparent {
 	opacity:0.5;
         }
+
+

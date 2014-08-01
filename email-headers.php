@@ -15,7 +15,7 @@ require_once("GLOBAL/head.php");
 
 </div>
 
-<!-- -->
+<!-- // -->
 
 <?php 
 if ($alt == 0) {
@@ -97,12 +97,23 @@ _•° Notes From the Field
 }
 ?>
 
+<?php 
+if ($alt == 8) {
+?>
+<div id="Punct-8" class="floatPadwide times big black">
+_/“The Wattis Institute
+</div>
+<?php
+}
+?>
+
+
 
 
 <script type="text/javascript" src="JS/animatePunctuation.js"></script>
 
 <script>
-	initPunctuation('Punct', 1000, true);
+	initPunctuation('Punct', 200, true);
 </script>
 
 </div>

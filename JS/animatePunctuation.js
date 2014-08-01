@@ -34,11 +34,6 @@
 
                         divs[i].innerHTML = result;
 			delays[i] = delay;
-			// delays[i] = 2000;
-			// delays[i] = (10 * i)+90;
-			// console.log(divs[i]);
-			// console.log(messages[i]);
-			// console.log(delays[i]);
 		}
 
 		// start animations
