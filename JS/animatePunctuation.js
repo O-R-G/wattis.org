@@ -7,6 +7,20 @@
 	//   - second animation pattern for solo punctuation marks
 	//   - how many it takes to identify the animation could also be a parameter	
 
+	// stripping html tags:
+
+	// 0. search the input text for anything between '<' and '>'
+	// 1. remove these from the string that gets searched and replaced
+	//    though unsure how to both ignore them and then put them back in ...
+	//    maybe there is regex way to do this, i suspect there is with [^< >]
+	//    and that is surely the cleanest way
+	//    the other option is to save them out in an array, put in a marker, 
+	//    then write them back in the completed string after the fact
+	//    either way it will require a lookaround, lookahead or some such
+	//    
+	//    read up properly on regex 
+	// http://stackoverflow.com/questions/406230/regular-expression-to-match-string-not-containing-a-word
+
 
         function initPunctuation(id, delay, animate) {
 
