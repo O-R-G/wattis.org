@@ -51,7 +51,7 @@ if ($alt == 2) {
 if ($alt == 3) {
 ?>
 <div id="Punct-2" class="floatPad times big black">
-+=[ Exhibtion Opening
++=[ Exhibition Opening
 </div>
 <?php
 }
