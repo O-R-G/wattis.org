@@ -342,22 +342,22 @@ a:active {
 
 .greybox {
         background-color: #CCC;
-	border: 1px dotted #333;
+	outline: 1px dotted #333;
         }
 
 .redbox {
         background-color: #FCC;
-	border: 1px dotted #333;
+	outline: 1px dotted #333;
         }
 
 .bluebox {
         background-color: #CCF;
-	border: 1px dotted #333;
+	outline: 1px dotted #333;
         }
 
 .greenbox {
         background-color: #CFC;
-	border: 1px dotted #333;
+	outline: 1px dotted #333;
         }
 
 .transparent {

@@ -108,12 +108,23 @@ _/“The Wattis Institute
 ?>
 
 
+<?php 
+if ($alt == 9) {
+?>
+<div id="Punct-9" class="floatPadwide times big black">
+<a href="this.html">ok.abcdefg</a>.,/abcdefghijklmnopqrstuvwwxyz
+</div>
+<?php
+}
+?>
+
+
 
 
 <script type="text/javascript" src="JS/animatePunctuation.js"></script>
 
 <script>
-	initPunctuation('Punct', 200, true);
+	initPunctuation('Punct', 200, false);
 </script>
 
 </div>
