@@ -18,7 +18,7 @@
 	$dbColor = "000";
 	$dbColor2 = "666";
 	$dbColor3 = "333";
-		
+
 	// Client Username and Password -- read only
 	$dbUser1 = "guest";
 	$dbPass1 = "guest";
@@ -36,7 +36,7 @@
 	// (hour, minute, second, month, day, year)
 
 	// Client URL
-	$dbHost = "http://localhost/WATTIS/";
+	$dbHost = "http://wattis-stage.cca.edu/";
 
 	// DB Admin
 	$dbAdmin = $dbHost ."OPEN-RECORDS-GENERATOR/";
@@ -57,12 +57,12 @@
 
 function dbConnectMain($dbUser) {
 
-	$dbMainHost = "localhost";
-	$dbMainDbse = "wattis_local";
+	$dbMainHost = "vm-mysql-01";
+	$dbMainDbse = "wwwwattisdev";
 
-	if 		($dbUser == 1) {		$dbMainUser = "root"; 	$dbMainPass = ""; }
-	else if ($dbUser == 2) {		$dbMainUser = "root"; 	$dbMainPass = ""; }
-	else if ($dbUser == 3) {		$dbMainUser = "root";   	$dbMainPass = ""; }
+	if 		($dbUser == 1) {		$dbMainUser = "wattisdev"; 	$dbMainPass = "W4++15d3v"; }
+	else if ($dbUser == 2) {		$dbMainUser = "wattisdev"; 	$dbMainPass = "W4++15d3v"; }
+	else if ($dbUser == 3) {		$dbMainUser = "wattisdev";   	$dbMainPass = "W4++15d3v"; }
 
 	$dbConnect = MYSQL_CONNECT($dbMainHost, $dbMainUser, $dbMainPass);
 	MYSQL_SELECT_DB($dbMainDbse, $dbConnect);
