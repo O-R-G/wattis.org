@@ -2,14 +2,22 @@ Options +Indexes
 RewriteEngine On
 RewriteBase  /
 
+# internal -- url remains, request remapped on server 
+# external -- url changes, server remaps incoming request [R]
+
 # 0. if full url != marker 
 # 1. rewrite full url  --> clean url
 # 2. rewrite clean url --> full url & marker
 
-# note -- RewriteCond only applies to RewriteRule that immediately follows
-# note -- [OR] works as or, and [S=1] skips next 1 ReWriteRule
-# link -- http://httpd.apache.org/docs/current/rewrite/flags.html
+# note: RewriteCond only applies to RewriteRule that immediately follows
+# note: [OR] works as or, and [S=1] skips next 1 ReWriteRule
+# [L] flag -- last rule, stop processing
+# http://httpd.apache.org/docs/current/rewrite/flags.html
+# http://httpd.apache.org/docs/current/rewrite/remapping.html
 
+# $1 ... regex back ref same line
+# %1 ... regex back ref previous line
+ 
 # main
 
 RewriteRule ^main$ main.php? [L]
@@ -97,3 +105,10 @@ RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=93
 RewriteRule ^detail\.php$ exhibitions? [R,L]
 RewriteRule ^exhibitions$ detail.php?marker&id=93 [L]
+
+# view
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^detail\.php$ view?%1 [R,L]
+RewriteRule ^view$ detail.php?marker [QSA,L]
