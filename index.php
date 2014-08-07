@@ -47,6 +47,15 @@ require_once("_Library/orgRSSParse.php");
         border-bottom: solid 3px #000;
         }
 
+.blacklogo {
+        color: #000;
+        }
+
+.blacklogo a {
+        color: #000;
+        border-bottom: solid 3px #000;
+        }
+
 .red {
         color: #FFF;
         }

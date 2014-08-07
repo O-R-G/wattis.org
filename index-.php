@@ -100,8 +100,6 @@ LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND obje
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
         	                        	
 		$newsItems[$i] = $myrow["body"];
-
-		echo nl2br($newsItems[$i] . "<br /><br /><br />");
 		$i++;
 	}
                        
@@ -113,9 +111,23 @@ LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND obje
 <script type="text/javascript">
 
        	newsItem = new Array(
-			"The exhibition opens <a href='artist.php?id=32'>tomorrow</a>.",
-			"*New* limited edition from Ed Ruscha — <a href='griddetail.php?id=33'>get it now</a>!",
-			"<a href='artist.php?id=92'>Friday</a>, we are showing Joan Jonas films. Come."
+
+		<?php
+			$i = 0;
+ 		
+			while ( $newsItems[$i] != null ) {
+        	                        			
+				echo "\"" . $newsItems[$i] . "\"";
+
+if ( $i < (count($newsItems) -1) ) {
+
+echo ",\n";
+} else {
+echo "\n";
+
+}			$i++;
+			}
+		?>
 			);
 	
 	animateNewsTicker(newsItem[0]);
