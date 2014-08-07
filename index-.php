@@ -26,8 +26,9 @@ require_once("_Library/orgRSSParse.php");
                         
 	// SQL object 
 	
-	$sql = "SELECT * FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 LIKE 'Home' AND 
-objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
+	$sql = "SELECT * FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 
+LIKE 'Home' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = 
+'1' ORDER BY objects.rank;";
 	$result =  MYSQL_QUERY($sql);
 	$html = "";
 
@@ -81,6 +82,32 @@ objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1'
 	window.onload=initEmoticons(15, message, delay);
 
 </script>
+
+
+<?php
+
+	// SQL object
+	// get News
+	
+	$sql = "SELECT objects.id, objects.name1, objects.body, objects.active, objects.rank, wires.active, 
+wires.fromid, wires.toid FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 
+LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = 
+'1' ORDER BY objects.rank;";
+	$result =  MYSQL_QUERY($sql);
+	$i = 0;
+	$newsItems = array();
+
+	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+        	                        	
+		$newsItems[$i] = $myrow["body"];
+
+		echo nl2br($newsItems[$i] . "<br /><br /><br />");
+		$i++;
+	}
+                       
+?>
+
+
 
 
 <script type="text/javascript">
