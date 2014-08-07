@@ -106,9 +106,27 @@ RewriteCond %{QUERY_STRING} id=93
 RewriteRule ^detail\.php$ exhibitions? [R,L]
 RewriteRule ^exhibitions$ detail.php?marker&id=93 [L]
 
+
+
+### generics ### 
+
 # view
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} ^(.*)
 RewriteRule ^detail\.php$ view?%1 [R,L]
 RewriteRule ^view$ detail.php?marker [QSA,L]
+
+# more
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^artist\.php$ more?%1 [R,L]
+RewriteRule ^more$ artist.php?marker [QSA,L]
+
+# buy
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^griddetail\.php$ buy?%1 [R,L]
+RewriteRule ^buy$ griddetail.php?marker [QSA,L]
