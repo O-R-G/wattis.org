@@ -98,13 +98,11 @@ a:active {
 	}
 
 .imageContainer {
-        padding: 20%;
         }
 
 .imageContainerWrapper {
 	float:left;
         width:30%;
-        padding: 10px;
         }
 
 .captionContainer {

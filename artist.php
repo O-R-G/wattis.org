@@ -28,9 +28,12 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 			$mediaCaption = strip_tags($myrow["caption"]);
 			$mediaStyle = "width: 100%;";
 			$images[$i] .= "<div class = 'imageContainerWrapper'>";
-			$images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"20%\", \"0\");'>";
+
+// random display sizes
+
+			$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='margin:40px;' onclick='expandImageContainerMargin(\"image".$i."\", \"40px\", \"-80px\");'>";
 			$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-			$images[$i] .= "<div class = 'captionContainer caption'>";
+			$images[$i] .= "<div class = 'captionContainer caption helvetica small'>";
 			$images[$i] .= $mediaCaption . "<br /><br />";
 			$images[$i] .= "</div>";
 			$images[$i] .= "</div>";

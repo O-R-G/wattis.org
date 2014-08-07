@@ -42,23 +42,50 @@ function expandImage(thisId,originalSize,newSize) {
 
                 document.getElementById(thisId).style.padding = originalSize;           // reset
         }
+
+	// console.log(document.getElementById(thisId).style.width);
+
         return true;
 }
 
 
 // expand image (toggle size)
 
-function expandImageSize(thisId,originalSize,newSize) {
+function expandImageContainerWidth(thisId,originalSize,newSize) {
 
 	if (document.getElementById(thisId).style.width == originalSize) {
 
-		document.getElementById(thisId).style.width = newSize;		// set
+		document.getElementById(thisId).style.width = newSize;			// set
 	} else {
 
 		document.getElementById(thisId).style.width = originalSize;		// reset
 	}
+		
+	// console.log(document.getElementById(thisId).style.width);
+
 	return true;
 }
+
+
+// expand image (toggle size)
+
+function expandImageContainerMargin(thisId,originalSize,newSize) {
+
+	if (document.getElementById(thisId).style.margin == originalSize) {
+
+		document.getElementById(thisId).style.margin = newSize;			// set
+	} else {
+
+		document.getElementById(thisId).style.margin = originalSize;		// reset
+	}
+		
+	console.log(document.getElementById(thisId).style.margin);
+
+	return true;
+}
+
+
+
 
 
 //  Force getElementById to work
