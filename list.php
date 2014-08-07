@@ -10,7 +10,7 @@ require_once("GLOBAL/head.php");
 	// SQL object 
 
 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url FROM 
-objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE name1 = 'Events' AND 
+objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE name1 = 'Calendar' AND 
 objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER 
 BY objects.rank;";
 
