@@ -9,10 +9,11 @@ require_once("GLOBAL/head.php");
                 
 	// SQL object plus media
 	                     
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, 
-objects.rank as objectsRank, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, 
-media.active AS mediaActive, media.rank FROM objects LEFT JOIN media ON objects.id = media.object AND 
-media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.notes, 
+objects.active, objects.rank as objectsRank, media.id AS mediaId, media.object AS mediaObject, 
+media.type, media.caption, media.active AS mediaActive, media.rank FROM objects LEFT JOIN media ON 
+objects.id = media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY 
+media.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -46,7 +47,7 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 
 			$name = $myrow['name1'];
 			$body = $myrow['body'];
-			$deck = $myrow['deck'];
+			$notes = $myrow['notes'];
 		}
 
 		$i++;
@@ -101,19 +102,21 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 	}
 
 
-	// video (deck)
+	// video
 
-	$html .= "<span class=''>";
-	$html .= $deck;	                  
-	$html .= "</span>";	
+	if ($notes) {
+
+		$html .= "<span class=''>";
+		$html .= $notes;	                  
+		$html .= "</span>";	
+	}
 
         $html .= "</div>";
 
-	echo nl2br($html);
 
+	echo nl2br($html);
 	?>
         
-
 
 <!-- JS -->
 

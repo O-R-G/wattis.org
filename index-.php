@@ -63,8 +63,8 @@ LIKE 'Home' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND obje
 <script type="text/javascript">
 
                 message[1] =    [
-                                "----------",
-                                "=-=-=-=-=-",
+                                "---",
+                                "=-=",
                                 ];
 
                 delay[1] = 400;
