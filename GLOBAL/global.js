@@ -37,10 +37,10 @@ function expandImage(thisId,originalSize,newSize) {
 
         if (document.getElementById(thisId).style.padding == originalSize) {
 
-                document.getElementById(thisId).style.padding = newSize;                // set
+                document.getElementById(thisId).style.padding = newSize;
         } else {
 
-                document.getElementById(thisId).style.padding = originalSize;           // reset
+                document.getElementById(thisId).style.padding = originalSize;
         }
 
 	// console.log(document.getElementById(thisId).style.width);
@@ -49,43 +49,25 @@ function expandImage(thisId,originalSize,newSize) {
 }
 
 
-// expand image (toggle size)
-
-function expandImageContainerWidth(thisId,originalSize,newSize) {
-
-	if (document.getElementById(thisId).style.width == originalSize) {
-
-		document.getElementById(thisId).style.width = newSize;			// set
-	} else {
-
-		document.getElementById(thisId).style.width = originalSize;		// reset
-	}
-		
-	// console.log(document.getElementById(thisId).style.width);
-
-	return true;
-}
-
-
-// expand image (toggle size)
+// expand expandImageContainerMargin (toggle size)
 
 function expandImageContainerMargin(thisId,originalSize,newSize) {
 
 	if (document.getElementById(thisId).style.margin == originalSize) {
 
-		document.getElementById(thisId).style.margin = newSize;			// set
+		document.getElementById(thisId).style.margin = newSize;			
+		document.getElementById(thisId).style.zIndex = "100";
+			
 	} else {
 
-		document.getElementById(thisId).style.margin = originalSize;		// reset
+		document.getElementById(thisId).style.margin = originalSize;		
+		document.getElementById(thisId).style.zIndex = "0";			
 	}
 		
-	console.log(document.getElementById(thisId).style.margin);
+	// console.log(document.getElementById(thisId).style.margin);
 
 	return true;
 }
-
-
-
 
 
 //  Force getElementById to work

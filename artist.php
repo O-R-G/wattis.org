@@ -27,11 +27,13 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 			$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
 			$mediaCaption = strip_tags($myrow["caption"]);
 			$mediaStyle = "width: 100%;";
-			$images[$i] .= "<div class = 'imageContainerWrapper'>";
 
-// random display sizes
-
-			$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='margin:40px;' onclick='expandImageContainerMargin(\"image".$i."\", \"40px\", \"-80px\");'>";
+			$randomPadding = rand(0, 150);
+			$randomWidth = rand(15, 45);
+			$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
+			
+			$images[$i] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
+			$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='expandImageContainerMargin(\"image".$i."\", \"40px\", \"-80px\");'>";
 			$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 			$images[$i] .= "<div class = 'captionContainer caption helvetica small'>";
 			$images[$i] .= $mediaCaption . "<br /><br />";
@@ -44,6 +46,7 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 
 			$name = $myrow['name1'];
 			$body = $myrow['body'];
+			$deck = $myrow['deck'];
 		}
 
 		$i++;
@@ -56,7 +59,7 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 	if ( preg_match($pattern, $body) == 1 ) $columns = preg_split($pattern, $body);
 
    
-	// deck
+	// name
 
 	$html .= "<div class='listContainer times'>";
 	$html .= "<span class='monaco'>[*]</span> ";	                  
@@ -96,6 +99,13 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 	
 		$html .= $images[$j];
 	}
+
+
+	// video (deck)
+
+	$html .= "<span class=''>";
+	$html .= $deck;	                  
+	$html .= "</span>";	
 
         $html .= "</div>";
 

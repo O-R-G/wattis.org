@@ -197,7 +197,7 @@ function displayMediaPDF($file, $caption, $style, $link) {
 	if (!$link) $link = $file;
 	$media .= " target='_blank'>";
 	$media  .= "<img src='MEDIA/pdf.gif'><br/>";
-	$media .= $link;
+	// $media .= $link;
 	$media .= "</a>";
 	$status = $media;
 

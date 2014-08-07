@@ -85,7 +85,7 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
         $html .= "<div class='listContainer twocolumn monaco small'>";
 	$html .= $mediaCaption . "<br/>";
         $html .= $deck;
-        $html .= "<br />Order now here: <img src='MEDIA/paypal.png' width='35%'>";
+        $html .= "<br /><br /><a href='mailto:mmeng@cca.edu'>Please email for ordering information</a>";
 	$html .= "</div>";
 
 

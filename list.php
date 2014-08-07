@@ -10,7 +10,7 @@ require_once("GLOBAL/head.php");
 	// SQL object 
 
 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url FROM 
-objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE name1 = 'ByAppointment' AND 
+objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE name1 = 'Events' AND 
 objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER 
 BY objects.rank;";
 
@@ -30,22 +30,22 @@ BY objects.rank;";
         $html .= "</div>";
 
         $html .= "<div class='listContainer doublewide times'>";
+//	$html .= "<div class='listContainer twocolumn doublewide'>";
 
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-			
-		$html .= "<div class='listContainer twocolumn'>";
 
-                $URL = $myrow["url"];
+		$URL = $myrow["url"];
 		$URL = ($URL) ? "$URL" : "artist";
-
+		$html .= "<div class='listContainer'>";
 		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 		$html .= "<i>" . $myrow['deck'] . "</i>";	
 		$html .= "</div>";	
 
 	        $i++;
-		if ( $i % 3 == 0) $html .= "<div class='clear'></div>"; 	// clear floats
+		// if ( $i % 3 == 0) $html .= "<div class='clear'></div>"; 	// clear floats
 	}
 
+//	$html .= "</div>";	
         $html .= "</div>";
 
 	echo nl2br($html);
@@ -155,7 +155,7 @@ BY objects.rank;";
 
                 delay[10] = 500;
 
-window.onload=initEmoticons(11, message, delay);
+window.onload=initEmoticons(1, message, delay);
 </script>
 
 <?php
