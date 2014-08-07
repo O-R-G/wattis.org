@@ -31,11 +31,17 @@ if ($action != "add") {
 	<tr><td>Detail&nbsp; </td>
 	<td><textarea name='body' cols='40' rows='12'></textarea></td></tr>
 
+	<tr><td>Notes&nbsp; </td>
+	<td><textarea name='notes' cols='40' rows='3'><?php echo $myrow["notes"]; ?></textarea></td></tr>
+
+	<tr><td>Begin&nbsp; </td>
+	<td><textarea name='begin' cols='40' rows='3'><?php echo $myrow["begin"]; ?></textarea></td></tr>
+
+	<tr><td>End&nbsp; </td>
+	<td><textarea name='end' cols='40' rows='3'><?php echo $myrow["end"]; ?></textarea></td></tr>
+
 	<tr><td>URL&nbsp; </td>
 	<td><textarea name='url' cols='40' rows='3'></textarea></td></tr>
-
-	<tr><td>Date&nbsp; </td>
-	<td><textarea name='end' cols='40' rows='3'><?php echo $myrow["end"]; ?></textarea></td></tr>
 
 	<tr><td>Rank&nbsp; </td>
 	<td><textarea name='rank' cols='3' rows='3'></textarea>
@@ -104,7 +110,9 @@ if ($action != "add") {
 		$name2 = 	addslashes($name2);
 		$deck = 	addslashes($deck);
 		$body = 	addslashes($body);
+		$notes =  	addslashes($notes); 
 		$url =  	addslashes($url); 
+		$begin =  	addslashes($begin);
 		$end =  	addslashes($end);
 		$rank = 	addslashes($rank);
 	}
@@ -113,12 +121,14 @@ if ($action != "add") {
 	//  Process variables
 
 	if (!$name1) $name1 = "Untitled";
+	$begin = ($begin) ? date("Y-m-d H:i:s", strToTime($begin)) : NULL;
 	$end = ($end) ? date("Y-m-d H:i:s", strToTime($end)) : NULL;
 
 
 	//  Add object to database
 
-	$sql = "INSERT INTO objects (created, modified, name1, url, deck, body, end, rank) VALUES('". date("Y-m-d H:i:s") ."', '". date("Y-m-d H:i:s") ."', '$name1', '$url', '$deck', '$body', ";
+	$sql = "INSERT INTO objects (created, modified, name1, url, notes, deck, body, begin, end, rank) VALUES('". date("Y-m-d H:i:s") ."', '". date("Y-m-d H:i:s") ."', '$name1', '$url', '$notes', '$deck', '$body', ";
+	$sql .= ($begin)  ? "'$begin', " : "null, ";
 	$sql .= ($end)  ? "'$end', " : "null, ";
 	$sql .= ($rank) ? "'$rank')" : "null)";
 	$result = MYSQL_QUERY($sql);

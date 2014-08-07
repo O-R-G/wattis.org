@@ -13,7 +13,7 @@
 ////////////////////////
 
 //  Get attached objects (if any)
-$sql = "SELECT *, objects.id AS objectsId FROM objects, wires WHERE wires.fromid = '". $objects[$o] ."' AND wires.toid = objects.id AND wires.active = '1' AND objects.active = '1' ORDER BY weight DESC, objects.rank, end DESC, begin DESC, name1, name2, objects.modified DESC, objects.created DESC";
+$sql = "SELECT *, objects.id AS objectsId FROM objects, wires WHERE wires.fromid = '". $objects[$o] ."' AND wires.toid = objects.id AND wires.active = '1' AND objects.active = '1' ORDER BY weight DESC, objects.rank, begin, end DESC, begin DESC, name1, name2, objects.modified DESC, objects.created DESC";
 $result = MYSQL_QUERY($sql);
 $numrows = MYSQL_NUM_ROWS($result);
 $padout = floor(log10($numrows)) + 1;

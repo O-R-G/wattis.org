@@ -96,6 +96,7 @@ if ($action != "link") {
 
 	//  Process variables
 
+	// $begin = ($begin) ? date("Y-m-d H:i:s", strToTime($begin)) : NULL;
 	// $end = ($end) ? date("Y-m-d H:i:s", strToTime($end)) : NULL;
 
 

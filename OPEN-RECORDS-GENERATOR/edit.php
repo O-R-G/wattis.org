@@ -41,11 +41,17 @@ if ($action != "update") {
 		<tr><td>Detail&nbsp; </td>
 		<td><textarea name='body' cols='40' rows='12'><?php echo $myrow["body"]; ?></textarea></td></tr>
 
+		<tr><td>Notes&nbsp; </td>
+		<td><textarea name='notes' cols='40' rows='3'><?php echo $myrow["notes"]; ?></textarea></td></tr>
+
+		<tr><td>Begin&nbsp; </td>
+		<td><textarea name='begin' cols='40' rows='3'><?php echo $myrow["begin"]; ?></textarea></td></tr>
+
+		<tr><td>End&nbsp; </td>
+		<td><textarea name='end' cols='40' rows='3'><?php echo $myrow["end"]; ?></textarea></td></tr>
+
 		<tr><td>URL&nbsp; </td>
 		<td><textarea name='url' cols='40' rows='3'><?php echo $myrow["url"]; ?></textarea></td></tr>
-
-		<tr><td>Date&nbsp; </td>
-		<td><textarea name='end' cols='40' rows='3'><?php echo $myrow["end"]; ?></textarea></td></tr>
 
 		<tr><td>Rank&nbsp; </td>
 		<td><textarea name='rank' cols='3' rows='3'><?php echo $myrow["rank"]; ?></textarea>
@@ -141,7 +147,9 @@ if ($action != "update") {
 		$name2 = 	addslashes($name2);
 		$deck = 	addslashes($deck);
 		$body = 	addslashes($body);
+		$notes =  	addslashes($notes); 
 		$url =  	addslashes($url); 
+		$begin =  	addslashes($begin);
 		$end =  	addslashes($end);
 		$rank = 	addslashes($rank);
 	}
@@ -150,6 +158,7 @@ if ($action != "update") {
 	//  Process variables
 
 	if (!$name1) $name1 = "Untitled";
+	$begin = ($begin) ? date("Y-m-d H:i:s", strToTime($begin)) : NULL;
 	$end = ($end) ? date("Y-m-d H:i:s", strToTime($end)) : NULL;
 	$z = NULL;
 
@@ -160,7 +169,9 @@ if ($action != "update") {
 	if ($myrow["name2"] 	!= $name2) 	$z .= "name2='$name2', ";
 	if ($myrow["deck"] 	!= $deck) 	$z .= "deck='$deck', ";
 	if ($myrow["body"] 	!= $body) 	$z .= "body='$body', ";
+	if ($myrow["notes"] 	!= $notes) 	$z .= "notes='$notes', ";
 	if ($myrow["url"] 	!= $url) 	$z .= "url='$url', ";
+	if ($myrow["begin"] 	!= $begin) 	$z .= ($begin) ? "begin ='$begin', " : "begin = null, ";
 	if ($myrow["end"] 	!= $end) 	$z .= ($end) ? "end ='$end', " : "end = null, ";
 	if ($myrow["rank"] 	!= $rank) 	$z .= ($rank) ? "rank ='$rank', " : "rank = null, ";
 
