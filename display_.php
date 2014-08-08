@@ -23,12 +23,13 @@ require_once("GLOBAL/head.php");
 	$rootbody = $myrow["body"];
 
 
-	// SQL objects attached plus media
+        // SQL objects attached to object plus media
 
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, wires.fromid, wires.toid, 
-media.id AS mediaId, media.object, media.caption, media.type, media.active AS mediaActive FROM wires, objects LEFT JOIN media ON 
-objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT objects.id FROM objects WHERE objects.name1 LIKE 
-'$rootname') AND wires.toid=objects.id ORDER By objects.rank;";
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, 
+objects.rank, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, 
+media.active AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object AND 
+media.active = 1 WHERE wires.fromid = (SELECT objects.id FROM objects WHERE objects.id = $id AND 
+objects.active = 1) AND wires.toid=objects.id ORDER By objects.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -65,11 +66,10 @@ objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT obje
 	}
 
 
-	// nav
+	// name
 
 	$html .= "<div class='listContainer times'>";
-        $html .= "<canvas id='canvas" . ($thisCanvas) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
-	// $html .= "<span class='monaco'>[*]</span> ";	                  
+        $html .= "<span class='monaco'>[*]</span> ";
 	$html .= "<a href=''>" . $rootname . "</a> ";	
 	$html .= "<br /><br />" . $rootbody;
 	$html .= "</div>";	

@@ -15,32 +15,30 @@ require_once("GLOBAL/head.php");
         $rootname = $myrow["name1"];
         $rootbody = $myrow["body"];
 
-	// * fix * -- this should follow the pattern from grid.php and griddetail.php
 
-	// SQL object 
+	// SQL objects attached to object 
 
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url, 
-objects.begin, objects.end FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE 
-objects.id = $id AND objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND 
-wires.active = '1' ORDER BY objects.rank;";
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url, objects.begin, 
+objects.end FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.id = 
+$id AND objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' 
+ORDER BY objects.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
 	$i = 0;
 
 
-        // deck
-	// * fix * -- this should follow the pattern from grid.php and griddetail.php
+        // name
 
         $html .= "<div class='listContainer times'>";
-        // $html .= "<canvas id='canvas" . ($thisCanvas) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
         $html .= "<span class='monaco'>[*]</span> ";
         $html .= "<a href=''>" . $rootname . "</a> ";
-        // $html .= "<a href=''>Calendar</a> ";
         $html .= "</div>";
 
+
+	// attached objects 
+
         $html .= "<div class='listContainer doublewide times'>";
-//	$html .= "<div class='listContainer twocolumn doublewide'>";
 
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
@@ -48,15 +46,43 @@ wires.active = '1' ORDER BY objects.rank;";
 		$URL = ($URL) ? "$URL" : "view_";
 
 /*
+
+// display archive, very much in process
+// problem is that the query nees to get objects that are attached to exhibitions object
+// and this is currently used for calendar, so how to do this generically?
+
+// solution:
+// flag for showing future or past 
+// flag for showing events
+// flag for showing exhibitions
+
+// then sorted! although the $id could be hard wired into the calendar object 
+// though it will also have to call on the gallery, apartment, on our mind objects
+// in which case could troll the whole db for things with dates possibly
+
+// q.e.d.
+
+// format date, then display
+
+// time() gives current time
+// then only a matter of comparing begin or end to that
+
 		// archive -- check if end date passed
 		// in process 
 
 		$begin = $myrow['begin'];
 		$end = $myrow['end'];
+		$curtime = time();
+
+
+if ($end && ($end <= $curtime) ) {
 
 		$beginDisplay = date("Y-m-d H:i:s", strToTime($begin));
 		echo $beginDisplay . " - " . $end;
+}
 */
+
+
 
 		$html .= "<div class='listContainer'>";
 		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
@@ -67,10 +93,10 @@ wires.active = '1' ORDER BY objects.rank;";
 		// if ( $i % 3 == 0) $html .= "<div class='clear'></div>"; 	// clear floats
 	}
 
-//	$html .= "</div>";	
         $html .= "</div>";
 
 	echo nl2br($html);
+
 	?>
 
 
