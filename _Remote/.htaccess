@@ -1,6 +1,6 @@
 Options +Indexes
 RewriteEngine On
-RewriteBase  /WATTIS/
+RewriteBase  /
 
 # internal -- url remains, request remapped on server 
 # external -- url changes, server remaps incoming request [R]
