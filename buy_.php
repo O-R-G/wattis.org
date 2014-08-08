@@ -54,12 +54,6 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
                 }
         }
 
-/*
-        // Check for column breaks
-
-	$pattern = "/\/\/\//";
-	if ( preg_match($pattern, $body) == 1 ) $columns = preg_split($pattern, $body);
-*/
    
 	// nav
 
@@ -82,7 +76,9 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 
 	// order
 
-        $html .= "<div class='listContainer twocolumn monaco small'>";
+        $html .= "<div class='listContainer twocolumn doublewide helvetica small'>";
+	$html .= "</div>";
+        $html .= "<div class='listContainer twocolumn helvetica small'>";
 	$html .= $mediaCaption . "<br/>";
         $html .= $deck;
         $html .= "<br /><br /><a href='mailto:mmeng@cca.edu'>Please email for ordering information</a>";

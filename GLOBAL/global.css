@@ -111,8 +111,11 @@ a:active {
 	}
 
 .navbottomContainer {  
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
+	width: 400px;
 	clear: both; 
-        width: 400px;
 	}
 
 .programContainer {

@@ -53,7 +53,7 @@ objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT obje
 			$images[$i] .= "<a href='buy_.php?id=" . $myrow['objectsId'] . "'>";
 			$images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
 			$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-			$images[$i] .= "<div class = 'captionContainer monaco small'>";
+			$images[$i] .= "<div class = 'captionContainer helvetica small'>";
 			$images[$i] .= $myrow['name1'];
 			$images[$i] .= "</div>";
 			$images[$i] .= "</div>";
