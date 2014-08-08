@@ -15,8 +15,9 @@ require_once("GLOBAL/head.php");
 
 </div>
 
-
-
+<?php
+if ($alt == 'all') {
+?>
 
 <div id="Punct-0" class="floatPad helvetica big">
 .+*
@@ -130,6 +131,27 @@ require_once("GLOBAL/head.php");
 `\.
 </div>
 
+<?php
+} else {
+?>
+
+
+<!-- .+* THE WATTIS INSTITUTE -->
+
+<div class="centeredContainer times big black">
+
+<canvas id="canvas0" width="46" height="24" class="show" 
+onclick="showBones();">.+*</canvas></a>
+
+<a href="index-.php">The Wattis Institute</a>
+
+</div>
+
+
+<?php
+}
+?>
+
 
 	
 
@@ -139,6 +161,7 @@ require_once("GLOBAL/head.php");
 
 <script>
 	initPunctuation("Punct");
+	window.onload=initEmoticons(1, message, delay);
 </script>
 
 </div>

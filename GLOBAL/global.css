@@ -228,6 +228,16 @@ a:active {
 	margin: 0px;
 	}
 
+.centeredContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 25%;
+	margin-left: -10%;
+	margin-top: -3%;
+        z-index:1000;
+	}
+
 
 /* this is lazily done */
 /* clean up */

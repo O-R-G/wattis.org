@@ -1,6 +1,6 @@
 Options +Indexes
 RewriteEngine On
-RewriteBase  /WATTIS/
+RewriteBase  /
 
 # internal -- url remains, request remapped on server 
 # external -- url changes, server remaps incoming request [R]
@@ -123,6 +123,13 @@ RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} ^(.*)
 RewriteRule ^view_\.php$ view?%1 [R,L]
 RewriteRule ^view$ view_\.php?marker [QSA,L]
+
+# list
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^list_\.php$ list?%1 [R,L]
+RewriteRule ^list$ list_\.php?marker [QSA,L]
 
 # display
 
