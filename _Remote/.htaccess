@@ -1,6 +1,6 @@
 Options +Indexes
 RewriteEngine On
-RewriteBase  /
+RewriteBase  /WATTIS/
 
 # internal -- url remains, request remapped on server 
 # external -- url changes, server remaps incoming request [R]
@@ -144,3 +144,15 @@ RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} ^(.*)
 RewriteRule ^buy_\.php$ buy?%1 [R,L]
 RewriteRule ^buy$ buy_\.php?marker [QSA,L]
+
+
+
+### utility ###
+
+# logo
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^_logo\.php$ logo? [R,L]
+RewriteRule ^logo$ _logo\.php?marker [QSA,L]
+
