@@ -79,7 +79,7 @@
 
 <?php 
 if (($pageName != "index") 
-&& ($pageName != "index-") 
+&& ($pageName != "index_") 
 && ($pageName != "punctuation")  
 && ($pageName != "logo")  
 && ($pageName != "_logo")  
@@ -126,7 +126,7 @@ blacktemp'>*</span>
 <canvas id="canvas0" width="46" height="22" class="show" 
 onclick="showBones();">.+*</canvas></a>
 
-<a href="index-.php">The Wattis Institute</a>
+<a href="index_.php">The Wattis Institute</a>
 
 </div>
 

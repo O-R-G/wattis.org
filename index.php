@@ -111,7 +111,7 @@ objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1'
 
 <!-- CLICK ANYWHERE -->
 
-<div class="fullContainer" onclick="window.location.assign('index-.php');">
+<div class="fullContainer" onclick="window.location.assign('index_.php');">
 </div>
 
 <script type="text/javascript">
@@ -122,13 +122,13 @@ objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1'
         // better to use an eventHandler probably and capture click
 
         window.onclick = function showBones() {
-                window.location.assign("index-.php");
+                window.location.assign("index_.php");
         }
 
         // or
 
         document.body.onclick = function() {
-                window.location.assign("index-.php");
+                window.location.assign("index_.php");
         }
 
         */
