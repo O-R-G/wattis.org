@@ -7,42 +7,6 @@ require_once("GLOBAL/head.php");
 	// temporary animateEmoticon hack
 
 	$thisCanvas = 1;
-
-/*
-switch ($id) {
-    case 22:
-	$thisCanvas = 1;
-        break;
-    case 25:
-	$thisCanvas = 2;
-        break;
-    case 30:
-	$thisCanvas = 3;
-        break;
-    case 23:
-	$thisCanvas = 4;
-        break;
-    case 26:
-	$thisCanvas = 5;
-        break;
-    case 31:
-	$thisCanvas = 6;
-        break;
-    case 24:
-	$thisCanvas = 7;
-        break;
-    case 27:
-	$thisCanvas = 8;
-        break;
-    case 29:
-	$thisCanvas = 9;
-        break;
-    case 28:
-	$thisCanvas = 10;
-        break;
-}
-*/
-
 ?>
 
 

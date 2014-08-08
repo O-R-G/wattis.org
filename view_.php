@@ -9,11 +9,11 @@ require_once("GLOBAL/head.php");
                 
 	// SQL object plus media
 	                     
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.notes, 
-objects.active, objects.rank as objectsRank, media.id AS mediaId, media.object AS mediaObject, 
-media.type, media.caption, media.active AS mediaActive, media.rank FROM objects LEFT JOIN media ON 
-objects.id = media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY 
-media.rank;";
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, 
+objects.notes, objects.active, objects.begin, objects.end, objects.rank as objectsRank, media.id AS 
+mediaId, media.object AS mediaObject, media.type, media.caption, media.active AS mediaActive, media.rank 
+FROM objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id 
+AND objects.active ORDER BY media.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -48,6 +48,8 @@ media.rank;";
 			$name = $myrow['name1'];
 			$body = $myrow['body'];
 			$notes = $myrow['notes'];
+			$begin = $myrow['begin'];
+			$end = $myrow['end'];
 		}
 
 		$i++;
@@ -64,7 +66,36 @@ media.rank;";
 
 	$html .= "<div class='listContainer times'>";
 	$html .= "<span class='monaco'>[*]</span> ";	                  
-	$html .= "<a href=''>" . $name . "</a> ";	
+	$html .= "<a href=''>" . $name . "</a><br /> ";	
+
+
+	// hours
+
+	if ($begin || $end) {
+ 
+		$displayHours = (date("H",strtotime($begin)) != '00') ? true : false;
+
+		if ($begin) {
+
+			$beginDisplay = "g";
+			if (date("i",strtotime($begin)) != '00') $beginDisplay .= ".i";
+			if (!$end) $beginDisplay .= " a";
+			$begin = date($beginDisplay,strtotime($begin));
+			$hoursDisplay = "<br />" . $begin;
+		}
+
+		if ($end) {
+
+			$endDisplay = "g";
+			if (date("i",strtotime($end)) != '00') $endDisplay .= ".i";
+			$endDisplay .= " a";
+			$end = date($endDisplay,strtotime($end));
+			$hoursDisplay = "<br />" . $begin . ' – ' . $end;
+		}
+
+                if ($displayHours) $html .= $hoursDisplay;
+	}
+
 	$html .= "</div>";	
 
 

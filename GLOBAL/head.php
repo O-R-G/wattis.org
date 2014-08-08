@@ -1,5 +1,5 @@
 <?php 
-	// date_default_timezone_set('Asia/Kuwait');
+	date_default_timezone_set('America/Los_Angeles');
 	require_once("_Library/systemDatabase.php"); 
 	require_once("_Library/systemCookie.php");
 	require_once("_Library/displayNavigation.php"); 
