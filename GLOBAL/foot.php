@@ -2,7 +2,7 @@
 	        <div class='helvetica small black'>
         		<a href='main' class='instructionContainer'>MAIN</a>
         		<a href='visit' class='instructionContainer'>VISIT</a>
-        		<a href='exhibitions' class='instructionContainer'>PROGRAM</a>
+        		<a href='exhibitions' class='instructionContainer'>EXHIBITIONS</a>
         		<a href='calendar' class='instructionContainer'>CALENDAR</a>
         		<a href='archive' class='instructionContainer'>ARCHIVE</a>
         		<a href='index-.php' class='instructionContainer'>GO HOME</a>

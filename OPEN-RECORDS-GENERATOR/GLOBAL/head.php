@@ -36,7 +36,7 @@ $mediaType = $_REQUEST['mediaType'];
 ////////////////
 
 // by .htaccess and .htpasswd
-$dbUserSelected = 1;
+$dbUserSelected = 2;
 
 
 
