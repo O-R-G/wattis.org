@@ -5,7 +5,7 @@
         		<a href='exhibitions' class='instructionContainer'>EXHIBITIONS</a>
         		<a href='calendar' class='instructionContainer'>CALENDAR</a>
         		<a href='archive' class='instructionContainer'>ARCHIVE</a>
-        		<a href='index-.php' class='instructionContainer'>GO HOME</a>
+        		<a href='index_.php' class='instructionContainer'>GO HOME</a>
         	</div>
         </div>
 
