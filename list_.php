@@ -7,12 +7,21 @@ require_once("GLOBAL/head.php");
 
 	<?php
                         
+        // SQL object
+
+        $sql = "SELECT objects.id, objects.name1, objects.body FROM objects WHERE objects.id = $id AND objects.active = 1;";
+        $result = MYSQL_QUERY($sql);
+        $myrow  = MYSQL_FETCH_ARRAY($result);
+        $rootname = $myrow["name1"];
+        $rootbody = $myrow["body"];
+
+	// * fix * -- this should follow the pattern from grid.php and griddetail.php
+
 	// SQL object 
 
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url FROM 
-objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE name1 = 'Calendar' AND 
-objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER 
-BY objects.rank;";
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url, objects.begin, objects.end FROM 
+objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.id = $id AND objects.active=1) AND 
+wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -25,8 +34,8 @@ BY objects.rank;";
         $html .= "<div class='listContainer times'>";
         // $html .= "<canvas id='canvas" . ($thisCanvas) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
         $html .= "<span class='monaco'>[*]</span> ";
-        // $html .= "<a href=''>" . $name . "</a> ";
-        $html .= "<a href=''>Calendar</a> ";
+        $html .= "<a href=''>" . $rootname . "</a> ";
+        // $html .= "<a href=''>Calendar</a> ";
         $html .= "</div>";
 
         $html .= "<div class='listContainer doublewide times'>";
@@ -36,6 +45,18 @@ BY objects.rank;";
 
 		$URL = $myrow["url"];
 		$URL = ($URL) ? "$URL" : "view_";
+
+/*
+		// archive -- check if end date passed
+		// in process 
+
+		$begin = $myrow['begin'];
+		$end = $myrow['end'];
+
+		$beginDisplay = date("Y-m-d H:i:s", strToTime($begin));
+		echo $beginDisplay . " - " . $end;
+*/
+
 		$html .= "<div class='listContainer'>";
 		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 		$html .= "<i>" . $myrow['deck'] . "</i>";	
