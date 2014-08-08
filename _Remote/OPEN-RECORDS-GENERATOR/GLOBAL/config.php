@@ -60,7 +60,7 @@ function dbConnectMain($dbUser) {
 	$dbMainHost = "vm-mysql-01";
 	$dbMainDbse = "wwwwattisdev";
 
-	if 		($dbUser == 1) {		$dbMainUser = "wattisdev"; 	$dbMainPass = "W4++15d3v"; }
+	if 		($dbUser == 1) {		$dbMainUser = "wattisview"; 	$dbMainPass = "W4++15v13w"; }
 	else if ($dbUser == 2) {		$dbMainUser = "wattisdev"; 	$dbMainPass = "W4++15d3v"; }
 	else if ($dbUser == 3) {		$dbMainUser = "wattisdev";   	$dbMainPass = "W4++15d3v"; }
 
