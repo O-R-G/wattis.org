@@ -35,7 +35,7 @@ BY objects.rank;";
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
 		$URL = $myrow["url"];
-		$URL = ($URL) ? "$URL" : "artist";
+		$URL = ($URL) ? "$URL" : "view_";
 		$html .= "<div class='listContainer'>";
 		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 		$html .= "<i>" . $myrow['deck'] . "</i>";	
