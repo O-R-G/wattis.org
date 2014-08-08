@@ -19,9 +19,10 @@ require_once("GLOBAL/head.php");
 
 	// SQL object 
 
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url, objects.begin, objects.end FROM 
-objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.id = $id AND objects.active=1) AND 
-wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url, 
+objects.begin, objects.end FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE 
+objects.id = $id AND objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND 
+wires.active = '1' ORDER BY objects.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";

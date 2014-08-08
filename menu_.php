@@ -9,10 +9,9 @@ require_once("GLOBAL/head.php");
                         
 	// SQL object 
 	
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url FROM 
-objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE name1 LIKE 'Main' AND 
-objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER 
-BY objects.rank;";
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url FROM objects, 
+wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.id=$id AND objects.active=1) AND 
+wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -24,7 +23,7 @@ BY objects.rank;";
 		$html .= "<canvas id='canvas" . ($i+1) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
 
                 $URL = $myrow["url"];
-		$URL = ($URL) ? "$URL" : "detail";
+		$URL = ($URL) ? "$URL" : "more_";
 
 		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 		$html .= "<i>" . $myrow['deck'] . "</i>";	
