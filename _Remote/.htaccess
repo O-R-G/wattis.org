@@ -18,9 +18,15 @@ RewriteBase  /
 # $1 ... regex back ref same line
 # %1 ... regex back ref previous line
  
+
+### specific ### 
+
 # main
 
-RewriteRule ^main$ main_\.php? [L]
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=3
+RewriteRule ^menu_\.php$ main? [R,L]
+RewriteRule ^main$ menu_\.php?marker&id=3 [L]
 
 # about
 
@@ -108,7 +114,14 @@ RewriteRule ^exhibitions$ more_\.php?marker&id=93 [L]
 
 
 
-### generics ### 
+### generic ### 
+
+# menu
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^menu_\.php$ menu?%1 [R,L]
+RewriteRule ^menu$ menu_\.php?marker [QSA,L]
 
 # more
 
