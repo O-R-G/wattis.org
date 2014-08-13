@@ -15,9 +15,24 @@ mediaId, media.object AS mediaObject, media.type, media.caption, media.active AS
 FROM objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id 
 AND objects.active ORDER BY media.rank;";
 
-	$result = MYSQL_QUERY($sql);
-	$html = "";
+        $result = MYSQL_QUERY($sql);
+        $myrow = MYSQL_FETCH_ARRAY($result);
+        $name = $myrow['name1'];
+        $body = $myrow['body'];
+        $notes = $myrow['notes'];
+        $begin = $myrow['begin'];
+        $end = $myrow['end'];
+	mysql_data_seek($result, 0);    // reset to row 0    
+        $html = "";
 	$i=0;
+
+	// name
+
+	$html .= "<div class='listContainer times'>";
+	$html .= "<span class='monaco'>[*]</span> ";	                  
+	$html .= "<a href=''>" . $name . "</a><br /> ";	
+	echo $html;	// force no <br /> in name
+        $html = "";
 
 	// collect images
 
@@ -42,15 +57,6 @@ AND objects.active ORDER BY media.rank;";
 			$images[$i] .= "</div>";
 			$images[$i] .= "</div>";
 		}
-		
-		if ( $i == 0 ) {
-
-			$name = $myrow['name1'];
-			$body = $myrow['body'];
-			$notes = $myrow['notes'];
-			$begin = $myrow['begin'];
-			$end = $myrow['end'];
-		}
 
 		$i++;
 	}
@@ -61,19 +67,14 @@ AND objects.active ORDER BY media.rank;";
 	$pattern = "/\/\/\//";
 	if ( preg_match($pattern, $body) == 1 ) $columns = preg_split($pattern, $body);
 
-   
-	// name
-
-	$html .= "<div class='listContainer times'>";
-	$html .= "<span class='monaco'>[*]</span> ";	                  
-	$html .= "<a href=''>" . $name . "</a><br /> ";	
-
 
 	// hours
 
 	if ($begin || $end) {
  
-		$displayHours = (date("H",strtotime($begin)) != '00') ? true : false;
+		// build date display
+
+		$displayHours = (date("H",strtotime($begin)) != '00') ? true : false;		
 
 		if ($begin) {
 
@@ -146,9 +147,8 @@ AND objects.active ORDER BY media.rank;";
 	}
 
         $html .= "</div>";
-
-
 	echo nl2br($html);
+
 	?>
         
 

@@ -25,10 +25,9 @@
 	// if (!$dev) die('Under construction . . .');
 	*/
 
-	// Alt for dev options
+	// other 
 	
 	$alt = $_REQUEST['alt'];
-	// $alt = systemCookie("alt", $alt, 0);
 
 	/*
 	$staging = $_REQUEST['staging'];

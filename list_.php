@@ -6,24 +6,21 @@ require_once("GLOBAL/head.php");
 <div class="mainContainer times big black">
 
 	<?php
-                        
-        // SQL object
 
-        $sql = "SELECT objects.id, objects.name1, objects.body FROM objects WHERE objects.id = $id AND objects.active = 1;";
-        $result = MYSQL_QUERY($sql);
-        $myrow  = MYSQL_FETCH_ARRAY($result);
-        $rootname = $myrow["name1"];
-        $rootbody = $myrow["body"];
+        $rootid = $ids[0];	// root object
 
+	// SQL objects attached to root with rootname
 
-	// SQL objects attached to object 
-
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url, objects.begin, 
-objects.end FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.id = 
-$id AND objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' 
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url, 
+objects.begin, objects.end, (SELECT objects.name1 FROM objects WHERE objects.id = $id) AS rootname 
+FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.id = $rootid 
+AND objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' 
 ORDER BY objects.rank;";
 
 	$result = MYSQL_QUERY($sql);
+	$myrow = MYSQL_FETCH_ARRAY($result);
+        $rootname = $myrow["rootname"];
+	mysql_data_seek($result, 0);	// reset to row 0
 	$html = "";
 	$i = 0;
 
@@ -45,63 +42,57 @@ ORDER BY objects.rank;";
 		$URL = $myrow["url"];
 		$URL = ($URL) ? "$URL" : "view_";
 
-/*
+		$now = time();
+		$begin = ($myrow['begin'] != null) ? strtotime($myrow['begin']) : $now;
+		$end = ($myrow['end'] != null) ? strtotime($myrow['end']) : $now;
+		
+		if ($alt && ($end < $now)) {
 
-// display archive, very much in process
-// problem is that the query needs to get objects that are attached to exhibitions object
-// and this is currently used for calendar, so how to do this generically?
+			// archive
 
-// solution:
+			$html .= "<div class='listContainer'>";
+			$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
+			$html .= "<i>" . $myrow['deck'] . "</i>";	
+	                // $html .= "<div class = 'helvetica small'>" . $begin . "-" . $end . " / " . $now . "</div> ";
+			$html .= "</div>";	
 
-// flag for showing future or past 
-// flag for showing events
-// flag for showing exhibitions
+		} else if (!$alt && (($begin >= $now) || ($end >= $now))) {
+			
+			// upcoming
 
-// then sorted! although the $id could be hard wired into the calendar object 
-// though it will also have to call on the gallery, apartment, on our mind objects
-// in which case could troll the whole db for things with dates possibly
-
-// q.e.d.
-
-// format date, then display
-
-// time() gives current time
-// then only a matter of comparing begin or end to that
-
-		// archive -- check if end date passed
-		// in process 
-
-		$begin = $myrow['begin'];
-		$end = $myrow['end'];
-		$curtime = time();
-
-
-if ($end && ($end <= $curtime) ) {
-
-		$beginDisplay = date("Y-m-d H:i:s", strToTime($begin));
-		echo $beginDisplay . " - " . $end;
-}
-*/
-
-
-
-		$html .= "<div class='listContainer'>";
-		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
-		$html .= "<i>" . $myrow['deck'] . "</i>";	
-		$html .= "</div>";	
+			$html .= "<div class='listContainer'>";
+			$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
+			$html .= "<i>" . $myrow['deck'] . "</i>";	
+			// $html .= "<div class = 'helvetica small'>" . $begin . "-" . $end . " / " . $now . "</div> ";
+			$html .= "</div>";	
+		} 
 
 	        $i++;
+
 		// if ( $i % 3 == 0) $html .= "<div class='clear'></div>"; 	// clear floats
 	}
 
         $html .= "</div>";
-
 	echo nl2br($html);
 
 	?>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- JS -->
+<!-- to get rid of -->
 
 <script type="text/javascript">
 
