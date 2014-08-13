@@ -68,6 +68,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 	<script type="text/javascript" src="GLOBAL/global.js"></script>
         <script type="text/javascript" src="JS/animateEmoticon.js"></script>
+	<script type="text/javascript" src="JS/animatePunctuation.js"></script>
         <script type="text/javascript" src="JS/animateEmoticon-src.js"></script>
 </head>
 
@@ -87,7 +88,7 @@ if (($pageName != "index")
 && ($pageName != "sign") 
 && ($pageName != "email")
 && ($pageName != "email-headers")
-&& ($pageName != "animatePunctuation-debug")
+&& ($pageName != "_animatePunctuation")
 && ($pageName != "ad") 
 && ($pageName != "ad-frieze")
 && ($pageName != "ad-artforum")

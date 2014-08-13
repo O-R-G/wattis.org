@@ -105,18 +105,21 @@ AND objects.active ORDER BY media.rank;";
 
 		// column 2
 	
+		// $html .= "<div id='Punct-0' class='listContainer times'>";
 		$html .= "<div class='listContainer times'>";
 		$html .= $columns[0];	
 		$html .= "</div>";	
                   	
 		// column 3
 	
+		// $html .= "<div id='Punct-1' class='listContainer times'>";
 		$html .= "<div class='listContainer times'>";
 		$html .= $columns[1];	
 		$html .= "</div>";	
                   	
 	} else {
 
+        	// $html .= "<div id='Punct-0' class='listContainer doublewide centered times'>";
         	$html .= "<div class='listContainer doublewide centered times'>";
         	$html .= $body;
         	$html .= "</div>";

@@ -20,7 +20,7 @@ require_once("GLOBAL/head.php");
 <?php 
 if ($alt == 0) {
 ?>
-<div id="Punct-0" class="floatPad helvetica big">
+<div class="floatPad times big black animatePunctuation">
 .+*
 </div>
 <?php 
@@ -30,13 +30,12 @@ if ($alt == 0) {
 <?php if ($alt == 1) 
 { 
 ?> 
-<div id="Punct-0" class="floatPad helvetica big">
-.+*
+<div class="floatPad times big black animatePunctuation">
+.+*)]~
 </div>
-<div id="Punct-1" class="floatPadwide times big black"> 
-oo<a href="this.html">ok.abcdefg</a>.,;;/ab;cd.ef, gh; ijklmnopqrstuvwwxyz[..,anb]
-<div id='1'>ok--0<span id='1-1'>ok-1</span></div>
-</div> 
+
+<div class="floatPad times big black animatePunctuation">
+ok;.</div> 
 <?php
 }
 ?>
@@ -44,7 +43,7 @@ oo<a href="this.html">ok.abcdefg</a>.,;;/ab;cd.ef, gh; ijklmnopqrstuvwwxyz[..,an
 <?php if ($alt == 2) 
 { 
 ?> 
-<div id="Punct-1" class="floatPadwide times big black"> 
+<div class="floatPad times big black animatePunctuation">
 .oi<span>0.</span>o..w
 <a href="this.html">abc.def</a>
 <a>ghi!!jkl</a>
@@ -59,7 +58,7 @@ oo<a href="this.html">ok.abcdefg</a>.,;;/ab;cd.ef, gh; ijklmnopqrstuvwwxyz[..,an
 <?php if ($alt == 3) 
 { 
 ?> 
-<div id="Punct-1" class="floatPadwide times big black"> 
+<div class="floatPad times big black animatePunctuation">
 <a>o</a>a<span>0.ausa <span class='red'>!ok</span>ok
 asiuhas = as-=-= +</span>
 </div>
@@ -70,8 +69,86 @@ asiuhas = as-=-= +</span>
 <?php 
 if ($alt == 4) {
 ?>
-<div id="Punct-4" class="floatPad times big black">
-Hello, World! abcdefg <.:,;>
+<div class="floatPad times big black animatePunctuation">
+Hello, World! <a href='test'>[!]this . . .</a>[ok] (919) –—*?~°• 
+</div>
+
+<div class="floatPad times big black animatePunctuation">
+well then ...,,,..:::
+</div>
+
+<?php 
+}
+?>
+
+<?php 
+if ($alt == 5) {
+?>
+<div class="floatPad times big black animatePunctuation">
+and this <a href=''>too!!*!</a>! 	
+<a href=''><i>The.Wattis+Institute*</i></a>ok<i>italic!?:!</i><b>ok--</b> and this too,.,.;
+</div>
+<?php 
+}
+?>
+
+<?php 
+if ($alt == 6) {
+?>
+<div class="floatPad times big black animatePunctuation">
+<a>hello, world!</a> hello hello hello world 
+world
+<a>hello. world</a>
+</div>
+<?php 
+}
+?>
+
+<?php 
+if ($alt == 7) {
+?>
+<div class="floatPad times big black animatePunctuation">
+one, world.<a href=''>two, world.</a>three, world.
+</div>
+<?php 
+}
+?>
+
+<?php 
+if ($alt == 8) {
+?>
+<div class="floatPad times big black animatePunctuation">
+<a href=''>The.Wattis+Institute</a>*
+</div>
+<?php 
+}
+?>
+
+<?php 
+if ($alt == 9) {
+?>
+<div class="floatPad times big black animatePunctuation">
+<a href=''>The.Wattis+Institute</a>* for Contemporary Arts)
+</div>
+<?php 
+}
+?>
+
+<?php 
+if ($alt == 10) {
+?>
+<div class="floatPad times big black animatePunctuation">
+<a href=''>The.Wattis+Institute</a>* for Contemporary Arts).. is reopening 9.9/2014!
+</div>
+<?php 
+}
+?>
+
+<?php 
+if ($alt == 11) {
+?>
+<div class="floatPad times big black animatePunctuation">
+<a href='http://www.wattis.org'>Re-opening</a> 9.9/2014!
 </div>
 <?php 
 }
@@ -82,7 +159,7 @@ Hello, World! abcdefg <.:,;>
 <script type="text/javascript" src="JS/animatePunctuation.js"></script>
 
 <script>
-	initPunctuation('Punct', 200, false);
+	initPunctuation('animatePunctuation', 500, true);
 </script>
 
 </div>

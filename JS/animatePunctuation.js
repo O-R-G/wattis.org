@@ -1,98 +1,80 @@
+
+	// 	animatePunctuation.js
 	//
-	//   * in process *
+	//   	id : {class}
+	//	delay : ## [200]
+	//	animate : {true, false}	
 	//
-	//   - parse dom, replace punct
-	//   - if three punct are found next to each other, then that identfies a zone to animate
-	//   - second animation pattern for solo punctuation marks
-	//   - how many it takes to identify the animation could also be a parameter	
-	
-	// http://regex101.com/r/yT7gZ0/1#javascript
-	// ([.,;:])(?![^<]*>|[^<>]*<\/)
+	//   	animation patterns: (to do)
+	//	0. shift all punct w/in a div
+	// 	1. three punctuation marks consecutively
+	//	2. individual marks animate
+	// 	3. logo collector animate	
 
 
         function initPunctuation(id, delay, animate) {
 
-		var divs = document.querySelectorAll("[id^=" + id + "]");	// better cross-browser method?
-										// fix to make by class name
-		// fix naming of arrays to more meaningful/consistent
-
-        	var punctdivs = new Array();	
-		var delays = new Array();
+		var divs = document.getElementsByClassName(id);
 		var punct = new Array();
-		var puncts = new Array();
-
-                // var re = /["#$%&!()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞«»–—“”‘’]/g;			// these two should match
-
-		// find all text not between tags (ie, a child) or in tag
-		var re = /([*+.:,;!?\(\)\[\]\{\}~°•“”‘’–—])(?![^<]*>|[^<>]*<\/)/g; 			// fill out punct
 	
-		//* find punctuation
-
 		for (var i = 0; i < divs.length; i++) {
 			
-			replaceChildren(divs[i]);
-			divs[i].innerHTML = divs[i].innerHTML.replace(re, "<span class='punctuation'>$1</span>");
+			replaceNodes(divs[i]);			// add .punctuation nodes
+			divs[i].delay = delay;			// array?
+			divs[i].punctdivs = divs[i].getElementsByClassName("punctuation");
 
-			delays[i] = delay;
-			
-			// naming of punct, punctdiv etc  ??
-
-			punctdiv = divs[i].getElementsByClassName('punctuation');
-			punctdivs.push(punctdiv);
-
-                        for (var k = 0; k < punctdiv.length; k++) {
+                        for (var k = 0; k < divs[i].punctdivs.length; k++) {
 		
-				punct.push(punctdivs[0][k].innerHTML);
-				console.log(k + "> " + punctdivs[0][k].innerHTML);
+				punct.push(divs[i].punctdivs[k].innerHTML);
+				divs[i].punct = punct;
 			}	
-
-			puncts.push(punct);
 		}
-
-
-		// start animations
 
 		if (animate) {
 
                 	for (var j = 0; j < divs.length; j++) {
 
-				animatePunctuation(divs[j],punctdivs[j],puncts[j],delays[j]);
+				animatePunctuation(divs[j], divs[j].punctdivs, divs[j].punct, divs[j].delay);
                 	}
 		}
 	}
 
 
+	function replaceNodes(node) {
 
-	// this could be written inline to the above function
+		var next;
+		var re = /([*+.:,;!.?\(\)\[\]\{\}\/~°•“”‘’\-–—])/g;		// to be cleaned up
 
-	function replaceChildren(thisDiv) {
+		if (node.nodeType === 1) {
+			
+			if (node = node.firstChild) {
+				do {
+					next = node.nextSibling;                
+					replaceNodes(node);
 
-		// this should match the other regex and could be passed as well
-		var re = /(["#$%&!()*+,\-.\/:;<=>?@\[\\\]^_`\{|\}~°•´∞«»–—“”‘’])/g;		
-
-		if (thisDiv.children.length) {
-
-			for (j = 0; j < thisDiv.children.length; j++) {
-
-				replaceChildren(thisDiv.children[j]);
+				} while(node = next);
 			}
-		} else {
 
-			thisDiv.innerHTML = thisDiv.innerHTML.replace(re, "<span class='punctuation'>$1</span>");
-		}	
+		} else if (node.nodeType === 3) {
+
+			if (re.test(node.nodeValue)) {	
+
+				temp = document.createElement("span");
+				temp.innerHTML = node.nodeValue.replace(re, "<span class='punctuation'>$1</span>");
+				node.parentNode.replaceChild(temp,node);
+			}
+		}
+
 		return true;
 	}
 
 
-
-        function animatePunctuation(divs, punctdivs, puncts, delays) {
+        function animatePunctuation(divs, punctdivs, punct, delay) {
 
 		for (i = 0; i < punctdivs.length; i++) {
 
-	   		punctdivs[i].innerHTML = puncts[i];
+	   		punctdivs[i].innerHTML = punct[i];
 		}
-
-    		puncts.push(puncts.shift());
-		var tt = setTimeout(function(){animatePunctuation(divs,punctdivs,puncts,delays);}, delays); 	
+    		punct.push(punct.shift());
+		var tt = setTimeout(function(){animatePunctuation(divs, punctdivs, punct, delay);}, delay);
 	}
-

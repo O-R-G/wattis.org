@@ -20,5 +20,9 @@
         </div>
 	-->
 
+	<script>
+	        initPunctuation('Punct', 200, true);
+	</script>
+
 </body>
 </html>

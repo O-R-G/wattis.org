@@ -48,10 +48,11 @@ ORDER BY objects.rank;";
 /*
 
 // display archive, very much in process
-// problem is that the query nees to get objects that are attached to exhibitions object
+// problem is that the query needs to get objects that are attached to exhibitions object
 // and this is currently used for calendar, so how to do this generically?
 
 // solution:
+
 // flag for showing future or past 
 // flag for showing events
 // flag for showing exhibitions

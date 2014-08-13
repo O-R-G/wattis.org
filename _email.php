@@ -16,18 +16,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>CCA Wattis Institute for Contemporary Arts / email</title>
+</head>
+
+<body>
+
 	<style>
 
 body {
-        color: #FFF;
-        background: #000;
+        color: #000;
+        background: #FFF;
         }
 
 a {
-        color: #FFF;
+        color: #000;
         text-decoration: none;
         border-bottom: solid 3px;
         }
@@ -43,7 +46,7 @@ a:hover {
         }
 
 a:active {
-        color: #F00;
+        color: #FFF;
         border-bottom: solid 3px #FFF;
         }
 
@@ -60,6 +63,11 @@ table {
 	line-height:20px;
         }
 
+.punctuation {
+        font-family: Monaco, "Lucida Console", monospace;
+        color: #F00;
+        }
+
 .big {
 	font-size:24px;
         }
@@ -69,10 +77,6 @@ table {
         }
 
 	</style>
-
-</head>
-
-<body>
 
 	<?php
                 
@@ -133,11 +137,11 @@ media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id A
 <table border="0" cellspacing="0">
 <tr>
 <td class='spacer'>
-<?php
-echo $deck;
-?>
 </td>
 <td>
+<?php
+echo $deck . "<br />";
+?>
 </td>
 <td class='spacer'>
 </td>

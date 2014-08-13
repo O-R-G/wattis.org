@@ -31,7 +31,7 @@ a:active {
 
 .monaco {
         font-family: Monaco, "Lucida Console", monospace;
-        }
+	}
 
 .times {
         font-family: "Times New Roman", Times, serif;
@@ -40,6 +40,11 @@ a:active {
 .helvetica {
         font-family: Helvetica, Arial, sans-serif;
         }
+
+.punctuation {
+        font-family: Monaco, "Lucida Console", monospace;
+	/* color: #F00; */
+	}
 
 
 /* sizes */
@@ -252,10 +257,6 @@ a:active {
 	}
 
 
-.symbol {
-        }
-
-
 /* utility */
 
 .thumb {
@@ -314,8 +315,9 @@ a:active {
         width: 400px;
        }
 
-
-/* added */
+.animatePunctuation {
+	/* add this to animate punctuation in a div */
+	}
 
 
 /* colors */
