@@ -23,7 +23,7 @@ wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER BY
 		$html .= "<canvas id='canvas" . ($i+1) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
 
                 $URL = $myrow["url"];
-		$URL = ($URL) ? "$URL" : "more_";
+		$URL = ($URL) ? "$URL" : "view_";
 
 		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 		$html .= "<i>" . $myrow['deck'] . "</i>";	
