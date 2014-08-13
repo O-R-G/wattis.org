@@ -32,36 +32,36 @@ RewriteRule ^main$ menu_\.php?marker&id=3 [L]
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=22
-RewriteRule ^more_\.php$ about? [R,L]
-RewriteRule ^about$ more_\.php?marker&id=22 [L]
+RewriteRule ^view_\.php$ about? [R,L]
+RewriteRule ^about$ view_\.php?marker&id=22 [L]
 
 # visit
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=23
-RewriteRule ^more_\.php$ visit? [R,L]
-RewriteRule ^visit$ more_\.php?marker&id=23 [L]
+RewriteRule ^view_\.php$ visit? [R,L]
+RewriteRule ^visit$ view_\.php?marker&id=23 [L]
 
 # contact
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=24
-RewriteRule ^more_\.php$ contact? [R,L]
-RewriteRule ^contact$ more_\.php?marker&id=24 [L]
+RewriteRule ^view_\.php$ contact? [R,L]
+RewriteRule ^contact$ view_\.php?marker&id=24 [L]
 
 # follow
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=28
-RewriteRule ^more_\.php$ follow? [R,L]
-RewriteRule ^follow$ more_\.php?marker&id=28 [L]
+RewriteRule ^view_\.php$ follow? [R,L]
+RewriteRule ^follow$ view_\.php?marker&id=28 [L]
 
 # support
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=25
-RewriteRule ^more_\.php$ support? [R,L]
-RewriteRule ^support$ more_\.php?marker&id=25 [L]
+RewriteRule ^view_\.php$ support? [R,L]
+RewriteRule ^support$ view_\.php?marker&id=25 [L]
 
 # editions
 
@@ -81,22 +81,22 @@ RewriteRule ^catalogs$ display_\.php?marker&id=27 [L]
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=30
-RewriteRule ^more_\.php$ archive? [R,L]
-RewriteRule ^archive$ more_\.php?marker&id=30 [L]
+RewriteRule ^view_\.php$ archive? [R,L]
+RewriteRule ^archive$ view_\.php?marker&id=30 [L]
 
 # capp
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=31
-RewriteRule ^more_\.php$ capp? [R,L]
-RewriteRule ^capp$ more_\.php?marker&id=31 [L]
+RewriteRule ^view_\.php$ capp? [R,L]
+RewriteRule ^capp$ view_\.php?marker&id=31 [L]
 
 # intern
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=29
-RewriteRule ^more_\.php$ intern? [R,L]
-RewriteRule ^intern$ more_\.php?marker&id=29 [L]
+RewriteRule ^view_\.php$ intern? [R,L]
+RewriteRule ^intern$ view_\.php?marker&id=29 [L]
 
 # calendar
 
@@ -109,8 +109,8 @@ RewriteRule ^calendar$ list_\.php?marker&id=7 [L]
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=93
-RewriteRule ^more_\.php$ exhibitions? [R,L]
-RewriteRule ^exhibitions$ more_\.php?marker&id=93 [L]
+RewriteRule ^view_\.php$ exhibitions? [R,L]
+RewriteRule ^exhibitions$ view_\.php?marker&id=93 [L]
 
 
 
@@ -122,13 +122,6 @@ RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} ^(.*)
 RewriteRule ^menu_\.php$ menu?%1 [R,L]
 RewriteRule ^menu$ menu_\.php?marker [QSA,L]
-
-# more
-
-RewriteCond %{QUERY_STRING} !marker
-RewriteCond %{QUERY_STRING} ^(.*)
-RewriteRule ^more_\.php$ more?%1 [R,L]
-RewriteRule ^more$ more_\.php?marker [QSA,L]
 
 # view
 
@@ -168,4 +161,3 @@ RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} ^(.*)
 RewriteRule ^_logo\.php$ logo? [R,L]
 RewriteRule ^logo$ _logo\.php?marker [QSA,L]
-
