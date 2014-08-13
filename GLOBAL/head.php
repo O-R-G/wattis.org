@@ -98,42 +98,13 @@ if (($pageName != "index")
 {
 ?>
 
-<?php
-if ($alt == 1) {
-?>
-
-<!-- THE.WATTIS+INSTITUTE* -->
-
-<div class="wattisContainer times big black fixed">
-
-<canvas id="canvas0" width="1" height="22" class="show" 
-onclick="showBones();">\\\\*</canvas></a>
-
-<a href="main">The<span class='monaco blacktemp'>.</span>Wattis<span 
-class='monaco blacktemp'>+</span>Institute</a><span class='monaco 
-blacktemp'>*</span>
-
-</div>
-
-<?php
-} else {
-?>
-
 <!-- .+* THE WATTIS INSTITUTE -->
 
 <div class="wattisContainer times big black fixed">
-
 <canvas id="canvas0" width="46" height="22" class="show" 
 onclick="showBones();">.+*</canvas></a>
-
 <a href="index_.php">The Wattis Institute</a>
-
 </div>
-
-<?php
-}
-?>
-
 
 <div class="clear"></div>
 
