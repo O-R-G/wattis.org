@@ -78,23 +78,32 @@ AND objects.active ORDER BY media.rank;";
 
 		if ($begin) {
 
-			$beginDisplay = "g";
-			if (date("i",strtotime($begin)) != '00') $beginDisplay .= ".i";
-			if (!$end) $beginDisplay .= " a";
-			$begin = date($beginDisplay,strtotime($begin));
-			$hoursDisplay = "<br />" . $begin;
+			$beginDisplayHours = "g";
+			if (date("i",strtotime($begin)) != '00') $beginDisplayHours .= ".i";
+			if (!$end) $beginDisplayHours .= " a";
+			$beginHours = date($beginDisplayHours,strtotime($begin));
+			$hoursDisplay = "<br />" . $beginHours;
+
+			$beginDisplayDates = "F j, Y";
+			$beginDates = date($beginDisplayDates,strtotime($begin));
+			$datesDisplay = "<br />" . $beginDates;
 		}
 
 		if ($end) {
 
-			$endDisplay = "g";
-			if (date("i",strtotime($end)) != '00') $endDisplay .= ".i";
-			$endDisplay .= " a";
-			$end = date($endDisplay,strtotime($end));
-			$hoursDisplay = "<br />" . $begin . ' – ' . $end;
+			$endDisplayHours = "g";
+			if (date("i",strtotime($end)) != '00') $endDisplayHours .= ".i";
+			$endDisplayHours .= " a";
+			$endHours = date($endDisplayHours,strtotime($end));
+			$hoursDisplay = "<br />" . $beginHours . ' – ' . $endHours;
+
+			$beginDisplayDates = "F j, Y";
+			$beginDates = date($beginDisplayDates,strtotime($begin));
+			$datesDisplay = "<br />" . $beginDates . ' – ' . $endDates;
 		}
 
-                if ($displayHours) $html .= $hoursDisplay;
+		if ($datesDisplay) $html .= $datesDisplay;
+                if ($hoursDisplay) $html .= $hoursDisplay;
 	}
 
 	$html .= "</div>";	
