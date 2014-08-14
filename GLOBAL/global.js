@@ -24,9 +24,9 @@ function displayTime() {
 }
 	
 
-// expand image (toggle)
+// expandImagePadding (toggle)
 
-function expandImage(thisId,originalSize,newSize) {
+function expandImagePadding(thisId,originalSize,newSize) {
 
         if (document.getElementById(thisId).style.padding == originalSize) {
 
@@ -40,14 +40,17 @@ function expandImage(thisId,originalSize,newSize) {
 }
 
 
-// expand expandImageContainerMargin (toggle)
+// expandImageContainerMargin (toggle)
 
 function expandImageContainerMargin(thisId,originalSize,newSize) {
 
 	if (document.getElementById(thisId).style.margin == originalSize) {
 
+		var timestamp = new Date().getTime().toString();
+		var zindexnow = timestamp.slice(-6);
+
 		document.getElementById(thisId).style.margin = newSize;			
-		document.getElementById(thisId).style.zIndex = "100";
+		document.getElementById(thisId).style.zIndex = zindexnow;
 			
 	} else {
 
