@@ -75,6 +75,7 @@ AND objects.active ORDER BY media.rank;";
 		// build date display
 
 		$displayHours = (date("H",strtotime($begin)) != '00') ? true : false;		
+		$displayDates = (date("z",strtotime($begin)) != date("z",strtotime($end))) ? true : false;		
 
 		if ($begin) {
 
@@ -84,7 +85,7 @@ AND objects.active ORDER BY media.rank;";
 			$beginHours = date($beginDisplayHours,strtotime($begin));
 			$hoursDisplay = "<br />" . $beginHours;
 
-			$beginDisplayDates = "F j, Y";
+			$beginDisplayDates = "F j";
 			$beginDates = date($beginDisplayDates,strtotime($begin));
 			$datesDisplay = "<br />" . $beginDates;
 		}
@@ -97,13 +98,13 @@ AND objects.active ORDER BY media.rank;";
 			$endHours = date($endDisplayHours,strtotime($end));
 			$hoursDisplay = "<br />" . $beginHours . ' – ' . $endHours;
 
-			$beginDisplayDates = "F j, Y";
-			$beginDates = date($beginDisplayDates,strtotime($begin));
+			$endDisplayDates = "F j, Y";
+			$endDates = date($endDisplayDates,strtotime($end));
 			$datesDisplay = "<br />" . $beginDates . ' – ' . $endDates;
 		}
 
-		if ($datesDisplay) $html .= $datesDisplay;
-                if ($hoursDisplay) $html .= $hoursDisplay;
+		if ($displayDates && $end) $html .= $datesDisplay;
+                if ($displayHours) $html .= $hoursDisplay;
 	}
 
 	$html .= "</div>";	
