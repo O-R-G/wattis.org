@@ -5,21 +5,6 @@ require_once("_Library/orgRSSParse.php");
 
 <script type="text/javascript" src="JS/animateNewsTicker.js"></script>
 
-<?php
-	
-	// Build weatherString
-	// currently using old version of orgRSSParse
-	// put this in head.php?
-/*
-	$weatherString .= orgRSSParse("http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
-	$weatherString = str_replace(" at San Francisco Intl Airport, CA", "", $weatherString);
-	$weatherString = preg_replace("/\d+/", "$0&deg;", $weatherString);
-	$weatherString = str_replace("and", "and currently ", $weatherString);
-	$weatherString = "Today, " . strtolower($weatherString) . ".";
-*/
-	$weatherString = "Today, we temporarily have no weather.";
-
-?>
 
 <!-- *todo* add homecontainer wrapper -->
 
@@ -81,7 +66,7 @@ require_once("_Library/orgRSSParse.php");
 
 
  
-<div class="times big black">
+<div class="times big black animatePunctuation">
 
 	<?php
                         
@@ -94,11 +79,6 @@ objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1'
 
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
         	                        	
-        	if (strpos($myrow["body"],"*weatherstring*")) {
-		
-			$myrow["body"] = str_replace("*weatherstring*", $weatherString, $myrow["body"]);
-		} 
-
 		$html .= $myrow["body"];	// *todo* wrap in flexible divs		
 	}
                        
@@ -134,6 +114,14 @@ objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1'
         */
 
 </script>
+
+
+<script type="text/javascript">
+
+        showRSS("http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
+
+</script>
+
 
 <script type="text/javascript">
 
@@ -171,6 +159,12 @@ objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1'
 
 </script>
         
+
+<script type="text/javascript" src="JS/animatePunctuation.js"></script>
+
+<script>
+        initPunctuation('animatePunctuation', 200, true);
+</script>
 
 
 <?php

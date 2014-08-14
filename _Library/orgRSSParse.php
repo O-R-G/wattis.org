@@ -34,7 +34,9 @@ function orgRSSParse($url) {
 
 		//echo "\n\n<a href='". $link[$i] ."' target='_blank'>". $title[$i] ."</a><br />";
 	}
-	$headline = $title[rand(1, sizeof($title))];
+
+	// $headline = $title[rand(1, sizeof($title))];
+	$headline = $title[1];
 
 	return $headline;
 }

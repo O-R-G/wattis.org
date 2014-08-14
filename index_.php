@@ -5,22 +5,11 @@ require_once("_Library/orgRSSParse.php");
 
 <script type="text/javascript" src="JS/animateNewsTicker.js"></script>
 
-<?php
-	
-	// Build weatherString
-	// currently using old version of orgRSSParse
-	// put this in head.php?
 
-	$weatherString .= orgRSSParse("http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
-	$weatherString = str_replace(" at San Francisco Intl Airport, CA", "", $weatherString);
-	$weatherString = preg_replace("/\d+/", "$0&deg;", $weatherString);
-	$weatherString = str_replace("and", "and currently ", $weatherString);
-	$weatherString = "Today, " . strtolower($weatherString) . ".";
-?>
 
 <!-- *todo* add homecontainer wrapper -->
 
-<div class="times big black">
+<div class="times big black animatePunctuation">
 
 	<?php
                         
@@ -34,11 +23,6 @@ LIKE 'Home' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND obje
 
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
         	                        	
-        	if (strpos($myrow["body"],"*weatherstring*")) {
-		
-			$myrow["body"] = str_replace("*weatherstring*", $weatherString, $myrow["body"]);
-		} 
-
 		$html .= $myrow["body"];	// *todo* wrap in flexible divs		
 	}
                        
@@ -53,7 +37,15 @@ LIKE 'Home' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND obje
 
 <script type="text/javascript">
 
+	showRSS("http://www.nws.noaa.gov/data/current_obs/KSFO.rss"); 
+
+</script>
+
+
+<script type="text/javascript">
+
 	function showBones() {
+
                 window.location.assign("index.php");
         }
 
@@ -106,8 +98,6 @@ LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND obje
 ?>
 
 
-
-
 <script type="text/javascript">
 
        	newsItem = new Array(
@@ -119,24 +109,29 @@ LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND obje
         	                        			
 				echo "\"" . $newsItems[$i] . "\"";
 
-if ( $i < (count($newsItems) -1) ) {
+				if ( $i < (count($newsItems) -1) ) {
 
-echo ",\n";
-} else {
-echo "\n";
-
-}			$i++;
+					echo ",\n";
+				} else {
+					echo "\n";
+				}			
+				$i++;
 			}
 		?>
-			);
+	);
 	
 	animateNewsTicker(newsItem[0]);
 
 </script>
         
 
+<script type="text/javascript" src="JS/animatePunctuation.js"></script>
+
+<script>
+        initPunctuation('animatePunctuation', 200, true);
+</script>
+
 
 <?php
 require_once("GLOBAL/foot.php");
 ?>
-

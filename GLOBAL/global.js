@@ -1,5 +1,6 @@
 // Server clock
 // (must be initialized in the head (or body) with a PHP date object)
+// pad 
 
 function padlength(what) {
 		
@@ -7,24 +8,16 @@ function padlength(what) {
 	return output;
 }
 
+
+// time
+
 function displayTime() {
 		
 	serverdate.setSeconds(serverdate.getSeconds()+1);
-
-	// var datestring = padlength(serverdate.getFullYear() + " " + montharray[serverdate.getMonth()] + " " + serverdate.getDate()) + " ";
-	// var datestring = padlength(serverdate.getFullYear() + "/" + serverdate.getMonth() + "/" + serverdate.getDate()) + " "; 
-
 	var thisHackedMonth = serverdate.getMonth()+1;		// no idea why this is happening
 	var datestring = padlength(serverdate.getFullYear() + "/" + thisHackedMonth  + "/" + serverdate.getDate()) + " ";
-			
-	// convert to 12 hour
-			
 	var currentHours = padlength(serverdate.getHours());
-	// var amPm = ( currentHours < 12 ) ? "AM" : "PM";
-	var currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
-	// currentHours = ( currentHours == 0 ) ? 12 : currentHours;
-  		
-	// var timestring = currentHours + ":" + padlength(serverdate.getMinutes()) + ":" + padlength(serverdate.getSeconds()) + " " + amPm;
+	var currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;  		
 	var timestring = currentHours + ":" + padlength(serverdate.getMinutes()) + ":" + padlength(serverdate.getSeconds());
 
 	document.getElementById("serverTime").innerHTML=datestring + " " + timestring;
@@ -43,13 +36,11 @@ function expandImage(thisId,originalSize,newSize) {
                 document.getElementById(thisId).style.padding = originalSize;
         }
 
-	// console.log(document.getElementById(thisId).style.width);
-
         return true;
 }
 
 
-// expand expandImageContainerMargin (toggle size)
+// expand expandImageContainerMargin (toggle)
 
 function expandImageContainerMargin(thisId,originalSize,newSize) {
 
@@ -64,47 +55,11 @@ function expandImageContainerMargin(thisId,originalSize,newSize) {
 		document.getElementById(thisId).style.zIndex = "0";			
 	}
 		
-	// console.log(document.getElementById(thisId).style.margin);
-
 	return true;
 }
 
-
-//  Force getElementById to work
-
-if(!document.getElementById) {
-	if(document.all) {
-		document.getElementById = function() {
-			if(typeof document.all[arguments[0]] != "undefined") {
-				return document.all[arguments[0]];
-			} else {
-				return null;
-			}
-		}
-	} else if(document.layers) {
-		document.getElementById = function() {
-			if(typeof document[arguments[0]] != "undefined") {
-				return document[arguments[0]];
-			} else {
-				return null;
-			}
-		}
-	}
-}
-
-
-
-
-//  Alternative to "voided" links
-
-function Hello() {
-	// Empty function
-}
-
-
-
-
-//  Show and Hide objects
+	
+//  show / hide objects
 
 function objectShow(id) {
 	document.getElementById(id).style.visibility = "visible";
@@ -114,14 +69,10 @@ function objectHide(id) {
 }
 
 
-
-
-
-//  Popup windows
+//  popup windows
 
 function windowPop(url, id, width, height) {
-	//var x = ((screen.width / 2) - ((width) / 2));
-	//var y = ((screen.height / 2) - ((height) / 2));
+
 	var x = (screen.width - width-30);
 	var y = (screen.height - height-50);
 	windowNew = window.open(url,id,"width="+ width +",height="+ height +",scrollbars=no,resizable=no,left="+ x +",top="+ y);
@@ -129,24 +80,34 @@ function windowPop(url, id, width, height) {
 }
 
 
+// show RSS
 
+function showRSS(str) {
 
-//  List Box Handler
+	if (str.length==0) { 
 
-function listBoxToggle(command) { 
+		document.getElementById("rss").innerHTML="";	
+		return;
+  	}
 
-	if (document.getElementById("listBox")) {
+	if (window.XMLHttpRequest) {
 
-		if (command) {
+		xmlhttp=new XMLHttpRequest();
 
-			objectHide('listIndicator');
-			objectShow('listBox');
+	} else {  // IE6, IE5
+    
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");	
+	}
 
-		} else {
-
-			objectHide('listBox');
-			objectShow('listIndicator');
+	xmlhttp.onreadystatechange=function() {
+    
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      
+			document.getElementById("rss").innerHTML=xmlhttp.responseText;
 		}
 	}
+
+  	xmlhttp.open("GET","_Library/orgRSSajax.php?xml="+str,true);
+  	xmlhttp.send();
 }
 

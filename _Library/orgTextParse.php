@@ -12,6 +12,7 @@ function orgTextParse($url) {
 	//  Requires "php_flag allow_url_fopen on" in .htaccess
 
 	$file = @fopen($url, "r");
+
 	if ($file) {
 		$parsedText = null;
 		while (!feof($file)) {
