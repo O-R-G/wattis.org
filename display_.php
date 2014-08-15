@@ -69,7 +69,6 @@ objects.active = 1) AND wires.toid=objects.id ORDER By objects.rank;";
 	// name
 
 	$html .= "<div class='listContainer times'>";
-        $html .= "<span class='monaco'>[*]</span> ";
 	$html .= "<a href=''>" . $rootname . "</a> ";	
 	$html .= "<br /><br />" . $rootbody;
 	$html .= "</div>";	

@@ -20,7 +20,7 @@ wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER BY
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 			
 		$html .= "<div class='listContainer times'>";
-		$html .= "<canvas id='canvas" . ($i+1) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
+		// $html .= "<canvas id='canvas" . ($i+1) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
 
                 $URL = $myrow["url"];
 		$URL = ($URL) ? "$URL" : "view_";

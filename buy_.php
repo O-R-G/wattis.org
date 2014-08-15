@@ -58,8 +58,6 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 	// nav
 
 	$html .= "<div class='listContainer times'>";
-        $html .= "<canvas id='canvas" . ($thisCanvas) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
-	// $html .= "<span class='monaco'>[*]</span> ";	                  
 	$html .= "<a href=''>" . $name . "</a> ";	
 	$html .= "</div>";	
 

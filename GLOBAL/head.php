@@ -1,11 +1,9 @@
 <?php 
 	date_default_timezone_set('America/Los_Angeles');
 	require_once("_Library/systemDatabase.php"); 
-	require_once("_Library/systemCookie.php");
-	require_once("_Library/displayNavigation.php"); 
 	require_once("_Library/displayMedia.php"); 
 	
-	// Parse $id
+	// $id
 
 	$id = $_REQUEST['id'];		// no register globals	
 	if (!$id) $id = "0";
@@ -14,29 +12,9 @@
 	$id = $ids[count($ids) - 1];
 	$pageName = basename($_SERVER['PHP_SELF'], ".php");
 
-	/*
-	// Live?
-	
-	// $live is stored in database and turns on site
-	// $dev is passed in query and stored in cookie
-
-	$dev = $_REQUEST['dev'];
-	$dev = systemCookie("devCookie", $dev, 0);
-	// if (!$dev) die('Under construction . . .');
-	*/
-
-	// other 
+	// $alt
 	
 	$alt = $_REQUEST['alt'];
-
-	/*
-	$staging = $_REQUEST['staging'];
-	$sql    = "SELECT deck FROM objects WHERE objects.name1 LIKE 'Live';";
-	$result =  MYSQL_QUERY($sql);
-	$myrow  =  MYSQL_FETCH_ARRAY($result);
-	$deck = $myrow["deck"];
-	if ( $deck == 'TRUE' ) $live = TRUE;
-	*/	
 
 	$documentTitle = ( $pageName == "index" ) ? "CCA Wattis Institute for Contemporary Arts" : "CCA Wattis Institute for Contemporary Arts / " . $pageName;
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"; 
@@ -51,19 +29,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><?php echo $documentTitle; ?></title>
 	<meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
-	<meta http-equiv="Title" content="<?php echo $documentTitle; ?>" />		
-
-	<!-- ** fix viewport and possibly responsiveness ** -->
-
-	<!-- <meta name="viewport" content="width=device-width"> -->
-	<!-- <meta name="viewport" content="width=700"> -->
-	<!-- <meta name="viewport" content="initial-scale=1.0">-->
-
-	<!-- ** this is for .htaccess rewrites with trailing slash ** -->
-	<!-- ** for now, while local i leave this turned off ** -->
-	<!-- b/c live server base will be "/" -->
-	<!-- <base href="/WATTIS/" /> -->
-
+	<meta http-equiv="Title" content="<?php echo $documentTitle; ?>" />
 	<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 	<script type="text/javascript" src="GLOBAL/global.js"></script>
         <script type="text/javascript" src="JS/animateEmoticon.js"></script>
@@ -78,36 +44,24 @@
 <!-- End Google Tag Manager -->
 
 <?php 
-if (($pageName != "index") 
-&& ($pageName != "index_") 
-&& ($pageName != "punctuation")  
-&& ($pageName != "logo")  
-&& ($pageName != "_logo")  
-&& ($pageName != "logo-dev")  
-&& ($pageName != "sign") 
-&& ($pageName != "email")
-&& ($pageName != "email-headers")
-&& ($pageName != "_animatePunctuation")
-&& ($pageName != "ad") 
-&& ($pageName != "ad-frieze")
-&& ($pageName != "ad-artforum")
-&& ($pageName != "ad-afterall")
-&& ($pageName != "ad-artpractical")
-&& ($pageName != "ad-kqed")
-&& ($pageName != "ad-may"))
+if 
+	(($pageName != "_logo") && 
+	 ($pageName != "_animatePunctuation")) 
 {
 ?>
 
-<!-- .+* THE WATTIS INSTITUTE -->
-
-<div class="wattisContainer times big black fixed">
-<canvas id="canvas0" width="46" height="22" class="show" 
-onclick="showBones();">.+*</canvas></a>
-<a href="index_.php">The Wattis Institute</a>
-</div>
-
-<div class="clear"></div>
+	<!-- .+* THE WATTIS INSTITUTE -->
+	
+	<div class="logoContainer times big black fixed animatePunctuation">
+	<span class="">.+*</span> 
+	<a href="<?php echo ($pageName == 'index') ? 'main' : 'index.php'; ?>" class="logo">The Wattis Institute</a>
+	</div>
+	
+	<div class="clear"></div>
 
 <?php
-} 
+}  
 ?>
+
+<div id="color" class="<?php echo (($pageName === 'index') && (!$alt)) ? 'white' : 'black' ?>">
+<div id="animatePunctuation" class="animatePunctuation">

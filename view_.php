@@ -29,7 +29,6 @@ AND objects.active ORDER BY media.rank;";
 	// name
 
 	$html .= "<div class='listContainer times'>";
-	$html .= "<span class='monaco'>[*]</span> ";	                  
 	$html .= "<a href=''>" . $name . "</a><br /> ";	
 	echo $html;	// force no <br /> in name
         $html = "";

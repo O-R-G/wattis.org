@@ -7,7 +7,7 @@ require_once("GLOBAL/head.php");
 
 	<?php
 
-        $rootid = $ids[0];	// root object
+        $rootid = $ids[0];
 
 	// SQL objects attached to root with rootname
 
@@ -28,7 +28,6 @@ ORDER BY objects.rank;";
         // name
 
         $html .= "<div class='listContainer times'>";
-        $html .= "<span class='monaco'>[*]</span> ";
         $html .= "<a href=''>" . $rootname . "</a> ";
         $html .= "</div>";
 

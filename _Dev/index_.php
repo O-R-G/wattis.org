@@ -97,9 +97,9 @@ objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 <script type="text/javascript">
 
 // do this once the page loads? dunno. maybe here is good
-// still may be more robust method for this
 
 document.getElementById("click").onclick=function(){ click('color','black'); };
+
 
 
 function click(id,color) {
@@ -114,6 +114,7 @@ function click(id,color) {
 	var child = document.getElementById("click");
 	child.parentNode.removeChild(child);
 }
+
 
 
 function flipColor(id,color) {
@@ -146,6 +147,11 @@ function showBones(id,color) {
 
 
 
+
+
+
+
+
 /* stop event propogration?
 
 	if (!e) var e = window.event;
@@ -157,8 +163,6 @@ function showBones(id,color) {
 
 
 </script>
-
-
 
 
 
