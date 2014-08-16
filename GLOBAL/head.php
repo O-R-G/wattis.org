@@ -2,7 +2,8 @@
 	date_default_timezone_set('America/Los_Angeles');
 	require_once("_Library/systemDatabase.php"); 
 	require_once("_Library/displayMedia.php"); 
-	
+        require_once("_Library/systemCookie.php");
+		
 	// $id
 
 	$id = $_REQUEST['id'];		// no register globals	
@@ -32,9 +33,7 @@
 	<meta http-equiv="Title" content="<?php echo $documentTitle; ?>" />
 	<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 	<script type="text/javascript" src="GLOBAL/global.js"></script>
-        <script type="text/javascript" src="JS/animateEmoticon.js"></script>
 	<script type="text/javascript" src="JS/animatePunctuation.js"></script>
-        <script type="text/javascript" src="JS/animateEmoticon-src.js"></script>
 </head>
 
 <body>
@@ -43,18 +42,25 @@
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N8MCCT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N8MCCT');</script>
 <!-- End Google Tag Manager -->
 
+
+<!-- COLOR / ANIMATEPUNCTUATION -->
+
+<div id="color" class="<?php echo (($pageName === 'index') && (!$alt)) ? 'white' : 'black' ?>">
+<div id="animatePunctuation" class="animatePunctuation">
+
+
+<!-- .+* THE WATTIS INSTITUTE -->
+
 <?php 
 if 
 	(($pageName != "_logo") && 
-	 ($pageName != "_animatePunctuation")) 
+	($pageName != "_animatePunctuation")) 
 {
 ?>
-
-	<!-- .+* THE WATTIS INSTITUTE -->
 	
-	<div class="logoContainer times big black fixed animatePunctuation">
-	<span class="">.+*</span> 
-	<a href="<?php echo ($pageName == 'index') ? 'main' : 'index.php'; ?>" class="logo">The Wattis Institute</a>
+	<div class="logoContainer times big logo fixed">
+	<span onmousedown="startStopAnimatePunctuation(100);" style="cursor: pointer;">.+*</span>
+	<a href="<?php echo ($pageName == 'index') ? 'main' : 'index'; ?>" style="color:#000;">The Wattis Institute</a>
 	</div>
 	
 	<div class="clear"></div>
@@ -63,5 +69,4 @@ if
 }  
 ?>
 
-<div id="color" class="<?php echo (($pageName === 'index') && (!$alt)) ? 'white' : 'black' ?>">
-<div id="animatePunctuation" class="animatePunctuation">
+

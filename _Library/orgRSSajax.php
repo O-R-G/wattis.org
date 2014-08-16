@@ -16,7 +16,14 @@
 function orgRSSajax($xml) {
 
 	$xmlDoc = new DOMDocument();
-	$xmlDoc->load($xml);
+	// $xmlDoc->load($xml);
+    	$live = @$xmlDoc->load($xml);
+
+	if (!$live){ 
+
+		echo "Sorry, too foggy now."; 
+		die();
+	} 
 
 	// get elements from <channel>
 

@@ -2,8 +2,7 @@
 require_once("GLOBAL/head.php");
 ?>
 
-
-<div class="mainContainer times big black">
+<div class="mainContainer times big">
 
 	<?php
 
@@ -28,7 +27,7 @@ ORDER BY objects.rank;";
         // name
 
         $html .= "<div class='listContainer times'>";
-        $html .= "<a href=''>" . $rootname . "</a> ";
+        $html .= $rootname;
         $html .= "</div>";
 
 
@@ -49,7 +48,7 @@ ORDER BY objects.rank;";
 
 			// archive
 
-			$html .= "<div class='listContainer'>";
+			$html .= "<div class='listSmallContainer'>";
 			$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 			$html .= "<i>" . $myrow['deck'] . "</i>";	
 	                // $html .= "<div class = 'helvetica small'>" . $begin . "-" . $end . " / " . $now . "</div> ";
@@ -59,7 +58,7 @@ ORDER BY objects.rank;";
 			
 			// upcoming
 
-			$html .= "<div class='listContainer'>";
+			$html .= "<div class='listSmallContainer'>";
 			$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 			$html .= "<i>" . $myrow['deck'] . "</i>";	
 			// $html .= "<div class = 'helvetica small'>" . $begin . "-" . $end . " / " . $now . "</div> ";
@@ -73,132 +72,8 @@ ORDER BY objects.rank;";
 
         $html .= "</div>";
 	echo nl2br($html);
-
 	?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- JS -->
-<!-- to get rid of -->
-
-<script type="text/javascript">
-
-                message[1] =    [
-                                "[*]",
-                                "[.]",
-                                "[!]"
-                                ];
-
-                delay[1] = 100;
-
-                message[2] =    [
-                                "\\/\\",
-                                "/\\/",
-                                "\\\\\\",
-                                "///"
-                                ];
-
-                delay[2] = 100;
-
-                message[3] =    [
-                                "(-)",
-                                "(+)",
-                                "(*)",
-                                ];
-
-                delay[3] = 300;
-
-                message[4] =    [
-                                "% )",
-                                "% )",
-                                "% |"
-                                ];
-
-                delay[4] = 500;
-
-                message[5] =    [
-                                "#.#",
-                                "...",
-                                "..#",
-                                "#..",
-                                ".#."
-                                ];
-
-                delay[5] = 200;
-
-                message[6] =    [
-                                "|||",
-                                ".||",
-                                "..|",
-                                "..."
-                                ];
-
-                delay[6] = 250;
-
-                message[7] =    [
-                                ">>>",
-                                ".>>",
-                                "..>",
-                                "..."
-                                ];
-
-                delay[7] = 250;
-
-                message[8] =    [
-                                ":*",
-                                ":*",
-                                ":*",
-                                ":*",
-                                ":*",
-                                ":*",
-                                ":/",
-                                ":|",
-                                ":\\",
-                                ":/",
-                                ":|",
-                                ":\\",
-                                ":/",
-                                ":|",
-                                ":\\",
-                                ];
-
-                delay[8] = 100;
-
-                message[9] =    [
-                                ">/?",
-                                ">/ "
-                                ];
-
-                delay[9] = 500;
-
-                message[10] =    [
-                                "&+}",
-                                "&  ",
-                                "&+}",
-                                " + ",
-                                "&+}",
-                                "  }"
-                                ];
-
-                delay[10] = 500;
-
-window.onload=initEmoticons(1, message, delay);
-</script>
 
 <?php
 require_once("GLOBAL/foot.php");
 ?>
-
-

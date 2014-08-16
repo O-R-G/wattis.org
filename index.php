@@ -4,10 +4,12 @@ require_once("_Library/orgRSSParse.php");
 ?>
 
 
-<div class="homeContainer times big animatePunctuation">
+<!-- BLOCKS -->
+
+<div class="homeContainer times big">
 
 	<?php
-                        
+
 	$rootname = 'Home';
 
         // SQL objects attached to root by name
@@ -20,8 +22,6 @@ objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
         $result = MYSQL_QUERY($sql);
         $html = "";
         $i = 0;
-
-        // collect blocks
 
         $myrow = MYSQL_FETCH_ARRAY($result);
 	$blocks[$i] = "<div class = 'logoContainer'>" . $myrow["body"] . "</div>";
@@ -53,145 +53,43 @@ objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- WEATHER -->
 
-
 <script type="text/javascript">
 
-	// requires html <element id=rss>
-
-	showRSS("http://www.nws.noaa.gov/data/current_obs/KSFO.rss"); 
+	showRSS("http://www.nws.noaa.gov/data/current_obs/KSFO.rss"); 	// requires <element id="rss">
 
 </script>
-
-
-
-
-
-
-
-<!-- CLICK -->
-
-<div id='click' class="fullContainer"></div>
-
-
-
-
-<script type="text/javascript">
-
-// do this once the page loads? dunno. maybe here is good
-// still may be more robust method for this
-
-document.getElementById("click").onclick=function(){ click('color','black'); };
-
-
-function click(id,color) {
-
-	// change main color to black
-	// change news color to red 	* to do *
-	// change menu color to black
-	// remove click div
-
-	flipColor(id,color);
-
-	var child = document.getElementById("click");
-	child.parentNode.removeChild(child);
-}
-
-
-function flipColor(id,color) {
-
-	// might do getElementsByClassName instead and search for anything with black in it
-	// or anything with red? 
-
-	color = (document.getElementById(id).className != color) ? color : 'white';
-	document.getElementById(id).className = color;
-}
-
-
-
-/*
-function showBones(id,color) {
-
-	// flipTextColor
-	// stop/start animation
-
-	color = (document.getElementById(id).className != color) ? color : 'white';
-	document.getElementById(id).className = color;
-
-	color = (document.getElementById('News').className != color) ? color : 'white';
-	document.getElementById(id).className = color;
-}
-
-*/
-
-
-
-
-
-/* stop event propogration?
-
-	if (!e) var e = window.event;
-	e.cancelBubble = true;
-	if (e.stopPropagation) e.stopPropagation();
-*/
-
-
-
-
-</script>
-
-
-
-
 
 
 <!-- NEWS -->
 
 <script type="text/javascript" src="JS/animateNewsTicker.js"></script>
-
-<?php
-
-	// SQL object with attached (News)
-	
-	$sql = "SELECT objects.id, objects.name1, objects.body, objects.active, objects.rank, wires.active, 
-wires.fromid, wires.toid FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 
-LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = 
-'1' ORDER BY objects.rank;";
-
-	$result =  MYSQL_QUERY($sql);
-	$i = 0;
-	$newsItems = array();
-
-	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-        	                        	
-		$newsItems[$i] = $myrow["body"];
-		$i++;
-	}
-                       
-?>
-
 <script type="text/javascript">
 
-       	newsItem = new Array(
+	<?php
+	
+		// SQL object with attached (News)
+		// could be written into main query with LEFTJOIN
+	
+		$sql = "SELECT objects.id, objects.name1, objects.body, objects.active, objects.rank, wires.active, 
+	wires.fromid, wires.toid FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 
+	LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = 
+	'1' ORDER BY objects.rank;";
+	
+		$result =  MYSQL_QUERY($sql);
+		$i = 0;
+		$newsItems = array();
+	
+		while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+        	                        		
+			$newsItems[$i] = $myrow["body"];
+			$i++;
+		}
+                       	
+	?>
 
+       	newsItem = new Array(
 		<?php
 			$i = 0;
  		
@@ -212,10 +110,7 @@ LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND obje
 	);
 	
 	animateNewsTicker(newsItem[0]);
-
 </script>
-
-
 
 
 <?php

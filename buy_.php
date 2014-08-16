@@ -2,28 +2,31 @@
 require_once("GLOBAL/head.php");
 ?>
 
-<?php
-
-        // temporary animateEmoticon hack
-
-        $thisCanvas = 1;
-?>
-
-
-<div class="mainContainer times big black">
+<div class="mainContainer times big">
 
 	<?php
-                
-	// SQL object plus media
-	                     
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, 
-objects.rank as objectsRank, media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, 
-media.active AS mediaActive, media.rank FROM objects LEFT JOIN media ON objects.id = media.object AND 
-media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
 
-	$result = MYSQL_QUERY($sql);
-	$html = "";
-	$i=0;
+        $rootid = $ids[0];
+
+        // SQL object plus media plus rootname
+
+        $sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body,
+objects.notes, objects.active, objects.begin, objects.end, objects.rank as objectsRank, (SELECT
+objects.name1 FROM objects WHERE objects.id = $rootid) AS rootname, media.id AS mediaId,
+media.object AS mediaObject, media.type, media.caption, media.active AS mediaActive, media.rank
+FROM objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE objects.id =
+$id AND objects.active ORDER BY media.rank;";
+
+        $result = MYSQL_QUERY($sql);
+        $myrow = MYSQL_FETCH_ARRAY($result);
+        $rootname = $myrow['rootname'];
+        $name = $myrow['name1'];
+        $deck = $myrow['deck'];
+        $body = $myrow['body'];
+        mysql_data_seek($result, 0);    // reset to row 0
+        $html = "";
+        $i=0;
+
 
         // collect images
 
@@ -38,15 +41,13 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
                         if ( $i == 0 ) {
 
                                 $specs  = getimagesize($mediaFile);
-                                $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;
+                                // $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;
+                                $use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;
 
-	        	        $name = $myrow['name1'];
-        		        $body = $myrow['body'];
-	                	$deck = $myrow['deck'];
                         }
 
                         $images[$i] .= "<div id='image".$i."' class = '" . (($use4xgrid) ? "listContainer twocolumn" : "") . "'>";
-                        $images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+                        $images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
                         $images[$i] .= "</div>";
 
 			$images[$i] .= "<div class='clear'></div>";
@@ -58,7 +59,7 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
 	// nav
 
 	$html .= "<div class='listContainer times'>";
-	$html .= "<a href=''>" . $name . "</a> ";	
+	$html .= $name;
 	$html .= "</div>";	
 
 
@@ -90,32 +91,8 @@ media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;"
         $html .= "</div>";
 
         $html .= "</div>";
-
 	echo nl2br($html);
-
 	?>
-        
-
-
-<!-- JS -->
-
-<script type="text/javascript">
-	
-	message[1] =    [
-			"[.]",
-			"[+]",
-			"[-]",
-			"[!]",
-			"[*]"
-			];
-
-	delay[1] = 400;
-
-	// window.onload=initEmoticons(1, message, delay);
-	window.onload=initEmoticons(2, message, delay);
-
-</script>
-
 
 <?php
 require_once("GLOBAL/foot.php");

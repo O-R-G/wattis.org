@@ -2,21 +2,24 @@
 require_once("GLOBAL/head.php");
 ?>
 
-
-<div class="mainContainer times big black">
+<div class="mainContainer times big">
 
 	<?php
-                
-	// SQL object plus media
-	                     
+
+        $rootid = $ids[0];
+
+	// SQL object plus media plus rootname
+
 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, 
-objects.notes, objects.active, objects.begin, objects.end, objects.rank as objectsRank, media.id AS 
-mediaId, media.object AS mediaObject, media.type, media.caption, media.active AS mediaActive, media.rank 
-FROM objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id 
-AND objects.active ORDER BY media.rank;";
+objects.notes, objects.active, objects.begin, objects.end, objects.rank as objectsRank, (SELECT 
+objects.name1 FROM objects WHERE objects.id = $rootid) AS rootname, media.id AS mediaId, 
+media.object AS mediaObject, media.type, media.caption, media.active AS mediaActive, media.rank 
+FROM objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE objects.id = 
+$id AND objects.active ORDER BY media.rank;";
 
         $result = MYSQL_QUERY($sql);
         $myrow = MYSQL_FETCH_ARRAY($result);
+        $rootname = $myrow['rootname'];
         $name = $myrow['name1'];
         $body = $myrow['body'];
         $notes = $myrow['notes'];
@@ -26,12 +29,6 @@ AND objects.active ORDER BY media.rank;";
         $html = "";
 	$i=0;
 
-	// name
-
-	$html .= "<div class='listContainer times'>";
-	$html .= "<a href=''>" . $name . "</a><br /> ";	
-	echo $html;	// force no <br /> in name
-        $html = "";
 
 	// collect images
 
@@ -44,7 +41,7 @@ AND objects.active ORDER BY media.rank;";
 			$mediaStyle = "width: 100%;";
 
 			$randomPadding = rand(0, 150);
-			$randomWidth = rand(15, 45);
+			$randomWidth = rand(30, 50);
 			$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
 			
 			$images[$i] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
@@ -69,12 +66,14 @@ AND objects.active ORDER BY media.rank;";
 
 	// hours
 
+	$html .= "<div class='listContainer times'>";
+
 	if ($begin || $end) {
  
 		// build date display
 
 		$displayHours = (date("H",strtotime($begin)) != '00') ? true : false;		
-		$displayDates = (date("z",strtotime($begin)) != date("z",strtotime($end))) ? true : false;		
+ 		$displayDatesEnd = (date("z",strtotime($begin)) != date("z",strtotime($end))) ? true : false;
 
 		if ($begin) {
 
@@ -84,9 +83,10 @@ AND objects.active ORDER BY media.rank;";
 			$beginHours = date($beginDisplayHours,strtotime($begin));
 			$hoursDisplay = "<br />" . $beginHours;
 
-			$beginDisplayDates = "F j";
+			$beginDisplayDates = ($displayDatesEnd) ? "F j" : "F j, Y";
+			if (!$end) $beginDisplayDates .= ", Y";
 			$beginDates = date($beginDisplayDates,strtotime($begin));
-			$datesDisplay = "<br />" . $beginDates;
+			$datesDisplay = $beginDates;
 		}
 
 		if ($end) {
@@ -99,11 +99,16 @@ AND objects.active ORDER BY media.rank;";
 
 			$endDisplayDates = "F j, Y";
 			$endDates = date($endDisplayDates,strtotime($end));
-			$datesDisplay = "<br />" . $beginDates . ' – ' . $endDates;
-		}
 
-		if ($displayDates && $end) $html .= $datesDisplay;
+			if ($displayDatesEnd) $datesDisplay = $beginDates . ' –<br />' . $endDates;
+		}		
+
+		$html .= $datesDisplay;
                 if ($displayHours) $html .= $hoursDisplay;
+
+	} else {
+	
+		$html .= $name;	
 	}
 
 	$html .= "</div>";	
@@ -115,21 +120,18 @@ AND objects.active ORDER BY media.rank;";
 
 		// column 2
 	
-		// $html .= "<div id='Punct-0' class='listContainer times'>";
 		$html .= "<div class='listContainer times'>";
 		$html .= $columns[0];	
 		$html .= "</div>";	
                   	
 		// column 3
 	
-		// $html .= "<div id='Punct-1' class='listContainer times'>";
 		$html .= "<div class='listContainer times'>";
 		$html .= $columns[1];	
 		$html .= "</div>";	
                   	
 	} else {
 
-        	// $html .= "<div id='Punct-0' class='listContainer doublewide centered times'>";
         	$html .= "<div class='listContainer doublewide centered times'>";
         	$html .= $body;
         	$html .= "</div>";
@@ -138,7 +140,8 @@ AND objects.active ORDER BY media.rank;";
 
 	// images
         	
-	$html .= "<div class='listContainer triplewide centered'>";
+	$html .= "<div class='clear'></div>";
+	$html .= "<div class='galleryContainer'>";
 
 	for ( $j = 0; $j < count($images); $j++) {
 	
@@ -157,28 +160,7 @@ AND objects.active ORDER BY media.rank;";
 
         $html .= "</div>";
 	echo nl2br($html);
-
 	?>
-        
-
-<!-- JS -->
-
-<script type="text/javascript">
-	
-	message[1] =    [
-			"[.]",
-			"[+]",
-			"[-]",
-			"[!]",
-			"[*]"
-			];
-
-	delay[1] = 400;
-
-	window.onload=initEmoticons(1, message, delay);
-
-</script>
-
 
 <?php
 require_once("GLOBAL/foot.php");

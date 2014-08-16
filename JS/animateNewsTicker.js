@@ -1,14 +1,20 @@
 	// globals
-	
-	newsCounter = 0;	// *fix* could be wrapped
+	// requires newsItem[] set elsewhere
 
-        function animateNewsTicker(thisnewsItem) {
-	
+	newsCounter = 0;
+
+        function animateNewsTicker(thisnewsItem) {	
+
+		if (thisnewsItem == null) { 
+
+			thisNewsItem = "Sorry, no news *now.*";
+		}
+
 		// rewrite innerhtml
 
-		thisinnerhtml = "<div id='news' class='newsContainer red'><canvas id='canvas14' width='20' height='24'>!</canvas>";
+		thisinnerhtml = "<span id='news-item'>";
 		thisinnerhtml += thisnewsItem;
-		thisinnerhtml += "<canvas id='canvas11' width='12' height='24'>!</canvas></div>";
+		thisinnerhtml += "</span>";
 		document.getElementById("news").innerHTML = thisinnerhtml;
 
 		// increment pointer 
