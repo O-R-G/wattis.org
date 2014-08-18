@@ -60,8 +60,7 @@ if
 	
 	<div class="logoContainer times big logo fixed">
 	<span id="logo" onmousedown="startStopAnimatePunctuation(200);" class="control">.+*</span>
-	<a href="<?php echo ($pageName == 'index') ? 'main' : 'index'; ?>" style="color:#000;">The Wattis 
-Institute</a>
+	<a href="<?php echo ($pageName == 'index') ? 'main' : 'index?alt=1'; ?>" style="color:#000;">The Wattis Institute</a>
 	</div>
 	
 	<div class="clear"></div>

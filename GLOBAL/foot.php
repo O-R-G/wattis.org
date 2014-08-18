@@ -5,7 +5,7 @@
         		<a href='program' class='instructionContainer'>PROGRAM</a>
         		<a href='calendar' class='instructionContainer'>CALENDAR</a>
         		<a href='archive' class='instructionContainer'>ARCHIVE</a>
-        		<a href='index' class='instructionContainer'>GO HOME</a>
+        		<a href='index?alt=1' class='instructionContainer'>GO HOME</a>
         	</div>
         </div>
 
@@ -22,7 +22,12 @@
 		<?php if ($pageName=="index") { ?> 
 
                         initPunctuation("animatePunctuation", delay, true, true);
-                        var click = clickHandler();
+
+			<?php if (!$alt) { ?> 
+
+        	                var click = clickHandler();
+	
+			<?php } ?>
 
 		<?php } else { ?>
 
