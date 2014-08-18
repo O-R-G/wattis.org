@@ -17,7 +17,7 @@
 	
 	$alt = $_REQUEST['alt'];
 
-	$documentTitle = ( $pageName == "index" ) ? "CCA Wattis Institute for Contemporary Arts" : "CCA Wattis Institute for Contemporary Arts / " . $pageName;
+	$documentTitle = "CCA Wattis Institute for Contemporary Arts";
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"; 
 ?>
 

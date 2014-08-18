@@ -104,7 +104,7 @@ $id AND objects.active ORDER BY media.rank;";
 		}		
 
 		$html .= $datesDisplay;
-                if ($displayHours) $html .= $hoursDisplay;
+                // if ($displayHours) $html .= $hoursDisplay;
 
 	} else {
 	

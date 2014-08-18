@@ -130,9 +130,14 @@ a:active {
 
 .listContainer {  
 	float:left;
+	padding-right:2%;
+    padding-bottom:40px;
+    width: 30%;
+    /*
         padding-right:60px;
         padding-bottom:30px;
         width: 300px;
+    */
 	}
 
 .listSmallContainer {  
@@ -237,7 +242,8 @@ a:active {
         }
 
 .twocolumn {
-        width:260px;
+        width:47%;
+        /* width:260px; */
 	}
 
 .fourcolumn {
@@ -245,8 +251,11 @@ a:active {
 	}
 
 .doublewide {
+        width:58%;
+        /*
         padding-right:0px;
         width:660px;
+        */
 	}
 
 .triplewide {
