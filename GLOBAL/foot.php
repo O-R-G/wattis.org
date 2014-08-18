@@ -21,13 +21,13 @@
 	
 		<?php if ($pageName=="index") { ?> 
 
-                        initPunctuation("animatePunctuation", delay, true, true);
+			initPunctuation("animatePunctuation", delay, true, true);
 
-                        <?php if (!$alt) { ?>
+       	                <?php if (!$alt) { ?>
 
         	                var click = clickHandler();
 	
-                        <?php } ?>
+                        <?php } ?> 
 
 		<?php } else { ?>
 
