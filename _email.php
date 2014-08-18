@@ -63,6 +63,15 @@ table {
 	line-height:20px;
         }
 
+.helvetica {
+        font-family: Helvetica, Arial, sans-serif;
+        }
+
+.small {
+        font-size:10px;
+        line-height:12px;
+        }
+
 .punctuation {
         font-family: Monaco, "Lucida Console", monospace;
         color: #000;
