@@ -112,6 +112,13 @@ RewriteCond %{QUERY_STRING} id=93
 RewriteRule ^view_\.php$ exhibitions? [R,L]
 RewriteRule ^exhibitions$ view_\.php?marker&id=93 [L]
 
+# exhibitions
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=93
+RewriteRule ^view_\.php$ program? [R,L]
+RewriteRule ^program$ view_\.php?marker&id=93 [L]
+
 
 
 ### generic ### 

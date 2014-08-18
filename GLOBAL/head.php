@@ -45,8 +45,8 @@
 
 <!-- COLOR / ANIMATEPUNCTUATION -->
 
-<div id="color" class="<?php echo (($pageName === 'index') && (!$alt)) ? 'white' : 'black' ?>">
 <div id="animatePunctuation" class="animatePunctuation">
+<div id="color" class="black">
 
 
 <!-- .+* THE WATTIS INSTITUTE -->
@@ -59,11 +59,18 @@ if
 ?>
 	
 	<div class="logoContainer times big logo fixed">
-	<span onmousedown="startStopAnimatePunctuation(100);" style="cursor: pointer;">.+*</span>
-	<a href="<?php echo ($pageName == 'index') ? 'main' : 'index'; ?>" style="color:#000;">The Wattis Institute</a>
+	<span id="logo" onmousedown="startStopAnimatePunctuation(200);" class="control">.+*</span>
+	<a href="<?php echo ($pageName == 'index') ? 'main' : 'index'; ?>" style="color:#000;">The Wattis 
+Institute</a>
 	</div>
 	
 	<div class="clear"></div>
+
+	<script type="text/javascript">
+
+		var logo = unescape(getCookie("logoCookie"));
+		if (logo) {document.getElementById("logo").textContent = logo; }
+	</script>
 
 <?php
 }  

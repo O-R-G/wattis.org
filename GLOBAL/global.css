@@ -78,6 +78,15 @@ a:active {
 	color: #000;
 	}
 
+.control {
+	cursor:pointer;
+}
+
+.control:hover {
+  	background-color:#FFF;
+	opacity:.5;
+}
+
 
 /* containers */
 
@@ -157,7 +166,7 @@ a:active {
 	position: fixed;
 	bottom: 20px;
 	left: 30px;
-	width: 400px;	        /* debug for iphone */
+	width: 500px;	        /* debug for iphone */
 	clear: both; 
 	}
 
@@ -292,6 +301,24 @@ a:active {
         color: #F00;
         text-decoration: none;
         border-bottom: solid 3px #F00;
+        }
+
+.red a:hover {
+        border-bottom: solid 3px #FFF;
+        }
+
+.redwhite {
+        color: #FFF;
+        }
+
+.redwhite a {
+        color: #FFF;
+        text-decoration: none;
+        border-bottom: solid 3px #F00;
+        }
+
+.redwhite a:hover {
+        border-bottom: solid 3px #FFF;
         }
 
 .greybox {
