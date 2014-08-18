@@ -60,7 +60,6 @@ table {
 
 .monaco {
         font-family: Monaco, "Lucida Console", monospace;
-	line-height:20px;
         }
 
 .helvetica {
