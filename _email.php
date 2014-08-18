@@ -78,7 +78,8 @@ table {
         }
 
 .big {
-	font-size:24px;
+        font-size:24px;
+        line-height:27px;
         }
 
 .spacer {
