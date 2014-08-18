@@ -65,7 +65,7 @@ table {
 
 .punctuation {
         font-family: Monaco, "Lucida Console", monospace;
-        color: #F00;
+        color: #000;
         }
 
 .big {
