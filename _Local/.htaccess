@@ -125,10 +125,10 @@ RewriteRule ^program$ view_\.php?marker&id=93 [L]
 
 # index
 
-RewriteCond %{QUERY_STRING} !marker
-RewriteCond %{QUERY_STRING} ^(.*)
-RewriteRule ^index\.php$ index?%1 [R,L]
-RewriteRule ^index$ index\.php?marker [QSA,L]
+# RewriteCond %{QUERY_STRING} !marker
+# RewriteCond %{QUERY_STRING} ^(.*)
+# RewriteRule ^index\.php$ index?%1 [R,L]
+# RewriteRule ^index$ index\.php?marker [QSA,L]
 
 # menu
 

@@ -68,7 +68,7 @@ if
 	<script type="text/javascript">
 
 		var logo = unescape(getCookie("logoCookie"));
-		if (logo) {document.getElementById("logo").textContent = logo; }
+		if (logo) { document.getElementById("logo").textContent = logo; }
 	</script>
 
 <?php

@@ -23,11 +23,11 @@
 
                         initPunctuation("animatePunctuation", delay, true, true);
 
-			<?php if (!$alt) { ?> 
+                        <?php if (!$alt) { ?>
 
         	                var click = clickHandler();
 	
-			<?php } ?>
+                        <?php } ?>
 
 		<?php } else { ?>
 
