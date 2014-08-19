@@ -48,7 +48,7 @@ ORDER BY objects.rank;";
 
 			// archive
 
-			$html .= "<div class='listSmallContainer'>";
+			$html .= "<div class='listContainer'>";
 			$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 			$html .= "<i>" . $myrow['deck'] . "</i>";	
 	                // $html .= "<div class = 'helvetica small'>" . $begin . "-" . $end . " / " . $now . "</div> ";
@@ -58,7 +58,7 @@ ORDER BY objects.rank;";
 			
 			// upcoming
 
-			$html .= "<div class='listSmallContainer'>";
+			$html .= "<div class='listContainer'>";
 			$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
 			$html .= "<i>" . $myrow['deck'] . "</i>";	
 			// $html .= "<div class = 'helvetica small'>" . $begin . "-" . $end . " / " . $now . "</div> ";

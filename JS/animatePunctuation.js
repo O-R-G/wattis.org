@@ -134,7 +134,7 @@
  		if (timeout == null) {
 							
 			initPunctuation("animatePunctuation", delay, false, true);			
-			document.cookie="animateCookie=true; expires=Fri, 16 Aug 2024 12:00:00 GMT";
+			document.cookie="animateCookie=true";
 			var click = clickHandler();
 			return true;
 
