@@ -36,7 +36,7 @@
 	// (hour, minute, second, month, day, year)
 
 	// Client URL
-	$dbHost = "http://wattis-stage.cca.edu/";
+	$dbHost = "http://www.wattis.org/";
 
 	// DB Admin
 	$dbAdmin = $dbHost ."OPEN-RECORDS-GENERATOR/";
@@ -60,7 +60,7 @@ function dbConnectMain($dbUser) {
 	$dbMainHost = "vm-mysql-01";
 	$dbMainDbse = "wwwwattisdev";
 
-	if 		($dbUser == 1) {		$dbMainUser = "wattisview"; 	$dbMainPass = "W4++15v13w"; }
+	if 	($dbUser == 1) {		$dbMainUser = "wattisview"; 	$dbMainPass = "W4++15v13w"; }
 	else if ($dbUser == 2) {		$dbMainUser = "wattisdev"; 	$dbMainPass = "W4++15d3v"; }
 	else if ($dbUser == 3) {		$dbMainUser = "wattisdev";   	$dbMainPass = "W4++15d3v"; }
 
