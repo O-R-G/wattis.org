@@ -109,6 +109,7 @@ media.rank;";
 <td style="width:30%;">
 </td>
 <td>
+<br/>
 <?php
 	// images
 
