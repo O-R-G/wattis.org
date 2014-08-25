@@ -168,7 +168,7 @@ echo nl2br($body);
 	renderedHTML=renderedHTML.replace(find, replace);
 
 	find = /<a href=([\"\'].*[\"\'])>/g;
-	replace = "<a href=\"$1\" style='color:#000; text-decoration: none; border-bottom: solid 3px;'>";
+        replace = "<a href=$1 style='color:#000; text-decoration: none; border-bottom: solid 3px;'>";
 	renderedHTML=renderedHTML.replace(find, replace);
 
 	find = /(class=[\"\']helvetica[\"\'])/g;
