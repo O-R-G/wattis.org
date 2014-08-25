@@ -18,15 +18,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>CCA Wattis Institute for Contemporary Arts / email</title>
-</head>
 
-<body>
-
-	<style>
+<style>
 
 body {
         color: #000;
         background: #FFF;
+        }
+
+table {
+        width: 100%;
         }
 
 a {
@@ -50,50 +51,32 @@ a:active {
         border-bottom: solid 3px #FFF;
         }
 
-table {
-	width: 100%;
-	}
-
 .times {
         font-family: "Times New Roman", Times, serif;
-        }
-
-.monaco {
-        font-family: Monaco, "Lucida Console", monospace;
-        }
-
-.helvetica {
-        font-family: Helvetica, Arial, sans-serif;
-        }
-
-.small {
-        font-size:10px;
-        line-height:12px;
-        }
-
-.punctuation {
-        font-family: Monaco, "Lucida Console", monospace;
-        color: #000;
-        }
-
-.big {
         font-size:24px;
         line-height:27px;
         }
 
-.spacer {
-	width:30%;
+.helvetica {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size:10px;
+        line-height:12px;
         }
 
-	</style>
+</style>
+</head>
 
-	<?php
+<body>
+<div id="animatePunctuation" class="animatePunctuation">
+<?php
                 
 	// SQL object plus media
 	                     
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.active, objects.rank as objectsRank, 
-media.id AS mediaId, media.object AS mediaObject, media.type, media.caption, media.active AS mediaActive, media.rank FROM objects LEFT JOIN 
-media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, 
+objects.active, objects.rank as objectsRank, media.id AS mediaId, media.object AS mediaObject, 
+media.type, media.caption, media.active AS mediaActive, media.rank FROM objects LEFT JOIN media ON 
+objects.id = media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY 
+media.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -106,14 +89,8 @@ media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id A
 		if ($myrow['mediaActive'] != null) {
 		
 			$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-			$mediaCaption = strip_tags($myrow["caption"]);
 			$mediaStyle = "width: 100%;";
-			$images[$i] .= "<div id='image".$i."' class = 'imageContainer' onclick='expandImage(\"image".$i."\", \"100px\", \"0px\");' style='padding:100px;'>";
-			$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-			$images[$i] .= "<div class = 'captionContainer monaco small'>";
-			$images[$i] .= $mediaCaption;
-			$images[$i] .= "</div>";
-			$images[$i] .= "</div>";
+			$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 		}
 
 		if ( $i == 0 ) {
@@ -126,10 +103,16 @@ media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id A
 		$i++;
 	}
 
-	/*
+?>
+<table border="0" cellspacing="0" style="font-family: 'Times New Roman', Times, serif; font-size:24px; line-height:27px;">
+<tr>
+<td style="width:30%;">
+</td>
+<td>
+<?php
 	// images
 
-	if ( !$images ) {
+	if ( $images ) {
 
 		for ( $j = 0; $j < count($images); $j++) {
 		
@@ -137,47 +120,71 @@ media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id A
 		}
 	}
 
-	// echo nl2br($html);
-	*/
-
-	?>
-        
-
-<table border="0" cellspacing="0">
-<tr>
-<td class='spacer'>
-</td>
-<td>
-<?php
-echo $deck . "<br />";
+	echo $html;
 ?>
 </td>
-<td class='spacer'>
+<td style="width:30%;">
 </td>
 </tr>
-
 <tr>
-<td class='spacer'>
+<td style="width:30%;">
 </td>
 <td class='times big'>
 <?php
 echo nl2br($body);
 ?>
 </td>
-<td class='spacer'>
+<td style="width:30%;">
 </td>
 </tr>
-
 <tr>
-<td class='spacer'>
+<td style="width:30%;">
 </td>
 <td>
 </td>
-<td class='spacer'>
+<td style="width:30%;">
 </td>
 </tr>
-
 </table>
+</div>
+
+<script type="text/javascript" src="JS/animatePunctuation.js"></script>
+<script type="text/javascript">
+
+	initPunctuation("animatePunctuation", delay, true, false);
+
+	// build renderedHTML
+
+	var renderedHTML;
+	var find;
+	var replace;
+
+	renderedHTML = "<html>\n<body>";
+	renderedHTML += document.getElementById('animatePunctuation').innerHTML;
+	renderedHTML += "</body>\n</html>";
+
+	find = /(class=[\"\']punctuation[\"\'])/g;
+	replace = "style=\"font-family: Monaco, 'Lucida Console', monospace;\"";
+	renderedHTML=renderedHTML.replace(find, replace);
+
+	find = /<a href=([\"\'].*[\"\'])>/g;
+	replace = "<a href=\"$1\" style='color:#000; text-decoration: none; border-bottom: solid 3px;'>";
+	renderedHTML=renderedHTML.replace(find, replace);
+
+	find = /(class=[\"\']helvetica[\"\'])/g;
+	replace = "style=\"font-family: Helvetica, Arial, sans-serif; font-size: 10px; line-height:12px;\"";
+	renderedHTML=renderedHTML.replace(find, replace);
+
+  	find = /<img src=[\"\'](MEDIA\/.*)[\"\']>/g;
+	replace = "<img src=\"http://www.wattis.org/$1\">";
+	renderedHTML=renderedHTML.replace(find, replace);
+
+</script>
+
+<button type="button" onclick="prompt('Press command-C to copy rendered html:',renderedHTML);">Render html</button>
 
 </body>
 </html>
+
+
+
