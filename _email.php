@@ -167,8 +167,8 @@ echo nl2br($body);
 	replace = "style=\"font-family: Monaco, 'Lucida Console', monospace;\"";
 	renderedHTML=renderedHTML.replace(find, replace);
 
-	find = /<a href=([\"\'].*[\"\'])>/g;
-        replace = "<a href=$1 style='color:#000; text-decoration: none; border-bottom: solid 3px;'>";
+	find = /(<a href)/g;
+        replace = "<a style='color:#000; text-decoration: none; border-bottom: solid 3px;' href";
 	renderedHTML=renderedHTML.replace(find, replace);
 
 	find = /(class=[\"\']helvetica[\"\'])/g;
