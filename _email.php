@@ -63,6 +63,11 @@ a:active {
         line-height:12px;
         }
 
+.punctuation {
+        font-family: Monaco, "Lucida Console", monospace;
+        color: #000;
+        }
+
 </style>
 </head>
 
