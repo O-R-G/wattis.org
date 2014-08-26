@@ -66,7 +66,7 @@
 	function replaceNodes(node) {
 
 		var next;
-		var re = /([*+.:,;!.?\(\)\[\]\{\}\/~°•“”‘’\-–—_])/g;
+		var re = /([*+.:,;!.?\(\)\[\]\{\}\/~°•“”‘’\-–—_&@])/g;
 
 		if (node.nodeType === 1) {
 			
@@ -81,7 +81,7 @@
 		} else if (node.nodeType === 3) {
 
 			if (re.test(node.nodeValue)) {	
-
+	
 				temp = document.createElement("span");
 				temp.innerHTML = node.nodeValue.replace(re, "<span class='punctuation'>$1</span>");
 				node.parentNode.replaceChild(temp,node);
