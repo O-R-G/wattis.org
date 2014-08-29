@@ -7,7 +7,7 @@
         		<a href='archive' class='instructionContainer'>ARCHIVE</a>
         		<a href='index?alt=1' class='instructionContainer'>GO HOME</a>
         	</div>
-        </div> -->
+        </div>
 
         <!-- CLOSE home/mainContainer, animatePunctuation, color -->
 
