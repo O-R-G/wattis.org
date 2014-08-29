@@ -168,7 +168,7 @@ RewriteRule ^buy$ buy_\.php?marker [QSA,L]
 
 ### archive ###
 
-# buy
+# exhibitions
 
 RewriteRule ^exhibitions/(.*)$ http://archive.wattis.org/exhibitions/$1 [R,L]
 
