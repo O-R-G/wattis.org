@@ -1,4 +1,4 @@
-        <div class='menuContainer'>
+	<div class='menuContainer'>
 	        <div class='helvetica small'>
         		<a href='main' class='instructionContainer'>MAIN</a>
         		<a href='visit' class='instructionContainer'>VISIT</a>
@@ -7,7 +7,7 @@
         		<a href='archive' class='instructionContainer'>ARCHIVE</a>
         		<a href='index?alt=1' class='instructionContainer'>GO HOME</a>
         	</div>
-        </div>
+        </div> -->
 
         <!-- CLOSE home/mainContainer, animatePunctuation, color -->
 
