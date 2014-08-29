@@ -105,7 +105,7 @@ RewriteCond %{QUERY_STRING} id=7
 RewriteRule ^list_\.php$ calendar? [R,L]
 RewriteRule ^calendar$ list_\.php?marker&id=7 [L]
 
-# exhibitions
+# yexhibitions
 
 RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} id=93
@@ -165,6 +165,12 @@ RewriteCond %{QUERY_STRING} ^(.*)
 RewriteRule ^buy_\.php$ buy?%1 [R,L]
 RewriteRule ^buy$ buy_\.php?marker [QSA,L]
 
+
+### archive ###
+
+# buy
+
+RewriteRule ^exhibitions/(.*)$ http://archive.wattis.org/exhibitions/$1 [R,L]
 
 
 ### utility ###
