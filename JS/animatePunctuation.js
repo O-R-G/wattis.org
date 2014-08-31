@@ -85,9 +85,6 @@
 				temp = document.createElement("span");
 				temp.innerHTML = node.nodeValue.replace(re, "<span class='punctuation'>$1</span>");
 				node.parentNode.replaceChild(temp,node);
-			
-				// temp.parentNode.removeChild(temp);	// in process, trying to rm wrapping div
-									// should take all children and insertBefore
 			}
 		}
 
