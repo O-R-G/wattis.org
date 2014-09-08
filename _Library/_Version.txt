@@ -1,7 +1,7 @@
 // O-R-G 
-// _ Library version 1.1.7
+// _Library version 1.4.0
 //
-// Last updated June 28, 2011
+// Last updated July 30, 2014
 // 
 // Built on _ Library functions by Stewart Smith while at O-R-G
 // Updated and expanded by David Reinfurt
@@ -14,3 +14,5 @@
 5/17/2011 -- displayMedia adjusted to make either height or width = 100%
 6/22/2011 -- displayNavigation added multiColumn settings
 6/27/2011 -- displayMedia added display PNG function
+7/17/2013 -- added paypalIPNlisten, paypalIPNwrite
+7/30/2014 -- added orgRSSajax.php
