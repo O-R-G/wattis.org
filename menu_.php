@@ -16,20 +16,24 @@ wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' ORDER BY
 	$html = "";
 	$i = 0;
 
-	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-			
-		$html .= "<div class='listContainer times'>";
-		// $html .= "<canvas id='canvas" . ($i+1) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
+        while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
-                $URL = $myrow["url"];
-		$URL = ($URL) ? "$URL" : "view_";
+		if ($myrow['name1'][0] != '.') {
 
-		$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
-		$html .= "<i>" . $myrow['deck'] . "</i>";	
-		$html .= "</div>";	
+			$html .= "<div class='listContainer times'>";
+			// $html .= "<canvas id='canvas" . ($i+1) . "' width='46' height='22' class='monaco'>[*]</canvas> ";
 
-	        $i++;
-		if ( $i % 3 == 0) $html .= "<div class='clear'></div>"; 	// clear floats
+                	$URL = $myrow["url"];
+			$URL = ($URL) ? "$URL" : "view_";
+	
+			$html .= "<a href='" . $URL . ".php?id=" . $myrow['objectsId'] . "'>" . $myrow['name1'] . "</a> ";	
+			$html .= "<i>" . $myrow['deck'] . "</i>";	
+			$html .= "</div>";	
+
+	        	$i++;
+			if ( $i % 3 == 0) $html .= "<div class='clear'></div>"; 	// clear floats
+
+		}
 	}
 
 	echo nl2br($html);
