@@ -97,6 +97,7 @@ media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDE
 
 			$name = $myrow['name1'];
 			$body = $myrow['body'];
+			$deck = $myrow['deck'];
 			$notes = $myrow['notes'];
 		}
 
