@@ -110,17 +110,16 @@ media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDE
 
 <tr>
 <td style="font-family: 'Times New Roman', Times, serif; font-size:24px; line-height:27px; color:#000;">
+<br />
 <?php
 echo nl2br($deck);
 ?>
-<br />
-<br />
 </td>
 </tr>
 
 <tr>
 <td>
-<br/>
+<br />
 <?php
 	// images
 
@@ -139,6 +138,7 @@ echo nl2br($deck);
 
 <tr>
 <td style="font-family: 'Times New Roman', Times, serif; font-size:24px; line-height:27px; color:#000;">
+<br />
 <?php
 echo nl2br($body);
 ?>
@@ -149,6 +149,7 @@ echo nl2br($body);
 
 <tr>
 <td style="font-family: Helvetica, Arial, sans-serif; font-size: 10px; line-height:12px; color:#000;">
+<br />
 <?php
 echo nl2br($notes);
 ?>
