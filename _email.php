@@ -106,6 +106,17 @@ media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDE
 ?>
 <center>
 <table border="0" cellspacing="0" style="width: 335px;">
+
+<tr>
+<td style="font-family: 'Times New Roman', Times, serif; font-size:24px; line-height:27px; color:$
+<?php
+echo nl2br($deck);
+?>
+<br />
+<br />
+</td>
+</tr>
+
 <tr>
 <td>
 <br/>
