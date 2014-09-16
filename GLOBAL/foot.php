@@ -21,7 +21,7 @@
 	
 		<?php if ($pageName=="index") { ?> 
 
-                        document.cookie = "animateCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                        // document.cookie = "animateCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 			initPunctuation("animatePunctuation", delay, true, true);
 
        	                <?php if (!$alt) { ?>

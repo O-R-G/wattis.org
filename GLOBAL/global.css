@@ -83,8 +83,9 @@ a:active {
 }
 
 .control:hover {
+	color:#F00;
   	background-color:#FFF;
-	opacity:.5;
+	/* opacity:.5; */
 }
 
 

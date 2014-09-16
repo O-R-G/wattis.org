@@ -60,6 +60,7 @@ if
 	
 	<div class="logoContainer times big logo fixed">
 	<span id="logo" onmousedown="startStopAnimatePunctuation(200);" class="control">.+*</span>
+	<span id="rollover" onmousedown="startStopAnimatePunctuation(200);" class="control helvetica small">ON / OFF</span>
 	<a href="<?php echo ($pageName == 'index') ? 'main' : 'index?alt=1'; ?>" style="color:#000;">The Wattis Institute</a>
 	</div>
 	
