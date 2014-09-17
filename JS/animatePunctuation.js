@@ -51,13 +51,18 @@
 
 				delay -= ((delay-10) < 0) ? 0 : 10;
 				initPunctuation('animatePunctuation', delay, false, animate);
+				// document.cookie="delayCookie=" + delay;
 
 			} else if (e.keyCode == 189) {
 
 				delay += ((delay+10) > 500) ? 0 : 10;
 				initPunctuation('animatePunctuation', delay, false, animate);
+				// document.cookie="delayCookie=" + delay;
 			}
 
+			// *dev*
+			// delay=200;			// reset
+			// console.log("delay=" + delay);
 		};
 
 	}

@@ -32,6 +32,7 @@
 	<meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
 	<meta http-equiv="Title" content="<?php echo $documentTitle; ?>" />
 	<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
+	<link rel="icon" href="MEDIA/icon.gif?refresh=true" type="image/gif">
 	<script type="text/javascript" src="GLOBAL/global.js"></script>
 	<script type="text/javascript" src="JS/animatePunctuation.js"></script>
 </head>
@@ -60,7 +61,7 @@ if
 	
 	<div class="logoContainer times big logo fixed">
 	<span id="logo" onmousedown="startStopAnimatePunctuation(200);" class="control">.+*</span>
-	<span id="rollover" onmousedown="startStopAnimatePunctuation(200);" class="control helvetica small">ON / OFF</span>
+	<!-- <span id="rollover" onmousedown="startStopAnimatePunctuation(200);" class="control helvetica small">ON / OFF</span> -->
 	<a href="<?php echo ($pageName == 'index') ? 'main' : 'index?alt=1'; ?>" style="color:#000;">The Wattis Institute</a>
 	</div>
 	

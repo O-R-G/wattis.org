@@ -18,10 +18,10 @@
 	<script type="text/javascript">
 
         	var animate = checkCookie("animateCookie");
-	
+		// delay = (checkCookie("delayCookie")) ? (getCookie("delayCookie")) : 200;
+
 		<?php if ($pageName=="index") { ?> 
 
-                        // document.cookie = "animateCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 			initPunctuation("animatePunctuation", delay, true, true);
 
        	                <?php if (!$alt) { ?>
