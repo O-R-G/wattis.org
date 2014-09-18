@@ -18,7 +18,7 @@
 	<script type="text/javascript">
 
         	var animate = checkCookie("animateCookie");
-		// delay = (checkCookie("delayCookie")) ? (getCookie("delayCookie")) : 200;
+		delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
 
 		<?php if ($pageName=="index") { ?> 
 

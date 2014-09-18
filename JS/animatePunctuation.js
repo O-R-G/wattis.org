@@ -14,7 +14,6 @@
 	// 	globals
 	
 	var timeout;
-	var delay = 200;
 
 
         function initPunctuation(id, delay, replace, animate) {
@@ -51,18 +50,17 @@
 
 				delay -= ((delay-10) < 0) ? 0 : 10;
 				initPunctuation('animatePunctuation', delay, false, animate);
-				// document.cookie="delayCookie=" + delay;
+				updateControlDisplay(animate,delay,"+")
 
 			} else if (e.keyCode == 189) {
 
-				delay += ((delay+10) > 500) ? 0 : 10;
+				delay += ((delay+10) > 400) ? 0 : 10;
 				initPunctuation('animatePunctuation', delay, false, animate);
-				// document.cookie="delayCookie=" + delay;
+				updateControlDisplay(animate,delay,"–")
 			}
 
-			// *dev*
-			// delay=200;			// reset
-			// console.log("delay=" + delay);
+			document.cookie="delayCookie=" + delay;
+
 		};
 
 	}
@@ -134,10 +132,11 @@
 	// 1. expire cookie
 
 
-        function startStopAnimatePunctuation(delay) {
+        function startStopAnimatePunctuation() {
 
  		if (timeout == null) {
 							
+	                delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
 			initPunctuation("animatePunctuation", delay, false, true);			
 			document.cookie="animateCookie=true";
 			var click = clickHandler();
@@ -225,4 +224,13 @@
 
 			return false; 
                 }
+	}
+
+
+	function updateControlDisplay(animate,delay,plus) {
+    
+		if ( document.getElementById("control")) { 
+
+			document.getElementById("control").textContent = animate + " : " + (400 - delay) + " " + plus; 
+		}
 	}

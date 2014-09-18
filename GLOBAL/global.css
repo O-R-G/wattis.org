@@ -78,13 +78,22 @@ a:active {
 	color: #000;
 	}
 
-.control {
+
+/* ids */
+
+#control {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+	height: 100px;
+	width: 100px;
 	cursor:pointer;
+	color:transparent;
 }
 
-.control:hover {
+#control:hover {
 	color:#F00;
-  	background-color:#FFF;
+	background-color:#FFF;
 	opacity:.5;
 }
 
@@ -273,6 +282,14 @@ a:active {
 .animatePunctuation {
 	/* add this to animate punctuation in a div */
 	}
+
+.target {
+        cursor:pointer;
+        }
+
+.target:hover {
+	opacity:.5;
+}
 
 
 /* colors */
