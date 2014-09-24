@@ -163,6 +163,8 @@ echo nl2br($notes);
 <script type="text/javascript" src="JS/animatePunctuation.js"></script>
 <script type="text/javascript">
 
+	delay = 200;	// default
+
 	initPunctuation("animatePunctuation", delay, true, false);
 
 	// build renderedHTML
