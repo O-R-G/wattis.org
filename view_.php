@@ -31,7 +31,8 @@ $id AND objects.active ORDER BY media.rank;";
 
 
 	// collect images
-
+	// ok
+ 
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
                 if ($myrow['mediaActive'] != null) {

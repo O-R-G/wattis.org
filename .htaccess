@@ -1,0 +1,182 @@
+# Options +Indexes
+RewriteEngine On
+RewriteBase  /
+
+# internal -- url remains, request remapped on server 
+# external -- url changes, server remaps incoming request [R]
+
+# 0. if full url != marker 
+# 1. rewrite full url  --> clean url
+# 2. rewrite clean url --> full url & marker
+
+# note: RewriteCond only applies to RewriteRule that immediately follows
+# note: [OR] works as or, and [S=1] skips next 1 ReWriteRule
+# [L] flag -- last rule, stop processing
+# http://httpd.apache.org/docs/current/rewrite/flags.html
+# http://httpd.apache.org/docs/current/rewrite/remapping.html
+
+# $1 ... regex back ref same line
+# %1 ... regex back ref previous line
+ 
+
+### specific ### 
+
+# main
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=3
+RewriteRule ^menu_\.php$ main? [R,L]
+RewriteRule ^main$ menu_\.php?marker&id=3 [L]
+
+# about
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=22
+RewriteRule ^view_\.php$ about? [R,L]
+RewriteRule ^about$ view_\.php?marker&id=22 [L]
+
+# visit
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=23
+RewriteRule ^view_\.php$ visit? [R,L]
+RewriteRule ^visit$ view_\.php?marker&id=23 [L]
+
+# contact
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=24
+RewriteRule ^view_\.php$ contact? [R,L]
+RewriteRule ^contact$ view_\.php?marker&id=24 [L]
+
+# follow
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=28
+RewriteRule ^view_\.php$ follow? [R,L]
+RewriteRule ^follow$ view_\.php?marker&id=28 [L]
+
+# support
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=25
+RewriteRule ^view_\.php$ support? [R,L]
+RewriteRule ^support$ view_\.php?marker&id=25 [L]
+
+# editions
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=26
+RewriteRule ^display_\.php$ editions? [R,L]
+RewriteRule ^editions$ display_\.php?marker&id=26 [L]
+
+# catalogs
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=27
+RewriteRule ^display_\.php$ catalogs? [R,L]
+RewriteRule ^catalogs$ display_\.php?marker&id=27 [L]
+
+# archive
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=30
+RewriteRule ^view_\.php$ archive? [R,L]
+RewriteRule ^archive$ view_\.php?marker&id=30 [L]
+
+# capp
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=31
+RewriteRule ^view_\.php$ capp? [R,L]
+RewriteRule ^capp$ view_\.php?marker&id=31 [L]
+
+# intern
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=29
+RewriteRule ^view_\.php$ intern? [R,L]
+RewriteRule ^intern$ view_\.php?marker&id=29 [L]
+
+# calendar
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=7
+RewriteRule ^list_\.php$ calendar? [R,L]
+RewriteRule ^calendar$ list_\.php?marker&id=7 [L]
+
+# exhibitions
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=93
+RewriteRule ^view_\.php$ exhibitions? [R,L]
+RewriteRule ^exhibitions$ view_\.php?marker&id=93 [L]
+
+# program
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} id=93
+RewriteRule ^view_\.php$ program? [R,L]
+RewriteRule ^program$ view_\.php?marker&id=93 [L]
+
+
+### generic ### 
+
+# index
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^index\.php$ index?%1 [R,L]
+RewriteRule ^index$ index\.php?marker [QSA,L]
+
+# menu
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^menu_\.php$ menu?%1 [R,L]
+RewriteRule ^menu$ menu_\.php?marker [QSA,L]
+
+# view
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^view_\.php$ view?%1 [R,L]
+RewriteRule ^view$ view_\.php?marker [QSA,L]
+
+# list
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^list_\.php$ list?%1 [R,L]
+RewriteRule ^list$ list_\.php?marker [QSA,L]
+
+# display
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^display_\.php$ display?%1 [R,L]
+RewriteRule ^display$ display_\.php?marker [QSA,L]
+
+# buy
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^buy_\.php$ buy?%1 [R,L]
+RewriteRule ^buy$ buy_\.php?marker [QSA,L]
+
+
+### archive ###
+
+# exhibitions
+
+RewriteRule ^exhibitions/(.*)$ http://archive.wattis.org/exhibitions/$1 [R,L]
+
+
+### utility ###
+
+# logo
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^(.*)
+RewriteRule ^_logo\.php$ logo? [R,L]
+RewriteRule ^logo$ _logo\.php?marker [QSA,L]
