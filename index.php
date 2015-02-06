@@ -16,7 +16,7 @@ require_once("_Library/orgRSSParse.php");
 
         $sql = "SELECT objects.id AS objectsId, objects.name1, objects.body, objects.url, 
 objects.begin, objects.end FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects 
-WHERE objects.name1 LIKE '$rootname' AND objects.active=1) AND wires.toid = objects.id AND 
+WHERE objects.name1 LIKE '$rootname' AND objects.active=1) AND objects.name1 NOT LIKE '.%' AND wires.toid = objects.id AND 
 objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
         $result = MYSQL_QUERY($sql);

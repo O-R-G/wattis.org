@@ -55,7 +55,7 @@ function orgRSSajax($xml) {
 
 		$weatherString = $item_title;
 
-		$weatherString = str_replace(" at San Francisco Intl Airport, CA", "", $weatherString);
+		$weatherString = str_replace(" at San Francisco, San Francisco International Airport, CA", "", $weatherString);
 		$weatherString = preg_replace("/\d+/", "$0&deg;", $weatherString);
 		$weatherString = str_replace("and", "and ", $weatherString);
 		$weatherString = "Today, " . strtolower($weatherString) . ".";
