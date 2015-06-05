@@ -31,7 +31,8 @@ RewriteRule ^main$ menu_\.php?marker&id=3 [L]
 # about
 
 RewriteCond %{QUERY_STRING} !marker
-RewriteCond %{QUERY_STRING} id=22
+# RewriteCond %{QUERY_STRING} id=22
+RewriteCond %{QUERY_STRING} ^id=22$
 RewriteRule ^view_\.php$ about? [R,L]
 RewriteRule ^about$ view_\.php?marker&id=22 [L]
 
