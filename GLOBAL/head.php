@@ -17,6 +17,10 @@
 	
 	$alt = $_REQUEST['alt'];
 
+	// pop
+
+        $pop = $_REQUEST['pop'];          // no register globals
+
 	$documentTitle = "CCA Wattis Institute for Contemporary Arts";
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"; 
 ?>

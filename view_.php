@@ -8,9 +8,10 @@ require_once("GLOBAL/head.php");
 	
 	// sam lewitt popWindow exception
 
-	if (<? echo $id; ?> == 238) {
+	if (<? echo $pop; ?> == true) {o
 
 		window.open("http://http://192.168.1.30");		
+
 	} else {
 
 		window.alert("Live stream currently unavailable . . .");
