@@ -8,7 +8,7 @@ require_once("GLOBAL/head.php");
 	
 	// sam lewitt popWindow exception
 
-	if (<? echo $pop; ?> == true) {o
+	if (<? echo $pop; ?> == true) {
 
 		window.open("http://http://192.168.1.30");		
 
