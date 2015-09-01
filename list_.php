@@ -14,7 +14,7 @@ require_once("GLOBAL/head.php");
 objects.begin, objects.end, (SELECT objects.name1 FROM objects WHERE objects.id = $id) AS rootname 
 FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.id = $rootid 
 AND objects.active=1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = '1' 
-ORDER BY objects.rank;";
+ORDER BY objects.rank, objects.begin;";
 
 	$result = MYSQL_QUERY($sql);
 	$myrow = MYSQL_FETCH_ARRAY($result);

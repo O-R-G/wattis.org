@@ -4,19 +4,15 @@ require_once("GLOBAL/head.php");
 
 <div class="mainContainer times big">
 
-	<script>
+	<?php
 	
-	// sam lewitt popWindow exception
+	// sam lewitt exception
+	
+	if ($id) {
 
-	if (<? echo $id; ?> == 238) {
-
-		window.open("http://http://192.168.1.30");		
-	} else {
-
-		window.alert("Live stream currently unavailable . . .");
-	}
-
-	</script>
+		window.open("http://www.w3schools.com");
+	} 
+	?>
 
 	<?php
 
