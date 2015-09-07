@@ -4,20 +4,19 @@ require_once("GLOBAL/head.php");
 
 <div class="mainContainer times big">
 
-	<script>
-	
+	<? 
 	// sam lewitt popWindow exception
 
-	if (<? echo $pop; ?> == true) {
+	if ($id = 238) {
+	?>
 
-		window.open("http://http://192.168.1.30");		
-
-	} else {
-
-		window.alert("Live stream currently unavailable . . .");
-	}
-
+	<script>
+		window.open("http://barcahall.com/wattis-heat.html?delay=0.5");		
 	</script>
+
+	<?
+	}
+	?>
 
 	<?php
 
