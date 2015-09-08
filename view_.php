@@ -11,7 +11,8 @@ require_once("GLOBAL/head.php");
 	?>
 
 	<script>
-		window.open("http://barcahall.com/wattis-heat.html?delay=0.5");		
+		// window.open("http://barcahall.com/wattis-heat.html?delay=0.5");		
+		window.open("http://wattis.org/thermalcam.html");		
 	</script>
 
 	<?
