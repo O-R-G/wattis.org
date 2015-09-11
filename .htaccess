@@ -181,3 +181,5 @@ RewriteCond %{QUERY_STRING} !marker
 RewriteCond %{QUERY_STRING} ^(.*)
 RewriteRule ^_logo\.php$ logo? [R,L]
 RewriteRule ^logo$ _logo\.php?marker [QSA,L]
+
+AddType application/x-httpd-php .html .htm
