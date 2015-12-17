@@ -4,6 +4,7 @@ require_once("GLOBAL/head.php");
 
 <div class="mainContainer times big">
 
+	<!--
 	<? 
 	// sam lewitt popWindow exception
 
@@ -20,6 +21,7 @@ require_once("GLOBAL/head.php");
 	<?
 	// }
 	?>
+	-->
 
 	<?php
 
