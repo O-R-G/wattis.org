@@ -1,20 +1,4 @@
-<?php
-
-echo "hello, world";
-die();
-
-?>
-
-
-
-
-
-<?php
-
-echo "OK!";
-die();
-
-// require_once("GLOBAL/head.php");
+<?php require_once("GLOBAL/head.php"); 
 
 
 
@@ -72,10 +56,10 @@ if ($action != "add") {
 
 	//  Upload New Images
 
-	for ($j = 0; $j < 1; $j++) {
+	for ($j = 0; $j < $uploadsMax; $j++) {
 
-		// echo "\n\n<tr><td>Image ". STR_PAD($i++, 2, "0", STR_PAD_LEFT) ."&nbsp; </td>";
-		echo "\n\n<tr><td>Image&nbsp; </td>";
+		echo "\n\n<tr><td>Image ". STR_PAD(++$i, 2, "0", STR_PAD_LEFT) ."&nbsp; </td>";
+		// echo "\n\n<tr><td>Image&nbsp; </td>";
 		echo "\n<td><input type='file' name='upload". $j ."' /><br />&nbsp;";
 		echo "\n</td></tr>";
 	}
@@ -199,4 +183,55 @@ if ($action != "add") {
 			// To turn on set $resize = TRUE; FALSE by default
 
 			$resize = FALSE; 
-			$targetPath = ($resize) ? "../MEDIA/_HI/" :
+			$targetPath = ($resize) ? "../MEDIA/_HI/" : "../MEDIA/";
+
+			$target = $targetPath . $targetFile;
+
+			// echo "wants to upload |". $_FILES["upload". $i]['name'] ."| to |". $target ."|<br /><br />";
+			
+			$copy = copy($_FILES["upload".$i]['tmp_name'], $target);
+			
+			if ($copy) {
+			
+				if ($resize) {
+	
+					include('_Extensions/SimpleImage.php');
+								
+					$image = new SimpleImage();
+					$image->load($target);
+					$image->scale(24);
+	
+					$targetPath = "../MEDIA/"; //$dbMedia;
+					$target = $targetPath . $targetFile;	
+					
+					$image->save($target);
+					
+					echo "Upload $imageName SUCCESSFUL<br />";
+					echo "Copy $target SUCCESSFUL<br />";
+				}
+
+								
+				// Add to DB's image list
+				
+				$sql = "INSERT INTO media (type, caption, object, created, modified) VALUES ('$type', '', '$insertId', '". date("Y-m-d H:i:s") ."', '". date("Y-m-d H:i:s") ."')";
+				$result = MYSQL_QUERY($sql);
+				
+			} else {
+				
+				//echo "Upload $imageName FAILED<br />";
+				//printf ("ERROR %s<br/>", $_FILES['imagefile'. $i]['error']);
+			}
+			
+			$m = TRUE;
+		}
+	}
+	echo "Object added successfully.<br /><br />";
+	echo "<a href='". $dbAdmin ."browse.php". urlData() ."'>CONTINUE...</a>";
+}
+
+
+
+
+
+
+require_once("GLOBAL/foot.php"); ?>
