@@ -7,7 +7,7 @@ require_once("GLOBAL/head.php");
 	<? 
 	// sam lewitt popWindow exception
 
-	if ($id == 238) {
+	// if ($id == 238) {
 	?>
 
 	<script>
@@ -18,7 +18,7 @@ require_once("GLOBAL/head.php");
 	</script>
 
 	<?
-	}
+	// }
 	?>
 
 	<?php

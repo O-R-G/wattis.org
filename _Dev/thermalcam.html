@@ -1,0 +1,20 @@
+<html>
+<script type="text/javascript">
+var delayBetweenUpdate = 1000 * Number(location.search.split('delay=')[1] ? location.search.split('delay=')[1] : '1');
+
+function updateImage()
+{
+	var img = document.getElementById("img");
+	img.src = "http://162.238.126.169/graphics/livevideo/stream/stream3.jpg" + "?" + Date.now();
+	// img.src = "http://204.28.123.14/graphics/livevideo/stream/stream3.jpg" + "?" + Date.now();
+	setTimeout(updateImage, delayBetweenUpdate);
+}
+</script>
+
+<head>
+<title>CCA Wattis Institute for Contemporary Arts</title>
+</head>
+<body onload="updateImage()" style="background-color:#0A0A0A">
+	<img id="img" height="480" width="640" src="" style="display:block; margin:auto;">
+</body>
+</html>
