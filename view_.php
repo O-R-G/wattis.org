@@ -13,7 +13,8 @@ require_once("GLOBAL/head.php");
 	<script>
 		// window.open("http://barcahall.com/wattis-heat.html?delay=0.5");		
 		// window.open("http://wattis.org/thermalcam.html");		
-                window.open("http://wattis.org/thermalcam.html?delay=0.5", "thermal cam", "width=660, height=520, scrollbars=no, resizable=no");          
+                // window.open("http://wattis.org/thermalcam.html?delay=0.5", "thermal cam", "width=660, height=520, scrollbars=no, resizable=no");          
+                window.open("http://wattis.org/thermalcam.html?delay=0.25", "thermal cam", "width=660, height=520, scrollbars=no, resizable=no");          
 	</script>
 
 	<?
@@ -61,8 +62,16 @@ $id AND objects.active ORDER BY media.rank;";
 			$randomWidth = rand(30, 50);
 			$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
 			
-			$images[$i] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
-			$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='expandImageContainerMargin(\"image".$i."\", \"40px\", \"-80px\");'>";
+			if(!$isMobile)
+			{
+				$images[$i] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
+				$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='expandImageContainerMargin(\"image".$i."\", \"40px\", \"-80px\");'>";
+			}
+			else
+			{
+				$images[$i] .= "<div class='imageContainerWrapper'>";
+				$images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
+			}
 			$images[$i] .= "\n    ". displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 			$images[$i] .= "<div class = 'captionContainer caption helvetica small'>";
 			$images[$i] .= $mediaCaption . "<br /><br />";

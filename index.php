@@ -27,11 +27,20 @@ objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 	$blocks[$i] = "<div class = 'logoContainer'>" . $myrow["body"] . "</div>";
 
         while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-
-                $randomPadding = rand(0, 150);
-                $randomWidth = rand(10, 35);
-                $randomMargin = rand(30, 80);
-                $randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
+				if(!$isMobile)
+				{
+					$randomPadding = rand(0, 150);
+					$randomWidth = rand(10, 35);
+					$randomMargin = rand(30, 80);
+					$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
+                }
+                else
+                {
+                	$randomPadding = rand(0, 30);
+					$randomWidth = rand(30, 80);
+					$randomMargin = rand(20, 50);
+					$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
+                }
                 $blocks[$i] .= "<div class = 'blockContainer' style='width:" . $randomWidth . "%; float:" . $randomFloat . "; padding-top:" . $randomPadding . "px; margin: " . $randomMargin . "px;'>";
                 $blocks[$i] .= $myrow["body"];
                 $blocks[$i] .= "</div>";
