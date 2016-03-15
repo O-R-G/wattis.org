@@ -12,7 +12,7 @@
 		</div>
 	</div>
 </div>	
-<script type="text/javascript">
+<!--script type="text/javascript">
 
 		var animate = checkCookie("animateCookie");
 	delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
@@ -34,6 +34,6 @@
 
 	<?php } ?>
 
-</script>
+</script-->
 </body>
 </html>

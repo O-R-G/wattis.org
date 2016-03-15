@@ -22,19 +22,38 @@ require_once("GLOBAL/head.php");
 	// }
 	?>
 	-->
+<?
+$rootid = $ids[0];
 
-	<?php
-
-        $rootid = $ids[0];
-
-	// SQL object plus media plus rootname
-
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, 
-objects.notes, objects.active, objects.begin, objects.end, objects.rank as objectsRank, (SELECT 
-objects.name1 FROM objects WHERE objects.id = $rootid) AS rootname, media.id AS mediaId, 
-media.object AS mediaObject, media.type, media.caption, media.active AS mediaActive, media.rank 
-FROM objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE objects.id = 
-$id AND objects.active ORDER BY media.rank;";
+// SQL object plus media plus rootname
+$sql = "SELECT 
+			objects.id AS objectsId, 
+			objects.name1, objects.deck, objects.body, objects.notes, 
+			objects.active, objects.begin, objects.end, 
+			objects.rank as objectsRank, 
+			(
+				SELECT 
+					objects.name1 
+				FROM objects 
+				WHERE objects.id = $rootid
+			) AS rootname, 
+			media.id AS mediaId, 
+			media.object AS mediaObject, 
+			media.type, 
+			media.caption, 
+			media.active AS mediaActive, 
+			media.rank 
+		FROM 
+			objects 
+		LEFT JOIN 
+			media 
+		ON 
+			objects.id = media.object 
+			AND media.active = 1 
+		WHERE 
+			objects.id = $id 
+			AND objects.active 
+		ORDER BY media.rank;";
 
         $result = MYSQL_QUERY($sql);
         $myrow = MYSQL_FETCH_ARRAY($result);
@@ -51,11 +70,11 @@ $id AND objects.active ORDER BY media.rank;";
 
 	// collect images
 	// ok
- 
-	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-
-                if ($myrow['mediaActive'] != null) {
-
+	$image_files = array();
+	while($myrow = MYSQL_FETCH_ARRAY($result)) 
+	{
+		if($myrow['mediaActive'] != null) 
+		{
 			$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
 			$mediaCaption = strip_tags($myrow["caption"]);
 			$mediaStyle = "width: 100%;";
@@ -67,7 +86,8 @@ $id AND objects.active ORDER BY media.rank;";
 			if(!$isMobile)
 			{
 				$images[$i] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
-				$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='expandImageContainerMargin(\"image".$i."\", \"40px\", \"-80px\");'>";
+				// $images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='expandImageContainerMargin(this, \"40px\", \"-80px\");'>";
+				$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='launch($i);'>";
 			}
 			else
 			{
@@ -80,20 +100,18 @@ $id AND objects.active ORDER BY media.rank;";
 			$images[$i] .= "</div>";
 			$images[$i] .= "</div>";
 			$images[$i] .= "</div>";
+			
+			$image_files[] = trim($mediaFile, "/");
 		}
-
 		$i++;
 	}
-
-
-        // Check for column breaks
-
+    
+    // Check for column breaks
 	$pattern = "/\/\/\//";
 	if ( preg_match($pattern, $body) == 1 ) $columns = preg_split($pattern, $body);
 
 
 	// hours
-
 	$html .= "<div class='listContainer times'>";
 
 	if ($begin || $end) {
@@ -189,8 +207,19 @@ $id AND objects.active ORDER BY media.rank;";
 
         $html .= "</div>";
 	echo nl2br($html);
-	?>
-
-<?php
+	?><div id="gallery" class="center hidden">
+		<div id="gallery-ex" onclick="close_gallery();"><img src="/MEDIA/svg/ex.svg"></div>
+		<div id="gallery-prev" onclick="prev();"><img src="/MEDIA/svg/prev.svg"></div>
+		<div id="gallery-next" onclick="next();"><img src="/MEDIA/svg/next.svg"></div>
+		<img id="img-gallery" class="center" src="/MEDIA/00554.jpg">
+	</div>
+	<script type="text/javascript">
+		var images = <? echo json_encode($image_files); ?>;
+		var gallery_id = "gallery";
+		var gallery_img = "img-gallery"
+		var index = 0;
+		var inGallery = false;
+		var attached = false;
+	</script><?
 require_once("GLOBAL/foot.php");
 ?>

@@ -226,6 +226,64 @@ a:active {
 	margin-top: -3%;
         z-index:1000;
 	}
+	
+#gallery {
+	position: fixed;
+	width: 100%;
+    height: 100%;
+    z-index: 100;
+    
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#gallery-ex,
+#gallery-prev,
+#gallery-next {
+	position: fixed;
+	width: 20px;
+	padding: 10px;
+	
+	cursor: pointer;
+}
+
+#gallery-prev,
+#gallery-next {
+	top: 50%;
+	transform: translateY(-50%);
+}
+#gallery-ex {
+	top: 0px;
+	right: 0px;
+}
+
+#gallery-prev {
+	left: 0px;
+}
+
+#gallery-next {
+	right: 0px;
+}
+#img-gallery {
+	position: fixed;
+	max-height: 90%;
+	max-width: 90%;
+}
+
+.center {
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hidden {
+	display: none;
+}
+
+.visible {
+	display: inherit;
+}
 
 
 /* utility */

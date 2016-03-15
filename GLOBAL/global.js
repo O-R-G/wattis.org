@@ -26,36 +26,36 @@ function displayTime() {
 
 // expandImagePadding (toggle)
 
-function expandImagePadding(thisId,originalSize,newSize) {
-
-        if (document.getElementById(thisId).style.padding == originalSize) {
-
-                document.getElementById(thisId).style.padding = newSize;
-        } else {
-
-                document.getElementById(thisId).style.padding = originalSize;
-        }
-
-        return true;
+function expandImagePadding(thisId, originalSize, newSize) 
+{
+	var el = document.getElementById(thisId);
+	if(el.style.padding == originalSize)
+	{
+		el.style.padding = newSize;
+    } 
+    else 
+    {
+		el.style.padding = originalSize;
+    }
+	return true;
 }
 
 
 // expandImageContainerMargin (toggle)
-
-function expandImageContainerMargin(thisId,originalSize,newSize) {
-
-	if (document.getElementById(thisId).style.margin == originalSize) {
-
+function expandImageContainerMargin(el, originalSize, newSize) 
+{	
+	if (el.style.margin == originalSize) 
+	{
 		var timestamp = new Date().getTime().toString();
 		var zindexnow = timestamp.slice(-6);
-
-		document.getElementById(thisId).style.margin = newSize;			
-		document.getElementById(thisId).style.zIndex = zindexnow;
+		el.style.margin = newSize;			
+		el.style.zIndex = zindexnow;
 			
-	} else {
-
-		document.getElementById(thisId).style.margin = originalSize;		
-		document.getElementById(thisId).style.zIndex = "0";			
+	}
+	else 
+	{
+		el.style.margin = originalSize;		
+		el.style.zIndex = "0";			
 	}
 		
 	return true;
@@ -114,3 +114,105 @@ function showRSS(str) {
   	xmlhttp.send();
 }
 
+// image gallery
+
+function launch(i) {
+	show(gallery_id);
+	// setbg(gallery_id, images[i]);
+	setsrc(gallery_img, images[i]);
+	index = i; // store current image index
+	if(!attached)
+	{
+		document.addEventListener("click", gallery_listener);
+		gallery_listener_set();
+	}
+}
+
+function gallery_listener_set() {
+	inGallery = true;
+}
+
+function prev() {
+	if(index == 0)
+		index = images.length;
+	index--;
+	setsrc(gallery_img, images[index]);
+}
+
+function next() {
+	if(index == images.length-1)
+		index = -1;
+	index++;
+	setsrc(gallery_img, images[index]);
+}
+
+function close_gallery() {
+	inGallery = false;
+	hide(gallery_id);
+	if(attached)
+		document.removeEventListener("click", gallery_listener);
+	attached = false;
+}
+
+// use arrow keys for navigation within the gallery
+document.onkeydown = function(e) {
+	if(inGallery) {
+		e = e || window.event;
+		switch(e.which || e.keyCode) {
+			case 37: // left
+				prev();
+			break;
+			case 39: // right
+				next();
+			break;
+			case 27: // esc
+				close_gallery();
+			break;
+			default: return; // exit this handler for other keys
+		}
+		e.preventDefault();
+	}
+}
+
+function setbg(id, url) {
+	// get element
+	el = document.getElementById(id);
+	
+	// build bg style
+	bi = "url('/".concat(url).concat("')");
+	el.style.backgroundImage = bi;
+}
+
+function setsrc(id, url) {
+	// get element
+	el = document.getElementById(id);
+	el.src = url;
+}
+
+function hide(id)
+{
+	el = document.getElementById(id);
+	el.classList.remove("visible");
+	el.classList.add("hidden");
+}
+
+function show(id)
+{
+	el = document.getElementById(id);
+	el.classList.remove("hidden");
+	el.classList.add("visible");
+}
+
+function gallery_listener(e)
+{
+	var level = 0;
+	attached = true;
+  	for(var element = e.target; element; element = element.parentNode) {
+		if(element.id === 'img-gallery') {
+			console.log("img-gallery clicked")
+			return;
+		}
+		level++;
+	}
+  	console.log("not img-gallery clicked");
+}
