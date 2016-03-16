@@ -36,7 +36,7 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css" />
 		<link rel="icon" href="MEDIA/icon.gif?refresh=true" type="image/gif">
-		<script type="text/javascript" src="GLOBAL/global.js"></script>
+		<script type="text/javascript" src="JS/global.js"></script>
 		<script type="text/javascript" src="JS/animatePunctuation.js"></script>
 	</head>
 	<body>

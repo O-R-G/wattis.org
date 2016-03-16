@@ -1,7 +1,7 @@
 <?php
 require_once("GLOBAL/head.php");
 ?>
-
+<script type="text/javascript" src="JS/gallery.js"></script>
 <div class="mainContainer times big">
 
 	<!--
@@ -153,53 +153,47 @@ $sql = "SELECT
 		$html .= $datesDisplay;
                 // if ($displayHours) $html .= $hoursDisplay;
 
-	} else {
-	
+	} 
+	else
+	{
 		$html .= $name;	
 	}
 
-	$html .= "</div>";	
-
+	$html .= "</div>";
 
 	// body
-
-	if ($columns) {
-
+	if($columns) 
+	{
 		// column 2
-	
 		$html .= "<div class='listContainer times'>";
 		$html .= $columns[0];	
 		$html .= "</div>";	
                   	
 		// column 3
-	
 		$html .= "<div class='listContainer times'>";
 		$html .= $columns[1];	
-		$html .= "</div>";	
-                  	
-	} else {
-
-        	$html .= "<div class='listContainer doublewide centered times'>";
-        	$html .= $body;
-        	$html .= "</div>";
+		$html .= "</div>";              	
+	} 
+	else 
+	{
+		$html .= "<div class='listContainer doublewide centered times'>";
+		$html .= $body;
+		$html .= "</div>";
 	}
 
 
-	// images
-        	
+	// images        	
 	$html .= "<div class='clear'></div>";
 	$html .= "<div class='galleryContainer'>";
 
-	for ( $j = 0; $j < count($images); $j++) {
-	
+	for($j = 0; $j < count($images); $j++)
+	{
 		$html .= $images[$j];
 	}
 
-
 	// video
-
-	if ($notes) {
-
+	if($notes)
+	{
 		$html .= "<span class=''>";
 		$html .= $notes;	                  
 		$html .= "</span>";	
@@ -220,6 +214,7 @@ $sql = "SELECT
 		var index = 0;
 		var inGallery = false;
 		var attached = false;
+		var gallery = document.getElementById(gallery_id);
 	</script><?
 require_once("GLOBAL/foot.php");
 ?>

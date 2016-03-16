@@ -12,28 +12,27 @@
 		</div>
 	</div>
 </div>	
-<!--script type="text/javascript">
+<script type="text/javascript">
+var animate = checkCookie("animateCookie");
+delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
 
-		var animate = checkCookie("animateCookie");
-	delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
-
-	<?php if ($pageName=="index") { ?> 
-
-		initPunctuation("animatePunctuation", delay, true, true);
-
-					<?php if (!$alt) { ?>
-
-						document.cookie = "animateCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-						var click = clickHandler();
-
-					<?php } ?> 
-
-	<?php } else { ?>
-
-			initPunctuation('animatePunctuation', delay, true, animate);
-
-	<?php } ?>
-
-</script-->
+<? 
+if($pageName=="index") 
+{ 
+?>initPunctuation("animatePunctuation", delay, true, true);<? 
+	if(!$alt) 
+	{ 
+	?>
+		document.cookie = "animateCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		var click = clickHandler();
+	<?
+	}
+} 
+else 
+{ 
+	?>initPunctuation('animatePunctuation', delay, true, animate);<? 
+} 
+?>
+</script>
 </body>
 </html>

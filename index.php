@@ -63,11 +63,13 @@ objects.active = '1' AND wires.active = '1' ORDER BY objects.rank;";
 
 
 <!-- WEATHER -->
-
 <script type="text/javascript">
-
-	showRSS("http://www.nws.noaa.gov/data/current_obs/KSFO.rss"); 	// requires <element id="rss">
-
+el = document.getElementById("rss");
+if(!!el)
+{
+	// requires <element id="rss">
+	showRSS(el, "http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
+}
 </script>
 
 
