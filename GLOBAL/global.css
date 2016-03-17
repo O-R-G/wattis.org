@@ -175,6 +175,10 @@ a:active {
 	padding-bottom: 1em;
 
 }
+.inline-img-container {
+	display:inline-block;
+	vertical-align: text-top;
+}
 
 .captionContainer {
 	padding-top: 1em;
