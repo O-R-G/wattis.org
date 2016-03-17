@@ -165,6 +165,9 @@ RewriteCond %{QUERY_STRING} ^(.*)
 RewriteRule ^buy_\.php$ buy?%1 [R,L]
 RewriteRule ^buy$ buy_\.php?marker [QSA,L]
 
+# mind
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
 
 ### archive ###
 

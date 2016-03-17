@@ -172,12 +172,14 @@ a:active {
 	}
 
 .imageContainerWrapper {
-	float:right;
-        }
+	padding-bottom: 1em;
+
+}
 
 .captionContainer {
-	padding-top: 10px;
-	}
+	padding-top: 1em;
+	padding-bottom: 10px;
+}
 
 .menuContainer {  
 	position: fixed;
