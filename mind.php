@@ -48,6 +48,7 @@ $sql = "SELECT
         $html = "";
 	$i=0;
 
+// search for embedded image tags
 $pattern = "/\[i(\d+)\]/";
 preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);
 $img_indexes = $out[1];
@@ -59,33 +60,33 @@ $img_indexes = $out[1];
 	{
 		if($myrow['mediaActive'] != null) 
 		{
+			$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
+			$mediaCaption = $myrow["caption"];
+			$mediaStyle = "width: 100%;";
+			$image_files[] = trim($mediaFile, "/");
+				
 			if(in_array($i+1, $img_indexes))
 			{
-				$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-				$mediaCaption = $myrow["caption"];
-				$mediaStyle = "width: 100%;";
-
 				$randomPadding = rand(0, 150);
 				$randomWidth = rand(40, 80);
 				$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
 			
+				$images[$i] .= "<div class = 'imageContainerWrapper'>";
+				if(!empty($mediaCaption))
+				{
+					$images[$i] .= "<div class = 'captionContainer caption'>";
+					$images[$i] .= $mediaCaption;
+					$images[$i] .= "</div>";
+				}
 				if(!$isMobile)
 				{
-					$images[$i] .= "<div class = 'imageContainerWrapper' style='float: $randomFloat;'>";
-					$images[$i] .= "<div class = 'captionContainer caption'>";
-					$images[$i] .= $mediaCaption;
-					$images[$i] .= "</div>";
-					// $images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='expandImageContainerMargin(this, \"40px\", \"-80px\");'>";
-					$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='float: $randomFloat; width: $randomWidth%; padding-$randomFloat: {$randomPadding}px' onclick='launch($i);'>";
+					$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='width: $randomWidth%; padding-left: {$randomPadding}px' onclick='launch($i);'>";
 				}
 				else
-				{
-					$images[$i] .= "<div class='imageContainerWrapper'>";
-					$images[$i] .= "<div class = 'captionContainer caption'>";
-					$images[$i] .= $mediaCaption;
-					$images[$i] .= "</div>";
+				{				
 					$images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
 				}
+				
 				$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 			
 				$images[$i] .= "</div>";
@@ -100,10 +101,6 @@ $img_indexes = $out[1];
 			}
 			else 
 			{
-				$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-				$mediaCaption = strip_tags($myrow["caption"]);
-				$mediaStyle = "width: 100%;";
-
 				$randomPadding = rand(0, 150);
 				$randomWidth = rand(30, 50);
 				$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
@@ -126,7 +123,6 @@ $img_indexes = $out[1];
 				$images[$i] .= "</div>";
 				$images[$i] .= "</div>";
 			}
-			$image_files[] = trim($mediaFile, "/");
 		}
 		$i++;
 	}
@@ -140,7 +136,6 @@ $img_indexes = $out[1];
 	// replace with image container = n
 	// remove image container n from array of images
 	// print out rest of images at the end (as normal images?)
-
 
 	// hours
 	$html .= "<div class='listContainer times'>";
