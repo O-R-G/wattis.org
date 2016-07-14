@@ -24,6 +24,8 @@ OPEN-RECORDS-GENERATOR can accommodate all standards-compliant HTML tags. This i
 
 <a href = 'http://www.example.com' target= 'new'>this text is a hyperlink in a new window</a>
 
+[image1] adds first inline image into the text body ([image2] is second, etc.)
+
 --
 
 GNU GENERAL PUBLIC LICENSE
