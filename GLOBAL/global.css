@@ -178,6 +178,7 @@ a:active {
 .inline-img-container {
 	display:inline-block;
 	vertical-align: text-top;
+    padding: 10px
 }
 
 .captionContainer {
@@ -242,6 +243,7 @@ a:active {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: #FFF;
 }
 
 #gallery-ex,
@@ -276,11 +278,22 @@ a:active {
 	max-height: 90%;
 	max-width: 90%;
 }
+#img-gallery-caption {
+	position: fixed;
+	max-height: 90%;
+	max-width: 90%;
+}
 
 .center {
 	top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.centerbottom {
+	bottom: 2%;
+    left: 50%;
+    transform: translate(-50%, -2%);
 }
 
 .hidden {

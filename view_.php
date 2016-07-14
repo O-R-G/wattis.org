@@ -54,8 +54,9 @@ preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);
 $img_indexes = $out[1];
 
 // collect images
-// ok
+// collect captions
 $image_files = array();
+$image_captions = array();
 while($myrow = MYSQL_FETCH_ARRAY($result)) 
 {
 	if($myrow['mediaActive'] != null) 
@@ -67,19 +68,21 @@ while($myrow = MYSQL_FETCH_ARRAY($result))
 			$image_files[] = ("/MEDIA/pdf.gif");
 		else
 			$image_files[] = trim($mediaFile, "/");
-			
+        $image_captions[] = $mediaCaption;		
+
 		if(in_array($i+1, $img_indexes))
 		{
-			$randomPadding = rand(0, 150);
-			$randomWidth = rand(15, 25);
-			$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
-			
+			// $randomWidth = rand(15, 25);
+			$width = 90;    // 90% of text column
+
 			if(!$isMobile)
 			{
-				$images[$i] .= "<div id='image".$i."' class = 'inline-img-container' style='width: $randomWidth%;' onclick='launch($i);'>";
+				// $images[$i] .= "<div id='image".$i."' class = 'inline-img-container' style='width: $randomWidth%;' onclick='launch($i);'>";
+				$images[$i] .= "<div id='image".$i."' class = 'inline-img-container' style='width: $width%;' onclick='launch($i);'>";
 			}
 			else
 			{				
+				// $images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
 				$images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
 			}
 			
@@ -223,11 +226,14 @@ echo nl2br($html);
 		<div id="gallery-prev" onclick="prev();"><img src="/MEDIA/svg/prev.svg"></div>
 		<div id="gallery-next" onclick="next();"><img src="/MEDIA/svg/next.svg"></div>
 		<img id="img-gallery" class="center" src="/MEDIA/00554.jpg">
+		<div id="img-gallery-caption" class='centerbottom monaco small'>. . .</div>
 	</div>
 	<script type="text/javascript">
 		var images = <? echo json_encode($image_files); ?>;
+		var captions = <? echo json_encode($image_captions); ?>;
 		var gallery_id = "gallery";
-		var gallery_img = "img-gallery"
+		var gallery_img = "img-gallery";
+		var gallery_img_caption = "img-gallery-caption";
 		var index = 0;
 		var inGallery = false;
 		var attached = false;
