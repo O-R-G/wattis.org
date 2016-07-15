@@ -87,8 +87,9 @@ while($myrow = MYSQL_FETCH_ARRAY($result))
 			}
 			
 			$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-			$images[$i].= "</div>";
-			// insert iages into body
+			$images[$i] .= "<div class='captionContainer monaco small'>" . $image_captions[$i] . "</div>";
+			$images[$i] .= "</div>";
+			// insert images into body
 			// remove leading and trailing whitespace for consistency
 			// (necessary whitespace is added in css)
 			$pattern = "/\[image".($i+1)."\]/";
@@ -113,7 +114,7 @@ while($myrow = MYSQL_FETCH_ARRAY($result))
 				$images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
 			}
 			$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-			$images[$i] .= "<div class = 'captionContainer caption helvetica small'>";
+			$images[$i] .= "<div class='captionContainer caption helvetica small'>";
 			$images[$i] .= $mediaCaption;
 			$images[$i] .= "</div>";
 			$images[$i] .= "</div>";
