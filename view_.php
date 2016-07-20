@@ -2,7 +2,7 @@
 require_once("GLOBAL/head.php");
 ?>
 <script type="text/javascript" src="JS/gallery.js"></script>
-<div class="mainContainer times big"><?
+<div class="mainContainer times big"><?php
 
 $rootid = $ids[0];
 
@@ -230,8 +230,8 @@ echo nl2br($html);
 		<div id="img-gallery-caption" class='centerbottom monaco small'>. . .</div>
 	</div>
 	<script type="text/javascript">
-		var images = <? echo json_encode($image_files); ?>;
-		var captions = <? echo json_encode($image_captions); ?>;
+		var images = <?php echo json_encode($image_files); ?>;
+		var captions = <?php echo json_encode($image_captions); ?>;
 		var gallery_id = "gallery";
 		var gallery_img = "img-gallery";
 		var gallery_img_caption = "img-gallery-caption";
@@ -239,6 +239,6 @@ echo nl2br($html);
 		var inGallery = false;
 		var attached = false;
 		var gallery = document.getElementById(gallery_id);
-	</script><?
+	</script><?php
 require_once("GLOBAL/foot.php");
 ?>

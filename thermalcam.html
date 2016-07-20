@@ -16,7 +16,7 @@ var delayBetweenUpdate = 1000 * Number(location.search.split('delay=')[1] ? loca
 function updateImage()
 {
 	var img = document.getElementById("img");
-	img.src = "<? echo $ip; ?>" + "?" + Date.now();
+	img.src = "<?php echo $ip; ?>" + "?" + Date.now();
 	// img.src = "http://204.28.123.14/graphics/livevideo/stream/stream3.jpg" + "?" + Date.now();
 	setTimeout(updateImage, delayBetweenUpdate);
 }

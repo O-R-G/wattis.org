@@ -16,21 +16,21 @@
 var animate = checkCookie("animateCookie");
 delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
 
-<? 
+<?php 
 if($pageName=="index") 
 { 
-?>initPunctuation("animatePunctuation", delay, true, true);<? 
+?>initPunctuation("animatePunctuation", delay, true, true);<?php 
 	if(!$alt) 
 	{ 
 	?>
 		document.cookie = "animateCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 		var click = clickHandler();
-	<?
+	<?php
 	}
 } 
 else 
 { 
-	?>initPunctuation('animatePunctuation', delay, true, animate);<? 
+	?>initPunctuation('animatePunctuation', delay, true, animate);<?php 
 } 
 ?>
 </script>
