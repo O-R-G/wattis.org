@@ -3,7 +3,7 @@ require_once("GLOBAL/head.php");
 require_once("_Library/orgRSSParse.php");
 ?>
 <!-- BLOCKS -->
-<div class="homeContainer times big"><?
+<div class="homeContainer times big"><?php
 
 $rootname = 'Home';
 
@@ -76,7 +76,7 @@ if(!!el)
 }
 </script>
 
-<!-- NEWS -->
+<!-- NEWS --> 
 <script type="text/javascript" src="JS/animateNewsTicker.js"></script>
 <script type="text/javascript">
 
@@ -124,7 +124,6 @@ if(!!el)
 	
 	animateNewsTicker(newsItem[0]);
 </script>
-
 
 <?php
 require_once("GLOBAL/foot.php");
