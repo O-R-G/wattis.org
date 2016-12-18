@@ -84,26 +84,33 @@ media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDE
 
 	// collect images
 
-	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+    while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
-		if ($myrow['mediaActive'] != null) {
-		
-			$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-			$mediaStyle = "width: 100%;";
-			$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-		}
+            $name = $myrow['name1'];
+            $body = $myrow['body'];
+            $deck = $myrow['deck'];
+            $notes = $myrow['notes'];
 
-		if ( $i == 0 ) {
+        if ($myrow['mediaActive'] != null) {
 
-			$name = $myrow['name1'];
-			$body = $myrow['body'];
-			$deck = $myrow['deck'];
-			$notes = $myrow['notes'];
-		}
+            $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
+            $mediaStyle = "width: 75%; padding: 5%; display:inline-block; vertical-align: text-top;";
 
-		$i++;
-	}
+            $images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 
+            // insert images into body
+            // remove leading and trailing whitespace for consistency
+            $pattern = "/\[image".($i+1)."\]/";
+
+	    if (preg_match($body, $pattern)) {
+
+               $body = preg_replace($pattern, $images[$i], $body);
+               unset($images[$i])
+            }
+        }
+
+        $i++;
+    }
 ?>
 <center>
 <table border="0" cellspacing="0" style="width: 335px;">
