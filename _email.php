@@ -1,8 +1,8 @@
 <?php
+	// Parse $id
         require_once("_Library/systemDatabase.php");
         require_once("_Library/displayMedia.php");
 
-	// Parse $id
 
         $id = $_REQUEST['id'];          // no register globals
         if (!$id) $id = "0";
@@ -70,13 +70,14 @@ a:active {
 <body>
 <div id="animatePunctuation" class="animatePunctuation">
 <?php
-                
+
 	// SQL object plus media
-	                     
-	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.notes, 
-objects.active, objects.rank as objectsRank, media.id AS mediaId, media.object AS mediaObject, media.type, 
-media.caption, media.active AS mediaActive, media.rank FROM objects LEFT JOIN media ON objects.id = 
-media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDER BY media.rank;";
+
+	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, 
+objects.notes, objects.active, objects.rank as objectsRank, media.id AS mediaId, media.object AS 
+mediaObject, media.type, media.caption, media.active AS mediaActive, media.rank FROM objects LEFT 
+JOIN media ON objects.id = media.object AND media.active = 1 WHERE objects.id = $id AND 
+objects.active ORDER BY media.rank;";
 
 	$result = MYSQL_QUERY($sql);
 	$html = "";
@@ -87,7 +88,8 @@ media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDE
     while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
             $name = $myrow['name1'];
-            $body = $myrow['body'];
+	    if (!$found)
+                $body = $myrow['body'];
             $deck = $myrow['deck'];
             $notes = $myrow['notes'];
 
@@ -102,13 +104,14 @@ media.object AND media.active = 1 WHERE objects.id = $id AND objects.active ORDE
             // remove leading and trailing whitespace for consistency
             $pattern = "/\[image".($i+1)."\]/";
 
-	    if (preg_match($body, $pattern)) {
+	    if (preg_match($pattern, $body)) {
 
-               $body = preg_replace($pattern, $images[$i], $body);
-               unset($images[$i])
+               $body = preg_replace($pattern, $images[$i], $body, 1);
+	       $found = TRUE;
+               unset($images[$i]);
             }
-        }
 
+        }
         $i++;
     }
 ?>
@@ -124,6 +127,7 @@ echo nl2br($deck);
 </td>
 </tr>
 
+<!--
 <tr>
 <td>
 <br />
@@ -133,7 +137,7 @@ echo nl2br($deck);
 	if ( $images ) {
 
 		for ( $j = 0; $j < count($images); $j++) {
-		
+
 			$html .= $images[$j];
 		}
 	}
@@ -142,6 +146,7 @@ echo nl2br($deck);
 ?>
 </td>
 </tr>
+-->
 
 <tr>
 <td style="font-family: 'Times New Roman', Times, serif; font-size:24px; line-height:27px; color:#000;">
@@ -202,6 +207,3 @@ echo nl2br($notes);
 
 </body>
 </html>
-
-
-
