@@ -3,7 +3,6 @@
         require_once("_Library/systemDatabase.php");
         require_once("_Library/displayMedia.php");
 
-
         $id = $_REQUEST['id'];          // no register globals
         if (!$id) $id = "0";
         $ids = explode(",", $id);
@@ -127,14 +126,14 @@ echo nl2br($deck);
 </td>
 </tr>
 
-<!--
 <tr>
 <td>
-<br />
 <?php
 	// images
 
 	if ( $images ) {
+
+		$html .= "<br />";
 
 		for ( $j = 0; $j < count($images); $j++) {
 
@@ -146,7 +145,6 @@ echo nl2br($deck);
 ?>
 </td>
 </tr>
--->
 
 <tr>
 <td style="font-family: 'Times New Roman', Times, serif; font-size:24px; line-height:27px; color:#000;">
