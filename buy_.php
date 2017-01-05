@@ -80,7 +80,7 @@ $id AND objects.active ORDER BY media.rank;";
         $html .= "<div class='listContainer twocolumn helvetica small'>";
 	$html .= $mediaCaption . "<br/>";
         $html .= $deck;
-        $html .= "<br /><br /><a href='mailto:tbutterworth@cca.edu'>Please email for ordering information</a>";
+        $html .= "<br /><br /><a href='mailto:arabinovitch@cca.edu'>Please email for ordering information</a>";
 	$html .= "</div>";
 
 
