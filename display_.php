@@ -11,11 +11,11 @@ require_once("GLOBAL/head.php");
         // SQL objects attached to object plus media plus rootname, rootbody
 
 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, (SELECT 
-objects.name1 FROM objects WHERE objects.id = $rootid) AS rootname, (SELECT objects.body FROM objects WHERE objects.id 
-= $rootid) AS rootbody, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, 
-media.active AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE 
-wires.fromid = (SELECT objects.id FROM objects WHERE objects.id = $id AND objects.active = 1) AND wires.toid=objects.id 
-ORDER BY objects.rank;";
+objects.name1 FROM objects WHERE objects.id = $rootid) AS rootname, (SELECT objects.body FROM objects WHERE objects.id = 
+$rootid) AS rootbody, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active 
+AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid = 
+(SELECT objects.id FROM objects WHERE objects.id = $id AND objects.active = 1) AND wires.toid=objects.id AND wires.active = 
+1 ORDER BY objects.rank;";
 
 	$result = MYSQL_QUERY($sql);
         $myrow = MYSQL_FETCH_ARRAY($result);
