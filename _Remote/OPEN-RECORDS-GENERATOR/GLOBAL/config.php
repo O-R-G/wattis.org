@@ -57,7 +57,7 @@
 
 function dbConnectMain($dbUser) {
 
-	$dbMainHost = "vm-mysql-01";
+	$dbMainHost = "vm-mysql-07";
 	$dbMainDbse = "wwwwattisdev";
 
 	if 	($dbUser == 1) {		$dbMainUser = "wattisview"; 	$dbMainPass = "W4++15v13w"; }

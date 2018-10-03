@@ -1,14 +1,26 @@
 			<!-- CLOSE home/mainContainer, animatePunctuation, color -->
 			</div>
 		<div class='menuContainer helvetica small'>
-			<!--div class='helvetica small'-->
-			<a href='main' class='instructionContainer'>MAIN</a>
+			<!-- <div class='helvetica small'>-->
+
+			<!--
+			<a href='main' class='instructionContainer'>MAIN</a> 
 			<a href='visit' class='instructionContainer'>VISIT</a>
 			<a href='program' class='instructionContainer'>PROGRAM</a>
 			<a href='calendar' class='instructionContainer'>CALENDAR</a>
 			<a href='archive' class='instructionContainer'>ARCHIVE</a>
 			<a href='index?alt=1' class='instructionContainer'>GO HOME</a>
-			<!--/div-->
+			-->
+
+			<a href='about' class='instructionContainer'>ABOUT</a> 
+			<a href='program' class='instructionContainer'>PROGRAM</a>
+			<a href='calendar' class='instructionContainer'>CALENDAR</a>
+			<a href='archive' class='instructionContainer'>ARCHIVE</a>
+			<a href='visit' class='instructionContainer'>VISIT</a>
+			<a href='contact' class='instructionContainer'>CONTACT</a>
+			<a href='catalogs' class='instructionContainer'>BOOKSHOP</a>
+
+			<!-- </div> -->
 		</div>
 	</div>
 </div>	

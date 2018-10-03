@@ -17,8 +17,7 @@ a:active {
         }
 
 a:hover {
-        color:#FFF;
-        border-bottom: solid 3px #FFF;
+        border-bottom: none;
         }
 
 a:active {
@@ -194,7 +193,7 @@ a:active {
 	clear: both; 
 	}
 
-.newsContainer {
+newsContainer {
         top: 0px;
         left: 0px;
         float:left;
