@@ -12,14 +12,14 @@
 
 			<a href='about' class='instructionContainer'>ABOUT</a> 
 			<a href='program' class='instructionContainer'>PROGRAM</a>
-			<a href='main' class='instructionContainer'>MENU</a>
+			<a href='calendar' class='instructionContainer'>CALENDAR</a>
 			<span class='desktop'>
-				<a href='calendar' class='instructionContainer'>CALENDAR</a>
 				<a href='archive' class='instructionContainer'>ARCHIVE</a>
 				<a href='visit' class='instructionContainer'>VISIT</a>
 				<a href='contact' class='instructionContainer'>CONTACT</a>
 				<a href='catalogs' class='instructionContainer'>BOOKSHOP</a>
 			</span>
+			<a href='main' class='instructionContainer'>MORE</a>
 		</div>
 	</div>
 </div>	
