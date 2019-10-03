@@ -1,5 +1,6 @@
 <?php 
 date_default_timezone_set('America/Los_Angeles');
+require_once("_Library/fix_mysql.php");		
 require_once("_Library/systemDatabase.php"); 
 require_once("_Library/displayMedia.php"); 
 require_once("_Library/systemCookie.php");		
