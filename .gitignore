@@ -4,3 +4,4 @@ config.php
 
 # authentication
 .htpasswd
+OPEN-RECORDS-GENERATOR/.htaccess
