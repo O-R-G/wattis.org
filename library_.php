@@ -22,14 +22,18 @@ require_once("GLOBAL/head.php");
 AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";         
     $result = MYSQL_QUERY($sql);
     while ($myrow = MYSQL_FETCH_ARRAY($result)) {
+        // var_dump($myrow);
         // default to first submenu item
         if (!$count)
             $submenu_selected_id = $myrow['id'];
         // ** not yet working **
+        // $id is not a thing
         if ($myrow['id'] == $id)
             $html_submenu .= $myrow['name1'] . "<br/>";
         else
             $html_submenu .= "<a href='library_.php?id=" . $myrow['id'] . "'>" . $myrow['name1'] ."</a><br/>";
+        echo "<br><br>submenu_selected_id = ";
+        var_dump($submenu_selected_id);
         $count++;
     }
     
@@ -40,22 +44,27 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
     $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $submenu_selected_id AND objects.active = 1 
 AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
     $result = MYSQL_QUERY($sql);
-    while ($myrow = MYSQL_FETCH_ARRAY($result))
-        $categories[] = $myrow['name1'];
+    $count = 0;
+    while ($myrow = MYSQL_FETCH_ARRAY($result)) {
+        $categories[$count]['id'] = $myrow['id'];
+        $categories[$count]['name'] = $myrow['name1'];
+        $count++;
+    }
 
+    // build objects in each category
 
-
-        // $root_id = $ids[0];
-        $root_id = 757;          // ** fix **
-        $id = 757;              // ** fix **
+        // not yet working **fix**
+        // because of how submenu_selected is not working
+        $category_id = $categories[0]['id'];;          
+        echo $category_id;
 
         // SQL objects attached to object plus media plus rootname, rootbody
 
     	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, (SELECT 
-objects.name1 FROM objects WHERE objects.id = $root_id) AS rootname, (SELECT objects.body FROM objects WHERE objects.id = 
-$root_id) AS rootbody, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active 
+objects.name1 FROM objects WHERE objects.id = $category_id) AS rootname, (SELECT objects.body FROM objects WHERE objects.id = 
+$category_id) AS rootbody, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active 
 AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid = 
-(SELECT objects.id FROM objects WHERE objects.id = $id AND objects.active = 1) AND wires.toid=objects.id AND wires.active = 
+(SELECT objects.id FROM objects WHERE objects.id = $category_id AND objects.active = 1) AND wires.toid=objects.id AND wires.active = 
 1 ORDER BY objects.rank;";
 
     	$result = MYSQL_QUERY($sql);
@@ -83,7 +92,7 @@ AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object 
 				$use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;		       
 	                }
 
-			$images[$i] .= "<a href='buy_.php?id=" . $root_id . "," . $myrow['objectsId'] . "'>";
+			$images[$i] .= "<a href='buy_.php?id=" . $category_id . "," . $myrow['objectsId'] . "'>";
 			$images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
 			$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 			$images[$i] .= "<div class = 'captionContainer helvetica small'>";
@@ -119,11 +128,15 @@ AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object 
     // categories
 
 
+
    
 	// images
 	
 	$html .= "<div class = 'listContainer doublewide'>";
 
+    foreach ($categories as $c)
+        $html .= $c['name'] . "&nbsp;";;
+    
 	for ( $j = 0; $j < count($images); $j++) {
 	
 		$html .= $images[$j];
