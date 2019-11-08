@@ -15,6 +15,7 @@ require_once("GLOBAL/head.php");
             $base_name = $myrow['name1'];
         }
 
+echo "----> id = " . $id;
 
     // build submenu
 
@@ -22,14 +23,10 @@ require_once("GLOBAL/head.php");
 AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";         
     $result = MYSQL_QUERY($sql);
     while ($myrow = MYSQL_FETCH_ARRAY($result)) {
-        // var_dump($myrow);
-        // default to first submenu item
-        if (!$count)
+        if ($myrow['id'] == $id) {
             $submenu_selected_id = $myrow['id'];
-        // ** not yet working **
-        // $id is not a thing
-        if ($myrow['id'] == $id)
             $html_submenu .= $myrow['name1'] . "<br/>";
+        }
         else
             $html_submenu .= "<a href='library_.php?id=" . $myrow['id'] . "'>" . $myrow['name1'] ."</a><br/>";
         echo "<br><br>submenu_selected_id = ";
@@ -40,7 +37,6 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
 
     // build categories
 
-    // $submenu_selected_id = $myrow['id'];
     $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $submenu_selected_id AND objects.active = 1 
 AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
     $result = MYSQL_QUERY($sql);
@@ -52,6 +48,8 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
     }
 
     // build objects in each category
+    // need to repeat this whole thing for each of two categories
+    // foreach ($categories as $c)
 
         // not yet working **fix**
         // because of how submenu_selected is not working
