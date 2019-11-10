@@ -95,7 +95,7 @@ wires.active = 1 ORDER BY objects.rank;";
 				        $use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;		       
 	                        }
         
-			        $images[$i] .= "<a href='buy_.php?id=" . $category_id . "," . $myrow['objectsId'] . "'>";
+			        $images[$i] .= "<a href='library_view_.php?id=" . $base_id . "," . $submenu_id . "," . $category_id . "," . $myrow['objectsId'] . "'>";
 			        $images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
 			        $images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 			        $images[$i] .= "<div class = 'captionContainer helvetica small'>";

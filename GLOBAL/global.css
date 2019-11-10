@@ -241,6 +241,10 @@ newsContainer {
 	padding-bottom: 1em;
 }
 
+.subdateContainer {
+	padding-top: 1em;
+}
+
 #gallery {
 	position: fixed;
 	width: 100%;
@@ -352,6 +356,10 @@ newsContainer {
 .triplewide {
         width:85%;
 	}
+
+.fullwide {
+    width: 100%;
+}
 
 .centered {
 	margin-left: auto;
