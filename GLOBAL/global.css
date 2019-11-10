@@ -64,6 +64,10 @@ a:active {
         border-bottom: solid 3px;
 	}
 
+.not-underlined a {
+        border-bottom: none;
+	}
+
 
 /* contents */
 
@@ -233,6 +237,10 @@ newsContainer {
         z-index:1000;
 	}
 	
+.subheadContainer {
+	padding-bottom: 1em;
+}
+
 #gallery {
 	position: fixed;
 	width: 100%;
@@ -322,12 +330,12 @@ newsContainer {
         }
 
 .clear {
-	clear:both;      
-        }
+	clear:both;
+    }
 
 .fixed {
 	position: fixed;      
-        }
+    }
 
 .twocolumn {
         width:47%;
