@@ -112,7 +112,7 @@ wires.active = 1 ORDER BY objects.rank;";
     
             // output $html
                 
-    	    $html .= "<div class = 'listContainer'>";
+    	    $html .= "<div class = 'listContainer not-underlined'>";
             $html .= "<div class='subheadContainer'>" . $c['name'] . "</div>";
 	        for ( $j = 0; $j < count($images); $j++)
 		        $html .= $images[$j];  
