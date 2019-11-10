@@ -6,6 +6,7 @@ require_once("GLOBAL/head.php");
 
 	<?php
 
+        $base_name = "Library";
         $base_id = $ids[0];
         $sub_id = $ids[1];
 
@@ -41,7 +42,21 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
             $count++;
         }
 
+
+        // output $html
     
+	    $html .= "<div class='listContainer times'>";
+        $html .= $base_name;
+	    $html .= "<br /><br />";
+        if ($rootbody)
+	        $html .= $rootbody . "<br /><br />";
+        if ($html_submenu)
+    	    $html .= $html_submenu;
+	    $html .= "</div>";	
+	    echo nl2br($html);
+        $html = "";
+
+        
         // build objects per category
 
         foreach ($categories as $c) {
@@ -62,7 +77,9 @@ wires.active = 1 ORDER BY objects.rank;";
             $rootbody = $myrow['rootbody'];
             mysql_data_seek($result, 0);    // reset to row 0
 	        $html = "";
+            $images = [];
     	    $i=0;
+
 	        while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
         
 		        if ($myrow['mediaActive'] != null) {
@@ -91,69 +108,20 @@ wires.active = 1 ORDER BY objects.rank;";
              		        $i++;
 		        }
 	        }
+
+    
+            // output $html
+                
+    	    $html .= "<div class = 'listContainer'>";
+            $html .= "<div class='subheadContainer'>" . $c['name'] . "</div>";
+	        for ( $j = 0; $j < count($images); $j++)
+		        $html .= $images[$j];  
+	        $html .= "</div>";
+    	    echo nl2br($html);
         }
-
-
-        // ------ $html -------
-    
-	    // name
-    
-	    $html .= "<div class='listContainer times'>";
-        $html .= $base_name;
-	    $html .= "<br /><br />" . $rootbody .  "<br /><br />";
-        if ($html_submenu)
-    	    $html .= $html_submenu;
-	    $html .= "</div>";	
-    
-    
-        // categories
-    
-       
-	    // images
-	    
-	    $html .= "<div class = 'listContainer doublewide'>";
-    
-        foreach ($categories as $c)
-            $html .= $c['name'] . "&nbsp;";;
-        
-	    for ( $j = 0; $j < count($images); $j++) {
-	    
-		    $html .= $images[$j];
-    
-	    }
-    
-	    $html .= "</div>";
-	    echo nl2br($html);
     ?>
+
 
 <?php
 require_once("GLOBAL/foot.php");
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?
-/*
-// debug
-print_r($ids);
-echo "----> id = " . $id;        
-echo "<br>" . $base_id . "," . $submenu_id;
-echo $category_id;
-echo "<br><br>" . $html_submenu; 
-var_dump($categories);
-// die();
-*/
-?>
-
-
