@@ -6,61 +6,65 @@ require_once("GLOBAL/head.php");
 
 	<?php
 
+        $search = $_REQUEST['search'];
+        $search_id = $_REQUEST['search_id'];
+        if ($search && $search_id)
+            $ids = explode(",", $search_id);
         $base_name = "Library";
         $base_id = $ids[0];
         $sub_id = $ids[1];
-        $search = $_REQUEST['search'];      
 
 
         // build submenu
-            
+
+        $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $base_id AND objects.active = 1 
+                AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";         
+        $result = MYSQL_QUERY($sql);
+        $count = 0;
+        while ($myrow = MYSQL_FETCH_ARRAY($result)) {
+            $submenu[$count]['id'] = $myrow['id'];
+            $submenu[$count]['name'] = $myrow['name1'];
+            $count++;
+        }
+        $submenu_id = ($ids[1]) ? $ids[1] : $submenu[0]['id'];
+        foreach ($submenu as $s)
+            if ($s['id'] == $submenu_id)
+                $html_submenu .= $s['name'] . "<br/>";
+            else
+                $html_submenu .= "<a href='library_.php?id=" . $base_id . "," . $s['id'] . "'>" . $s['name'] ."</a><br/>";
         if ($search)
             $html_submenu = "*$search*";
-        else {
-            $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $base_id AND objects.active = 1 
-                    AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";         
-            $result = MYSQL_QUERY($sql);
-            $count = 0;
-            while ($myrow = MYSQL_FETCH_ARRAY($result)) {
-                $submenu[$count]['id'] = $myrow['id'];
-                $submenu[$count]['name'] = $myrow['name1'];
-                $count++;
-            }
-            $submenu_id = ($ids[1]) ? $ids[1] : $submenu[0]['id'];
-            foreach ($submenu as $s)
-                if ($s['id'] == $submenu_id)
-                    $html_submenu .= $s['name'] . "<br/>";
-                else
-                    $html_submenu .= "<a href='library_.php?id=" . $base_id . "," . $s['id'] . "'>" . $s['name'] ."</a><br/>";
-        }
         
             
         // build categories
 
-        if ($search) {
-            $categories[0]['id'] = null;
-            $categories[0]['name'] = 'Results';
-        } else {
-            $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $submenu_id AND objects.active = 1 
+        $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $submenu_id AND objects.active = 1 
 AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
-            $result = MYSQL_QUERY($sql);
-            $count = 0;
-            while ($myrow = MYSQL_FETCH_ARRAY($result)) {
-                $categories[$count]['id'] = $myrow['id'];
-                $categories[$count]['name'] = $myrow['name1'];
-                $count++;
-            }
+        $result = MYSQL_QUERY($sql);
+        $count = 0;
+        while ($myrow = MYSQL_FETCH_ARRAY($result)) {
+            $categories[$count]['id'] = $myrow['id'];
+            $categories[$count]['name'] = $myrow['name1'];
+            $count++;
         }
  
             
         // build search
 
-        if (!$search) {
+        /* 
+            right now search is only working within the already selected submenu_id categories
+            but should be easy to broaden to search under all categories under library
+            currently passes $base_id and $sub_id as hidden value in form
+        */
+
+        if (!$search) {                                
+            $search_id = $base_id . "," . $sub_id;
             $html_search  = "<div id='library-search-container'>";
-            $html_search .= "<form action='library_.php'>
-                                <input id='library-search-field' type='text' placeholder='Search the Library ...' name='search'>
-                                <button type='submit'><img id='library-search-icon' src='MEDIA/svg/magnifying-glass-6-k.svg'></button>
-                             </form>";
+            $html_search .= "<form action='library_.php'>";
+            $html_search .= "<input id='library-search-field' type='text' placeholder='Search The Wattis Library ...' name='search'>";
+            $html_search .= "<input type='hidden' id='id' name='search_id' value=$search_id>";
+            $html_search .= "<button type='submit'><img id='library-search-icon' src='MEDIA/svg/magnifying-glass-6-k.svg'></button>";
+            $html_search .= "</form>";
             $html_search .= "</div>";
         } 
 
@@ -82,7 +86,6 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
 	    echo nl2br($html);
         $html = "";
 
-
         
         // build objects per category
 
@@ -91,17 +94,34 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
             if ($search) {
     
             // SQL objects where name1 like $search and connected to Library object plus media
-   
+
+            /*   
     	    $sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, wires.fromid, 
 wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active AS mediaActive FROM wires, objects 
 LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT objects.id FROM objects WHERE 
 objects.name1 LIKE '%$search%' AND objects.active = 1) AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
-    	    $result = MYSQL_QUERY($sql);
-            $myrow = MYSQL_FETCH_ARRAY($result);
+            */
+
+            // this is the hiccup, need to get category_id here correctly
+            // passed in through the form
+            // YAY! this works
+
+            $category_id = $c['id'];
+
+            $sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, wires.fromid, 
+wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active AS mediaActive FROM wires, objects LEFT 
+JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT objects.id FROM objects WHERE 
+objects.id = $category_id AND objects.active = 1) AND objects.name1 LIKE '%$search%' AND wires.toid=objects.id 
+AND wires.active = 1 ORDER BY objects.rank;";
+
+       	    $result = MYSQL_QUERY($sql);
+            // $myrow = MYSQL_FETCH_ARRAY($result);
 
             } else {
 
             $category_id = $c['id'];
+
+// var_dump($category_id);
     
             // SQL objects attached to category object plus media plus rootname, rootbody
    
@@ -124,6 +144,8 @@ wires.active = 1 ORDER BY objects.rank;";
 
 	        while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
         
+// var_dump($myrow);
+
 		        if ($myrow['mediaActive'] != null) {
         
 			        $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
