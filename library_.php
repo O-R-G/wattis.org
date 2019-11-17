@@ -9,53 +9,60 @@ require_once("GLOBAL/head.php");
         $base_name = "Library";
         $base_id = $ids[0];
         $sub_id = $ids[1];
+        $search = $_REQUEST['search'];      
 
 
         // build submenu
             
-        $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $base_id AND objects.active = 1 
-AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";         
-        $result = MYSQL_QUERY($sql);
-        $count = 0;
-        while ($myrow = MYSQL_FETCH_ARRAY($result)) {
-            $submenu[$count]['id'] = $myrow['id'];
-            $submenu[$count]['name'] = $myrow['name1'];
-            $count++;
+        if ($search)
+            $html_submenu = "*$search*";
+        else {
+            $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $base_id AND objects.active = 1 
+                    AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";         
+            $result = MYSQL_QUERY($sql);
+            $count = 0;
+            while ($myrow = MYSQL_FETCH_ARRAY($result)) {
+                $submenu[$count]['id'] = $myrow['id'];
+                $submenu[$count]['name'] = $myrow['name1'];
+                $count++;
+            }
+            $submenu_id = ($ids[1]) ? $ids[1] : $submenu[0]['id'];
+            foreach ($submenu as $s)
+                if ($s['id'] == $submenu_id)
+                    $html_submenu .= $s['name'] . "<br/>";
+                else
+                    $html_submenu .= "<a href='library_.php?id=" . $base_id . "," . $s['id'] . "'>" . $s['name'] ."</a><br/>";
         }
-        $submenu_id = ($ids[1]) ? $ids[1] : $submenu[0]['id'];
-        foreach ($submenu as $s)
-            if ($s['id'] == $submenu_id)
-                $html_submenu .= $s['name'] . "<br/>";
-            else
-                $html_submenu .= "<a href='library_.php?id=" . $base_id . "," . $s['id'] . "'>" . $s['name'] ."</a><br/>";
         
-    
+            
         // build categories
-    
-        $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $submenu_id AND objects.active = 1 
-AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
-        $result = MYSQL_QUERY($sql);
-        $count = 0;
-        while ($myrow = MYSQL_FETCH_ARRAY($result)) {
-            $categories[$count]['id'] = $myrow['id'];
-            $categories[$count]['name'] = $myrow['name1'];
-            $count++;
-        }
 
+        if ($search) {
+            $categories[0]['id'] = null;
+            $categories[0]['name'] = 'Results';
+        } else {
+            $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $submenu_id AND objects.active = 1 
+AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
+            $result = MYSQL_QUERY($sql);
+            $count = 0;
+            while ($myrow = MYSQL_FETCH_ARRAY($result)) {
+                $categories[$count]['id'] = $myrow['id'];
+                $categories[$count]['name'] = $myrow['name1'];
+                $count++;
+            }
+        }
+ 
             
         // build search
 
-        /*
-            will link to library-search_ which implements sql query 
-            and returns results in one column
-        */
-        
-        iF (!$search) {
-            $html_search  = "<div id='library-search'>";
-            $html_search .= "<img id='library-search-icon' src='MEDIA/svg/magnifying-glass-6-k.svg'>";
-            // $html_search .= "<input id='library-search-field' type='text' placeholder='Search..'>";
+        if (!$search) {
+            $html_search  = "<div id='library-search-container'>";
+            $html_search .= "<form action='library_.php'>
+                                <input id='library-search-field' type='text' placeholder='Search the Library ...' name='search'>
+                                <button type='submit'><img id='library-search-icon' src='MEDIA/svg/magnifying-glass-6-k.svg'></button>
+                             </form>";
             $html_search .= "</div>";
-        }
+        } 
 
         
         // output $html
@@ -80,7 +87,20 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
         // build objects per category
 
         foreach ($categories as $c) {
+
+            if ($search) {
     
+            // SQL objects where name1 like $search and connected to Library object plus media
+   
+    	    $sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, wires.fromid, 
+wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active AS mediaActive FROM wires, objects 
+LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid = (SELECT objects.id FROM objects WHERE 
+objects.name1 LIKE '%$search%' AND objects.active = 1) AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
+    	    $result = MYSQL_QUERY($sql);
+            $myrow = MYSQL_FETCH_ARRAY($result);
+
+            } else {
+
             $category_id = $c['id'];
     
             // SQL objects attached to category object plus media plus rootname, rootbody
@@ -96,6 +116,8 @@ wires.active = 1 ORDER BY objects.rank;";
             $rootname = $myrow['rootname'];
             $rootbody = $myrow['rootbody'];
             mysql_data_seek($result, 0);    // reset to row 0
+            }
+
 	        $html = "";
             $images = [];
     	    $i=0;
