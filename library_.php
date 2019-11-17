@@ -42,12 +42,31 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
             $count++;
         }
 
+            
+        // build search
 
+        /*
+            will link to library-search_ which implements sql query 
+            and returns results in one column
+        */
+        
+        iF (!$search) {
+            $html_search  = "<div id='library-search'>";
+            $html_search .= "<img id='library-search-icon' src='MEDIA/svg/magnifying-glass-6-k.svg'>";
+            // $html_search .= "<input id='library-search-field' type='text' placeholder='Search..'>";
+            $html_search .= "</div>";
+        }
+
+        
         // output $html
     
 	    $html .= "<div class='listContainer times'>";
+        $html .= "<div class='one-column'>";
         $html .= $base_name;
-	    $html .= "<br /><br />";
+        if ($html_search)
+    	    $html .= $html_search;
+        $html .= "</div>";
+	    $html .= "<br />";
         if ($rootbody)
 	        $html .= $rootbody . "<br /><br />";
         if ($html_submenu)
@@ -55,6 +74,7 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
 	    $html .= "</div>";	
 	    echo nl2br($html);
         $html = "";
+
 
         
         // build objects per category
@@ -108,7 +128,6 @@ wires.active = 1 ORDER BY objects.rank;";
              		        $i++;
 		        }
 	        }
-
     
             // output $html
                 

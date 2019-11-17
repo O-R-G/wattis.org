@@ -295,6 +295,22 @@ newsContainer {
 	max-width: 90%;
 }
 
+#library-search {
+    display: inline-block;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
+#library-search-icon {
+    width: 50px;
+    height: 50px;
+}
+
+#library-search-field {
+    /* border-bottom: 2px; */
+}
+
 .center {
 	top: 50%;
     left: 50%;
