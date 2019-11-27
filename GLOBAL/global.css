@@ -64,6 +64,10 @@ a:active {
         border-bottom: solid 3px;
 	}
 
+.not-underlined a {
+        border-bottom: none;
+	}
+
 
 /* contents */
 
@@ -233,6 +237,14 @@ newsContainer {
         z-index:1000;
 	}
 	
+.subheadContainer {
+	padding-bottom: 1em;
+}
+
+.subdateContainer {
+	padding-top: 1em;
+}
+
 #gallery {
 	position: fixed;
 	width: 100%;
@@ -272,15 +284,53 @@ newsContainer {
 #gallery-next {
 	right: 0px;
 }
+
 #img-gallery {
 	position: fixed;
 	max-height: 90%;
 	max-width: 90%;
 }
+
 #img-gallery-caption {
 	position: fixed;
 	max-height: 90%;
 	max-width: 90%;
+}
+
+#library-search-container {
+    display: inline-block;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+#library-search-container button {
+    background-color: none;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#library-search-container button:hover {
+    opacity: 0.5;
+}
+
+#library-search-container input[type=text] {
+    display: inline-block;
+    padding: 10px;
+    width: 300px;
+border: none;
+border-bottom: solid 3px #000;
+}
+    
+#library-search-icon {
+}
+
+#library-search-field {
+    /* border-bottom: 2px; */
 }
 
 .center {
@@ -322,12 +372,12 @@ newsContainer {
         }
 
 .clear {
-	clear:both;      
-        }
+	clear:both;
+    }
 
 .fixed {
 	position: fixed;      
-        }
+    }
 
 .twocolumn {
         width:47%;
@@ -344,6 +394,10 @@ newsContainer {
 .triplewide {
         width:85%;
 	}
+
+.fullwide {
+    width: 100%;
+}
 
 .centered {
 	margin-left: auto;
