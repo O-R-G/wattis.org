@@ -4,3 +4,9 @@ config.php
 
 # authentication
 .htpasswd
+
+# media
+MEDIA/*.jpg
+MEDIA/*.png
+MEDIA/*.gif
+MEDIA/*.pdf
