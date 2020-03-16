@@ -1,7 +1,9 @@
 <?php
+// now on o-r-g github
 require_once("GLOBAL/head.php");
 require_once("_Library/orgRSSParse.php");
 ?>
+
 <!-- BLOCKS -->
 <div class="homeContainer times big"><?php
 
