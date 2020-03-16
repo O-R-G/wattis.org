@@ -120,6 +120,13 @@ RewriteCond %{QUERY_STRING} ^id=93$
 RewriteRule ^view_\.php$ program? [R,L]
 RewriteRule ^program$ view_\.php?marker&id=93 [L]
 
+# library
+
+RewriteCond %{QUERY_STRING} !marker
+RewriteCond %{QUERY_STRING} ^id=752$
+RewriteRule ^library_\.php$ library? [R,L]
+RewriteRule ^library$ library_\.php?marker&id=752 [L]
+
 
 ### generic ### 
 
