@@ -5,3 +5,11 @@ config.php
 # authentication
 .htpasswd
 OPEN-RECORDS-GENERATOR/.htaccess
+MEDIA/*.jpg
+MEDIA/*.jpeg
+MEDIA/*.gif
+MEDIA/*.pdf
+MEDIA/*.png
+MEDIA/*.svg
+MEDIA/*.tif
+MEDIA/*.tiff
