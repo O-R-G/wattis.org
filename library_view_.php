@@ -44,7 +44,7 @@ require_once("GLOBAL/head.php");
         $html .= "<a href='library_.php?id=" . $base_id . "," . $submenu_id . "'>" . $base_name . "</a>";
 	    $html .= "<br /><br />";
         if ($html_submenu)
-    	    $html .= $html_submenu;
+    	    $html .= $html_submenu."</br>";
         if ($html_category)
     	    $html .= $html_category;
 	    // $html .= "</div>";	// dont close side before thumbnail icon
@@ -96,7 +96,6 @@ require_once("GLOBAL/head.php");
     	    $html .= "<div class = 'listContainer doublewide'>";
             $html .= "<div class='subheadContainer'>" . $name . "</div>";
 		    $html .= $body;  
-            $html .= "<div class='subdateContainer helvetica small'>" . $date . "</div>";
 	        $html .= "</div>";
 
     	    echo nl2br($html);

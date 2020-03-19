@@ -289,6 +289,7 @@ newsContainer {
 	position: fixed;
 	max-height: 90%;
 	max-width: 90%;
+	
 }
 
 #img-gallery-caption {
@@ -508,6 +509,7 @@ border-bottom: solid 3px #000;
 		left: 0px;
 		display: block;
 		width: initial;
+		margin-right: 0;
 	}
 	
 	.fixed {
@@ -590,5 +592,24 @@ border-bottom: solid 3px #000;
 	.imageContainer {
 		padding: 20px;
 	}
+	/* 3/19 search bar for mobile */
+	#library-search-container form *{
+		vertical-align: middle;
+	}
+	#library-search-container{
+		top: 70px;
+	}
+	#library-search-container.top{
+		top: 0px;
+	}
+	#library-search-container input[type=text]{
+		width: calc(100vw - 80px);
+	}
 	
+}
+
+/* 3/19 adjust font size of caption */
+.captionContainer.small{
+	font-size: 13px;
+	line-height: 16px;
 }

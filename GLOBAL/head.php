@@ -50,7 +50,7 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		<div id="color" class="black">
 		<!-- .+* THE WATTIS INSTITUTE --><?php 
 		if (($pageName != "_logo") && ($pageName != "_animatePunctuation")) 
-		{
+		{ 
 		?><div class="logoContainer times big logo fixed">
 			<span id="logo" onmousedown="startStopAnimatePunctuation();" class="target">.+*</span>
 			<!-- <span id="logo" class="target">.+*</span> -->

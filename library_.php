@@ -13,7 +13,7 @@ require_once("GLOBAL/head.php");
         $base_name = "Library";
         $base_id = $ids[0];
         $sub_id = $ids[1];
-
+        $search_count = 0;
 
         // build submenu
 
@@ -29,11 +29,11 @@ require_once("GLOBAL/head.php");
         $submenu_id = ($ids[1]) ? $ids[1] : $submenu[0]['id'];
         foreach ($submenu as $s)
             if ($s['id'] == $submenu_id)
-                $html_submenu .= $s['name'] . "<br/>";
+                $html_submenu .= '<span class = "current_submenu">' . $s['name'] . "</span><br/>";
             else
                 $html_submenu .= "<a href='library_.php?id=" . $base_id . "," . $s['id'] . "'>" . $s['name'] ."</a><br/>";
         if ($search)
-            $html_submenu = "*$search*";
+            $html_submenu = "Search: <i>$search</i><br><span id = 'search_count'></span> results.";
         
             
         // build categories
@@ -71,17 +71,28 @@ AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
         
         // output $html
     
-	    $html .= "<div class='listContainer times'>";
+	    $html .= "<div class='sidemenu listContainer times'>";
         $html .= "<div class='one-column'>";
-        $html .= $base_name;
+        // $html .= $base_name;
+        if($search)
+            $html .= "<a href='library_.php?id=" . $base_id . "," . $submenu_id . "'>" . $base_name . "</a>";
+        else
+            $html .= $base_name;
         if ($html_search)
     	    $html .= $html_search;
         $html .= "</div>";
 	    $html .= "<br />";
         if ($rootbody)
 	        $html .= $rootbody . "<br /><br />";
-        if ($html_submenu)
-    	    $html .= $html_submenu;
+        if ($html_submenu){
+            if(!$search){
+                // 3/19 add brief intro for library
+                $html .= "<span>This is a Library. There are videos of artists talking about their work as well as video and audio documentation of all past lectures, performances, and events. There are essays about exhibitions, as well as reviews, reading lists, and interviews to read. Browse both sections anytime.</span><br><br>";
+            }
+            $html .= $html_submenu;
+
+        }
+            
 	    $html .= "</div>";	
 	    echo nl2br($html);
         $html = "";
@@ -116,13 +127,10 @@ AND wires.active = 1 ORDER BY objects.rank;";
 
        	    $result = MYSQL_QUERY($sql);
             // $myrow = MYSQL_FETCH_ARRAY($result);
-
+            
             } else {
 
-            $category_id = $c['id'];
-
-// var_dump($category_id);
-    
+            $category_id = $c['id'];    
             // SQL objects attached to category object plus media plus rootname, rootbody
    
     	    $sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, (SELECT 
@@ -137,15 +145,11 @@ wires.active = 1 ORDER BY objects.rank;";
             $rootbody = $myrow['rootbody'];
             mysql_data_seek($result, 0);    // reset to row 0
             }
-
 	        $html = "";
             $images = [];
     	    $i=0;
 
 	        while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-        
-// var_dump($myrow);
-
 		        if ($myrow['mediaActive'] != null) {
         
 			        $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
@@ -163,7 +167,7 @@ wires.active = 1 ORDER BY objects.rank;";
 			        $images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
 			        $images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 			        $images[$i] .= "<div class = 'captionContainer helvetica small'>";
-			        $images[$i] .= $myrow['name1'];
+                    $images[$i] .= $myrow['name1'];
 			        $images[$i] .= "</div>";
 			        $images[$i] .= "</div>";
 			        $images[$i] .= "</a>";
@@ -177,14 +181,48 @@ wires.active = 1 ORDER BY objects.rank;";
                 
     	    $html .= "<div class = 'listContainer not-underlined'>";
             $html .= "<div class='subheadContainer'>" . $c['name'] . "</div>";
-	        for ( $j = 0; $j < count($images); $j++)
-		        $html .= $images[$j];  
+            for ( $j = 0; $j < count($images); $j++){
+                $search_count++;
+                $html .= $images[$j];  
+            }
 	        $html .= "</div>";
     	    echo nl2br($html);
         }
-    ?>
+    // 3/19 search position when mobile;
+    if($isMobile){?>
+        <script type = "text/javascript">
+            var ticking = false;
+            var scrollTop = window.scrollTop;
+            var sLibrary_search_container = document.getElementById("library-search-container");
+            window.addEventListener('scroll', function(){
+                sTop = window.scrollY;
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        if(sTop > 70){
+                            sLibrary_search_container.classList.add("top");
+                        }
+                        if(sTop < 80){
+                            sLibrary_search_container.classList.remove("top");
+                        }
+                        ticking = false;
+                    });
 
+                    ticking = true;
+                }
+            });
+        </script>
+
+
+    <?}
+    // 3/19 add search counts;
+    if($search){
+    ?>
+    <script type="text/javascript">
+        var sSearch_count = document.getElementById('search_count');
+        sSearch_count.innerText = '<? echo $search_count; ?>';
+    </script>
 
 <?php
+}
 require_once("GLOBAL/foot.php");
 ?>
