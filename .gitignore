@@ -6,11 +6,4 @@ config.php
 .htpasswd
 
 # media
-MEDIA/*.jpg
-MEDIA/*.jpeg
-MEDIA/*.png
-MEDIA/*.gif
-MEDIA/*.pdf
-MEDIA/*.tif
-MEDIA/*.tiff
 
