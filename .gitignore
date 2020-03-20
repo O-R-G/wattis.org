@@ -4,6 +4,4 @@ config.php
 
 # authentication
 .htpasswd
-
-# media
-
+OPEN-RECORDS-GENERATOR/.htaccess
