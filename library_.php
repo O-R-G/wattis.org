@@ -62,7 +62,7 @@ require_once("GLOBAL/head.php");
             $search_id = $base_id . "," . $sub_id;
             $html_search  = "<div id='library-search-container'>";
             $html_search .= "<form action='library_.php'>";
-            $html_search .= "<input id='library-search-field' type='text' placeholder='SEARCH THE WATTIS LIBRARY ...' name='search'>";
+            $html_search .= "<input id='library-search-field' type='text' placeholder='Search the Library ...' name='search'>";
             $html_search .= "<input type='hidden' id='id' name='search_id' value=$search_id>";
             $html_search .= "<button type='submit'><img id='library-search-icon' src='MEDIA/svg/magnifying-glass-6-k.svg'></button>";
             $html_search .= "</form>";
