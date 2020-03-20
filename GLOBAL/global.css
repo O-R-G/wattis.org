@@ -303,6 +303,10 @@ newsContainer {
     position: fixed;
     top: 10px;
     right: 10px;
+    z-index: 10;
+}
+
+#library-search-container form {
 }
 
 #library-search-container button {
@@ -323,8 +327,8 @@ newsContainer {
     display: inline-block;
     padding: 10px;
     width: 300px;
-border: none;
-border-bottom: solid 3px #000;
+    border: none;
+    border-bottom: solid 3px #000;
 }
     
 #library-search-icon {
@@ -333,6 +337,36 @@ border-bottom: solid 3px #000;
 #library-search-field {
     /* border-bottom: 2px; */
 }
+
+#library-mode-switch {
+    margin-bottom: 2em;
+}
+
+#library-mode-switch button {
+  display: inline-block;
+  width: 40%;
+  height: 100px;
+  background-color: #FFF;
+  margin-right: 10px;
+  border: 2px solid #555555;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#library-mode-switch a button {
+    opacity: 0.5;
+}
+
+#library-mode-switch a button:hover {
+    opacity: 1.0;
+}
+
+#library-mode-switch a {
+    border-bottom: none;
+}
+
 
 .center {
 	top: 50%;
@@ -597,7 +631,9 @@ border-bottom: solid 3px #000;
 		vertical-align: middle;
 	}
 	#library-search-container{
-		top: 70px;
+		/* top: 70px; */
+        /* top: 7px; */
+        top: 40px;
 	}
 	#library-search-container.top{
 		top: 0px;
@@ -605,11 +641,48 @@ border-bottom: solid 3px #000;
 	#library-search-container input[type=text]{
 		width: calc(100vw - 80px);
 	}
-	
+    #library-search-container form {
+        padding-top: 20px;
+        background-color: #FFF;
+    }
+    #library-search-container input::placeholder {
+        /* opacity: 0; */
+    }
 }
 
 /* 3/19 adjust font size of caption */
-.captionContainer.small{
+.captionContainer.small {
 	font-size: 13px;
 	line-height: 16px;
 }
+
+.captionContainer.library {
+	/* font-style: italic; */
+    padding-top: 0px;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.subheadContainer.library {
+    height: 3em;
+}
+
+#library-description {
+    width: 90%;
+    margin-bottom: 1em;
+}
+
+.listContainer.doublewide.library img {
+    width: 100%;
+}
+
+.listContainer.not-underlined.library img {
+    filter: grayscale(100%);
+}
+
+.listContainer.not-underlined.library img:hover {
+    filter: none;
+}
+
