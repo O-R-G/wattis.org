@@ -165,7 +165,7 @@ wires.active = 1 ORDER BY objects.rank;";
 			        $images[$i] .= "<a href='library_view_.php?id=" . $base_id . "," . $submenu_id . "," . $category_id . "," . $myrow['objectsId'] . "'>";
 			        $images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
 			        $images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-			        $images[$i] .= "<div class = 'captionContainer library'>";
+			        $images[$i] .= "<div class = 'captionContainer library helvetica small'>";
                     $images[$i] .= $myrow['name1'];
 			        $images[$i] .= "</div>";
 			        $images[$i] .= "</div>";
@@ -179,7 +179,7 @@ wires.active = 1 ORDER BY objects.rank;";
             // output $html
                 
     	    $html .= "<div class = 'listContainer not-underlined library'>";
-            $html .= "<div class='subheadContainer library italic '>" . $c['name'] . "</div>";
+            $html .= "<div class='subheadContainer library'>" . $c['name'] . "</div>";
             for ( $j = 0; $j < count($images); $j++){
                 $search_count++;
                 $html .= $images[$j];  
