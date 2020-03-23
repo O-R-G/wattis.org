@@ -35,7 +35,7 @@ require_once("GLOBAL/head.php");
                 $html_submenu .= "<a href='library_.php?id=" . $base_id . "," . $s['id'] . "'>" . "<button class = 'helvetica small'>" . $s['name'] ."</button></a>";
         $html_submenu .= '</div>';
         if ($search)
-            $html_submenu = "<br/>Search: <i>$search</i><br><span id = 'search_count'></span> matches...";
+            $html_submenu = "<br/>Search: <i>$search</i><br/>matches...";
 
         if ($search) {
 
@@ -274,10 +274,6 @@ wires.active = 1 ORDER BY objects.rank;";
     // 3/19 add search counts;
     if($search){
     ?>
-    <script type="text/javascript">
-        var sSearch_count = document.getElementById('search_count');
-        sSearch_count.innerText = '<? echo $search_count; ?>';
-    </script>
 </div>
 <?php
 }

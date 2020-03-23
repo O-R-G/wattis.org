@@ -19,6 +19,7 @@
 				<a href='contact' class='instructionContainer'>CONTACT</a>
 				<a href='catalogs' class='instructionContainer'>BOOKSHOP</a>
 			</span>
+			<a href='library' class='instructionContainer'>LIBRARY</a>
 			<a href='main' class='instructionContainer'>MORE</a>
 		</div>
 	</div>
