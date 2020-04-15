@@ -81,7 +81,8 @@ $id AND objects.active ORDER BY media.rank;";
 	$html .= $mediaCaption . "<br/>";
         $html .= $deck;
         // $html .= "<br /><br /><a href='mailto:arabinovitch@cca.edu'>Please email for ordering information</a>";
-        $html .= "<br /><br /><a href='mailto:csquier@cca.edu'>Please email for ordering information</a>";
+        // $html .= "<br /><br /><a href='mailto:csquier@cca.edu'>Please email for ordering information</a>";
+        $html .= "<br /><br /><a href='mailto:jgerrity@cca.edu'>Please email for ordering information</a>";
 	$html .= "</div>";
 
 
