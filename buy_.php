@@ -36,7 +36,7 @@ $id AND objects.active ORDER BY media.rank;";
 
                         $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
                         $mediaCaption = strip_tags($myrow["caption"]);
-                        $mediaStyle = "width: 100%;";
+                        $mediaStyle = "width: 100%; padding: 10px;";
 
                         if ( $i == 0 ) {
 
