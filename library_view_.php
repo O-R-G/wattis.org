@@ -26,17 +26,25 @@ require_once("GLOBAL/head.php");
             $count++;
         }
         $submenu_id = ($ids[1]) ? $ids[1] : $submenu[0]['id'];
+        /*
+        $html_submenu = '<div id="library-mode-switch">';
         foreach ($submenu as $s)
             if ($s['id'] == $submenu_id)
-                $html_submenu .= $s['name'] . "<br/>";
-    
+                $html_submenu .= '<button class = "helvetica small">' . $s['name'] . "</button>";
+            else
+                $html_submenu .= "<a href='library_.php?id=" . $base_id . "," . $s['id'] . "'>" . "<button class = 'helvetica small'>" . $s['name'] ."</button></a>";
+        if ($search)
+            $html_submenu = "Search: <i>$search</i><br><span id = 'search_count'></span> results.";
+        $html_submenu .= '</div>';
+        */
+
         // get category
     
         $sql = "SELECT objects.name1 FROM objects WHERE objects.id=$category_id AND objects.active = 1 LIMIT 1;";
         $result = MYSQL_QUERY($sql);
         while ($myrow = MYSQL_FETCH_ARRAY($result)) 
             $category_name = $myrow['name1'];
-        $html_category = $category_name . "<br />";
+        $html_category = "<span class='italic'>" . $category_name . "<br /></span>";
 
         // output $html
     
@@ -67,6 +75,7 @@ require_once("GLOBAL/head.php");
                 $name = $myrow['name1'];
                 $body = $myrow['body'];
                 $date = date('F d, Y', strtotime($myrow['begin']));
+                /*
 		        if ($myrow['mediaActive'] != null) {
         
 			        $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
@@ -84,16 +93,16 @@ require_once("GLOBAL/head.php");
 			        if ( ( $i+1) % (($use4xgrid) ? 4 : 2) == 0) $images[$i] .= "<div class='clear'></div>";
              		        $i++;
 		        }
+                */  
 	        }
-
     
             // output $html
                 
-    	    $html .= "<div class = 'listContainer fullwide not-underlined'>";
-		    $html .= "<br />" . $images[0];        // add thumbnail icon
-	        $html .= "</div>";	        // close thumb
+    	    //$html .= "<div class = 'listContainer fullwide not-underlined'>";
+		    //$html .= "<br />" . $images[0];        // add thumbnail icon
+	        //$html .= "</div>";	        // close thumb
 	        $html .= "</div>";	        // close side column
-    	    $html .= "<div class = 'listContainer doublewide'>";
+    	    $html .= "<div class = 'listContainer doublewide library'>";
             $html .= "<div class='subheadContainer'>" . $name . "</div>";
 		    $html .= $body;  
 	        $html .= "</div>";

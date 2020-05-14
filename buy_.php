@@ -37,6 +37,7 @@ $id AND objects.active ORDER BY media.rank;";
 
                         $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
                         $mediaCaption = strip_tags($myrow["caption"]);
+<<<<<<< HEAD
                         $mediaStyle = "width: 100%; position: absolute; top: 0; left: 0; opacity: 0; top: 50%; transform: translate(0, -50%);";
                         $this_img_size  = getimagesize($mediaFile);
                         // h / w
@@ -44,6 +45,10 @@ $id AND objects.active ORDER BY media.rank;";
                                 $image_ratio = $this_img_size[1] / $this_img_size[0];
                                 $image_tallest = $i;
                         }
+=======
+                        $mediaStyle = "width: 100%; padding: 10px;";
+
+>>>>>>> 370f0613b6b9679f0d25c1a729b26575f742a4a2
                         if ( $i == 0 ) {
 
                                 $specs  = getimagesize($mediaFile);
@@ -88,7 +93,8 @@ $id AND objects.active ORDER BY media.rank;";
 	$html .= $mediaCaption . "<br/>";
         $html .= $deck;
         // $html .= "<br /><br /><a href='mailto:arabinovitch@cca.edu'>Please email for ordering information</a>";
-        $html .= "<br /><br /><a href='mailto:csquier@cca.edu'>Please email for ordering information</a>";
+        // $html .= "<br /><br /><a href='mailto:csquier@cca.edu'>Please email for ordering information</a>";
+        $html .= "<br /><br /><a href='mailto:jgerrity@cca.edu'>Please email for ordering information</a>";
 	$html .= "</div>";
 
 

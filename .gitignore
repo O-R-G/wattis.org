@@ -4,13 +4,4 @@ config.php
 
 # authentication
 .htpasswd
-
-# media
-MEDIA/*.jpg
-MEDIA/*.jpeg
-MEDIA/*.png
-MEDIA/*.gif
-MEDIA/*.pdf
-MEDIA/*.tif
-MEDIA/*.tiff
-
+OPEN-RECORDS-GENERATOR/.htaccess
