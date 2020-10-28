@@ -128,5 +128,6 @@ if(!!el)
 </script>
 
 <?php
+require_once("video_.php");
 require_once("GLOBAL/foot.php");
 ?>
