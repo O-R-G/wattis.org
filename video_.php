@@ -16,7 +16,7 @@
 }
 
 #video {
-    width: 85%;
+    width: 75%;
     /* z-index: 11; */
     z-index: 101;
 }
@@ -27,23 +27,20 @@
     bottom: 10px;
 }
 
-#close {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-
 #more {
     position: absolute;
     right: 10px;
     bottom: 10px;
+    width: 50%;
     color: #FFF;
+    columns: 200px 2;
+    column-gap: 20px;
 }
 
 .center {
     margin: 0;
-    position: fixed;
-    /* position: absolute; */
+    /* position: fixed; */
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -88,11 +85,12 @@
             18:14 min<br>
             Courtesy of the artist and Sikkema Jenkins & Co.<br>
         </div>
-        <div id='more'>
+        <div id='more' class='helvetica small'>
+Conceived during this pandemic era, the immersive video work depicts the American flag in unsettling stillness, as a marker of territory, and projected onto bodies, while set to a heartrending soundtrack. At once melancholic and beautiful, Gibson renders the iconic image of the flag as both elastic and unyielding. The slow transformation through time, color, and form reflects both a distillation of our social collapse and the reinvention of self and community, referencing the movement and change that is so desired for this nation<br />
+<br/>
+Jeffrey Gibson (b. 1972, Colorado, US) is an interdisciplinary artist and craftsperson based in Hudson, New York. His work references various aesthetic and material histories rooted in Indigenous cultures of the Americas, and in modern and con- temporary subcultures. Gibson, a member of the Mississippi Band of Choctaw Indians and of Cherokee descent, is forging a multifarious practice that redresses the exclusion and erasure of Indigenous art traditions from the history of Western art as it explores the complexity and fluidity of identity.<br />
+<br/>
             <a href=''>Read more here . . .</a>
-        </div>
-        <div id='close'>
-            <a href=''>Close</a>
         </div>
     </div>
     <div id='video' class='center'>
