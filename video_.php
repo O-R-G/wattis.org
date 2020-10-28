@@ -6,11 +6,11 @@
     width: 100%;
     height: 100%;
     opacity: 0.9;
-    color: #FFF;
+    /* color: #FFF; */
     background-color: #000;
     animation-name: fade; 
     animation-timing-function: ease-in;
-    animation-duration: 4s; 
+    animation-duration: 10s; 
     z-index: 10;
     /* z-index: 100; */
 }
@@ -30,7 +30,6 @@
     position: absolute;
     right: 10px;
     width: 50%;
-    color: #FFF;
     columns: 100px 2;
     column-gap: 20px;
     padding: 20px 0px 100px 0px;
@@ -43,7 +42,6 @@
     top: 200px;
     left: 50%;
     transform: translate(-50%, 0%);
-    color: #FFF;
 }
 
 .punctuation {
