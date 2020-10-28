@@ -23,27 +23,26 @@
 
 #details {
     position: absolute;
-    left: 10px;
-    bottom: 10px;
+    padding: 20px 0px 100px 0px;
 }
 
 #more {
     position: absolute;
     right: 10px;
-    bottom: 10px;
     width: 50%;
     color: #FFF;
-    columns: 200px 2;
+    columns: 100px 2;
     column-gap: 20px;
+    padding: 20px 0px 100px 0px;
 }
 
 .center {
     margin: 0;
     /* position: fixed; */
     position: absolute;
-    top: 50%;
+    top: 200px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     color: #FFF;
 }
 
@@ -78,6 +77,11 @@
 
 <div id='video-home'>
     <div id='screen'>
+    </div>
+    <div id='video' class='center'>
+        <div style="padding:56.25% 0 0 0;position:relative;">
+            <iframe src="https://player.vimeo.com/video/469873476?color=FFFFFF&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
         <div id='details' class='helvetica small'>
             Jeffrey Gibson<br>
             Nothing Is Eternal, 2020<br>
@@ -91,11 +95,6 @@ Conceived during this pandemic era, the immersive video work depicts the Americ
 Jeffrey Gibson (b. 1972, Colorado, US) is an interdisciplinary artist and craftsperson based in Hudson, New York. His work references various aesthetic and material histories rooted in Indigenous cultures of the Americas, and in modern and con- temporary subcultures. Gibson, a member of the Mississippi Band of Choctaw Indians and of Cherokee descent, is forging a multifarious practice that redresses the exclusion and erasure of Indigenous art traditions from the history of Western art as it explores the complexity and fluidity of identity.<br />
 <br/>
             <a href=''>Read more here . . .</a>
-        </div>
-    </div>
-    <div id='video' class='center'>
-        <div style="padding:56.25% 0 0 0;position:relative;">
-            <iframe src="https://player.vimeo.com/video/469873476?color=FFFFFF&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         <script src="https://player.vimeo.com/api/player.js"></script>
     </div>
