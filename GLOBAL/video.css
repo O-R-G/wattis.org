@@ -1,0 +1,78 @@
+/*
+    jeffrey gibson homepage takeover
+    use with video_.php
+*/
+
+/*
+#screen {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.fade {
+    opacity: 0.9;
+    background-color: #000;
+    animation-name: fade;
+    animation-timing-function: ease-in;
+    animation-duration: 5s;
+}
+*/
+
+.fade-bg {
+    background-color: #111;
+    animation-name: fade-bg;
+    animation-timing-function: ease-in;
+    animation-duration: 5s;
+}
+
+#video {
+    width: 75%;
+    z-index: 101;
+}
+
+#details {
+    position: absolute;
+    width: 25%;
+    padding: 20px 0px 100px 0px;
+}
+
+#more {
+    position: absolute;
+    right: 0px;
+    width: 50%;
+    columns: 110px 2;
+    column-gap: 20px;
+    padding: 20px 0px 100px 0px;
+}
+
+.centered {
+    margin: 0;
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+/*
+@keyframes fade {
+    from {
+        opacity: 0.0;
+    } to {
+        opacity: 0.9;
+    };
+}
+*/
+
+@keyframes fade-bg {
+    from {
+        background-color: #FFF;
+    } to {
+        background-color: #111;
+    };
+}
+
+

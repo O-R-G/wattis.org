@@ -36,6 +36,7 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		<meta http-equiv="Title" content="<?php echo $documentTitle; ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/global.css?<?php echo filemtime('GLOBAL/global.css'); ?>" />
+		<link rel="stylesheet" type="text/css" media="all" href="GLOBAL/video.css?<?php echo filemtime('GLOBAL/global.css'); ?>" />
 		<link rel="icon" href="MEDIA/icon.gif?refresh=true" type="image/gif">
 		<script type="text/javascript" src="JS/global.js"></script>
 		<script type="text/javascript" src="JS/animatePunctuation.js"></script>
