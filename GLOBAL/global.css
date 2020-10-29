@@ -574,9 +574,9 @@ newsContainer {
 	.menuContainer {
 		left: 0px;
    		bottom: 0px;
-	    	/*width: 100%;*/
-    		background-color: white;
-	    	padding: 20px;
+	    /*width: 100%;*/
+    	background-color: #FFF;
+	    padding: 20px;
 	}
 
 	.menuContainer > .desktop {
