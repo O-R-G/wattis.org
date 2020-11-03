@@ -5,3 +5,6 @@ config.php
 # authentication
 .htpasswd
 OPEN-RECORDS-GENERATOR/.htaccess
+
+# MEDIA uploads
+MEDIA/[0-9][0-9][0-9][0-9][0-9].*
