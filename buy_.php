@@ -30,7 +30,7 @@ $id AND objects.active ORDER BY media.rank;";
         $image_tallest = 0;
         
         // collect images
-        
+        var_dump(count($myrow));
         while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
                 if ($myrow['mediaActive'] != null) {
@@ -131,6 +131,13 @@ $id AND objects.active ORDER BY media.rank;";
                         launch_static(0);
                 }
                 
+        }else{
+               var image1 = document.getElementById('image0');
+               if(image0 != null){
+                        image0.firstChild.style.position = 'relative';
+                        image0.firstChild.style.top= 0;
+                        image0.firstChild.style.transform = 'translate(0, 0)';
+               }
         }
 
 

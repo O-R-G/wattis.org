@@ -18,10 +18,10 @@ AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object 
 1 ORDER BY objects.rank;";
 
 	$result = MYSQL_QUERY($sql);
-        $myrow = MYSQL_FETCH_ARRAY($result);
-        $rootname = $myrow['rootname'];
-        $rootbody = $myrow['rootbody'];
-        mysql_data_seek($result, 0);    // reset to row 0
+    $myrow = MYSQL_FETCH_ARRAY($result);
+    $rootname = $myrow['rootname'];
+    $rootbody = $myrow['rootbody'];
+    mysql_data_seek($result, 0);    // reset to row 0
 	$html = "";
 	$i=0;
 
@@ -35,12 +35,12 @@ AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object 
 			$mediaCaption = strip_tags($myrow["caption"]);
 			$mediaStyle = "width: 100%;";
 
-	                if ( $i == 0 ) {
+            if ( $i == 0 ) {
 
 				$specs  = getimagesize($mediaFile);
 				// $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;		       
 				$use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;		       
-	                }
+            }
 
 			$images[$i] .= "<a href='buy_.php?id=" . $rootid . "," . $myrow['objectsId'] . "'>";
 			$images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
