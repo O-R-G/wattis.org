@@ -15,7 +15,7 @@ objects.name1 FROM objects WHERE objects.id = $rootid) AS rootname, (SELECT obje
 $rootid) AS rootbody, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active 
 AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid = 
 (SELECT objects.id FROM objects WHERE objects.id = $id AND objects.active = 1) AND wires.toid=objects.id AND wires.active = 
-1 ORDER BY objects.rank;";
+1 ORDER BY objects.rank, media.rank;";
 
 	$result = MYSQL_QUERY($sql);
     $myrow = MYSQL_FETCH_ARRAY($result);
@@ -29,30 +29,34 @@ AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object 
 
 	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
-		if ($myrow['mediaActive'] != null) {
+		if ($myrow['objectsId'] != $previous_objectsId) { 
 
-			$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-			$mediaCaption = strip_tags($myrow["caption"]);
-			$mediaStyle = "width: 100%;";
-
-            if ( $i == 0 ) {
-
-				$specs  = getimagesize($mediaFile);
-				// $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;		       
-				$use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;		       
-            }
-
-			$images[$i] .= "<a href='buy_.php?id=" . $rootid . "," . $myrow['objectsId'] . "'>";
-			$images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
-			$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-			$images[$i] .= "<div class = 'captionContainer helvetica small'>";
-			$images[$i] .= $myrow['name1'];
-			$images[$i] .= "</div>";
-			$images[$i] .= "</div>";
-			$images[$i] .= "</a>";
-		
-			if ( ( $i+1) % (($use4xgrid) ? 4 : 2) == 0) $images[$i] .= "<div class='clear'></div>";
-             		$i++;
+			if ($myrow['mediaActive'] != null) {
+	
+				$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
+				$mediaCaption = strip_tags($myrow["caption"]);
+				$mediaStyle = "width: 100%;";
+	
+	                	if ( $i == 0 ) {
+	
+					$specs  = getimagesize($mediaFile);
+					// $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;		       
+					$use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;		       
+	                	}
+	
+				$images[$i] .= "<a href='buy_.php?id=" . $rootid . "," . $myrow['objectsId'] . "'>";
+				$images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
+				$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+				$images[$i] .= "<div class = 'captionContainer helvetica small'>";
+				$images[$i] .= $myrow['name1'];
+				$images[$i] .= "</div>";
+				$images[$i] .= "</div>";
+				$images[$i] .= "</a>";
+			
+				if ( ( $i+1) % (($use4xgrid) ? 4 : 2) == 0) $images[$i] .= "<div class='clear'></div>";
+             			$i++;
+			}
+			$previous_objectsId = $myrow['objectsId'];
 		}
 	}
 

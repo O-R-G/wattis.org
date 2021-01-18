@@ -50,7 +50,8 @@ $id AND objects.active ORDER BY media.rank;";
                                 $specs  = getimagesize($mediaFile);
                                 // $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;
                                 $use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;
-                                $mediaStyle = "width: 100%; position: absolute; top: 0; left: 0; opacity: 1; top: 50%; transform: translate(0, -50%);";
+                        	$mediaStyle = "width: 100%; padding: 10px;";
+                                // $mediaStyle = "width: 100%; position: absolute; top: 0; left: 0; opacity: 1; top: 50%; transform: translate(0, -50%);";
 
                         }
 
@@ -90,7 +91,8 @@ $id AND objects.active ORDER BY media.rank;";
         $html .= $deck;
         // $html .= "<br /><br /><a href='mailto:arabinovitch@cca.edu'>Please email for ordering information</a>";
         // $html .= "<br /><br /><a href='mailto:csquier@cca.edu'>Please email for ordering information</a>";
-        $html .= "<br /><br /><a href='mailto:jgerrity@cca.edu'>Please email for ordering information</a>";
+        // $html .= "<br /><br /><a href='mailto:jgerrity@cca.edu'>Please email for ordering information</a>";
+        $html .= "<br /><br /><a href='mailto:jgerrity@cca.edu'>Please email for international orders</a>";
 	$html .= "</div>";
 
 

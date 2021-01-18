@@ -657,7 +657,8 @@ newsContainer {
 }
 
 #gallery_static_ctner{
-	background-color: #bbb;
+	/* background-color: #bbb; */
+	padding-bottom: 40px;
 }
 #gallery_control_ctner{
 	position: absolute;
