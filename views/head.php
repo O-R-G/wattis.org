@@ -42,6 +42,9 @@ $idFull = $id;
 $id = $ids[count($ids) - 1];
 $pageName = basename($_SERVER['PHP_SELF'], ".php"); 
 
+$alt = $_REQUEST['alt'];
+$pop = $_REQUEST['pop'];
+
 // detect mobile
 $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows (phone|ce)|blackberry|tablet'.
 				'|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp|laystation portable)|nokia|fennec|htc[\-_]'.

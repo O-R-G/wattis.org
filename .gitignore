@@ -1,10 +1,25 @@
-# database settings
-systemDatabase.php
-config.php
+# machine-specific config files
+.htaccess
+.htpasswd 
 
-# authentication
-.htpasswd
-OPEN-RECORDS-GENERATOR/.htaccess
+# nano, emacs backups
+*~
 
-# MEDIA uploads
-MEDIA/[0-9][0-9][0-9][0-9][0-9].*
+# media
+*.gif
+*.jpg
+*.jpeg
+*.png
+*.pdf
+*.svg
+*.tif
+*.tiff
+*.mp4
+
+# macos
+.DS_Store
+
+# bash 
+backup
+sync
+log

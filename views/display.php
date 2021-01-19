@@ -15,8 +15,8 @@
 			$ids = array_values($ids);
 			$id = $ids[0];
 		}
-        $rootid = $ids[0];
-        
+		$rootid = $ids[0];
+		
         // SQL objects attached to object plus media plus rootname, rootbody
 
 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, (SELECT 

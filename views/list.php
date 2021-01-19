@@ -7,7 +7,6 @@
         $id = $ids[0];
 	}
 	$rootid = $ids[0];
-
 	// SQL objects attached to root with rootname
 
 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.url, 
@@ -24,9 +23,9 @@ ORDER BY objects.rank, objects.begin;";
 		$items[] = $obj;
 	$rootname = $items[0]["rootname"];
 	
-	$result = MYSQL_QUERY($sql);
-	$myrow = MYSQL_FETCH_ARRAY($result);
-        $rootname = $myrow["rootname"];
+	// $result = MYSQL_QUERY($sql);
+	// $myrow = MYSQL_FETCH_ARRAY($result);
+        // $rootname = $myrow["rootname"];
 	mysql_data_seek($result, 0);	// reset to row 0
 	$html = "";
 	$i = 0;
@@ -43,19 +42,17 @@ ORDER BY objects.rank, objects.begin;";
 
         $html .= "<div class='listContainer doublewide times'>";
 
-	while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-
-                if ($myrow['name1'][0] != '.') {
-
+	foreach($items as $key => $myrow){
+                if (substr($myrow['name1'], 0, 1) != '.') {
+                	
 			$URL = $myrow["url"];
 			$URL = ($URL) ? "/calendar/".$URL : "view_";
 	
 			$now = time();
 			$begin = ($myrow['begin'] != null) ? strtotime($myrow['begin']) : $now;
 			$end = ($myrow['end'] != null) ? strtotime($myrow['end']) : $now;
-			
+
 			if ($alt && ($end < $now)) {
-	
 				// archive
 	
 				$html .= "<div class='listContainer'>";
@@ -65,7 +62,6 @@ ORDER BY objects.rank, objects.begin;";
 				$html .= "</div>";	
 	
 			} else if (!$alt && (($begin >= $now) || ($end >= $now))) {
-				
 				// upcoming
 	
 				$html .= "<div class='listContainer'>";

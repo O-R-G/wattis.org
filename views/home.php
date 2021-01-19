@@ -94,8 +94,8 @@ if(!!el)
 	while ($obj = $res_news->fetch_assoc())
 		$items[] = $obj;
 	$res_news->close();
-	foreach($items as $item){
-		$newsItems[$i] = $item["body"];
+	foreach($items as $key => $item){
+		$newsItems[$key] = $item["body"];
 		
 	}
 	?>
@@ -110,21 +110,6 @@ if(!!el)
 				else
 					echo "\n";
 			}
-			// $i = 0;
- 		
-			// while ( $newsItems[$i] != null ) {
-        	                        			
-			// 	echo "\"" . $newsItems[$i] . "\"";
-
-			// 	if ( $i < (count($newsItems) -1) ) {
-
-			// 		echo ",\n";
-			// 	} else {
-
-			// 		echo "\n";
-			// 	}			
-			// 	$i++;
-			// }
 		?>
 	);
 
