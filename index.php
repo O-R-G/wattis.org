@@ -1,132 +1,50 @@
-<?php
-// now on o-r-g github
-require_once("GLOBAL/head.php");
-require_once("_Library/orgRSSParse.php");
+<?
+$request = $_SERVER['REQUEST_URI'];
+$requestclean = strtok($request,"?");
+$uri = explode('/', $requestclean);
+
+require_once("views/head.php");
+// var_dump($uri);
+if (!$uri[1])
+    require_once("views/home.php");
+// elseif( $uri[1] == 'about' ||
+// 		 $uri[1] == 'visit' ||
+// 		 $uri[1] == 'contact' ||
+// 		 $uri[1] == 'follow' ||
+// 		 $uri[1] == 'support' ||
+// 		 $uri[1] == 'archive' ||
+// 		 $uri[1] == 'capp' ||
+// 		 $uri[1] == 'intern' ||
+// 		 $uri[1] == 'exhibitions' ||
+// 		 $uri[1] == 'program' ||
+// 		 $uri[1] == 'view' ||
+// 		 ($uri[1] == 'calendar' && count($uri) >= 3)
+// 		)
+// 	require_once("views/view.php");
+elseif( $uri[1] == 'main' ||
+		 $uri[1] == 'menu'
+		)
+	require_once("views/menu.php");
+elseif( $uri[1] == 'library' || 
+		$uri[1] == 'library_.php' 
+	   )
+	require_once("views/library.php");
+elseif( $uri[1] == 'library_view.php' )
+	require_once("views/library_view.php");
+elseif( $uri[1] == 'list' ||
+		($uri[1] == 'calendar' && count($uri) < 3)
+	   )
+	require_once("views/list.php");
+elseif( $uri[1] == 'catalogues' ||
+		$uri[1] == 'editions' ||
+		$uri[1] == 'display'
+	   )
+	require_once("views/display.php");
+else if ($uri[1] == 'buy' || $uri[1] == 'buy_.php')
+    require_once("views/buy.php");
+else 
+    require_once("views/view.php");
+// require_once("views/badge.php");
+require_once("views/foot.php");
 ?>
 
-<!-- BLOCKS -->
-<div class="homeContainer times big"><?php
-
-$rootname = 'Home';
-
-// SQL objects attached to root by name
-$sql = "SELECT 
-			objects.id AS objectsId, 
-			objects.name1, objects.body, objects.url, 
-			objects.begin, objects.end 
-		FROM 
-			objects, wires 
-		WHERE 
-			wires.fromid = (
-				SELECT objects.id 
-				FROM objects 
-				WHERE 
-					objects.name1 LIKE '$rootname' 
-					AND objects.active = 1
-			) 
-			AND objects.name1 NOT LIKE '.%' 
-			AND wires.toid = objects.id 
-			AND objects.active = '1' 
-			AND wires.active = '1' 
-		ORDER BY objects.rank;";
-
-$result = MYSQL_QUERY($sql);
-$html = "";
-$i = 0;
-$myrow = MYSQL_FETCH_ARRAY($result);
-$blocks[$i] = "<div class = 'logoContainer'>" . $myrow["body"] . "</div>";
-
-while($myrow =  MYSQL_FETCH_ARRAY($result)) 
-{
-	if(!$isMobile)
-	{
-		$randomPadding = rand(0, 150);
-		$randomWidth = rand(10, 35);
-		$randomMargin = rand(30, 80);
-		$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
-	}
-	else
-	{
-		$randomPadding = rand(0, 30);
-		$randomWidth = rand(30, 80);
-		$randomMargin = rand(20, 50);
-		$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
-	}
-	$blocks[$i] .= "<div class = 'blockContainer' style='width:".$randomWidth."%; float: ".$randomFloat."; padding-top:".$randomPadding."px; margin: ".$randomMargin."px;'>";
-	$blocks[$i] .= $myrow["body"];
-	$blocks[$i] .= "</div>";
-
-	$i++;
-}
-
-// write blocks
-for ($j = 0; $j < count($blocks); $j++)
-{
-	$html .= $blocks[$j];
-}
-echo nl2br($html);
-
-?></div>
-
-<!-- WEATHER -->
-<script type="text/javascript">
-el = document.getElementById("rss");
-if(!!el)
-{
-	// requires <element id="rss">
-	showRSS(el, "http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
-}
-</script>
-
-<!-- NEWS --> 
-<script type="text/javascript" src="JS/animateNewsTicker.js"></script>
-<script type="text/javascript">
-
-	<?php
-	
-		// SQL object with attached (News)
-		// could be written into main query with LEFTJOIN
-	
-		$sql = "SELECT objects.id, objects.name1, objects.body, objects.active, objects.rank, wires.active, 
-	wires.fromid, wires.toid FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 
-	LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = 
-	'1' ORDER BY objects.rank;";
-	
-		$result =  MYSQL_QUERY($sql);
-		$i = 0;
-		$newsItems = array();
-	
-		while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-        	                        		
-			$newsItems[$i] = $myrow["body"];
-			$i++;
-		}
-                       	
-	?>
-
-       	newsItem = new Array(
-		<?php
-			$i = 0;
- 		
-			while ( $newsItems[$i] != null ) {
-        	                        			
-				echo "\"" . $newsItems[$i] . "\"";
-
-				if ( $i < (count($newsItems) -1) ) {
-
-					echo ",\n";
-				} else {
-
-					echo "\n";
-				}			
-				$i++;
-			}
-		?>
-	);
-	
-	animateNewsTicker(newsItem[0]);
-</script>
-
-<?php
-require_once("GLOBAL/foot.php");
-?>
