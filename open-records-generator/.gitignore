@@ -1,6 +1,0 @@
-# site-specific configuration files
-.htaccess
-settings.store
-vendor/
-license.txt
-config.php

@@ -1,4 +1,0 @@
-AuthUserFile /Library/Webserver/Documents/WATTIS/.htpasswd
-AuthName "OPEN-RECORDS-GENERATOR"
-AuthType Basic
-Require valid-user
