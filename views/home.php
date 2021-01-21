@@ -1,4 +1,5 @@
 <!-- BLOCKS -->
+
 <div class="homeContainer times big"><?
 
 $rootname = 'Home';
@@ -32,6 +33,10 @@ $items = array();
 while ($obj = $res->fetch_assoc())
 	$items[] = $obj;
 $res->close();
+
+// $greeting_id = end($oo->urls_to_ids(array('home', 'hi-visitor')));
+// $greeting_item = $oo->get($greeting_id);
+// array_unshift($items, $greeting_item);
 // var_dump(count($items));
 // foreach($items as $item)
 // {
@@ -39,27 +44,17 @@ $res->close();
 // }
 foreach($items as $key =>$item)
 {
-	if($key == 0){
+	$display = false;
+	if($key == 1){
 		// var_dump($item);
-		?><div class = 'logoContainer'><?= nl2br($item["body"]); ?></div><?
+		?><div class = 'logoContainer' style = '<?= $display ? "display:block" : "display: none" ?>;'><?= nl2br($item["body"]); ?></div><?
 	}
 	else
 	{
-		if(!$isMobile)
-		{
-			$randomPadding = rand(0, 150);
-			$randomWidth = rand(10, 35);
-			$randomMargin = rand(30, 80);
-			$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
-		}
-		else
-		{
-			$randomPadding = rand(0, 30);
-			$randomWidth = rand(30, 80);
-			$randomMargin = rand(20, 50);
-			$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
-		}
-		?><div class = 'blockContainer' style='width:<?= $randomWidth; ?>%; float: <?= $randomFloat; ?>; padding-top:<?= $randomPadding; ?>px; margin: <?= $randomMargin; ?>px'><?= nl2br($item['body']); ?></div><?
+		
+		if($key == 0)
+			$display = true;
+		?><div class = 'blockContainer' style='<?= $display ? 'display:block' : 'display: none' ?>;'><?= nl2br($item['body']); ?></div><?
 	}
 }
 
