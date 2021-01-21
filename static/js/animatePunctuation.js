@@ -147,6 +147,7 @@ function animatePunctuation(divs,delay)
 
 function startStopAnimatePunctuation() 
 {
+	console.log('startStopAnimatePunctuation');
 	if(timeout == null) 
 	{						
 		delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
@@ -168,6 +169,7 @@ function startStopAnimatePunctuation()
 	
 function clickHandler() 
 {			   
+	console.log('click');
 	swapClass("color","black","white");
 	if (document.getElementById("news")) 
 	{ 

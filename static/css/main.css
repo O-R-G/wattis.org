@@ -122,11 +122,15 @@ a:active {
 }
 
 .homeContainer {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-        overflow: hidden; 
-    }
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    position: relative;
+    /*position: absolute;*/
+    /*top: 10px;*/
+    /*left: 10px;*/
+    /*overflow: hidden; */
+}
 
 .mainContainer {
     position: absolute;
@@ -144,13 +148,15 @@ a:active {
 .blockContainer
 {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    max-width: 100%;
-    height: 100vh;
-    background-color: #fff;
-    padding: 25vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*width: 100vw;*/
+    width: 600px;
+    /*max-width: 100%;*/
+    /*height: 100vh;*/
+    /*background-color: #fff;*/
+    /*padding: 25vw;*/
     box-sizing: border-box;
 }
 
@@ -591,6 +597,17 @@ a:active {
     cursor: pointer;
     background-image: url(../../media/svg/magnifying-glass-6-k.svg);
     background-size: 100%;
+}
+.continue-btn
+{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 100%);
+}
+#main-logo
+{
+    /*z-index: 0;*/
 }
 @media screen and (max-width: 568px) {
     

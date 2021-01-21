@@ -73,7 +73,7 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 			<!-- .+* THE WATTIS INSTITUTE --><?php 
 			if (($pageName != "_logo") && ($pageName != "_animatePunctuation")) 
 			{ 
-			?><div class="logoContainer times big logo fixed">
+			?><div id = 'main-logo' class="logoContainer times big logo fixed">
 				<span id="logo" onmousedown="startStopAnimatePunctuation();" class="target">.+*</span>
 				<!-- <span id="logo" class="target">.+*</span> -->
 				<!-- <span id="control" onmousedown="startStopAnimatePunctuation();" class="helvetica small">CONTROL</span> -->
@@ -86,52 +86,4 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 			</script><?
 			}
 		?>
-		<!-- <?
-	    if(!$uu->id) {
-    	    ?><header id="menu" class="hidden homepage"><?
-	    }
-	    else if($show_menu) {
-    	    ?><header id="menu" class="visible"><?
-	    }
-	    else {
-    	    ?><header id="menu" class="hidden"><?
-	    }
-	    ?><ul>
-		    <li><?
-			    if($uu->id) {
-				    ?><a href="<? echo $host; ?>"><?= $head; ?></a><?
-			    }
-			    else { 
-                    echo $head; 
-                }
-		    ?></li>
-		    <ul class="nav-level"><?
-	    $prevd = $nav[0]['depth'];
-	    foreach($nav as $n) {
-		    $d = $n['depth'];
-		    if($d > $prevd) {
-    		    ?><ul class="nav-level"><?
-		    }
-		    else {
-			    for($i = 0; $i < $prevd - $d; $i++) { 
-                    ?></ul><? 
-                }
-		    }
-		    ?><li><?
-			    if($n['o']['id'] != $uu->id) {
-    			    ?><a href="<? echo $host.$n['url']; ?>"><?
-				    echo $n['o']['name1'];
-                    if ($n['o']['url'] !== "about")
-    				    echo ', ' . $n['o']['deck'];
-	    		    ?></a><?
-			    }
-			    else {
-    			    ?><span><?= $n['o']['name1']; ?></span><?
-			    }
-		    ?></li><?
-		    $prevd = $d;
-	    }
-	    ?></ul>
-	    </ul>
-    </header>
- -->
+		

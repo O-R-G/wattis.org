@@ -47,14 +47,14 @@ foreach($items as $key =>$item)
 	$display = false;
 	if($key == 1){
 		// var_dump($item);
-		?><div class = 'logoContainer' style = '<?= $display ? "display:block" : "display: none" ?>;'><?= nl2br($item["body"]); ?></div><?
+		?><div class = 'logoContainer' style = '<?= $display ? "display:block" : "display: none" ?>;'><?= nl2br($item["body"]); ?><div class = 'continue-btn small helvetica'>CONTINUE</div></div><?
 	}
 	else
 	{
 		
 		if($key == 0)
 			$display = true;
-		?><div class = 'blockContainer' style='<?= $display ? 'display:block' : 'display: none' ?>;'><?= nl2br($item['body']); ?></div><?
+		?><div class = 'blockContainer' style='<?= $display ? 'display:block' : 'display: none' ?>;'><?= nl2br($item['body']); ?><div class = 'continue-btn small helvetica'>CONTINUE</div></div><?
 	}
 }
 
@@ -109,4 +109,6 @@ if(!!el)
 	);
 
 	animateNewsTicker(newsItem[0]);
+
+	
 </script>
