@@ -23,7 +23,9 @@
 			<div id = 'close-menu-btn' class = 'round-btn'>CLOSE</div>
 		</div>
 	</div>
-</div>	
+</div>
+<audio id='btn-on-sound-effect' ><source src = '/media/audio/320181__dland__hint.wav' type="audio/wav"></audio>
+<audio id='btn-off-sound-effect' ><source src = '/media/audio/413690__splatez07__click_edited.m4a' type=""></audio>
 <script type="text/javascript">
 	var animate = checkCookie("animateCookie");
 	delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
@@ -45,16 +47,24 @@
 		?>initPunctuation('animatePunctuation', delay, true, animate);<?php 
 	} 
 	?>
+	var sBtn_on_sound_effect = document.getElementById('btn-on-sound-effect');
+	var sBtn_off_sound_effect = document.getElementById('btn-off-sound-effect');
 	var sMenu_btn = document.getElementById('menu-btn');
 	sMenu_btn.addEventListener('click', function(){
 		document.body.classList.add('viewing-menu');
+		sBtn_on_sound_effect.play();
 	});
 	var sClose_menu_btn = document.getElementById('close-menu-btn');
 	sClose_menu_btn.addEventListener('click', function(){
 		document.body.classList.remove('viewing-menu');
+		sBtn_off_sound_effect.play();
 	});
 	var sSearch_btn = document.getElementById('search-btn');
 	sSearch_btn.addEventListener('click', function(){
+		if(document.body.classList.contains('viewing-search'))
+			sBtn_off_sound_effect.play();
+		else
+			sBtn_on_sound_effect.play();
 		document.body.classList.toggle('viewing-search');
 	});
 </script>
