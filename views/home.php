@@ -1,6 +1,6 @@
 <!-- BLOCKS -->
 
-<div class="homeContainer times big"><?
+<div class="homeContainer times big" stage = '0'><?
 
 $rootname = 'Home';
 
@@ -47,14 +47,13 @@ foreach($items as $key =>$item)
 	$display = false;
 	if($key == 1){
 		// var_dump($item);
-		?><div class = 'logoContainer' style = '<?= $display ? "display:block" : "display: none" ?>;'><?= nl2br($item["body"]); ?><div class = 'continue-btn small helvetica'>CONTINUE</div></div><?
+		?><div class = 'logoContainer' style = '<?= $display ? "display:block" : "display: none" ?>;'><?= nl2br($item["body"]); ?><div class = 'continue-btn small helvetica round-btn'>CONTINUE</div></div><?
 	}
 	else
-	{
-		
+	{	
 		if($key == 0)
 			$display = true;
-		?><div class = 'blockContainer' style='<?= $display ? 'display:block' : 'display: none' ?>;'><?= nl2br($item['body']); ?><div class = 'continue-btn small helvetica'>CONTINUE</div></div><?
+		?><div class = 'blockContainer' style='<?= $display ? 'display:block' : 'display: none' ?>;'><?= nl2br($item['body']); ?><?= $key == count($items) - 1 ? '' : '<div class = "continue-btn small helvetica round-btn">CONTINUE</div>' ?></div><?
 	}
 }
 
@@ -110,5 +109,18 @@ if(!!el)
 
 	animateNewsTicker(newsItem[0]);
 
-	
+	var sContainers = document.querySelectorAll('.homeContainer .logoContainer, .homeContainer .blockContainer');
+	var sHomeContainer = document.querySelector('.homeContainer');
+	var sContibue_btn = document.getElementsByClassName('continue-btn');
+	[].forEach.call(sContibue_btn, function(el, i){
+		el.addEventListener('click', function(){
+			var current_stage = sHomeContainer.getAttribute('stage');
+			sContainers[current_stage].style.display = 'none';
+			current_stage++;
+			if(current_stage > sContainers.length - 1)
+				current_stage = 0;
+			sContainers[current_stage].style.display = 'block';
+			sHomeContainer.setAttribute('stage', current_stage);
+		});
+	});
 </script>

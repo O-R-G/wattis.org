@@ -74,8 +74,9 @@ function db_connect($remote_user) {
 // Browse the Library = 752
 // Browse the Library > Watch / Listen = 776
 // Main > Consult the Archive = 30
+// _Email = 94
 $db = db_connect("admin");
-$sql = "SELECT objects.name1, objects.id FROM objects, wires WHERE objects.id = wires.toid AND objects.active = '1' AND wires.active = '1' AND wires.fromid = '30'";
+$sql = "SELECT objects.name1, objects.id FROM objects, wires WHERE objects.id = wires.toid AND objects.active = '1' AND wires.active = '1' AND wires.fromid = '94'";
 $result = $db->query($sql);
 if(!$result)
 	throw new Exception($db->error);

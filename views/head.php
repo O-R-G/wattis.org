@@ -45,6 +45,10 @@ $pageName = basename($_SERVER['PHP_SELF'], ".php");
 $alt = $_REQUEST['alt'];
 $pop = $_REQUEST['pop'];
 
+
+$displaySearch = $_GET['displaysearch'];
+if(empty($displaySearch))
+	$displaySearch = false;
 // detect mobile
 $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows (phone|ce)|blackberry|tablet'.
 				'|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp|laystation portable)|nokia|fennec|htc[\-_]'.
@@ -64,7 +68,7 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 		<script type="text/javascript" src="/static/js/global.js"></script>
 		<script type="text/javascript" src="/static/js/animatePunctuation.js"></script>
 	</head>
-	<body>
+	<body class = '<?= empty($displaySearch) ? '' : 'viewing-search'; ?>'>
 		<!-- Google Tag Manager -->
 		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NQNBBC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NQNBBC');</script>
 		<!-- End Google Tag Manager -->

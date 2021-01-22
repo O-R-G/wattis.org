@@ -42,8 +42,11 @@ elseif( $uri[1] == 'catalogues' ||
 	require_once("views/display.php");
 else if ($uri[1] == 'buy' || $uri[1] == 'buy_.php')
     require_once("views/buy.php");
+elseif($uri[1] == 'search')
+	require_once('views/search.php');
 else 
     require_once("views/view.php");
+
 // require_once("views/badge.php");
 require_once("views/foot.php");
 ?>
