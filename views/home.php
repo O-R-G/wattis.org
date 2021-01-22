@@ -53,7 +53,7 @@ foreach($items as $key =>$item)
 	{	
 		if($key == 0)
 			$display = true;
-		?><div class = 'blockContainer' style='<?= $display ? 'display:block' : 'display: none' ?>;'><?= nl2br($item['body']); ?><?= $key == count($items) - 1 ? '' : '<div class = "continue-btn small helvetica round-btn">CONTINUE</div>' ?></div><?
+		?><div class = 'blockContainer' style='<?= $display ? 'display:block' : 'display: none' ?>;'><?= $item['body']; ?><?= $key == count($items) - 1 ? '' : '<div class = "continue-btn small helvetica round-btn">CONTINUE</div>' ?></div><?
 	}
 }
 

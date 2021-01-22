@@ -601,8 +601,8 @@ a:active {
 }
 .round-btn
 {
-    padding: 10px 15px;
-    border-radius: 19px;
+    padding: 10px 15px 8px 15px;
+    border-radius: 18px;
     background-color: #fff;
     cursor: pointer;
 }
@@ -665,7 +665,7 @@ a:active {
 .continue-btn
 {
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     left: 50%;
     transform: translate(-50%, 100%);
     background-color: #fff;
@@ -780,8 +780,8 @@ a:active {
     }
     /* INDEX */
     .logoContainer {
-        top: 0px;
-        left: 0px;
+        /*top: 0px;*/
+        /*left: 0px;*/
         display: block;
         width: initial;
         margin-right: 0;
@@ -803,14 +803,10 @@ a:active {
     }
     
     .logoContainer,
-    .blockContainer
+    .blockContainer,
+    #searchContainer
     {
-        /*width: 100vw;
-        max-width: 100%;
-        height: 100vh;
-        background-color: #fff;
-        padding: 25vw;
-        position: absolute;*/
+        width: 300px;
     }
     
     .menuContainer > a {
@@ -824,7 +820,7 @@ a:active {
         bottom: 0px;
         width: 100%;
         background-color: white;
-        padding: 20px;
+        /*padding: 20px;*/
     }
 
     .menuContainer > .desktop {
@@ -895,6 +891,50 @@ a:active {
     }
     #library-search-container input::placeholder {
         /* opacity: 0; */
+    }
+    #search-btn
+    {
+        right: 10px;
+        bottom: 10px;
+    }
+    #menu-btn
+    {
+        top: 10px;
+        left: 10px;
+    }
+    #menu-btn
+    {
+        -webkit-box-shadow: -2px 3px 4px rgba(0,0,0,.5);
+           -moz-box-shadow: -2px 3px 4px rgba(0,0,0,.5);
+                box-shadow: -2px 3px 4px rgba(0,0,0,.5);
+    }
+    #close-menu-btn
+    {
+        top: 10px;
+        left: 10px;
+        -webkit-box-shadow: -2px 3px 4px rgba(255,255,255,.5);
+           -moz-box-shadow: -2px 3px 4px rgba(255,255,255,.5);
+                box-shadow: -2px 3px 4px rgba(255,255,255,.5);
+    }
+    #search-picker
+    {
+        width: 300px;
+    }
+    .search-item
+    {
+        width: initial;
+        display: block;
+        /*vertical-align: top;*/
+        /*box-sizing: border-box;*/
+        margin-bottom: 40px;
+    }
+    .search-item:nth-child(even)
+    {
+        padding-left: 0;
+    }
+    .search-item:nth-child(odd)
+    {
+        padding-right: 0;
     }
 }
 
