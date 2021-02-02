@@ -75,8 +75,10 @@ function db_connect($remote_user) {
 // Browse the Library > Watch / Listen = 776
 // Main > Consult the Archive = 30
 // _Email = 94
+// Cecilia VicuÃ±a is on our mind = 1110
+$parent_id = 1110;
 $db = db_connect("admin");
-$sql = "SELECT objects.name1, objects.id FROM objects, wires WHERE objects.id = wires.toid AND objects.active = '1' AND wires.active = '1' AND wires.fromid = '94'";
+$sql = "SELECT objects.name1, objects.id FROM objects, wires WHERE objects.id = wires.toid AND objects.active = '1' AND wires.active = '1' AND wires.fromid = '".$parent_id."'";
 $result = $db->query($sql);
 if(!$result)
 	throw new Exception($db->error);
