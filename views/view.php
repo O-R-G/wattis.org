@@ -232,14 +232,31 @@ $result->close();
 $pattern = "/\/\/\//";
 if(preg_match($pattern, $body) == 1) 
 	$columns = preg_split($pattern, $body);
-
+$firstChar = substr($columns[0], 0, 1);
+while( ord($firstChar) == 9 || 
+	   ord($firstChar) == 10 || 
+	   ord($firstChar) == 13
+	 )
+{
+	$columns[0] = substr($columns[0], 1);
+	$firstChar = substr($columns[0], 0, 1);
+}
+$firstChar = substr($columns[1], 0, 1);
+while( ord($firstChar) == 9 || 
+	   ord($firstChar) == 10 || 
+	   ord($firstChar) == 13
+	 )
+{
+	$columns[1] = substr($columns[1], 1);
+	$firstChar = substr($columns[1], 0, 1);
+}
 // search for strings that match [\d+] where \d+ = n
 // replace with image container = n
 // remove image container n from array of images
 // print out rest of images at the end (as normal images?)
 
 // hours
-$html .= "<div class='listContainer times'>";
+$html .= "<div class='listContainer times title-block'>";
 if ($begin || $end) 
 {
 	// build date display

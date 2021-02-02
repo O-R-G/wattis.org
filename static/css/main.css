@@ -109,7 +109,32 @@ a:active {
 
 
 /* containers */
-
+body.reverse
+{
+    background-color: #000;
+    color: #fff;
+}
+body.reverse .black a
+{
+    border-color: #fff;
+}
+body.reverse .black a,
+body.reverse .black
+{
+    color: #fff;
+}
+body.reverse .punctuation
+{
+    color: #fff;
+}
+body.reverse .round-btn
+{
+    background-color: #000;
+}
+body.reverse #search-btn
+{
+    background-image: url(../../media/svg/magnifying-glass-6-w.svg);
+}
 .logoContainer {
     z-index:99;
     /*top: 10px;*/
@@ -132,13 +157,15 @@ a:active {
 }
 
 .mainContainer {
-    position: absolute;
-    top: 200px;
-    left: 10px;
+    /*position: absolute;*/
+    /*top: 200px;*/
+    /*left: 10px;*/
     width: 95%;
+    margin: 0 auto;
     padding:20px;
-        overflow: hidden; 
-    }
+    /*padding-top:3px;*/
+    overflow: hidden; 
+}
 
 .blockContainer {
     position:relative; 
@@ -688,7 +715,11 @@ a:active {
 }
 #main-logo
 {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 15px;
     min-height: initial;
+    width: 42vw;
 }
 .viewing-menu #menuContainer
 {
@@ -753,23 +784,29 @@ a:active {
     width: 500px;
     padding-top: 20px;
     /*margin-top: 200px;*/
-    margin: 230px auto 0 auto;
+    margin: 0px auto 0 auto;
+    padding-bottom: 40px;
 }
 .search-item
 {
-    width: 50%;
-    display: inline-block;
+    /*width: 50%;*/
+    /*display: inline-block;*/
     vertical-align: top;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    /*margin-left: 50px;*/
+}
+.search-item a
+{
+
 }
 .search-item:nth-child(even)
 {
-    padding-left: 10px;
+    /*padding-left: 10px;*/
 }
 .search-item:nth-child(odd)
 {
-    padding-right: 10px;
+    /*padding-right: 10px;*/
 }
 
 /* temp */
@@ -943,6 +980,18 @@ a:active {
     {
         padding-right: 0;
     }
+    #main-logo
+    {
+        left: 0;
+        margin-left: 90px;
+        transform: none;
+        width: auto;
+    }
+    .title-block
+    {
+        margin-left: 70px;
+    }
+
 }
 
 /* 3/19 adjust font size of caption */

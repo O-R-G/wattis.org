@@ -54,7 +54,9 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 				'|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp|laystation portable)|nokia|fennec|htc[\-_]'.
 				'|mobile|up\.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\b#i', $_SERVER['HTTP_USER_AGENT']);
 
-
+$reverse = false;
+if($uri[1] == 'search')
+	$reverse = true;
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -68,7 +70,7 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 		<script type="text/javascript" src="/static/js/global.js"></script>
 		<script type="text/javascript" src="/static/js/animatePunctuation.js"></script>
 	</head>
-	<body class = '<?= empty($displaySearch) ? '' : 'viewing-search'; ?>'>
+	<body class = '<?= empty($displaySearch) ? '' : 'viewing-search'; ?> <?= $reverse ? 'reverse' : ''; ?>'>
 		<!-- Google Tag Manager -->
 		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NQNBBC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NQNBBC');</script>
 		<!-- End Google Tag Manager -->
@@ -77,11 +79,11 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 			<!-- .+* THE WATTIS INSTITUTE --><?php 
 			if (($pageName != "_logo") && ($pageName != "_animatePunctuation")) 
 			{ 
-			?><div id = 'main-logo' class="logoContainer times big logo fixed">
+			?><div id = 'main-logo' class="logoContainer times big logo">
 				<span id="logo" onmousedown="startStopAnimatePunctuation();" class="target">.+*</span>
 				<!-- <span id="logo" class="target">.+*</span> -->
 				<!-- <span id="control" onmousedown="startStopAnimatePunctuation();" class="helvetica small">CONTROL</span> -->
-				<a href="<?= $uri[1] ? '/' : '/main'; ?>" style="color:#000;">The Wattis Institute</a>
+				<a href="<?= $uri[1] ? '/' : '/main'; ?>" style="">The Wattis Institute</a>
 			</div>
 			<div class="clear"></div>
 			<script type="text/javascript">
