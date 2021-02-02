@@ -771,6 +771,13 @@ a:active {
 {
     padding-right: 10px;
 }
+
+/* temp */
+
+.desktop {
+    display: none;
+}
+
 @media screen and (max-width: 568px) {
     
     * {
