@@ -770,8 +770,8 @@ body.reverse #search-btn
 }
 #search-input:focus
 {
-    background-color: #fff;
-    color: #000;
+    background-color: #000;
+    color: #fff;
     outline: none;
 }
 #commit-search-btn
