@@ -169,7 +169,6 @@ function startStopAnimatePunctuation()
 	
 function clickHandler() 
 {			   
-	console.log('click');
 	swapClass("color","black","white");
 	if (document.getElementById("news")) 
 	{ 

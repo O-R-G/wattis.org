@@ -5,27 +5,55 @@
 				<input id = 'search-input' name = 'query' type = 'text' class = 'big helvetica'><button id = 'commit-search-btn' type = 'submit'><img src = '/media/svg/arrow-forward-6-w.svg'></button>
 			</form>
 		</div>
-		<div id = 'menu-btn' class = 'helvetica round-btn'>MENU</div>
+		<!-- .+* THE WATTIS INSTITUTE --><?php 
+			if (($pageName != "_logo") && ($pageName != "_animatePunctuation")) 
+			{ 
+			?><div id = 'menu-btn' class=" times big logo">
+				<span id="logo" class="target">.+*</span>
+				<!-- <span id="logo" onmousedown="startStopAnimatePunctuation();" class="target">.+*</span> -->
+				<!-- <a href="<?= $uri[1] ? '/' : '/main'; ?>" style="">The Wattis Institute</a> -->
+			</div>
+			<div class="clear"></div>
+			<script type="text/javascript">
+				var logo = unescape(getCookie("logoCookie"));
+				// console.log(logo);
+				if (logo) { document.getElementById("logo").textContent = logo; }
+			</script><?
+			}
+		?>
 		<div id = 'menuContainer' class='menuContainer helvetica'>
-			<div id = 'menu-wrapper'>
+			<div id = 'menu-wrapper' level='0'>
+				<a href='/' class='instructionContainer'>HOME</a> <br>
 				<a href='/about' class='instructionContainer'>ABOUT</a> <br>
 				<a href='/program' class='instructionContainer'>PROGRAM</a><br>
 				<a href='/calendar' class='instructionContainer'>CALENDAR</a><br>
-				<span class='desktop'>
+				<div id = 'menu-level-1' class='menu-level'>
 					<a href='/archive' class='instructionContainer'>ARCHIVE</a><br>
 					<a href='/visit' class='instructionContainer'>VISIT</a><br>
 					<a href='/contact' class='instructionContainer'>CONTACT</a><br>
 					<a href='/catalogs' class='instructionContainer'>BOOKSHOP</a><br>
-				</span>
+				</div>
+				<div id = 'menu-level-2' class='menu-level'>
+					<a href='/thank-our-supporters' class='instructionContainer'>THANKS OUR SUPPORTERS</a><br>
+					<a href='/support' class='instructionContainer'>BECOME A MEMBER</a><br>
+					<a href='/editions' class='instructionContainer'>BUY LIMITED EDITIONS</a><br>
+					<a href='/capp' class='instructionContainer'>CAPP STREET PROJECT</a><br>
+				</div>
+				<div id = 'menu-level-3' class='menu-level'>
+					<a href='/thank-our-supporters' class='instructionContainer'>THANKS OUR SUPPORTERS</a><br>
+					<a href='/support' class='instructionContainer'>BECOME A MEMBER</a><br>
+					<a href='/editions' class='instructionContainer'>BUY LIMITED EDITIONS</a><br>
+					<a href='/capp' class='instructionContainer'>CAPP STREET PROJECT</a><br>
+				</div>
 				<a href='/library' class='instructionContainer'>LIBRARY</a><br>
-				<a href='/main' class='instructionContainer'>MORE</a>
+				<div href='' id = 'more-menu-btn' class='instructionContainer menu-more-btn'><a>MORE</a></div>
 			</div>
-			<div id = 'close-menu-btn' class = 'round-btn'>CLOSE</div>
+			<div id = 'close-menu-btn' class = ''>CLOSE</div>
 		</div>
 	</div>
 </div>
-<audio id='btn-on-sound-effect' ><source src = '/media/audio/320181__dland__hint.wav' type="audio/wav"></audio>
-<audio id='btn-off-sound-effect' ><source src = '/media/audio/413690__splatez07__click_edited.m4a' type=""></audio>
+<audio id='btn-on-sound-effect' preload="auto"><source src = '/media/audio/320181__dland__hint.wav' type="audio/wav"></audio>
+<audio id='btn-off-sound-effect' preload="auto"><source src = '/media/audio/413690__splatez07__click_edited.m4a' type=""></audio>
 <script type="text/javascript">
 	var animate = checkCookie("animateCookie");
 	delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
@@ -39,6 +67,7 @@
 		?>
 			document.cookie = "animateCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 			var click = clickHandler();
+			click = clickHandler();
 		<?php
 		}
 	} 
@@ -60,12 +89,27 @@
 		sBtn_off_sound_effect.play();
 	});
 	var sSearch_btn = document.getElementById('search-btn');
+	var sSearch_input = document.getElementById('search-input');
 	sSearch_btn.addEventListener('click', function(){
 		if(document.body.classList.contains('viewing-search'))
 			sBtn_off_sound_effect.play();
-		else
+		else{
+			console.log('turn on');
+			setTimeout(function(){sSearch_input.focus();}, 0);
 			sBtn_on_sound_effect.play();
+		}
 		document.body.classList.toggle('viewing-search');
+	});
+
+	var sMore_menu_btn = document.getElementById('more-menu-btn');
+	var sMenu_wrapper = document.getElementById('menu-wrapper');
+	var sMenu_level = document.getElementsByClassName('menu-level');
+	sMore_menu_btn.addEventListener('click', function(){
+		var currentLevel = parseInt(sMenu_wrapper.getAttribute('level'));
+		if(currentLevel < sMenu_level.length)
+		{
+			sMenu_wrapper.setAttribute('level', currentLevel+1);
+		}
 	});
 </script>
 </body>

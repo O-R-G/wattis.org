@@ -57,6 +57,9 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 $reverse = false;
 if($uri[1] == 'search')
 	$reverse = true;
+
+require_once('static/php/function.php');
+
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -76,20 +79,5 @@ if($uri[1] == 'search')
 		<!-- End Google Tag Manager -->
 		<div id="animatePunctuation" class="animatePunctuation">
 			<div id="color" class="black">
-			<!-- .+* THE WATTIS INSTITUTE --><?php 
-			if (($pageName != "_logo") && ($pageName != "_animatePunctuation")) 
-			{ 
-			?><div id = 'main-logo' class="logoContainer times big logo">
-				<span id="logo" onmousedown="startStopAnimatePunctuation();" class="target">.+*</span>
-				<!-- <span id="logo" class="target">.+*</span> -->
-				<!-- <span id="control" onmousedown="startStopAnimatePunctuation();" class="helvetica small">CONTROL</span> -->
-				<a href="<?= $uri[1] ? '/' : '/main'; ?>" style="">The Wattis Institute</a>
-			</div>
-			<div class="clear"></div>
-			<script type="text/javascript">
-				var logo = unescape(getCookie("logoCookie"));
-				if (logo) { document.getElementById("logo").textContent = logo; }
-			</script><?
-			}
-		?>
+			
 		

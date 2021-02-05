@@ -5,57 +5,58 @@
 $rootname = 'Home';
 
 // SQL objects attached to root by name
-$sql = "SELECT 
-			objects.id, objects.name1,
-			objects.body, objects.url, 
-			objects.begin, objects.end 
-		FROM 
-			objects, wires 
-		WHERE 
-			wires.fromid IN
-			(
-				SELECT objects.id 
-				FROM objects 
-				WHERE 
-					objects.name1 LIKE '$rootname' 
-					AND objects.active = 1
-			) 
-			AND objects.name1 NOT LIKE '.%' 
-			AND wires.toid = objects.id 
-			AND objects.active = '1' 
-			AND wires.active = '1' 
-		ORDER BY objects.rank;";
+// $sql = "SELECT 
+// 			objects.id, objects.name1,
+// 			objects.body, objects.url, 
+// 			objects.begin, objects.end 
+// 		FROM 
+// 			objects, wires 
+// 		WHERE 
+// 			wires.fromid IN
+// 			(
+// 				SELECT objects.id 
+// 				FROM objects 
+// 				WHERE 
+// 					objects.name1 LIKE '$rootname' 
+// 					AND objects.active = 1
+// 			) 
+// 			AND objects.name1 NOT LIKE '.%' 
+// 			AND wires.toid = objects.id 
+// 			AND objects.active = '1' 
+// 			AND wires.active = '1' 
+// 		ORDER BY objects.rank;";
 
-$res = $db->query($sql);
-if(!$res)
-	throw new Exception($db->error);
-$items = array();
-while ($obj = $res->fetch_assoc())
-	$items[] = $obj;
-$res->close();
+// $res = $db->query($sql);
+// if(!$res)
+// 	throw new Exception($db->error);
+// $items = array();
+// while ($obj = $res->fetch_assoc())
+// 	$items[] = $obj;
+// $res->close();
 
-// $greeting_id = end($oo->urls_to_ids(array('home', 'hi-visitor')));
-// $greeting_item = $oo->get($greeting_id);
-// array_unshift($items, $greeting_item);
-// var_dump(count($items));
-// foreach($items as $item)
-// {
-// 	var_dump($item);
-// }
-foreach($items as $key =>$item)
+$welcome_id = end($oo->urls_to_ids(array('home', 'welcome')));
+$welcome_children = $oo->children($welcome_id);
+$spotlight_id = end($oo->urls_to_ids(array('home', 'spotlight')));
+$spotlight_children = $oo->children($spotlight_id);
+foreach($welcome_children as $child)
 {
-	$display = false;
-	if($key == 1){
-		// var_dump($item);
-		?><div class = 'logoContainer' style = '<?= $display ? "display:block" : "display: none" ?>;'><?= nl2br($item["body"]); ?><div class = 'continue-btn small helvetica round-btn'>CONTINUE</div></div><?
-	}
-	else
-	{	
-		if($key == 0)
-			$display = true;
-		?><div class = 'blockContainer' style='<?= $display ? 'display:block' : 'display: none' ?>;'><?= $item['body']; ?><?= $key == count($items) - 1 ? '' : '<div class = "continue-btn small helvetica round-btn">CONTINUE</div>' ?></div><?
+	?><div class = 'blockContainer'><?= $child["body"]; ?></div><?
+}
+foreach($spotlight_children as $child)
+{
+	?><div class = 'blockContainer'><?= $child["body"]; ?></div><?
+	if(!strictEmpty($child['deck']))
+	{
+		$img_src_arr = explode(',', $child['deck']);
+		$caption = strictClean($child['notes']);
+		?><div class = 'blockContainer imageBlock'><? foreach($img_src_arr as $src){
+			$this_src = strictClean($src);
+			?><img src = '/media/<?= $this_src ; ?>'><?
+		} ?><div class = 'captionContainer monaco small'><?= $caption; ?></div></div><?
 	}
 }
+// die();
+
 
 ?></div>
 
@@ -107,20 +108,47 @@ if(!!el)
 		?>
 	);
 
-	animateNewsTicker(newsItem[0]);
+	// animateNewsTicker(newsItem[0]);
 
 	var sContainers = document.querySelectorAll('.homeContainer .logoContainer, .homeContainer .blockContainer');
 	var sHomeContainer = document.querySelector('.homeContainer');
 	var sContibue_btn = document.getElementsByClassName('continue-btn');
-	[].forEach.call(sContibue_btn, function(el, i){
-		el.addEventListener('click', function(){
+	var homePlaying = true;
+
+
+	function nextPage(current_stage){
+		sContainers[current_stage].style.display = 'none';
+		current_stage++;
+		if(current_stage > sContainers.length - 1)
+			current_stage = 0;
+		sContainers[current_stage].style.display = 'block';
+		sHomeContainer.setAttribute('stage', current_stage);
+	}
+	var timer = setInterval(function(){
+		var current_stage = sHomeContainer.getAttribute('stage');
+		nextPage(current_stage);
+	}, 3000);
+	window.addEventListener('keydown', function(e){
+		if(e.keyCode == '39')
+		{
 			var current_stage = sHomeContainer.getAttribute('stage');
-			sContainers[current_stage].style.display = 'none';
-			current_stage++;
-			if(current_stage > sContainers.length - 1)
-				current_stage = 0;
-			sContainers[current_stage].style.display = 'block';
-			sHomeContainer.setAttribute('stage', current_stage);
-		});
+			nextPage(current_stage);
+		}
+		else if(e.keyCode == '32')
+		{
+			if(homePlaying)
+			{
+				clearInterval(timer);
+				homePlaying = false;
+			}
+			else
+			{
+				timer = setInterval(function(){
+					var current_stage = sHomeContainer.getAttribute('stage');
+					nextPage(current_stage);
+				}, 3000);
+				homePlaying = true;
+			}
+		}
 	});
 </script>
