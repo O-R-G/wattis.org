@@ -78,16 +78,29 @@
 	?>
 	var sBtn_on_sound_effect = document.getElementById('btn-on-sound-effect');
 	var sBtn_off_sound_effect = document.getElementById('btn-off-sound-effect');
+
 	var sMenu_btn = document.getElementById('menu-btn');
 	sMenu_btn.addEventListener('click', function(){
 		document.body.classList.add('viewing-menu');
 		sBtn_on_sound_effect.play();
 	});
+	sMenu_btn.addEventListener('touchstart', function(){
+		console.log('touchstart');
+		document.body.classList.add('viewing-menu');
+		sBtn_on_sound_effect.play();
+	});
+
 	var sClose_menu_btn = document.getElementById('close-menu-btn');
 	sClose_menu_btn.addEventListener('click', function(){
 		document.body.classList.remove('viewing-menu');
 		sBtn_off_sound_effect.play();
 	});
+	sClose_menu_btn.addEventListener('touchstart', function(){
+		console.log('touchstart');
+		document.body.classList.remove('viewing-menu');
+		sBtn_off_sound_effect.play();
+	});
+
 	var sSearch_btn = document.getElementById('search-btn');
 	var sSearch_input = document.getElementById('search-input');
 	sSearch_btn.addEventListener('click', function(){
@@ -95,6 +108,15 @@
 			sBtn_off_sound_effect.play();
 		else{
 			console.log('turn on');
+			setTimeout(function(){sSearch_input.focus();}, 0);
+			sBtn_on_sound_effect.play();
+		}
+		document.body.classList.toggle('viewing-search');
+	});
+	sSearch_btn.addEventListener('touchstart', function(){
+		if(document.body.classList.contains('viewing-search'))
+			sBtn_off_sound_effect.play();
+		else{
 			setTimeout(function(){sSearch_input.focus();}, 0);
 			sBtn_on_sound_effect.play();
 		}
