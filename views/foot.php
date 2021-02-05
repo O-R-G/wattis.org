@@ -46,7 +46,7 @@
 					<a href='/capp' class='instructionContainer'>CAPP STREET PROJECT</a><br>
 				</div>
 				<a href='/library' class='instructionContainer'>LIBRARY</a><br>
-				<div href='' id = 'more-menu-btn' class='instructionContainer menu-more-btn'><a>MORE</a></div>
+				<div id = 'more-menu-btn' class='instructionContainer menu-more-btn'><a>MORE</a></div>
 			</div>
 			<div id = 'close-menu-btn' class = ''>CLOSE</div>
 		</div>
@@ -108,7 +108,11 @@
 		var currentLevel = parseInt(sMenu_wrapper.getAttribute('level'));
 		if(currentLevel < sMenu_level.length)
 		{
+			var btn_text = sMore_menu_btn.querySelector('a').innerText;
+			sMore_menu_btn.querySelector('a').innerText = 'EVEN '+btn_text;
 			sMenu_wrapper.setAttribute('level', currentLevel+1);
+			if(currentLevel == sMenu_level.length-1)
+				sMore_menu_btn.style.display = 'none';
 		}
 	});
 </script>
