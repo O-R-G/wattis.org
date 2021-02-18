@@ -1,64 +1,25 @@
+<?
+	$rootname = 'Home';
+	$searchForBold = isset($_GET['searchForBold']);
+	$randomRecords = getRandomRecords($searchForBold);
+?>
+
 <!-- BLOCKS -->
 
-<div class="homeContainer times big" stage = '0'><?
-
-$rootname = 'Home';
-
-// SQL objects attached to root by name
-// $sql = "SELECT 
-// 			objects.id, objects.name1,
-// 			objects.body, objects.url, 
-// 			objects.begin, objects.end 
-// 		FROM 
-// 			objects, wires 
-// 		WHERE 
-// 			wires.fromid IN
-// 			(
-// 				SELECT objects.id 
-// 				FROM objects 
-// 				WHERE 
-// 					objects.name1 LIKE '$rootname' 
-// 					AND objects.active = 1
-// 			) 
-// 			AND objects.name1 NOT LIKE '.%' 
-// 			AND wires.toid = objects.id 
-// 			AND objects.active = '1' 
-// 			AND wires.active = '1' 
-// 		ORDER BY objects.rank;";
-
-// $res = $db->query($sql);
-// if(!$res)
-// 	throw new Exception($db->error);
-// $items = array();
-// while ($obj = $res->fetch_assoc())
-// 	$items[] = $obj;
-// $res->close();
-
-$welcome_id = end($oo->urls_to_ids(array('home', 'welcome')));
-$welcome_children = $oo->children($welcome_id);
-$spotlight_id = end($oo->urls_to_ids(array('home', 'spotlight')));
-$spotlight_children = $oo->children($spotlight_id);
-foreach($welcome_children as $child)
-{
-	?><div class = 'blockContainer'><?= $child["body"]; ?></div><?
-}
-foreach($spotlight_children as $child)
-{
-	?><div class = 'blockContainer'><?= $child["body"]; ?></div><?
-	if(!strictEmpty($child['deck']))
-	{
-		$img_src_arr = explode(',', $child['deck']);
-		$caption = strictClean($child['notes']);
-		?><div class = 'blockContainer imageBlock'><? foreach($img_src_arr as $src){
-			$this_src = strictClean($src);
-			?><img src = '/media/<?= $this_src ; ?>'><?
-		} ?><div class = 'captionContainer monaco small'><?= $caption; ?></div></div><?
-	}
-}
-// die();
-
-
-?></div>
+<div class="homeContainer times big" stage = '0'>
+	<!-- <div class = 'blockContainer'><img><div id = 'paragraph'><?= $randomRecords['all'][0]["sentence"]; ?></div></div> -->
+	<? foreach($randomRecords['all'] as $record){
+		if($record['image'])
+		{
+			?><div class = 'blockContainer displaying_image'><img src="<?= $record['image']; ?>"></div><?
+		}
+		else
+		{
+			?><div class = 'blockContainer'><div id = 'paragraph'><?= $record["sentence"]; ?></div></div><?
+		}
+		?><?
+	} ?>
+</div>
 
 <!-- WEATHER -->
 <script type="text/javascript">
@@ -68,71 +29,76 @@ if(!!el)
 	// requires <element id="rss">
 	showRSS(el, "http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
 }
-</script>
 
-<!-- NEWS --> 
-<script type="text/javascript" src="/static/js/animateNewsTicker.js"></script>
-<script type="text/javascript">
-
-	<?
-		// SQL object with attached (News)
-		// could be written into main query with LEFTJOIN
-		$sql = "SELECT objects.id, objects.name1, objects.body, objects.active, objects.rank, wires.active, 
-	wires.fromid, wires.toid FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 
-	LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = 
-	'1' ORDER BY objects.rank;";
-
-	$res_news = $db->query($sql);
-	if(!$res_news)
-		throw new Exception($db->error);
-	$items = array();
-	while ($obj = $res_news->fetch_assoc())
-		$items[] = $obj;
-	$res_news->close();
-	foreach($items as $key => $item){
-		$newsItems[$key] = $item["body"];
-		
-	}
-	?>
-   	newsItem = new Array(
-		<?
-
-			foreach($newsItems as $key => $item){
-				echo "\"" . $item . "\"";
-
-				if ( $key < (count($newsItems) -1) )
-					echo ",\n";
-				else
-					echo "\n";
-			}
-		?>
-	);
-
-	// animateNewsTicker(newsItem[0]);
-
-	var sContainers = document.querySelectorAll('.homeContainer .logoContainer, .homeContainer .blockContainer');
-	var sHomeContainer = document.querySelector('.homeContainer');
-	var sContibue_btn = document.getElementsByClassName('continue-btn');
 	var homePlaying = true;
+	var block = document.querySelector('.homeContainer .blockContainer');
+	var image = block.querySelector('img');
+	var paragraph = block.querySelector('#paragraph');
+	var randomRecords = <?= json_encode($randomRecords); ?>;
+	var randomRecords_all = randomRecords['all'];
+	var randomRecords_image = randomRecords['image'];
+	var current_index = 0;
+	var records_length = randomRecords_all.length;
+	var randomRecords_bold = <?= json_encode($randomRecords_bold); ?>;
+	var blockContainer = document.getElementsByClassName('blockContainer');
+	console.log(records_length);
 
-
-	function nextPage(current_stage){
-		sContainers[current_stage].style.display = 'none';
-		current_stage++;
-		if(current_stage > sContainers.length - 1)
-			current_stage = 0;
-		sContainers[current_stage].style.display = 'block';
-		sHomeContainer.setAttribute('stage', current_stage);
+	function nextPage(idx){
+		blockContainer[idx].style.display = 'none';
+		idx++;
+		if(idx > records_length - 1)
+			idx = 0;
+		blockContainer[idx].style.display = 'block';
+		// var current_record = randomRecords_all[idx];
+		// if(current_record['image'])
+		// {
+		// 	block.classList.add('displaying_image');
+		// 	image.src = current_record['image'];
+		// }
+		// else{
+		// 	block.classList.remove('displaying_image');
+		// 	paragraph.innerHTML = current_record['sentence'];
+		// }
+		return idx;
 	}
+	function preloadImage(img, array_of_src, idx = 0, limit = false){
+		img.onload = function(){
+			if(limit)
+			{
+				if(limit == 1)
+					return true;
+				else{
+					limit--;
+					idx++;
+					if(idx < array_of_src.length)
+						preloadImage(img, array_of_src, idx, limit);
+					else
+						return false;
+				}
+			}
+		};
+		img.src = array_of_src[idx];		
+	}
+	var preload_image = new Image;
+	var preload_idx = 0;
+	var test = preloadImage(preload_image, randomRecords_image, preload_idx, 10);
+
 	var timer = setInterval(function(){
-		var current_stage = sHomeContainer.getAttribute('stage');
-		nextPage(current_stage);
-	}, 3000);
+		current_index = nextPage(current_index);
+		if(current_index == 30){
+			preload_idx = 11;
+			preloadImage(preload_image, randomRecords_image, preload_idx, 10);
+		}
+		else if(current_index == 70)
+		{
+			preload_idx = 11;
+			preloadImage(preload_image, randomRecords_image, preload_idx, 10);
+		}
+	}, 5000);
 	window.addEventListener('keydown', function(e){
 		if(e.keyCode == '39')
 		{
-			var current_stage = sHomeContainer.getAttribute('stage');
-			nextPage(current_stage);
+			current_index = nextPage(current_index);
 		}
 		else if(e.keyCode == '32')
 		{
@@ -144,9 +110,8 @@ if(!!el)
 			else
 			{
 				timer = setInterval(function(){
-					var current_stage = sHomeContainer.getAttribute('stage');
-					nextPage(current_stage);
-				}, 3000);
+					current_index = nextPage(current_index);
+				}, 5000);
 				homePlaying = true;
 			}
 		}
