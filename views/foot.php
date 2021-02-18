@@ -1,29 +1,26 @@
 <?
 	$wattis_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 	$wattis_item = $oo->get($wattis_id);
-	$wattis_intro = 'WHERE AM I?<br/>
+	$help_text = 'WHERE AM I?<br/>
                         <br/>
                         WELL, YOU HAVE LANDED HERE ON THE WEBSITE FOR 
                         THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.';
-	$wattis_intro .= strtoupper($wattis_item['body']);
+	$help_text .= strtoupper($wattis_item['body']);
 ?>
+
 		</div> <!-- close #animatePunctuation -->
-		<div id = 'search-btn'></div>
-		<!-- <div id="logoContainer" class=" times big logo"> -->
-		<div id="logoContainer" class="helvetica">
+		<div id="logoContainer" class=" times big logo">
 			<!-- <div id="logo"><a href="/">.+* The Wattis Institute</a></div> -->
-			<!-- <div id="logo"><a href="/">THIS IS THE WEBSITE OF THE WATTIS INSTITUTE.</a></div> -->
-			<div id="logo">HELP</div>
 			<div id="intro"><?= $wattis_intro; ?></div>
 		</div>
-		<!--
-		<div id='helpContainer' class = 'fullContainer'>
-			WHERE AM I?<br/>
-			<br/>
-			WELL, YOU HAVE LANDED HERE ON THE WEBSITE FOR 
-			THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.
+
+		<div id = 'help-btn' class="helvetica">HELP</div>
+  		<div id="helpContainer" class="helvetica small-medium">
+			<div id="help-txt"><?= $help_text; ?></div>
+                        <div id = 'close-help-btn' class = ''></div>
 		</div>
-		-->
+
+		<div id = 'search-btn'></div>
 		<div id='searchPickerContainer' class = 'fullContainer'>
 			<form id = 'search-picker' action = '/search' method = 'GET'>
 				<input id = 'search-input' name = 'query' type = 'text' class = 'big helvetica'><button id = 'commit-search-btn' type = 'submit'><img src = '/media/svg/arrow-forward-6-w.svg'></button>
@@ -117,16 +114,16 @@
 		sBtn_off_sound_effect.play();
 	});
 
-	var sHelp_btn = document.getElementById('logoContainer');
+	var sHelp_btn = document.getElementById('help-btn');
 	sHelp_btn.addEventListener('click', function(){
-		document.body.classList.add('help-menu');
+		document.body.classList.add('viewing-help');
 		sBtn_on_sound_effect.play();
 	});
 
-	var sClose_help_btn = document.getElementById('logoContainer');
+	var sClose_help_btn = document.getElementById('close-help-btn');
 	sClose_help_btn.addEventListener('click', function(){
-		document.body.classList.remove('help-menu');
-		sBtn_on_sound_effect.play();
+		document.body.classList.remove('viewing-help');
+		sBtn_off_sound_effect.play();
 	});
 
 	var sSearch_btn = document.getElementById('search-btn');

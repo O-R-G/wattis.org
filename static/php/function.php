@@ -40,6 +40,8 @@ function getRandomRecords($markedBold = false){
   global $db;
   global $oo;
 
+  // collect records
+
   if(!$markedBold)
   {
     // ver 1: totally random
@@ -49,7 +51,6 @@ function getRandomRecords($markedBold = false){
   {
     $sql = "SELECT objects.id, objects.body FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.name1 NOT LIKE '.%' AND objects.name1 NOT LIKE '\_%' AND objects.body LIKE '%<b>%'";
   }
-  
   $sql .= " ORDER BY RAND() LIMIT 100";
 
   $res = $db->query($sql);
@@ -61,24 +62,37 @@ function getRandomRecords($markedBold = false){
   $output['all'] = array();
   $output['image'] = array();
   $insertImage = false;
+
+  // collect media, gif only
+
+  $sql = "SELECT * FROM media WHERE media.type = 'gif' ORDER BY RAND() LIMIT 100";
+  $res = $db->query($sql);
+  $media = array();
+  while ($obj = $res->fetch_assoc())
+    $media[] = $obj;
+  $res->close();
+
+  // build
+
   foreach($items as $key => $item)
   {
     $body = $item['body'];
     $id = $item['id'];
+/*
     $media = $oo->media($id);
-    $onlyPdf = true;
+    $isGif = false;
     foreach($media as $m)
     {
-      if($m['type'] != 'pdf'){
-        $onlyPdf = false;
+      if($m['type'] == 'gif'){
+        $isGif = false;
         break;
       }
     }
+*/
 
-    if($key % 4 == 0 && $key > 0 && !$insertImage)
+    if($key % 2 == 0 && $key > 0 && !$insertImage)
       $insertImage = true;
-    
-    if(!$insertImage || count($media) == 0 || $onlyPdf)
+    if(!$insertImage || count($media) == 0)
     {
       if(!$markedBold)
         $sentences = preg_split('/(?<=[.?!])\s+(?=[a-z])/i', $body);
@@ -95,7 +109,6 @@ function getRandomRecords($markedBold = false){
           }
         }
       }
-      
       $sentence = $sentences[array_rand($sentences)];
       $image = false;
     }
@@ -106,13 +119,19 @@ function getRandomRecords($markedBold = false){
       $insertImage = false;
       $output['image'][] = $image;
     }
-    
     $output['all'][] = array( 
       'id'       => $id, 
       'sentence' => $sentence,
       'image'    => $image
     );
   }
+
+  /*
+  // testing
+  foreach ($media as $m)
+    echo "<img src='" . m_url($m) . "'>";
+  die();
+  */
 
   return $output;
 }

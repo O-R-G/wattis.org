@@ -147,6 +147,10 @@ b
     width: 400px;
     z-index: 1005;
 }
+#logoContainer
+{
+    display: none;
+}
 #logo
 {
     position: absolute;
@@ -185,7 +189,6 @@ b
     /*padding-top:3px;*/
     overflow: hidden; 
 }
-
 
 .logoContainer,
 .blockContainer
@@ -618,6 +621,7 @@ b
     opacity:0.5;
         }
 
+#helpContainer,
 #menuContainer
 {
     position: fixed;
@@ -632,6 +636,7 @@ b
     display: none;
     overflow: hidden;
 }
+#helpContainer a,
 #menuContainer a
 {
     color: #fff;
@@ -639,10 +644,18 @@ b
     margin-bottom: 10px;
     border-bottom: solid 3px #fff;
 }
+#helpContainer a:hover,
 #menuContainer a:hover
 {
     border-bottom: solid 3px transparent;
 }
+
+#helpContainer #help-txt {
+    padding: 20px;
+    padding-top: 70px;
+    width: 300px;	
+}
+
 #menu-wrapper
 {
     position: absolute;
@@ -754,6 +767,30 @@ b
 {
     display: none;
 }
+
+#help-btn
+{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    /*padding: 10px 15px;*/
+    /*border-radius: 19px;*/
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+#close-help-btn
+{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    top: 20px;
+    left: 20px;
+    background-image: url('../../media/svg/ex-w.svg');
+    cursor: pointer;
+}
+
 #search-btn
 {
     position: fixed;
@@ -800,39 +837,31 @@ b
     min-height: initial;
     width: 500px;
 }
+.viewing-help #helpContainer,
 .viewing-menu #menuContainer
 {
     display: block;
 }
 .reverse #logoContainer,
-.viewing-menu  .punctuation,
+.viewing-help .punctuation,
+.viewing-menu .punctuation,
 .viewing-search .punctuation,
 .reverse .punctuation,
+.viewing-help a,
 .viewing-menu a,
 .viewing-search a,
 .reverse a
-
 {
     color: #fff;
     border-color: #fff;
 }
-.viewing-menu #logoContainer,
-.viewing-search #logoContainer {
-	/* display: none; */
-	color: #fff;
-}
-
-.viewing-menu #intro {
-	display: block;
-}
 
 /*
-.viewing-menu #intro,
-.viewing-search #intro
-{
+.viewing-help #help-text {
     display: block;
 }
 */
+
 #searchPickerContainer
 {
     background-color: #000;
@@ -1044,7 +1073,7 @@ body.reverse.viewing-search #search-btn
     #library-search-container input::placeholder {
         /* opacity: 0; */
     }
-    #search-btn
+    #search-btn, 
     {
         right: 10px;
         bottom: 10px;
