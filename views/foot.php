@@ -5,8 +5,11 @@
 ?>
 		</div> <!-- close #animatePunctuation -->
 		<div id = 'search-btn'></div>
-		<div id="logoContainer" class=" times big logo">
-			<div id="logo"><a href="/">.+* The Wattis Institute</a></div>
+		<!-- <div id="logoContainer" class=" times big logo"> -->
+		<div id="logoContainer" class="helvetica">
+			<!-- <div id="logo"><a href="/">.+* The Wattis Institute</a></div> -->
+			<!-- <div id="logo"><a href="/">THIS IS THE WEBSITE OF THE WATTIS INSTITUTE.</a></div> -->
+			<div id="logo">HELP</div>
 			<div id="intro"><?= $wattis_intro; ?></div>
 		</div>
 		<div id='searchPickerContainer' class = 'fullContainer'>
@@ -18,7 +21,6 @@
 			if (($pageName != "_logo") && ($pageName != "_animatePunctuation")) 
 			{ 
 			?><div id = 'menu-btn' class="">
-				
 			</div>
 			<div class="clear"></div>
 			<script type="text/javascript">

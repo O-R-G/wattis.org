@@ -1,7 +1,8 @@
 <?
+	// search for bold is default behavior
 	$rootname = 'Home';
-	$searchForBold = isset($_GET['searchForBold']);
-	$randomRecords = getRandomRecords($searchForBold);
+	$search_random = !(isset($_GET['random']));
+	$randomRecords = getRandomRecords($search_random);
 ?>
 
 <!-- BLOCKS -->

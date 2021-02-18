@@ -79,5 +79,3 @@ require_once('static/php/function.php');
 		<!-- End Google Tag Manager -->
 		<div id="animatePunctuation" class="animatePunctuation">
 			<div id="color" class="black">
-			
-		
