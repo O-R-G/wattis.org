@@ -9,3 +9,10 @@ website
 
 - add 'Hi Visitor,' under 'HOME'. Set rank to 5.
 - edit 'The Wattis Institute'. Make the color of the first <a> transparent.
+
+- wattis.local
+	
+- HELP ME! or WHERE AM I? or just HELP!
+  plus mechnism for contextual help messages
+
+- reimport db from live server, why do lowere level urls not work
