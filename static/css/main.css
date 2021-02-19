@@ -209,6 +209,7 @@ b
 {
     position: relative;
     display: none;
+    height: 250px;	    /* total hack ** fix ** */	
 }
 .homeContainer .blockContainer:first-of-type
 {
@@ -220,6 +221,12 @@ b
     max-width: 100%;
     margin: 0 auto;
     display: none;
+}
+
+.homeContainer .blockContainer div
+{	
+    position: absolute;
+    top: 50%; 	    /* total hack ** fix ** */
 }
 
 .textContainer {
@@ -776,7 +783,7 @@ b
     z-index: 1000;
     /*padding: 10px 15px;*/
     /*border-radius: 19px;*/
-    width: 50px;
+    width: 200px;
     height: 50px;
     cursor: pointer;
 }

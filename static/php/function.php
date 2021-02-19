@@ -65,7 +65,7 @@ function getRandomRecords($markedBold = false){
 
   // collect media, gif only
 
-  $sql = "SELECT * FROM media WHERE media.type = 'gif' ORDER BY RAND() LIMIT 100";
+  $sql = "SELECT * FROM media WHERE media.type = 'gif' ORDER BY RAND()";
   $res = $db->query($sql);
   $media = array();
   while ($obj = $res->fetch_assoc())

@@ -1,10 +1,8 @@
 <?
 	$wattis_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 	$wattis_item = $oo->get($wattis_id);
-	$help_text = 'WHERE AM I?<br/>
-                        <br/>
-                        WELL, YOU HAVE LANDED HERE ON THE WEBSITE FOR 
-                        THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.';
+	$help_text = 'WELL, YOU HAVE LANDED HERE ON THE WEBSITE FOR 
+                      THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.';
 	$help_text .= strtoupper($wattis_item['body']);
 ?>
 
@@ -12,12 +10,6 @@
 		<div id="logoContainer" class=" times big logo">
 			<!-- <div id="logo"><a href="/">.+* The Wattis Institute</a></div> -->
 			<div id="intro"><?= $wattis_intro; ?></div>
-		</div>
-
-		<div id = 'help-btn' class="helvetica">HELP</div>
-  		<div id="helpContainer" class="helvetica small-medium">
-			<div id="help-txt"><?= $help_text; ?></div>
-                        <div id = 'close-help-btn' class = ''></div>
 		</div>
 
 		<div id = 'search-btn'></div>
@@ -69,6 +61,12 @@
 			<div id = 'close-menu-btn' class = ''></div>
 		</div>
 	</div>
+        <!-- outside of #animatePunctuation, so dont animate punctuation -->
+        <div id = 'help-btn' class="helvetica">WHERE AM I?</div>
+        <div id="helpContainer" class="helvetica small-medium">
+            <div id="help-txt"><?= $help_text; ?></div>
+            <div id = 'close-help-btn' class = ''></div>
+        </div>
 </div>
 <audio id='btn-on-sound-effect' preload="auto"><source src = '/media/audio/320181__dland__hint.wav' type="audio/wav"></audio>
 <audio id='btn-off-sound-effect' preload="auto"><source src = '/media/audio/413690__splatez07__click_edited.m4a' type=""></audio>
