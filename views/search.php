@@ -80,6 +80,3 @@ function build_children_search($oo, $ww, $query) {
 		echo $no_results_error;
 	} ?>
 </div>
-<script>
-	
-</script>

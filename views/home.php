@@ -6,8 +6,7 @@
 ?>
 
 <!-- BLOCKS -->
-
-<div class="homeContainer times big" stage = '0'>
+<div class="homeContainer times big">
 	<!-- <div class = 'blockContainer'><img><div id = 'paragraph'><?= $randomRecords['all'][0]["sentence"]; ?></div></div> -->
 	<? foreach($randomRecords['all'] as $record){
 		if($record['image'])
@@ -21,6 +20,7 @@
 		?><?
 	} ?>
 </div>
+<div id="_click"></div>
 
 <!-- WEATHER -->
 <script type="text/javascript">
@@ -116,5 +116,9 @@ if(!!el)
 				homePlaying = true;
 			}
 		}
+	});
+	var s_click = document.getElementById('_click');
+	s_click.addEventListener('click', function(){
+			clickHandler();
 	});
 </script>
