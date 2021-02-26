@@ -1,9 +1,9 @@
 <? 
-echo "add url...\n";
+echo "add-url.php ...\n";
 $cwd = getcwd();
-echo $cwd."\n";
-// set_include_path($cwd);
-require_once('open-records-generator/lib/lib.php');
+
+set_include_path($cwd);
+require_once($cwd . '/../../open-records-generator/lib/lib.php');
 
 // connect to database (called in head.php)
 function db_connect($remote_user) {
@@ -76,23 +76,73 @@ function db_connect($remote_user) {
 // Main > Consult the Archive = 30
 // _Email = 94
 // Cecilia VicuÃ±a is on our mind = 1110
-$parent_id = 1110;
+
+$parent_id = 0;
 $db = db_connect("admin");
-$sql = "SELECT objects.name1, objects.id FROM objects, wires WHERE objects.id = wires.toid AND objects.active = '1' AND wires.active = '1' AND wires.fromid = '".$parent_id."'";
-$result = $db->query($sql);
-if(!$result)
-	throw new Exception($db->error);
-$items = array();
-while ($obj = $result->fetch_assoc())
-	$items[] = $obj;
-$result->close();
-foreach($items as $item){
-	$sql = "UPDATE objects SET url = '".slug($item['name1'])."' WHERE id = '".$item['id']."'";
-	echo $sql."\n";
-	$result_update = $db->query($sql);
-	var_dump($result_update);
+$processedIds = array();
+// $r = addChildrenUrl($parent_id, $db);
+$r = addChildrenUrl($parent_id, $db, 0, true);
+
+// var_dump($children_id);
+
+function addChildrenUrl($parentId, $db, $d = 0, $deep = false){
+	global $processedIds;
+	
+	if( in_array($parentId, $processedIds) ){
+		echo '!! id = ' . $parentId . ' is already processed'."\n";
+		return true;
+	}
+	$processedIds[] = $parentId;
+	$sql = "SELECT objects.name1, objects.id, objects.url FROM objects, wires WHERE objects.id = wires.toid AND objects.active = '1' AND wires.active = '1' AND wires.fromid = '".$parentId."'";
+	$result = $db->query($sql);
+	if(!$result)
+		throw new Exception($db->error);
+	$items = array();
+	while ($obj = $result->fetch_assoc())
+		$items[] = $obj;
+	$result->close();
+	$layer = '>';
+	for($i = 0; $i < $d; $i++)
+	{
+		$layer .= '>';
+	}
+	if(!empty($items)){
+		foreach($items as $item){
+			if(empty($item['url']))
+			{
+				echo $layer . ' processing ['.$item['id'].'] '.$item['name1']." ...\n";
+				$sql = "UPDATE objects SET url = '".slug($item['name1'])."' WHERE id = '".$item['id']."'";
+				$result_update = $db->query($sql);
+			}
+			else
+			{
+				echo '!! skiping ['.$item['id'].'] '.$item['name1']." ...\n";
+			}
+			if($deep)
+				addChildrenUrl($item['id'], $db, $d + 1, $deep);
+			
+		}
+	}
+	else
+	{
+		echo 'record with id = ' . $parentId . ' doesnt have children.' . "\n";
+		return false;
+	}
+	
 }
-// $result_update->close();
+
+function getChildrenId($parentId, $db){
+	// echo "getChildrenId() ... \n";
+	$sql = "SELECT toid FROM wires WHERE fromid = '".$parentId."'";
+	$result = $db->query($sql);
+	if(!$result)
+		throw new Exception($db->error);
+	$items = array();
+	while ($obj = $result->fetch_assoc())
+		$items[] = $obj['toid'];
+	$result->close();
+	return $items;
+}
 
 
 ?>

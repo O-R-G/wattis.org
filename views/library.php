@@ -296,3 +296,4 @@ wires.active = 1 ORDER BY objects.rank;";
 <?php
 }
 ?>
+</div>
