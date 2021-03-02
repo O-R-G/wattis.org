@@ -4,7 +4,6 @@
 	$wattis_intro = $wattis_item['body'];
 	$help_text = strictEmpty($item['notes']) ? 'WELL, YOU HAVE LANDED HERE ON THE WEBSITE FOR 
                       THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.'. strtoupper($wattis_intro) : $item['notes'] ;
-	
 ?>
 <div id="logoContainer" class=" times big logo">
 	<!-- <div id="logo"><a href="/">.+* The Wattis Institute</a></div> -->

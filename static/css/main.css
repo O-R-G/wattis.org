@@ -240,8 +240,8 @@ b
 /*  float:left; */
     display: inline-block;
     vertical-align: top;
-    
-    padding-right:2%;
+    /*box-sizing:border-box;*/
+    padding-right:1%;
     padding-bottom:40px;
     width: 30%;
         

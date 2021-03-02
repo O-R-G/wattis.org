@@ -5,39 +5,50 @@
         if ($search && $search_id)
             $ids = explode(",", $search_id);
         $base_name = "Library";
-        // var_dump($ids);
-        if($uri[1] == 'library' && !$uri[2]){
+        if($uri[1] == 'library' && !$uri[2] && !$search){
             $ids = $oo->urls_to_ids(array('main', 'library'));
             unset($ids[0]);
             $ids = array_values($ids);
         }
-
+        $uri_temp = $uri;
+        unset($uri_temp[0]);
+        array_unshift($uri_temp, 'main');
+        $uri_temp = array_values($uri_temp);
+        // die();
+        $ids = $oo->urls_to_ids($uri_temp);
+        unset($ids[0]);
+        $ids = array_values($ids);
         $base_id = $ids[0];
         $sub_id = $ids[1];
         $search_count = 0;
 
         // build submenu
 
-        $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $base_id AND objects.active = 1 
-                AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
-        $result = $db->query($sql);
-        if(!$result)
-            throw new Exception($db->error);
-        $items = array();
-        while ($obj = $result->fetch_assoc())
-            $items[] = $obj;
-        $result->close();
+        // $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $base_id AND objects.active = 1 
+        //         AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
+        // $result = $db->query($sql);
+        // if(!$result)
+        //     throw new Exception($db->error);
+        // $items = array();
+        // while ($obj = $result->fetch_assoc())
+        //     $items[] = $obj;
+        // $result->close();
+
+        $submenu = $oo->children($base_id);
 
 
 
         // $result = MYSQL_QUERY($sql);
         // $count = 0;
-        foreach($items as $key => $item)
-        {
-            $submenu[$key]['id'] = $item['id'];
-            $submenu[$key]['name'] = $item['name1'];
-            // $count++;
-        }
+        // foreach($items as $key => $item)
+        // {
+        //     $submenu[$key]['id'] = $item['id'];
+        //     $submenu[$key]['name'] = $item['name1'];
+        //     // $count++;
+        // }
+        // var_dump($submenu);
+        // var_dump($items);
+        // die();
         // while ($myrow = MYSQL_FETCH_ARRAY($result)) {
         //     $submenu[$count]['id'] = $myrow['id'];
         //     $submenu[$count]['name'] = $myrow['name1'];
@@ -45,46 +56,60 @@
         // }
         $submenu_id = ($ids[1]) ? $ids[1] : $submenu[0]['id'];
         // var_dump($ids);
-        $html_submenu = '<div id="library-mode-switch">';
-        foreach ($submenu as $s)
-            if ($s['id'] == $submenu_id)
-                $html_submenu .= '<button class = "helvetica small">' . $s['name'] . "</button>";
-            else
-                $html_submenu .= "<a href='library_.php?id=" . $base_id . "," . $s['id'] . "'>" . "<button class = 'helvetica small'>" . $s['name'] ."</button></a>";
-        $html_submenu .= '</div>';
-        if ($search)
-            $html_submenu = "<br/>Search: <i>$search</i><br/>matches...";
+        // $html_submenu = '<div id="library-mode-switch">';
+        // foreach ($submenu as $s)
+        //     if ($s['id'] == $submenu_id)
+        //         $html_submenu .= '<button class = "helvetica small">' . $s['name1'] . "</button>";
+        //     else
+        //         $html_submenu .= "<a href='library_.php?id=" . $base_id . "," . $s['id'] . "'>" . "<button class = 'helvetica small'>" . $s['name1'] ."</button></a>";
+        // $html_submenu .= '</div>';
+        // if ($search)
+        //     $html_submenu = "<br/>Search: <i>$search</i><br/>matches...";
 
         if ($search) {
 
             // build all categories (search)
     
-            $count = 0;
+            $categories_search = array();
             foreach($submenu as $s) {
                 $s_id = $s['id'];
-                $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $s_id AND objects.active = 1 
-                        AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
-                $result = MYSQL_QUERY($sql);
-                while ($myrow = MYSQL_FETCH_ARRAY($result)) {
-                    $categories_search[$count]['id'] = $myrow['id'];
-                    $categories_search[$count]['name'] = $myrow['name1'];
-                    $count++;
-               }
+                $category_children = $oo->children($s_id);
+                // $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $s_id AND objects.active = 1 
+                //         AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
+                // $result = MYSQL_QUERY($sql);
+                // while ($myrow = MYSQL_FETCH_ARRAY($result)) {
+                //     $categories_search[$count]['id'] = $myrow['id'];
+                //     $categories_search[$count]['name'] = $myrow['name1'];
+                //     $count++;
+                // }
+                foreach($category_children as $child)
+                {
+                    if(substr($child['name1'], 0, 1) != '.')
+                    {
+                        $categories_search[] = array(
+                            'id'    => $child['id'],
+                            'name1' => $child['name1']
+                        );
+                    }
+                }
             }
 
         } else {
 
             // build categories (this page)
-    
-            $count = 0;
-            $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $submenu_id AND objects.active = 1 
-                    AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
-            $result = MYSQL_QUERY($sql);
-            while ($myrow = MYSQL_FETCH_ARRAY($result)) {
-                $categories[$count]['id'] = $myrow['id'];
-                $categories[$count]['name'] = $myrow['name1'];
-                $count++;
-            }
+            
+            // $count = 0;
+            
+            // $sql = "SELECT objects.id, objects.name1 FROM objects, wires WHERE wires.fromid = $submenu_id AND objects.active = 1 
+            //         AND wires.toid=objects.id AND wires.active = 1 ORDER BY objects.rank;";
+            // $result = MYSQL_QUERY($sql);
+            // while ($myrow = MYSQL_FETCH_ARRAY($result)) {
+            //     $categories[$count]['id'] = $myrow['id'];
+            //     $categories[$count]['name'] = $myrow['name1'];
+            //     $count++;
+            // }
+
+            $categories = $oo->children($submenu_id);
         }
             
         // build search
@@ -127,8 +152,42 @@
         }
             
 	    $html .= "</div>";	
-	    echo nl2br($html);
-        $html = "";
+	    // echo nl2br($html);
+        // $html = "";
+        ?><div class='sidemenu listContainer times'>
+            <div class='one-column'>
+                <?= $search ? "<a href='library_.php?id=" . $base_id . "," . $submenu_id . "'>" . $base_name . "</a>" : $base_name ; ?>
+                <div id='library-search-container'>
+                    <form>
+                        <input id='library-search-field' type='text' placeholder='Search The Wattis Library ...' name='search'>
+                        <input type='hidden' id='id' name='search_id' value='<?= $search_id; ?>' >
+                        <button type='submit'><img id='library-search-icon' src='/media/svg/magnifying-glass-6-k.svg'></button>
+                    </form>
+                </div>
+                <?=  $rootbody ? $rootbody . "<br><br>" : ''; ?>
+                <? if(!$search){
+                    ?>
+                        <div id='library-description'>
+                            <br/>Here there are videos of artists talking about their work as well as video and audio documentation of all past lectures, performances, and events. There are also essays about exhibitions, plus reviews, reading lists, and interviews to read. The Library is organized in two sections:
+                        </div>
+                        <div id="library-mode-switch">
+                            <? foreach($submenu as $s){
+                                if ($s['id'] == $submenu_id){
+                                    ?><button class = "helvetica small"><?= $s['name1']; ?></button><?
+                                }
+                                else
+                                {
+                                    $this_url = '/library/' . $s['url'];
+                                    ?><a href='<?= $this_url; ?>'><button class = 'helvetica small'><?= $s['name1']; ?></button></a><?
+                                }
+                            } ?>
+                        </div>
+                    <?
+                } else{
+                    ?><br/>Search: <i>$search</i><br/>matches...<?
+                } ?>
+            </div>
+        </div><?
        
         // build objects per category
 
@@ -189,7 +248,38 @@ AND wires.active = 1 ORDER BY objects.rank;";
              		        $i++;
 		        }
 	        }
-    
+
+            $search_result = build_children_librarySearch($oo, $ww, $search);
+            
+            $search_count = count($search_result);
+            ?>
+                <div class='listContainer not-underlined library doublewide'>
+                    <div class='subheadContainer library'>Results</div>
+                    <? foreach($search_result as $key => $r){
+                        if(substr($r['name1'], 0, 1) != '.'){
+                            $this_url = '/library/' . $r['submenu_url'] . '/' . $r['category_url'] . '/' . $r['url'];
+                            $media = $oo->media($r['id'])[0];
+                            $mediaFile = m_url($media);
+                            $mediaCaption = strip_tags($media["caption"]);
+                            $mediaStyle = "width: 100%;";
+
+                            if($key == 0)
+                            {
+                                $mediaFile_temp = "media/". m_pad($media['id']) .".". $media["type"];
+                                $specs  = getimagesize($mediaFile_temp);
+                                $use4xgrid = TRUE;      
+                            }
+                            ?><a href='<?= $this_url; ?>'>
+                                <div id='image<?= $key; ?>' class = 'listContainer <?= ($use4xgrid) ? "fourcolumn" : "twocolumn"; ?>'>
+                                    <?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?>
+                                    <div class = 'captionContainer library helvetica small'><?= $r['name1']; ?></div>
+                                </div>
+                                </a>
+                            <?
+                        }
+                    } ?>
+                </div>
+            <?
             // output $html
             // use4xgrid and doublewide
                
@@ -200,7 +290,7 @@ AND wires.active = 1 ORDER BY objects.rank;";
                 $html .= $images[$j];  
             }
 	        $html .= "</div>";
-    	    echo nl2br($html);
+    	    // echo nl2br($html);
 
         } else {
 
@@ -252,17 +342,49 @@ wires.active = 1 ORDER BY objects.rank;";
              		            $i++;
 		            }
 	            }
+                $category_item = $oo->get($category_id);
+                $rootname = $category_item['name1'];
+                $rootbody = $category_item['body'];
+                $items = $oo->children($category_id);
+
+                ?>
+                <div class = 'listContainer not-underlined library'>
+                    <div class='subheadContainer library'><?= $c['name1']; ?></div>
+                    <? foreach($items as $key => $item){
+                        if(substr($item['name1'], 0, 1) != '.'){
+                            $this_url = '/library/' . $item['submenu_url'] . '/' . $item['category_url'] . '/' . $item['url'];
+                            $media = $oo->media($item['id'])[0];
+                            $mediaFile = m_url($media);
+                            $mediaCaption = strip_tags($media["caption"]);
+                            $mediaStyle = "width: 100%;";
+                            if($key == 0)
+                            {
+                                $mediaFile_temp = "media/". m_pad($media['id']) .".". $media["type"];
+                                $specs  = getimagesize($mediaFile_temp);
+                                $use4xgrid = ($rootname == "Buy Catalogs");  
+                            }
+                            ?><a href='<?= $this_url; ?>'>
+                                <div id='image<?= $key; ?>' class = 'listContainer <?= ($use4xgrid) ? "fourcolumn" : "twocolumn"; ?>'>
+                                    <?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?>
+                                    <div class = 'captionContainer library helvetica small'><?= $item['name1']; ?></div>
+                                </div>
+                                </a>
+                            <?
+                        }
+                    } ?>
+                </div>
+                <?
         
                 // output $html
                     
     	        $html .= "<div class = 'listContainer not-underlined library'>";
-                $html .= "<div class='subheadContainer library'>" . $c['name'] . "</div>";
+                $html .= "<div class='subheadContainer library'>" . $c['name1'] . "</div>";
                 for ( $j = 0; $j < count($images); $j++){
                     $search_count++;
                     $html .= $images[$j];  
                 }
 	            $html .= "</div>";
-    	        echo nl2br($html);
+    	        // echo nl2br($html);
     	    }
         }
     // 3/19 search position when mobile;
