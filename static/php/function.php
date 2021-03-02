@@ -135,7 +135,83 @@ function getRandomRecords($markedBold = false){
 
   return $output;
 }
+function build_children_search($oo, $ww, $query) {
+  $query = preg_replace('/[^a-z0-9]+/i', ' ', $query);
+  $query = addslashes($query);
+  $query = strtolower($query);
+  $query = str_replace(' ', '%', $query);
+  // search
+  $fields = array("objects.*");
+  $tables = array("objects", "wires");
+  $where  = array("objects.active = '1'",
+                  "(LOWER(CONVERT(BINARY objects.name1 USING utf8mb4)) LIKE '%" . $query .
+                  "%' OR LOWER(CONVERT(BINARY objects.deck USING utf8mb4)) LIKE '%" . $query . "%')",
+                  "objects.name1 NOT LIKE '.%'",
+                  // "objects.name1 NOT LIKE '_%'",
+                  "wires.toid = objects.id",
+                  "wires.active = '1'");
+  $order  = array("objects.name1", "objects.begin", "objects.end");
+  $children = $oo->get_all($fields, $tables, $where, $order);
+  return $children;
+}
+function build_children_librarySearch($oo, $ww, $query) {
+  $children_combined = array();
+  $library_id = end($oo->urls_to_ids(array('main', 'library')));
+  $submenu = $oo->children($library_id);
+  $category_ids = '';
+  $category_meta = array();
+  foreach($submenu as $s)
+  {
+    if(substr($s['name1'], 0, 1) != '.'){
+      $s_url = $s['url'];
+      $s_name = $s['name1'];
+      $submenu_children = $oo->children($s['id']);
+      foreach($submenu_children as $sc)
+      {
+        if(substr($sc['name1'], 0, 1) != '.'){
+          $category_ids .= ",'" . $sc['id'] . "'";
+          $category_meta[$sc['id']] = array(
+            'url'    => $sc['url'],
+            'fromid' => $s['id'],
+            'fromurl' => $s['url']
+          );
+        }
+      }
+    }
+  }
+  $category_ids = substr($category_ids, 1); //remove the first comma
 
+  $query = preg_replace('/[^a-z0-9]+/i', ' ', $query);
+  $query = addslashes($query);
+  $query = strtolower($query);
+  $query = str_replace(' ', '%', $query);
+  // search
+  $fields = array("objects.*, wires.fromid");
+  $tables = array("objects", "wires");
+  $where  = array("objects.active = '1'",
+                  "(LOWER(CONVERT(BINARY objects.name1 USING utf8mb4)) LIKE '%" . $query .
+                  "%' OR LOWER(CONVERT(BINARY objects.deck USING utf8mb4)) LIKE '%" . $query . "%')",
+                  "objects.name1 NOT LIKE '.%'",
+                  // "objects.name1 NOT LIKE '_%'",
+                  "wires.toid = objects.id",
+                  "wires.active = '1'",
+                  "wires.fromid IN (". $category_ids .")"
+            );
+  $order  = array("objects.rank");
+  $children = $oo->get_all($fields, $tables, $where, $order);
+  // var_dump($category_meta);
+  // die();
+  foreach($children as $child)
+  {
+    $this_cat_meta = $category_meta[$child['fromid']];
+    $this_child = $child;
+    $this_child['category_url'] = $this_cat_meta['url'];
+    $this_child['submenu_url'] = $this_cat_meta['fromurl'];
+    $children_combined[] = $this_child;
+  }
+
+  return $children_combined;
+}
 
 
 ?>

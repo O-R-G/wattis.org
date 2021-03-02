@@ -5,7 +5,7 @@ $uri = explode('/', $requestclean);
 
 require_once("views/head.php");
 require_once("views/nav.php");
-// var_dump($uri);
+
 if (!$uri[1])
     require_once("views/home.php");
 elseif( $uri[1] == 'main' ||
