@@ -135,6 +135,10 @@ body.reverse #search-btn
 {
     background-image: url(../../media/svg/magnifying-glass-6-w.svg);
 }
+body.hideGeneralSearch #search-btn
+{
+    display: none;
+}
 b
 {
     font-weight: normal;
@@ -398,8 +402,10 @@ b
 #library-search-container {
     display: inline-block;
     position: fixed;
-    top: 10px;
-    right: 10px;
+    /*top: 10px;*/
+    /*right: 10px;*/
+    bottom: 14px;
+    right: 20px;
     z-index: 10;
 }
 

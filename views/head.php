@@ -17,9 +17,16 @@ $oo = new Objects();
 $mm = new Media();
 $ww = new Wires();
 $uu = new URL();
-
 if($uu->id)
 	$item = $oo->get($uu->id);
+elseif($uri[1] == 'library')
+{
+	$uri_temp = $uri;
+	$uri_temp[0] = 'main';
+	$ids = $oo->urls_to_ids($uri_temp);
+	$uu->id = end($ids);
+	$item = $oo->get($uu->id);
+}
 else
 	$item = $oo->get(0);
 $name = ltrim(strip_tags($item["name1"]), ".");
@@ -54,9 +61,14 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 				'|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp|laystation portable)|nokia|fennec|htc[\-_]'.
 				'|mobile|up\.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\b#i', $_SERVER['HTTP_USER_AGENT']);
 
-$reverse = false;
+$bodyClass = '';
 if($uri[1] == 'search')
-	$reverse = true;
+	$bodyClass .= ' reverse';
+if($uri[1] == 'library')
+	$bodyClass .= ' hideGeneralSearch';
+if(!empty($displaySearch))
+	$bodyClass .= ' viewing-search';
+	
 
 require_once('static/php/function.php');
 
@@ -73,7 +85,7 @@ require_once('static/php/function.php');
 		<script type="text/javascript" src="/static/js/global.js"></script>
 		<script type="text/javascript" src="/static/js/animatePunctuation.js"></script>
 	</head>
-	<body class = '<?= empty($displaySearch) ? '' : 'viewing-search'; ?> <?= $reverse ? 'reverse' : ''; ?>'>
+	<body class = '<?= $bodyClass; ?>'>
 		<!-- Google Tag Manager -->
 		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NQNBBC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NQNBBC');</script>
 		<!-- End Google Tag Manager -->
