@@ -2,6 +2,8 @@
 	$wattis_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 	$wattis_item = $oo->get($wattis_id);
 	$wattis_intro = $wattis_item['body'];
+	// var_dump($item['name1']);
+	// die();
 	$help_text = strictEmpty($item['notes']) ? 'WELL, YOU HAVE LANDED HERE ON THE WEBSITE FOR 
                       THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.'. strtoupper($wattis_intro) : $item['notes'] ;
 ?>
