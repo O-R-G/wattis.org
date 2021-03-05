@@ -1,8 +1,27 @@
+<?
+    // $ids[0] is main
+    $rootid = $ids[1];
+    $root_item = $oo->get($rootid);
+    $rootname = nl2br($root_item["name1"]);
+    $rootbody = nl2br($root_item['body']);
+
+    $name = nl2br($item['name1']);
+    $deck = nl2br($item['deck']);
+    $body = nl2br($item['body']);
+
+    $media = $oo->media($item['id']);
+    $image_ratio = 0;
+    $image_tallest = 0;
+
+    $use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;
+    $mediaStyle = "width: 100%; padding: 10px;";
+
+?>
 <div class="mainContainer times big">
 
 	<?php
 
-        $rootid = $ids[0];
+        // $rootid = $ids[0];
 
         // SQL object plus media plus rootname
 
@@ -13,52 +32,87 @@ media.object AS mediaObject, media.type, media.caption, media.active AS mediaAct
 FROM objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE objects.id =
 $id AND objects.active ORDER BY media.rank;";
 
-        $result = MYSQL_QUERY($sql);
-        $myrow = MYSQL_FETCH_ARRAY($result);
-        $rootname = $myrow['rootname'];
-        $name = $myrow['name1'];
-        $deck = $myrow['deck'];
-        $body = $myrow['body'];
-        mysql_data_seek($result, 0);    // reset to row 0
-        $html = "";
-        $i=0;
-        $image_ratio = 0;
-        $image_tallest = 0;
+   //      $result = MYSQL_QUERY($sql);
+   //      $myrow = MYSQL_FETCH_ARRAY($result);
+   //      $rootname = $myrow['rootname'];
+   //      $name = nl2br($myrow['name1']);
+   //      $deck = nl2br($myrow['deck']);
+   //      $body = nl2br($myrow['body']);
+   //      mysql_data_seek($result, 0);    // reset to row 0
+   //      $html = "";
+   //      $i=0;
+   //      $image_ratio = 0;
+   //      $image_tallest = 0;
         
-        // collect images
-        while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
+   //      // collect images
+   //      while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
 
-                if ($myrow['mediaActive'] != null) {
+   //              if ($myrow['mediaActive'] != null) {
 
-                        $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-                        $mediaCaption = strip_tags($myrow["caption"]);
-                        $mediaStyle = "width: 100%; position: absolute; top: 0; left: 0; opacity: 0; top: 50%; transform: translate(0, -50%);";
-                        $this_img_size  = getimagesize($mediaFile);
-                        // h / w
-                        if($this_img_size[1] / $this_img_size[0] > $image_ratio){
-                                $image_ratio = $this_img_size[1] / $this_img_size[0];
-                                $image_tallest = $i;
-                        }
+   //                      $mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
+   //                      $mediaCaption = strip_tags($myrow["caption"]);
+   //                      $mediaStyle = "width: 100%; position: absolute; top: 0; left: 0; opacity: 0; top: 50%; transform: translate(0, -50%);";
+   //                      $specs  = getimagesize($mediaFile);
+   //                      // h / w
+   //                      if($specs[1] / $specs[0] > $image_ratio){
+   //                              $image_ratio = $specs[1] / $specs[0];
+   //                              $image_tallest = $i;
+   //                      }
 
-                        if ( $i == 0 ) {
+   //                      if ( $i == 0 ) {
 
-                                $specs  = getimagesize($mediaFile);
-                                // $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;
-                                $use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;
-                        	$mediaStyle = "width: 100%; padding: 10px;";
-                                // $mediaStyle = "width: 100%; position: absolute; top: 0; left: 0; opacity: 1; top: 50%; transform: translate(0, -50%);";
+   //                              $specs  = getimagesize($mediaFile);
+   //                              // $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;
+   //                              $use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;
+   //                      	$mediaStyle = "width: 100%; padding: 10px;";
+   //                              // $mediaStyle = "width: 100%; position: absolute; top: 0; left: 0; opacity: 1; top: 50%; transform: translate(0, -50%);";
 
-                        }
+   //                      }
 
-                        $images[$i] .= "<div id='image".$i."' class = 'buy_images " . (($use4xgrid) ? "listContainer twocolumn" : "") . "'>";
-                        $images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-                        $images[$i] .= "</div>";
+   //                      $images[$i] .= "<div id='image".$i."' class = 'buy_images " . (($use4xgrid) ? "listContainer twocolumn" : "") . "'>";
+   //                      $images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+   //                      $images[$i] .= "</div>";
 
-			$images[$i] .= "<div class='clear'></div>";
-                        $i++;
+			// $images[$i] .= "<div class='clear'></div>";
+   //                      $i++;
+   //              }
+   //      }
+   ?>
+   <div class='listContainer times'><?= $name; ?></div>
+   <div class='listContainer doublewide'>
+       <div id = 'gallery_static_ctner'>
+        <?
+            foreach($media as $key => $m)
+            {
+                $mediaFile_temp = "media/". m_pad($m['id']) .".". $m["type"];
+                $specs  = getimagesize($mediaFile_temp);
+                if($specs[1] / $specs[0] > $image_ratio){
+                    $image_ratio = $specs[1] / $specs[0];
+                    $image_tallest = $key;
                 }
-        }
-   
+
+                $mediaFile = m_url($m);
+                $mediaCaption = strip_tags($m["caption"]);
+
+                ?><div id='image<?= $key; ?>' class = 'buy_images <?= (($use4xgrid) ? "listContainer twocolumn" : ""); ?>'><?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?></div><?
+            }
+        ?>
+            <div id = 'gallery_control_ctner' style = 'display:none;'>
+                <div id = 'btn_prev' class = 'gallery_control'>&lt;</div>
+                <div id = 'nods_ctner' class = 'gallery_control'></div>
+                <div id = 'btn_next' class = 'gallery_control'>&gt;</div>
+            </div>
+       </div>
+       <div class='listContainer twocolumn doublewide helvetica small'></div>
+       <div class='listContainer twocolumn helvetica small'>
+            <?= $mediaCaption; ?><br>
+            <?= $deck; ?><br><br>
+            <a href='mailto:jgerrity@cca.edu'>Please email for international orders</a>
+        </div>
+        <div class='listContainer twocolumn times'><?= $body; ?></div>
+
+   </div>
+   <?
 	// nav
 
 	$html .= "<div class='listContainer times'>";
@@ -98,7 +152,7 @@ $id AND objects.active ORDER BY media.rank;";
         $html .= "</div>";
 
         $html .= "</div>";
-	echo nl2br($html);
+	// echo nl2br($html);
 	?>
 <script src = '/JS/gallery_static.js'></script>
 <script>

@@ -23,6 +23,18 @@ RewriteEngine On
 # RewriteCond %{REQUEST_FILENAME}.php -f
 # RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [L]
 
+#RewriteCond %{QUERY_STRING} ^id=93$
+#RewriteRule (.*) $1? [R=permanent]
+#RewriteRule ^views.php?id=93$ /program [R=302,NC,L]
+
+#RewriteCond %{QUERY_STRING} ^id=.*752.*$
+#RewriteRule (.*) /library$2 [QSD,R=302,NC,L]
+#QSD works only on apache 2.4 or later
+
+# relative path to absolute path
+# redirect all /xxx/xxx/editions to /editions
+RewriteRule ^.*/.*/editions$ /editions [R=302,NC,L]
+
 # direct everything to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
