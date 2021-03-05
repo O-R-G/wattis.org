@@ -143,6 +143,10 @@ b
 {
     font-weight: normal;
 }
+pre
+{
+    font-family: inherit;
+}
 #logoContainer
 {
     position: fixed;

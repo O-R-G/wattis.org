@@ -17,12 +17,36 @@ $oo = new Objects();
 $mm = new Media();
 $ww = new Wires();
 $uu = new URL();
-if($uu->id)
+
+$main_id = end($oo->urls_to_ids(array('main')));
+$main_children = $oo->children($main_id);
+$main_children_url = array();
+foreach($main_children as $child)
+	$main_children_url[] = $child['url'];
+
+if($uu->id){
 	$item = $oo->get($uu->id);
-elseif($uri[1] == 'library')
+	$uri_temp = $uri;
+	array_shift($uri_temp);
+	$ids = $oo->urls_to_ids($uri_temp);
+}
+elseif( in_array( $uri[1], $main_children_url ))
 {
 	$uri_temp = $uri;
 	$uri_temp[0] = 'main';
+	$ids = $oo->urls_to_ids($uri_temp);
+	$uu->id = end($ids);
+	$item = $oo->get($uu->id);
+}
+elseif($uri[1] == 'buy')
+{
+	$uri_temp = $uri;
+	array_shift($uri_temp);
+	array_shift($uri_temp);
+	if(in_array( $uri_temp[0], $main_children_url ))
+	{
+		array_unshift($uri_temp, 'main');
+	}
 	$ids = $oo->urls_to_ids($uri_temp);
 	$uu->id = end($ids);
 	$item = $oo->get($uu->id);
@@ -42,12 +66,16 @@ if($uu->id) {
         $uu->id = -1; 
 
 // id
-$id = $_REQUEST['id'];		// no register globals	
-if (!$id) $id = "0";
-$ids = explode(",", $id);
-$idFull = $id;
-$id = $ids[count($ids) - 1];
-// $pageName = basename($_SERVER['PHP_SELF'], ".php"); 
+if(!isset($ids))
+{
+	$id = $_REQUEST['id'];		// no register globals	
+	if (!$id) $id = "0";
+	$ids = explode(",", $id);
+	$idFull = $id;
+	$id = $ids[count($ids) - 1];
+	// $pageName = basename($_SERVER['PHP_SELF'], ".php");
+}
+ 
 
 $alt = $_REQUEST['alt'];
 $pop = $_REQUEST['pop'];

@@ -30,7 +30,7 @@
 			<a href='/archive' class='instructionContainer'>ARCHIVE</a><br>
 			<a href='/visit' class='instructionContainer'>VISIT</a><br>
 			<a href='/contact' class='instructionContainer'>CONTACT</a><br>
-			<a href='/catalogs' class='instructionContainer'>BOOKSHOP</a><br>
+			<a href='/catalogues' class='instructionContainer'>BOOKSHOP</a><br>
 		</div>
 		<div id = 'menu-level-2' class='menu-level'>
 			<a href='/thank-our-supporters' class='instructionContainer'>THANKS OUR SUPPORTERS</a><br>
