@@ -1,263 +1,64 @@
+<? 
+// $ids = $oo->urls_to_ids($uri);
+$isFound = false;
+// check if in main
+$main_id = end($oo->urls_to_ids(array('main')));
+$main_children = $oo->children($main_id);
+$id = end($ids);
+foreach($main_children as $child)
+{
+	if($child['url'] == $uri[1] && count($uri) == 2)
+	{
+		$rootid = $child['id'];
+		$isFound = true;
+		break;
+	}
+}
+// check if in root
+if(!$isFound)
+{
+	$root_children = $oo->children(0);
+	foreach($root_children as $child)
+	{
+		if($child['url'] == $uri[1] && count($uri) == 2)
+		{
+			$rootid = $child['id'];
+			$isFound = true;
+			break;
+		}
+	}
+}
+
+if(!$isFound)
+{
+	$id = $_REQUEST['id'];		// no register globals	
+	if (!$id) $id = "0";
+	$ids = explode(",", $id);
+	$idFull = $id;
+	$id = $ids[count($ids) - 1];
+	$rootid = $ids[0];
+}
+
+$root_item = $oo->get($rootid);
+$rootname = nl2br($root_item["name1"]);
+
+$name = $item['name1'];
+$body = $item['body'];
+$notes = $item['notes'];
+$begin = $item['begin'];
+$end = $item['end'];
+
+$pattern = "/\[image(\d+)\]/";
+preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);
+$img_indexes = $out[1];
+
+$media = $oo->media($item['id']);
+
+?>
 <script type="text/javascript" src="/static/js/gallery.js"></script>
-
-
-		<div class="mainContainer times big"><?php
-		// $ids = $oo->urls_to_ids($uri);
-		$isFound = false;
-		// check if in main
-		$main_id = end($oo->urls_to_ids(array('main')));
-		$main_children = $oo->children($main_id);
-		foreach($main_children as $child)
-		{
-			if($child['url'] == $uri[1] && count($uri) == 2)
-			{
-				$rootid = $child['id'];
-				$id = $rootid;
-				$isFound = true;
-				break;
-			}
-		}
-		// check if in root
-		if(!$isFound)
-		{
-			$root_children = $oo->children(0);
-			foreach($root_children as $child)
-			{
-				if($child['url'] == $uri[1] && count($uri) == 2)
-				{
-					$rootid = $child['id'];
-					$id = $rootid;
-					$isFound = true;
-					break;
-				}
-			}
-		}
-
-		if(!$isFound)
-		{
-			$id = $_REQUEST['id'];		// no register globals	
-			if (!$id) $id = "0";
-			$ids = explode(",", $id);
-			$idFull = $id;
-			$id = $ids[count($ids) - 1];
-			$rootid = $ids[0];
-		}
-
-
-		// if(end($uri) == 'about')
-		// {
-		// 	$rootid = end($oo->urls_to_ids(array('main', 'about')));
-		// 	$id = $rootid;
-		// }
-		// elseif(end($uri) == 'visit')
-		// {
-		// 	$rootid = end($oo->urls_to_ids(array('main', 'visit')));
-		// 	$id = $rootid;
-		// }
-		// elseif(end($uri) == 'contact')
-		// {
-		// 	$rootid = end($oo->urls_to_ids(array('main', 'contact')));
-		// 	$id = $rootid;
-		// }
-		// elseif(end($uri) == 'follow')
-		// {
-		// 	$rootid = end($oo->urls_to_ids(array('main', 'follow')));
-		// 	$id = $rootid;
-		// }
-		// elseif(end($uri) == 'support')
-		// {
-		// 	$rootid = end($oo->urls_to_ids(array('main', 'support')));
-		// 	$id = $rootid;
-		// }
-		// elseif(end($uri) == 'archive')
-		// {
-		// 	$rootid = end($oo->urls_to_ids(array('main', 'archive')));
-		// 	$id = $rootid;
-		// }
-		// elseif(end($uri) == 'capp')
-		// {
-		// 	$rootid = end($oo->urls_to_ids(array('main', 'capp')));
-		// 	$id = $rootid;
-		// }
-		// elseif(end($uri) == 'intern')
-		// {
-		// 	$rootid = end($oo->urls_to_ids(array('main', 'intern')));
-		// 	$id = $rootid;
-		// }
-		// elseif(end($uri) == 'program')
-		// {
-		// 	$rootid = end($oo->urls_to_ids(array('program')));
-		// 	$id = $rootid;
-		// }
-		// elseif( end($uri) == 'view' ||
-		// 		$uri[1] == 'calendar'
-		// 	   )
-		// {
-		// 	// die();
-		// 	$id = $_REQUEST['id'];		// no register globals	
-		// 	if (!$id) $id = "0";
-		// 	$ids = explode(",", $id);
-		// 	$idFull = $id;
-		// 	$id = $ids[count($ids) - 1];
-		// 	$rootid = $ids[0];
-		// }
-
-		// var_dump($rootid);
-
-		// SQL object plus media plus rootname
-		$sql = "SELECT 
-					objects.id AS objectsId, 
-					objects.name1, objects.deck, objects.body, objects.notes, 
-					objects.active, objects.begin, objects.end, 
-					objects.rank as objectsRank, 
-					(
-						SELECT 
-							objects.name1 
-						FROM objects 
-						WHERE objects.id = $rootid
-					) AS rootname, 
-					media.id AS mediaId, 
-					media.object AS mediaObject, 
-					media.type, 
-					media.caption, 
-					media.active AS mediaActive, 
-					media.rank 
-				FROM 
-					objects 
-				LEFT JOIN 
-					media 
-				ON 
-					objects.id = media.object 
-					AND media.active = '1' 
-				WHERE 
-					objects.id = $id 
-					AND objects.active = '1'
-				ORDER BY media.rank;";
-
-		$result = $db->query($sql);
-		if(!$result)
-			throw new Exception($db->error);
-		$items = array();
-		while ($obj = $result->fetch_assoc())
-			$items[] = $obj;
-		$items = $items[0];
-		$rootname = $items['rootname'];
-		$name = $items['name1'];
-		$body = $items['body'];
-		$notes = $items['notes'];
-		$begin = $items['begin'];
-		$end = $items['end'];
-		mysql_data_seek($result, 0);    // reset to row 0    
-		    $html = "";
-		$i=0;
-		// $result->close();
-		// search for embedded image tags
-		$pattern = "/\[image(\d+)\]/";
-		preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);
-		$img_indexes = $out[1];
-
-		// collect images
-		// collect captions
-		$image_files = array();
-		$image_captions = array();
-		while($myrow = MYSQL_FETCH_ARRAY($result)) 
-		{
-			if($myrow['mediaActive'] != null) 
-			{
-				$media = $oo->media($myrow['objectsId']);
-				$mediaFile = m_url($media[$i]);
-				// $mediaFile = "/media/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-				$mediaCaption = strip_tags($myrow["caption"]);
-				$mediaStyle = "width: 100%;";
-				if($myrow["type"] == "pdf")
-					$image_files[] = ("/media/pdf.gif");
-				else
-					$image_files[] = $mediaFile;
-		        $image_captions[] = $mediaCaption;		
-
-				if(in_array($i+1, $img_indexes))
-				{
-					// $randomWidth = rand(15, 25);
-					$width = 90;    // 90% of text column
-
-					if(!$isMobile)
-					{
-						// $images[$i] .= "<div id='image".$i."' class = 'inline-img-container' style='width: $randomWidth%;' onclick='launch($i);'>";
-						$images[$i] .= "<div id='image".$i."' class = 'inline-img-container' style='width: $width%;' onclick='launch($i);'>";
-					}
-					else
-					{				
-						// $images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
-						$images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
-					}
-					
-					$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-					$images[$i] .= "<div class='captionContainer monaco small'>" . $image_captions[$i] . "</div>";
-					$images[$i] .= "</div>";
-					// insert images into body
-					// remove leading and trailing whitespace for consistency
-					// (necessary whitespace is added in css)
-					$pattern = "/\[image".($i+1)."\]/";
-					$body = preg_replace($pattern, $images[$i], $body);
-					unset($images[$i]);
-				}
-				else 
-				{
-					$randomPadding = rand(0, 150);
-					$randomWidth = rand(30, 50);
-					$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
-				
-					if(!$isMobile)
-					{
-						$images[$i] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
-						// $images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='expandImageContainerMargin(this, \"40px\", \"-80px\");'>";
-						$images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:{$randomPadding}px; margin:40px;' onclick='launch($i);'>";
-					}
-					else
-					{
-						$images[$i] .= "<div class='imageContainerWrapper'>";
-						$images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
-					}
-					$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-					$images[$i] .= "<div class='captionContainer caption helvetica small'>";
-					$images[$i] .= $mediaCaption;
-					$images[$i] .= "</div>";
-					$images[$i] .= "</div>";
-					$images[$i] .= "</div>";
-				}
-			}
-			$i++;
-		}
-		$result->close();
-		// Check for column breaks
-		$pattern = "/\/\/\//";
-		if(preg_match($pattern, $body) == 1) 
-			$columns = preg_split($pattern, $body);
-		$firstChar = substr($columns[0], 0, 1);
-		while( ord($firstChar) == 9 || 
-			   ord($firstChar) == 10 || 
-			   ord($firstChar) == 13
-			 )
-		{
-			$columns[0] = substr($columns[0], 1);
-			$firstChar = substr($columns[0], 0, 1);
-		}
-		$firstChar = substr($columns[1], 0, 1);
-		while( ord($firstChar) == 9 || 
-			   ord($firstChar) == 10 || 
-			   ord($firstChar) == 13
-			 )
-		{
-			$columns[1] = substr($columns[1], 1);
-			$firstChar = substr($columns[1], 0, 1);
-		}
-		// search for strings that match [\d+] where \d+ = n
-		// replace with image container = n
-		// remove image container n from array of images
-		// print out rest of images at the end (as normal images?)
-
-		// hours
-		$html .= "<div class='listContainer times title-block'>";
+	<div class="mainContainer times big">
+		<div class='listContainer times title-block'>
+		<?php
 		if ($begin || $end) 
 		{
 			// build date display
@@ -295,59 +96,126 @@
 				if ($displayDatesEnd) $datesDisplay = $beginDates . ' –<br />' . $endDates;
 			}		
 
-			$html .= $datesDisplay;
+			echo nl2br($datesDisplay);
 			// if ($displayHours) $html .= $hoursDisplay;
 
 		} 
 		else
 		{
-			$html .= $name;	
+			echo nl2br($name);	
 		}
+		?></div><?
 
-		$html .= "</div>";
+		if(!empty($media))
+		{
+			$image_files = array();
+			$image_captions = array();
+			foreach($media as $key => $m)
+			{
+				$mediaFile = m_url($m);
+				// $mediaFile = "/media/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
+				$mediaCaption = strip_tags($m["caption"]);
+				$mediaStyle = "width: 100%;";
+				if($m["type"] == "pdf")
+					$image_files[] = ("/media/pdf.gif");
+				else
+					$image_files[] = $mediaFile;
+			    $image_captions[] = $mediaCaption;		
 
+				if(in_array($key+1, $img_indexes))
+				{
+					// $randomWidth = rand(15, 25);
+					$width = 90;    // 90% of text column
+
+					if(!$isMobile)
+					{
+						$images[$key] .= "<div id='image".$key."' class = 'inline-img-container' style='width: $width%;' onclick='launch($key);'>";
+					}
+					else
+					{				
+						// $images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
+						$images[$key] .= "<div id='image".$key."' class = 'imageContainer'>";
+					}
+					
+					$images[$key] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+					$images[$key] .= "<div class='captionContainer monaco small'>" . $image_captions[$key] . "</div>";
+					$images[$key] .= "</div>";
+					// insert images into body
+					// remove leading and trailing whitespace for consistency
+					// (necessary whitespace is added in css)
+					$pattern = "/\[image".($key+1)."\]/";
+					$body = preg_replace($pattern, $images[$key], $body);
+					unset($images[$key]);
+				}
+				else 
+				{
+					$randomPadding = rand(0, 150);
+					$randomWidth = rand(30, 50);
+					$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
+				
+					if(!$isMobile)
+					{
+						$images[$key] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
+						// $images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='expandImageContainerMargin(this, \"40px\", \"-80px\");'>";
+						$images[$key] .= "<div id='image".$key."' class = 'imageContainer' style='padding-top:{$randomPadding}px; margin:40px;' onclick='launch($key);'>";
+					}
+					else
+					{
+						$images[$key] .= "<div class='imageContainerWrapper'>";
+						$images[$key] .= "<div id='image".$key."' class = 'imageContainer'>";
+					}
+					$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+					$images[$i] .= "<div class='captionContainer caption helvetica small'>";
+					$images[$i] .= $mediaCaption;
+					$images[$i] .= "</div>";
+					$images[$i] .= "</div>";
+					$images[$i] .= "</div>";
+				}
+			}
+			
+		}
+		$pattern = "/\/\/\//";
+		if(preg_match($pattern, $body) == 1) 
+			$columns = preg_split($pattern, $body);
+		$columns[0] = strictClean($columns[0]);
+		$columns[1] = strictClean($columns[1]);
+		if(!$columns[0] && !$columns[1])
+			$columns = false;
+
+		
+		// search for strings that match [\d+] where \d+ = n
+		// replace with image container = n
+		// remove image container n from array of images
+		// print out rest of images at the end (as normal images?)
+
+	
 		// body
 		if($columns) 
 		{
-			// column 2
-			$html .= "<div class='listContainer times'>";
-			$html .= $columns[0];	
-			$html .= "</div>";	
-						
-			// column 3
-			$html .= "<div class='listContainer times'>";
-			$html .= $columns[1];	
-			$html .= "</div>";              	
+			?><div class='listContainer times'><?= nl2br($columns[0]); ?></div><div class='listContainer times'><?= nl2br($columns[1]); ?></div><?   	
 		} 
 		else 
 		{
-			$html .= "<div class='listContainer doublewide centered times'>";
-			$html .= $body;
-			$html .= "</div>";
+			?><div class='listContainer doublewide centered times'><?= nl2br($body); ?></div><?
 		}
-
-
-		// images        	
-		$html .= "<div class='clear'></div>";
-		$html .= "<div class='galleryContainer'>";
+		?><div class='clear'></div>
+		<div class='galleryContainer'><?
 		if(is_array($images))
 		{
 			for($j = 0; $j < count($images); $j++)
 			{
-				$html .= $images[$j];
+				echo $images[$j];
 			}
 		}
 
 		// video
 		if($notes)
 		{
-			$html .= "<span class=''>";
-			$html .= $notes;	                  
-			$html .= "</span>";	
+			?><span class=''><?= $notes; ?></span><?
 		}
 
-			$html .= "</div>";
-		echo nl2br($html);
+		?></div><?
+		// echo nl2br($html);
 			?><div id="gallery" class="center hidden">
 				<div id="gallery-ex" onclick="close_gallery();"><img src="/media/svg/ex.svg"></div>
 				<div id="gallery-prev" onclick="prev();"><img src="/media/svg/prev.svg"></div>

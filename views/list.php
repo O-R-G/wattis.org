@@ -15,7 +15,7 @@
 	<?php
 		foreach($children as $key => $child){
 			if (substr($child['name1'], 0, 1) != '.') {
-				$url = $item["url"];
+				$url = $child["url"];
 				$url = ($url) ? "/calendar/".$url : "view_";
 
 				$now = time();

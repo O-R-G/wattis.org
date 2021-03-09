@@ -51,7 +51,7 @@
 </div>
 <!-- <div id = 'help-btn' class="helvetica">HELP</div> -->
 <!-- <div id = 'help-btn' class="helvetica">HELP ME!</div> -->
-<div id = 'help-btn' class="helvetica">WHERE AM I?</div>
+<div id = 'help-btn' class="helvetica"></div>
 <div id="helpContainer" class="helvetica small-medium">
     <div id="help-txt"><?= $help_text; ?></div>
     <div id = 'close-help-btn' class = ''></div>
