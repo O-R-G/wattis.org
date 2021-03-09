@@ -124,10 +124,10 @@ $id AND objects.active ORDER BY media.rank;";
 
         $html .= "<div class='listContainer doublewide'>";
         $html .= "<div id = 'gallery_static_ctner'>";
-        for ( $j = 0; $j < count($images); $j++) {
+        // for ( $j = 0; $j < count($images); $j++) {
 
-                $html .= $images[$j];
-        }
+        //         $html .= $images[$j];
+        // }
         $html .= "<div id = 'gallery_control_ctner' style = 'display:none;'><div id = 'btn_prev' class = 'gallery_control'>&lt;</div><div id = 'nods_ctner' class = 'gallery_control'></div><div id = 'btn_next' class = 'gallery_control'>&gt;</div></div>";
         $html .= "</div>";
 
