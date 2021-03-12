@@ -979,6 +979,21 @@ body.reverse.viewing-search #search-btn
 .desktop {
     display: none;
 }
+.orglink
+{
+    display: none;
+}
+.the-word-for-world-is-forest-2020
+{
+    background-color: #d59c8b;
+}
+
+.the-word-for-world-is-forest-2020 .title-block a
+{
+    margin-top: 22px;
+    float: left;
+    clear: both;
+}
 
 @media screen and (max-width: 568px) {
     

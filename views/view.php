@@ -192,14 +192,14 @@ $media = $oo->media($item['id']);
 		// body
 		if($columns) 
 		{
-			?><div class='listContainer times'><?= nl2br($columns[0]); ?></div><div class='listContainer times'><?= nl2br($columns[1]); ?></div><?   	
+			?><div class='listContainer times'><?php echo nl2br($columns[0]); ?></div><div class='listContainer times'><?php echo nl2br($columns[1]); ?></div><?   	
 		} 
 		else 
 		{
-			?><div class='listContainer doublewide centered times'><?= nl2br($body); ?></div><?
+			?><div class='listContainer doublewide centered times'><?php echo nl2br($body); ?></div><?php
 		}
 		?><div class='clear'></div>
-		<div class='galleryContainer'><?
+		<div class='galleryContainer'><?php
 		if(is_array($images))
 		{
 			for($j = 0; $j < count($images); $j++)
@@ -211,10 +211,10 @@ $media = $oo->media($item['id']);
 		// video
 		if($notes)
 		{
-			?><span class=''><?= $notes; ?></span><?
+			?><span class=''><?php echo $notes; ?></span><?php
 		}
 
-		?></div><?
+		?></div><?php
 		// echo nl2br($html);
 			?><div id="gallery" class="center hidden">
 				<div id="gallery-ex" onclick="close_gallery();"><img src="/media/svg/ex.svg"></div>

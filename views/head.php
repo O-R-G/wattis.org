@@ -23,12 +23,12 @@ $main_children = $oo->children($main_id);
 $main_children_url = array();
 foreach($main_children as $child)
 	$main_children_url[] = $child['url'];
-
 if($uu->id){
 	$item = $oo->get($uu->id);
 	$uri_temp = $uri;
 	array_shift($uri_temp);
 	$ids = $oo->urls_to_ids($uri_temp);
+	$id = $uu->id;
 }
 elseif( in_array( $uri[1], $main_children_url ))
 {
@@ -37,6 +37,7 @@ elseif( in_array( $uri[1], $main_children_url ))
 	$ids = $oo->urls_to_ids($uri_temp);
 	$uu->id = end($ids);
 	$item = $oo->get($uu->id);
+	$id = $uu->id;
 }
 elseif($uri[1] == 'buy')
 {
@@ -96,7 +97,8 @@ if($uri[1] == 'library')
 	$bodyClass .= ' hideGeneralSearch';
 if(!empty($displaySearch))
 	$bodyClass .= ' viewing-search';
-	
+if($uri[2] == 'the-word-for-world-is-forest-2020' && count($uri) > 3)
+	$bodyClass .= ' the-word-for-world-is-forest-2020';
 
 require_once('static/php/function.php');
 
