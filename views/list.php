@@ -5,6 +5,8 @@
 	//     $id = $ids[0];
 	// }
 	$rootid = $ids[0];
+	if($uri[1] == 'archive')
+		$rootid = $oo->urls_to_ids(array('gallery'))[0];
 	$root_item = $oo->get($rootid);
 	$children = $oo->children($rootid);
 	$rootname = nl2br($root_item["name1"]);

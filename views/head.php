@@ -29,6 +29,7 @@ if($uu->id){
 	$uri_temp = $uri;
 	array_shift($uri_temp);
 	$ids = $oo->urls_to_ids($uri_temp);
+	$id = $uu->id;
 }
 elseif( in_array( $uri[1], $main_children_url ))
 {
@@ -37,6 +38,7 @@ elseif( in_array( $uri[1], $main_children_url ))
 	$ids = $oo->urls_to_ids($uri_temp);
 	$uu->id = end($ids);
 	$item = $oo->get($uu->id);
+	$id = $uu->id;
 }
 elseif($uri[1] == 'buy')
 {
