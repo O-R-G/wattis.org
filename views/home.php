@@ -3,11 +3,14 @@
 	$rootname = 'Home';
 	$search_random = !(isset($_GET['random']));
 	$randomRecords = getRandomRecords($search_random);
+	$logo_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
+	$logo_item = $oo->get($logo_id);
 ?>
 
 <!-- BLOCKS -->
 <div class="homeContainer times big">
 	<!-- <div class = 'blockContainer'><img><div id = 'paragraph'><?= $randomRecords['all'][0]["sentence"]; ?></div></div> -->
+	<div class = 'blockContainer'><div id = 'paragraph'>.+*The Wattis Institute</div></div>
 	<? foreach($randomRecords['all'] as $record){
 		if($record['image'])
 		{

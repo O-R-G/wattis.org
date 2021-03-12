@@ -5,20 +5,27 @@
 	//     $id = $ids[0];
 	// }
 	$rootid = $ids[0];
-	if($uri[1] == 'archive')
+	if(strpos($uri[2], 'past-exhibitions') !== false )
 		$rootid = $oo->urls_to_ids(array('gallery'))[0];
+	elseif(strpos($uri[2], 'research-seasons') !== false )
+		$rootid = $oo->urls_to_ids(array('on-our-mind'))[0];
+	elseif(strpos($uri[2], 'events') !== false ){
+		$rootid = $oo->urls_to_ids(array('calendar'))[0];
+	}
+	
 	$root_item = $oo->get($rootid);
+	$root_url = $root_item['url'];
 	$children = $oo->children($rootid);
-	$rootname = nl2br($root_item["name1"]);
+	$name = $item['name1'];
 ?>
 <div class="mainContainer times big">
-	<div class='listContainer times'><?= $rootname; ?></div>
+	<div class='listContainer times'><?= $name; ?></div>
 	<div class='listContainer doublewide times'>
 	<?php
 		foreach($children as $key => $child){
 			if (substr($child['name1'], 0, 1) != '.') {
 				$url = $child["url"];
-				$url = ($url) ? "/calendar/".$url : "view_";
+				$url = ($url) ? "/" . $root_url . "/".$url : "view_";
 
 				$now = time();
 				$begin = ($child['begin'] != null) ? strtotime($child['begin']) : $now;

@@ -1,5 +1,5 @@
 <? 
-echo "modify-links.php ...\n";
+echo "\nmodify-links.php ...\n";
 $cwd = getcwd();
 
 set_include_path($cwd);
@@ -80,16 +80,19 @@ function db_connect($remote_user) {
 
 $parent_id = 0;
 $db = db_connect("admin");
-$fields_to_check = array('body', 'deck', 'name1');
-$pattern = '#<a\s.*?(?:href.*?=.*?[\'"](.*?\?id=(.*?))[\'"]).*?>#is';
+$fields_to_check = array('name1', 'deck', 'body');
+$pattern = '#<a\s.*?(?:href.*?=.*?[\'"]((?:.*?wattis.org)?\/.*?\?id=(.*?))[\'"]).*?>#is';
 // $pattern_wattis = '#http[s?]://[www?].wattis.org/#is';
 $pattern_wattis = '/https?:\/\/(?:www\.)?wattis\.org\/?/';
 $replacement_wattis = '/';
 
 foreach($fields_to_check as $field)
 {
-	global $db;
-	$sql = "SELECT objects.id, objects." . $field . " FROM objects WHERE " . $field . " LIKE '%?id=%' LIMIT 3,1";
+	if($field != 'name')
+		$sql = "SELECT objects.id, objects.name1, objects." . $field;
+	else
+		$sql = "SELECT objects.id, objects." . $field;
+	$sql .= " FROM objects WHERE " . $field . " LIKE '%?id=%'";
 	// echo 'sql = ' . "\n";
 	// echo $sql;
 	$result = $db->query($sql);
@@ -101,9 +104,11 @@ foreach($fields_to_check as $field)
 	$result->close();
 	foreach($items as $item)
 	{
-		$this_body = $item['body'];
+		echo "\n[" . $item['id'] . '][' . $field . '] ' . $item['name1'] . "\n";
+		$this_field = $item[$field];
+		// var_dump($field);
 		$this_links = array();
-		preg_match_all($pattern, $this_body, $this_links);
+		preg_match_all($pattern, $this_field, $this_links);
 		// $this_links contains 3 arrays
 		// $this_links[0]: An array of opening tags of the hyperlinks.
 		//                 E.g. <a href = 'https://wattis.org?id=1'>
@@ -113,6 +118,7 @@ foreach($fields_to_check as $field)
 		//                 E.g. 1
 		$this_urls = $this_links[1];
 		$this_querystrings = $this_links[2];
+		$new_urls = array();
 		foreach($this_urls as $key => $url)
 		{
 			// "http://wattis.org" -> "/"
@@ -154,16 +160,26 @@ foreach($fields_to_check as $field)
 					{
 						if($key != 0)
 						{
-							$new_url .= $s;
+							if($key == 1)
+								$new_url .= $s;
+							else
+								$new_url .= '&amp;' . $s;
 						}
 					}
 				}
 				
 				echo $url . '  =>  ' . $new_url . "\n";
+				$new_urls[] = $new_url;
+				$this_field = str_replace($url, $new_url, $this_field); 
 			}
-			
 		}
-		
+		$this_field = addslashes($this_field);
+		$sql = "UPDATE objects SET ".$field." = '".$this_field."' WHERE id = '".$item['id']."' AND active = '1'";
+		$result_update = $db->query($sql);
+		if($result_update)
+			echo "    >>> update successes\n";
+		else
+			echo "    >>> error!\n";
 	}
 }
 
@@ -197,10 +213,7 @@ function getCompleteUrl($id){
 	if(!empty($items)){
 		$fromid = $items[0]['fromid'];
 		$output = '/' . $items[0]['url'];
-		var_dump($fromid);
-		var_dump($output);
-		die();
-		while ($fromid !== 0)
+		while ($fromid != 0)
 		{
 			$sql = "SELECT wires.fromid, objects.url FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.id = '" . $fromid . "'";
 			$result = $db->query($sql);
@@ -211,7 +224,11 @@ function getCompleteUrl($id){
 				$items[] = $obj;
 			$result->close();
 			$fromid = $items[0]['fromid'];
-			$output = '/' . $items[0]['url'] . $output;
+
+			// specific to wattis: "main" is hidden from url
+			if($items[0]['url'] != 'main')
+				$output = '/' . $items[0]['url'] . $output;
+			
 		}
 		return $output;
 	}

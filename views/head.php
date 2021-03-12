@@ -23,7 +23,6 @@ $main_children = $oo->children($main_id);
 $main_children_url = array();
 foreach($main_children as $child)
 	$main_children_url[] = $child['url'];
-
 if($uu->id){
 	$item = $oo->get($uu->id);
 	$uri_temp = $uri;
@@ -98,7 +97,8 @@ if($uri[1] == 'library')
 	$bodyClass .= ' hideGeneralSearch';
 if(!empty($displaySearch))
 	$bodyClass .= ' viewing-search';
-	
+if($uri[2] == 'the-word-for-world-is-forest-2020' && count($uri) > 3)
+	$bodyClass .= ' the-word-for-world-is-forest-2020';
 
 require_once('static/php/function.php');
 
