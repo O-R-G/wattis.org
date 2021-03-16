@@ -39,6 +39,8 @@ if(!$isFound)
 	$rootid = $ids[0];
 }
 
+
+
 $root_item = $oo->get($rootid);
 $rootname = nl2br($root_item["name1"]);
 
@@ -51,8 +53,72 @@ $end = $item['end'];
 $pattern = "/\[image(\d+)\]/";
 preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);
 $img_indexes = $out[1];
-
 $media = $oo->media($item['id']);
+
+$menu_tag = '[menu]';
+$isMenu = false;
+if(strpos($item['name1'], $menu_tag) !== false){
+	$isMenu = true;
+	$menu_items_level_uri = $uri;
+	array_shift($menu_items_level_uri);
+}
+else
+{
+	$uri_temp = $uri;
+	array_shift($uri_temp);
+	for($i = 0; $i < count($uri) ; $i++)
+	{
+		array_pop($uri_temp);
+		if(!empty($uri_temp))
+		{
+			$this_ancestor_id = end($oo->urls_to_ids($uri_temp));
+			$this_ancestor_name1 = $oo->name($this_ancestor_id);
+			if(strpos($this_ancestor_name1, $menu_tag) !== false){
+				$isMenu = true;
+				$menu_items_level_uri = $uri_temp;
+				break;
+			}
+		}
+		
+	}
+}
+
+
+if($isMenu)
+{
+	$menu_items = array();
+	$menu_level_uri = $menu_items_level_uri;
+	array_pop($menu_level_uri);
+	$parent_id = end($oo->urls_to_ids($menu_level_uri));
+	$siblings = $oo->children($parent_id);
+	foreach($siblings as $s)
+	{
+		if( strpos($s['name1'], $menu_tag) !== false &&
+			substr($s['name1'], 0, 1) != '.' )
+		$menu_items[] = $s;
+	}
+
+	$children = $oo->children($item['id']);
+	if(count($children) > 0)
+	{
+		$default = false;
+		foreach($children as $child)
+		{
+			if($child['name1'] == '[default]')
+			{
+				$default = $child;
+				break;
+			}
+		}
+		if(!$default)
+			$default = $children[0];
+		$name = $default['name1'];
+		$body = $default['body'];
+		$notes = $default['notes'];
+		$begin = $default['begin'];
+		$end = $default['end'];
+	}
+}
 
 ?>
 <script type="text/javascript" src="/static/js/gallery.js"></script>
@@ -100,6 +166,21 @@ $media = $oo->media($item['id']);
 			// if ($displayHours) $html .= $hoursDisplay;
 
 		} 
+		else if($isMenu)
+		{
+
+			$url_base = '/' . implode($menu_level_uri, '/');
+			foreach($menu_items as $mi)
+			{
+				$menu_tag_length = strlen($menu_tag);
+				$item_name = substr($mi['name1'], $menu_tag_length);
+
+				$item_url = $url_base . '/' . $mi['url'];
+				?>
+					<div><a href="<?php echo $item_url; ?>" ><?php echo $item_name; ?></a></div><br>
+				<?
+			}
+		}
 		else
 		{
 			echo nl2br($name);	
@@ -209,10 +290,13 @@ $media = $oo->media($item['id']);
 		}
 
 		// video
+		/*
 		if($notes)
 		{
-			?><span class=''><?php echo $notes; ?></span><?php
+			?>
+			<span class=''><?php echo $notes; ?></span><?php
 		}
+		*/
 
 		?></div><?php
 		// echo nl2br($html);
@@ -233,5 +317,11 @@ $media = $oo->media($item['id']);
 				var inGallery = false;
 				var attached = false;
 				var gallery = document.getElementById(gallery_id);
+
+				var isMenu = <?php echo json_encode($isMenu); ?>;
+				if(isMenu)
+				{
+					document.body.classList.add('pink');
+				}
 			</script>
 		</div>

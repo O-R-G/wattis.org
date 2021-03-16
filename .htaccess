@@ -31,6 +31,9 @@ RewriteEngine On
 #RewriteRule (.*) /library$2 [QSD,R=302,NC,L]
 #QSD works only on apache 2.4 or later
 
+# redirect /consult-the-archive to /archive
+RewriteRule ^consult-the-archive$ /archive [R=302,NC,L]
+
 # relative path to absolute path
 # redirect all /xxx/xxx/editions to /editions
 RewriteRule ^.*/.*/editions$ /editions [R=302,NC,L]
