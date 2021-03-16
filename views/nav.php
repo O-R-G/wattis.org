@@ -57,39 +57,43 @@
     <div id = 'close-help-btn' class = ''></div>
 </div>
 
-<!-- <<< sound >>> -->
+<!-- <<< sound >>> 
 <audio id='btn-on-sound-effect' preload="auto"><source src = '/media/audio/320181__dland__hint.wav' type="audio/wav"></audio>
 <audio id='btn-off-sound-effect' preload="auto"><source src = '/media/audio/413690__splatez07__click_edited.m4a' type=""></audio>
+-->
 
 <script type="text/javascript">
 	var logo = unescape(getCookie("logoCookie"));
 	if (logo) { document.getElementById("logo").textContent = logo; }
 
-	var sBtn_on_sound_effect = document.getElementById('btn-on-sound-effect');
-	var sBtn_off_sound_effect = document.getElementById('btn-off-sound-effect');
+	// var sBtn_on_sound_effect = document.getElementById('btn-on-sound-effect');
+ 	// var sBtn_off_sound_effect = document.getElementById('btn-off-sound-effect');
+
+	var sBtn_on_sound_effect = new Audio('/media/audio/320181__dland__hint.wav');
+	var sBtn_off_sound_effect = new Audio('/media/audio/413690__splatez07__click_edited.m4a');
 
 	var sMenu_btn = document.getElementById('menu-btn');
 	sMenu_btn.addEventListener('click', function(){
-		document.body.classList.add('viewing-menu');
 		sBtn_on_sound_effect.play();
+		document.body.classList.add('viewing-menu');
 	});
 
 	var sClose_menu_btn = document.getElementById('close-menu-btn');
 	sClose_menu_btn.addEventListener('click', function(){
-		document.body.classList.remove('viewing-menu');
 		sBtn_off_sound_effect.play();
+		document.body.classList.remove('viewing-menu');
 	});
 
 	var sHelp_btn = document.getElementById('help-btn');
 	sHelp_btn.addEventListener('click', function(){
-		document.body.classList.add('viewing-help');
 		sBtn_on_sound_effect.play();
+		document.body.classList.add('viewing-help');
 	});
 
 	var sClose_help_btn = document.getElementById('close-help-btn');
 	sClose_help_btn.addEventListener('click', function(){
-		document.body.classList.remove('viewing-help');
 		sBtn_off_sound_effect.play();
+		document.body.classList.remove('viewing-help');
 	});
 
 	var sSearch_btn = document.getElementById('search-btn');
@@ -99,9 +103,9 @@
 			sBtn_off_sound_effect.play();
 		}
 		else{
-			console.log('turn on');
-			setTimeout(function(){sSearch_input.focus();}, 0);
 			sBtn_on_sound_effect.play();
+			// console.log('turn on');
+			setTimeout(function(){sSearch_input.focus();}, 0);
 		}
 		document.body.classList.toggle('viewing-search');
 	});
