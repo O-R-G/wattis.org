@@ -51,7 +51,7 @@ function getRandomRecords($markedBold = false){
   {
     $sql = "SELECT objects.id, objects.body FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.name1 NOT LIKE '.%' AND objects.name1 NOT LIKE '\_%' AND objects.body LIKE '%<b>%'";
   }
-  $sql .= " ORDER BY RAND() LIMIT 3";
+  $sql .= " ORDER BY RAND() LIMIT 100";
 
   $res = $db->query($sql);
   $items = array();
