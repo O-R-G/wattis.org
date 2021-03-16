@@ -1,11 +1,10 @@
 <? 
-echo "add-url.php ...\n";
-$cwd = getcwd();
+echo "\nadd-url.php ...\n";
 
+$cwd = getcwd();
 set_include_path($cwd);
 require_once($cwd . '/../../open-records-generator/lib/lib.php');
 
-// connect to database (called in head.php)
 function db_connect($remote_user) {
 	global $adminURLString;
 	global $readOnlyURLString;
@@ -65,28 +64,32 @@ function db_connect($remote_user) {
 		echo "Failed to connect to MySQL: " . $db->connect_error;
 	return $db;
 }
-// id
-// Home = 1
-// Main = 3
-// Gallery = 4
-// On Our Mind = 6
-// Calendar = 7
-// Browse the Library = 752
-// Browse the Library > Watch / Listen = 776
-// Main > Consult the Archive = 30
-// _Email = 94
-// Cecilia VicuÃ±a is on our mind = 1110
+
+$db = db_connect("admin");
 
 $parent_id = 0;
-$db = db_connect("admin");
 $processedIds = array();
-// $r = addChildrenUrl($parent_id, $db);
+
+/*
+	urls to be updated
+*/ 
+$oldOrgUrls = array(
+	'view_','display_','library_'
+);
+
 $r = addChildrenUrl($parent_id, $db, 0, true);
 
-// var_dump($children_id);
-
 function addChildrenUrl($parentId, $db, $d = 0, $deep = false){
+	/*
+		This function adds url to those records without urls, and replace urls which are listed in $oldOrgUrls.
+
+		$parentId: parent of the records that need to add urls
+		$db      : $db
+		$d       : for aligning the output text. no practical usages
+		$deep    : if true, the function targets all the descendants; if false, it targets the children only.
+	*/
 	global $processedIds;
+	global $oldOrgUrls;
 	
 	if( in_array($parentId, $processedIds) ){
 		echo '!! id = ' . $parentId . ' is already processed'."\n";
@@ -107,17 +110,34 @@ function addChildrenUrl($parentId, $db, $d = 0, $deep = false){
 		$layer .= '>';
 	}
 	if(!empty($items)){
+		$sibling_url = array();
 		foreach($items as $item){
-			if(empty($item['url']))
+			if( 
+				empty($item['url']) ||
+				in_array($item['url'], $oldOrgUrls)
+			)
 			{
 				echo $layer . ' processing ['.$item['id'].'] '.$item['name1']." ...\n";
-				$sql = "UPDATE objects SET url = '".slug($item['name1'])."' WHERE id = '".$item['id']."'";
+				/*
+					check url of siglings
+				*/
+				$this_url = slug($item['name1']);
+				if(in_array($this_url, $sibling_url))
+					$this_url = strval($item['id']);
+
+				
+				$sql = "UPDATE objects SET url = '".$this_url."' WHERE id = '".$item['id']."'";
 				$result_update = $db->query($sql);
 			}
 			else
 			{
 				echo '!! skiping ['.$item['id'].'] '.$item['name1']." ...\n";
+				$this_url = $item['url'];
 			}
+			
+			if(strpos($this_url, '.php') === false)
+				$sibling_url[] = $this_url;
+
 			if($deep)
 				addChildrenUrl($item['id'], $db, $d + 1, $deep);
 			
@@ -130,19 +150,5 @@ function addChildrenUrl($parentId, $db, $d = 0, $deep = false){
 	}
 	
 }
-
-function getChildrenId($parentId, $db){
-	// echo "getChildrenId() ... \n";
-	$sql = "SELECT toid FROM wires WHERE fromid = '".$parentId."'";
-	$result = $db->query($sql);
-	if(!$result)
-		throw new Exception($db->error);
-	$items = array();
-	while ($obj = $result->fetch_assoc())
-		$items[] = $obj['toid'];
-	$result->close();
-	return $items;
-}
-
 
 ?>

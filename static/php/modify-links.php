@@ -1,7 +1,7 @@
 <? 
 echo "\nmodify-links.php ...\n";
-$cwd = getcwd();
 
+$cwd = getcwd();
 set_include_path($cwd);
 require_once($cwd . '/../../open-records-generator/lib/lib.php');
 
@@ -66,25 +66,63 @@ function db_connect($remote_user) {
 		echo "Failed to connect to MySQL: " . $db->connect_error;
 	return $db;
 }
-// id
-// Home = 1
-// Main = 3
-// Gallery = 4
-// On Our Mind = 6
-// Calendar = 7
-// Browse the Library = 752
-// Browse the Library > Watch / Listen = 776
-// Main > Consult the Archive = 30
-// _Email = 94
-// Cecilia VicuÃ±a is on our mind = 1110
 
-$parent_id = 0;
 $db = db_connect("admin");
+
+/* 
+	add/remove fields to check in the array
+*/
 $fields_to_check = array('name1', 'deck', 'body');
-$pattern = '#<a\s.*?(?:href.*?=.*?[\'"]((?:.*?wattis.org)?\/.*?\?id=(.*?))[\'"]).*?>#is';
-// $pattern_wattis = '#http[s?]://[www?].wattis.org/#is';
+$views_list_arr = array('view', 'list', 'library', 'library_view', 'display', 'buy');
+if(count($views_list_arr) > 0)
+{
+	$views_pattern = '(?:';
+	$views_pattern .= implode($views_list_arr, '|');
+	$views_pattern .= ')';
+}
+else
+{
+	echo "Please specify the view(s) that need to be replaced as $views_list_arr.";
+	die();
+}
+/* 
+	look for url that
+	1. with views names specifed in $views_list_arr that might be followed by '_' and might be followed by '.php' and are followed by "?id="
+	E.g. view?id=1
+		 view_?id=1
+		 view.php?id=1
+		 view_.php?id=1
+		 /view?id=1
+		 /view_?id=1
+		 ...
+	2. with a domain name that is one of the following:
+		 https://wattis.org
+		 http://wattis.org
+		 https://www.wattis.org
+		 http://www.wattis.org
+	   or without a domain name
+	3. followed by quote, double quote (<a>), or space
+*/
+	   /*
+$pattern = '#<a\s.*?(?:href.*?=.*?[\'"]((?:https?:\/\/(?:www\.)?wattis\.org\/?)?\/?(?:view|list|library|library_view|display|buy)_?(?:\.php)?\?id=(.*?))[\'"]).*?>#is';
+*/
+$pattern = '#((?:https?:\/\/(?:www\.)?wattis\.org\/?)?\/?(?:view|list|library|library_view|display|buy)_?(?:\.php)?\?id=(.*?))[\'"\s\/]#is';
+/* 
+	look for wattis.org url that
+	1. is either http:// or https://
+	2. with or without www
+*/
 $pattern_wattis = '/https?:\/\/(?:www\.)?wattis\.org\/?/';
+/*
+	replace wattis.org url with '/'
+*/
 $replacement_wattis = '/';
+
+/*
+	if $target_id = '', the code will run through the whole database
+*/
+$target_id = '';
+// $target_id = 1170;
 
 foreach($fields_to_check as $field)
 {
@@ -93,8 +131,10 @@ foreach($fields_to_check as $field)
 	else
 		$sql = "SELECT objects.id, objects." . $field;
 	$sql .= " FROM objects WHERE " . $field . " LIKE '%?id=%'";
-	// echo 'sql = ' . "\n";
-	// echo $sql;
+
+	if($target_id)
+		$sql .= " AND id = '".$target_id."'";
+	
 	$result = $db->query($sql);
 	if(!$result)
 		throw new Exception($db->error);
@@ -106,23 +146,26 @@ foreach($fields_to_check as $field)
 	{
 		echo "\n[" . $item['id'] . '][' . $field . '] ' . $item['name1'] . "\n";
 		$this_field = $item[$field];
-		// var_dump($field);
 		$this_links = array();
 		preg_match_all($pattern, $this_field, $this_links);
-		// $this_links contains 3 arrays
-		// $this_links[0]: An array of opening tags of the hyperlinks.
-		//                 E.g. <a href = 'https://wattis.org?id=1'>
-		// $this_links[1]: An array of urls
-		//                 E.g. https://wattis.org?id=1
-		// $this_links[2]: query string without "?id="
-		//                 E.g. 1
+		/* 
+			$this_links contains 3 arrays
+			$this_links[0]: An array of opening tags of the hyperlinks.
+			                E.g. <a href = 'https://wattis.org?id=1'>
+			$this_links[1]: An array of urls
+			                E.g. https://wattis.org?id=1
+			$this_links[2]: query string without "?id="
+							E.g. 1
+		*/                 
 		$this_urls = $this_links[1];
 		$this_querystrings = $this_links[2];
 		$new_urls = array();
+		$needsUpdate = false;
 		foreach($this_urls as $key => $url)
 		{
-			// "http://wattis.org" -> "/"
-			// $url = 'https://www.wattis.org/ccc';
+			/*
+				replace wattis.org url with '/'
+			*/
 			$new_url = preg_replace($pattern_wattis, $replacement_wattis, $url);
 			if(empty($new_url))
 				$new_url = '/' . $new_url;
@@ -137,8 +180,10 @@ foreach($fields_to_check as $field)
 				else
 					$querystring[0] = $querystring_temp;
 				
-				// $querystring[0] is IDs
-				// $querystring[1] ... are other query strings like alt, if any.
+				/* 
+					$querystring[0] is IDs
+					$querystring[1] ... are other query strings like alt, if any.
+				*/
 				if(!empty($querystring[0]))
 				{
 					$id_array = explode(',', $querystring[0]);
@@ -167,23 +212,32 @@ foreach($fields_to_check as $field)
 						}
 					}
 				}
-				
+				$needsUpdate = true;
 				echo $url . '  =>  ' . $new_url . "\n";
 				$new_urls[] = $new_url;
 				$this_field = str_replace($url, $new_url, $this_field); 
 			}
 		}
-		$this_field = addslashes($this_field);
-		$sql = "UPDATE objects SET ".$field." = '".$this_field."' WHERE id = '".$item['id']."' AND active = '1'";
-		$result_update = $db->query($sql);
-		if($result_update)
-			echo "    >>> update successes\n";
+		if($needsUpdate)
+		{
+			$this_field = addslashes($this_field);
+			$sql = "UPDATE objects SET ".$field." = '".$this_field."' WHERE id = '".$item['id']."' AND active = '1'";
+			$result_update = $db->query($sql);
+			if($result_update)
+				echo "    >>> update successes\n";
+			else
+				echo "    >>> error!\n";
+		}
 		else
-			echo "    >>> error!\n";
+			echo "    >>> no needs to update\n";
 	}
 }
 
 function getObjectsUrl($id){
+	/*
+		input:  id
+		output: the url of the reocrd with the given id
+	*/
 	global $db;
 	$sql = "SELECT objects.url FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.id = '" . $id . "'";
 	$result = $db->query($sql);
@@ -198,7 +252,12 @@ function getObjectsUrl($id){
 	else
 		return false;
 }
+
 function getCompleteUrl($id){
+	/*
+		input:  id
+		output: a complete url of the reocrd with the given id based on o-r-g stucture
+	*/
 	global $db;
 	$output = '';
 
@@ -225,7 +284,9 @@ function getCompleteUrl($id){
 			$result->close();
 			$fromid = $items[0]['fromid'];
 
-			// specific to wattis: "main" is hidden from url
+			/*
+				specific to wattis where "main" is hidden in url
+			*/
 			if($items[0]['url'] != 'main')
 				$output = '/' . $items[0]['url'] . $output;
 			

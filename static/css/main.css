@@ -7,6 +7,7 @@ body {
     /*-webkit-font-smoothing: subpixel-antialiased;*/
         color: #000;
         background: #FFF;
+        overflow: hidden;
     }
 
 a {
@@ -983,16 +984,9 @@ body.reverse.viewing-search #search-btn
 {
     display: none;
 }
-.the-word-for-world-is-forest-2020
+.pink
 {
     background-color: #d59c8b;
-}
-
-.the-word-for-world-is-forest-2020 .title-block a
-{
-    margin-top: 22px;
-    float: left;
-    clear: both;
 }
 
 @media screen and (max-width: 568px) {
