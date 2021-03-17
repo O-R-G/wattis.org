@@ -57,42 +57,39 @@
     <div id = 'close-help-btn' class = ''></div>
 </div>
 
-<!-- <<< sound >>> 
-<audio id='btn-on-sound-effect' preload="auto"><source src = '/media/audio/320181__dland__hint.wav' type="audio/wav"></audio>
-<audio id='btn-off-sound-effect' preload="auto"><source src = '/media/audio/413690__splatez07__click_edited.m4a' type=""></audio>
--->
+<script type='text/javascript' src='/static/js/audio.js'></script>
 
 <script type="text/javascript">
 	var logo = unescape(getCookie("logoCookie"));
 	if (logo) { document.getElementById("logo").textContent = logo; }
 
-	// var sBtn_on_sound_effect = document.getElementById('btn-on-sound-effect');
- 	// var sBtn_off_sound_effect = document.getElementById('btn-off-sound-effect');
+	// var sBtn_on_sound_effect = new Audio('/media/audio/_old/320181__dland__hint.wav');
+	// var sBtn_off_sound_effect = new Audio('/media/audio/_old/413690__splatez07__click_edited.m4a');
 
-	var sBtn_on_sound_effect = new Audio('/media/audio/320181__dland__hint.wav');
-	var sBtn_off_sound_effect = new Audio('/media/audio/413690__splatez07__click_edited.m4a');
+	var on_sound = new Audio(audio_src[Math.floor(Math.random() * audio_src.length)]);
+	var off_sound = new Audio(audio_src[Math.floor(Math.random() * audio_src.length)]);
 
 	var sMenu_btn = document.getElementById('menu-btn');
 	sMenu_btn.addEventListener('click', function(){
-		sBtn_on_sound_effect.play();
-		document.body.classList.add('viewing-menu');
+        on_sound.play();
+        document.body.classList.add('viewing-menu');
 	});
 
 	var sClose_menu_btn = document.getElementById('close-menu-btn');
 	sClose_menu_btn.addEventListener('click', function(){
-		sBtn_off_sound_effect.play();
+        off_sound.play();
 		document.body.classList.remove('viewing-menu');
 	});
 
 	var sHelp_btn = document.getElementById('help-btn');
 	sHelp_btn.addEventListener('click', function(){
-		sBtn_on_sound_effect.play();
+        on_sound.play();
 		document.body.classList.add('viewing-help');
 	});
 
 	var sClose_help_btn = document.getElementById('close-help-btn');
 	sClose_help_btn.addEventListener('click', function(){
-		sBtn_off_sound_effect.play();
+        off_sound.play();
 		document.body.classList.remove('viewing-help');
 	});
 
@@ -100,11 +97,10 @@
 	var sSearch_input = document.getElementById('search-input');
 	sSearch_btn.addEventListener('click', function(){
 		if(document.body.classList.contains('viewing-search')){
-			sBtn_off_sound_effect.play();
+            off_sound.play();
 		}
 		else{
-			sBtn_on_sound_effect.play();
-			// console.log('turn on');
+            on_sound.play();
 			setTimeout(function(){sSearch_input.focus();}, 0);
 		}
 		document.body.classList.toggle('viewing-search');

@@ -7,10 +7,12 @@ require_once('open-records-generator/config/url.php');
 // site
 require_once('static/php/config.php');
 
+/*  for old O-R-G, to delete
 require_once("static/php/fix_mysql.php");		
 require_once("static/php/systemDatabase.php"); 
 require_once("static/php/displayMedia.php"); 
 require_once("static/php/systemCookie.php");	
+*/
 
 $db = db_connect("guest");
 $oo = new Objects();
