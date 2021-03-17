@@ -19,6 +19,7 @@
 // could be done with php scan_dir and passed via json
 // or just short bash script
 
+/*
 var audio_src = [
     "/media/audio/assets/A/bubbles.mp3",  
     "/media/audio/assets/A/clay.mp3",
@@ -47,6 +48,7 @@ var audio_src = [
     "/media/audio/assets/A/wipe.mp3",
     "/media/audio/assets/A/zig-zag.mp3"
 ];
+*/
 
 var audios = [];
 function audio_preload(url) {

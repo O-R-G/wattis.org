@@ -57,6 +57,7 @@
     <div id = 'close-help-btn' class = ''></div>
 </div>
 
+<script type='text/javascript' src='/static/js/audio-src.js'></script>
 <script type='text/javascript' src='/static/js/audio.js'></script>
 
 <script type="text/javascript">
