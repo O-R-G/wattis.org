@@ -66,6 +66,7 @@ function init_ui() {
         }
     });
 
+    /*
     // href
     var e = document.getElementsByTagName('a');
     for(var i = 0, len = e.length; i < len; i++) {
@@ -73,14 +74,14 @@ function init_ui() {
             play_sound_random();
         }
     }
+    */
     
-    /*
     // clicks / taps
     // (touchstart event for taps may be better)
-    document.body.addEventListener('click', function () {
+    // document.body.addEventListener('click', function () {
+    document.body.addEventListener('touchstart', function () {
         play_sound_random();
     });
-    */
 
     console.log('** ui ready **');
 }

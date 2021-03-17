@@ -27,5 +27,6 @@ x HELP ME! or WHERE AM I? or just HELP!
 + integrate sound.js
 + update css in views/home for centered block
 + set random to default in getRandomRecords()
-- add custom sounds
++ add custom sounds
+- improve custom sounds, perhaps using sound sprites?
 - mobile css for views/home to match non-mobile

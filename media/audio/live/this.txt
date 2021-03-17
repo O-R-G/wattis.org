@@ -1,2 +1,0 @@
-hello\n\ngoodbye
-hello\n\ngoodbye
