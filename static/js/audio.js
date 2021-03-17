@@ -8,6 +8,7 @@
 */
     
 function init_audio () {
+    audio_src = shuffle(audio_src);
     load_sounds();
     console.log('** audio ready **');
 }
@@ -26,3 +27,16 @@ function play_sound_random () {
     soundID = Math.floor(Math.random() * audio_src.length);
     createjs.Sound.play(soundID);
 }
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
+

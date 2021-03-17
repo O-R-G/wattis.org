@@ -66,6 +66,23 @@ function init_ui() {
         }
     });
 
+    /*
+    // * href
+    var elements = document.getElementsByTagName('a');
+    for(var i = 0, len = elements.length; i < len; i++) {
+        elements[i].onclick = function () {
+            play_sound_random();
+        }
+    }
+    */
+
+    // all clicks or taps
+    // (touchstart event for taps may be better)
+
+    document.body.addEventListener('click', function () {
+        play_sound_random();
+    });
+
     console.log('** ui ready **');
 }
 
