@@ -66,22 +66,21 @@ function init_ui() {
         }
     });
 
-    /*
-    // * href
-    var elements = document.getElementsByTagName('a');
-    for(var i = 0, len = elements.length; i < len; i++) {
-        elements[i].onclick = function () {
+    // href
+    var e = document.getElementsByTagName('a');
+    for(var i = 0, len = e.length; i < len; i++) {
+        e[i].onclick = function () {
             play_sound_random();
         }
     }
-    */
-
-    // all clicks or taps
+    
+    /*
+    // clicks / taps
     // (touchstart event for taps may be better)
-
     document.body.addEventListener('click', function () {
         play_sound_random();
     });
+    */
 
     console.log('** ui ready **');
 }
