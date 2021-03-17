@@ -181,10 +181,6 @@ pre
     padding-top: 180px;
     padding-bottom: 60px;
     box-sizing: border-box;
-    /*position: absolute;*/
-    /*top: 10px;*/
-    /*left: 10px;*/
-    /*overflow: hidden; */
 }
 
 .mainContainer {
@@ -199,9 +195,7 @@ pre
 }
 
 .logoContainer,
-.blockContainer
-{
-    /*position: absolute;*/
+.blockContainer {
     top: 0;
     width: 300px;
     margin: 0 auto;
@@ -213,28 +207,35 @@ pre
     box-sizing: border-box;
 }
 
-.homeContainer .blockContainer
-{
-    position: relative;
+.homeContainer .blockContainer {
+    position: absolute;
     display: none;
-    height: 250px;	    /* total hack ** fix ** */	
+    height: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: #F00; */
 }
-.homeContainer .blockContainer:first-of-type
-{
+
+.homeContainer .blockContainer:first-of-type {
     display: block;
 }
-.homeContainer .blockContainer img
-{
+
+.homeContainer .blockContainer img {
     /* max-height: 50vh; */
     max-width: 100%;
     margin: 0 auto;
     display: none;
+    /* background-color: #0F0; */
 }
 
-.homeContainer .blockContainer div
-{	
+.homeContainer .blockContainer div {	
     position: absolute;
-    top: 50%; 	    /* total hack ** fix ** */
+    top: 50%;
+    left: 50%;
+    /* width: 100%; */
+    transform: translate(-50%, -50%);
+    /* background-color: #00F; */
 }
 
 .textContainer {
@@ -245,14 +246,13 @@ pre
 }
 
 .listContainer {  
-/*  float:left; */
+    /* float:left; */
     display: inline-block;
     vertical-align: top;
     /*box-sizing:border-box;*/
     padding-right:1%;
     padding-bottom:40px;
     width: 30%;
-        
 }
 
 .listSmallContainer {  

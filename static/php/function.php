@@ -40,6 +40,9 @@ function getRandomRecords($markedBold = false){
   global $db;
   global $oo;
 
+// echo "what is happening?";
+// die();
+
   // collect records
 
   if(!$markedBold)
