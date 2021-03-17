@@ -116,8 +116,30 @@ require_once('static/php/function.php');
 		<link rel="apple-touch-icon" href="/media/png/touchicon.png" />
 		<script type="text/javascript" src="/static/js/global.js"></script>
 		<script type="text/javascript" src="/static/js/animatePunctuation.js"></script>
+
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+
+    <script>
+
+        // test of sound.js
+        // https://createjs.com/getting-started/soundjs
+
+      var soundID = "Thunder";
+
+      function loadSound () {
+        // createjs.Sound.registerSound("media/audio/assets/B/timer.mp3", soundID);
+        // createjs.Sound.registerSound("media/audio/assets/F/strike.mp3", soundID);
+        // createjs.Sound.registerSound("media/audio/assets/F/timer.mp3", soundID);
+        createjs.Sound.registerSound("media/audio/assets/C/timer.mp3", soundID);
+      }
+
+      function playSound () {
+        createjs.Sound.play(soundID);
+      }
+    </script>
+
 	</head>
-	<body class = '<?= $bodyClass; ?>'>
+	<body class = '<?= $bodyClass; ?>' onload="loadSound();">
 		<!-- Google Tag Manager -->
 		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NQNBBC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NQNBBC');</script>
 		<!-- End Google Tag Manager -->

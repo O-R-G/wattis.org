@@ -83,13 +83,15 @@
 
 	var sHelp_btn = document.getElementById('help-btn');
 	sHelp_btn.addEventListener('click', function(){
-        on_sound.play();
+        // on_sound.play();
+        playSound();
 		document.body.classList.add('viewing-help');
 	});
 
 	var sClose_help_btn = document.getElementById('close-help-btn');
 	sClose_help_btn.addEventListener('click', function(){
-        off_sound.play();
+        // off_sound.play();
+        playSound();
 		document.body.classList.remove('viewing-help');
 	});
 
