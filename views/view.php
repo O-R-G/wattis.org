@@ -39,8 +39,6 @@ if(!$isFound)
 	$rootid = $ids[0];
 }
 
-
-
 $root_item = $oo->get($rootid);
 $rootname = nl2br($root_item["name1"]);
 
