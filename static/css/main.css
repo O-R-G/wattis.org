@@ -5,9 +5,16 @@
 body { 
     /* workaround for fixed div rendering in safari */
     /*-webkit-font-smoothing: subpixel-antialiased;*/
-        color: #000;
-        background: #FFF;
-    }
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                          supported by Chrome, Edge, Opera and Firefox */
+    color: #000;
+    background: #FFF;
+}
 
 a {
         color: #000;
@@ -139,38 +146,31 @@ body.hideGeneralSearch #search-btn
 {
     display: none;
 }
-b
-{
+b {
     font-weight: normal;
 }
-pre
-{
+pre {
     font-family: inherit;
 }
-#logoContainer
-{
+#logoContainer {
     position: fixed;
     top: 20px;
     left: 20px;
     width: 400px;
     z-index: 1005;
 }
-#logoContainer
-{
+#logoContainer {
     display: none;
 }
-#logo
-{
+#logo {
     position: absolute;
     top: 0;
     left: 0;
 }
-#intro
-{
+#intro {
     display: none;
 }
-#intro a:first-child
-{
+#intro a:first-child {
     display: block;
 }
 .homeContainer {
@@ -181,10 +181,6 @@ pre
     padding-top: 180px;
     padding-bottom: 60px;
     box-sizing: border-box;
-    /*position: absolute;*/
-    /*top: 10px;*/
-    /*left: 10px;*/
-    /*overflow: hidden; */
 }
 
 .mainContainer {
@@ -199,42 +195,37 @@ pre
 }
 
 .logoContainer,
-.blockContainer
-{
-    /*position: absolute;*/
+.blockContainer {
     top: 0;
     width: 300px;
     margin: 0 auto;
     min-height: 200px;
-    /*max-width: 100%;*/
-    /*height: 100vh;*/
-    /*background-color: #fff;*/
-    /*padding: 25vw;*/
     box-sizing: border-box;
 }
 
-.homeContainer .blockContainer
-{
-    position: relative;
+.homeContainer .blockContainer {
+    position: absolute;
     display: none;
-    height: 250px;	    /* total hack ** fix ** */	
-}
-.homeContainer .blockContainer:first-of-type
-{
-    display: block;
-}
-.homeContainer .blockContainer img
-{
-    /* max-height: 50vh; */
-    max-width: 100%;
-    margin: 0 auto;
-    display: none;
+    height: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: #F00; */
 }
 
-.homeContainer .blockContainer div
-{	
+.homeContainer .blockContainer:first-of-type {
+    display: block;
+}
+
+.homeContainer .blockContainer img,
+.homeContainer .blockContainer div {	
     position: absolute;
-    top: 50%; 	    /* total hack ** fix ** */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 100%;
+    /* background-color: #0F0; */
 }
 
 .textContainer {
@@ -245,14 +236,13 @@ pre
 }
 
 .listContainer {  
-/*  float:left; */
+    /* float:left; */
     display: inline-block;
     vertical-align: top;
     /*box-sizing:border-box;*/
     padding-right:1%;
     padding-bottom:40px;
     width: 30%;
-        
 }
 
 .listSmallContainer {  
@@ -987,6 +977,25 @@ body.reverse.viewing-search #search-btn
 {
     background-color: #d59c8b;
 }
+
+
+/* animation */
+
+.svg-shadow {
+  animation: svg-shadow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes svg-shadow {
+  from {
+    filter: drop-shadow( 0 0 5px #fff) drop-shadow( 0 0 15px #e60073) drop-shadow( 0 0 20px #e60073);
+  }
+
+  to {
+    
+    filter: drop-shadow( 0 0 20px #fff) drop-shadow( 0 0 25px #e60073) drop-shadow( 0 0 40px #e60073);
+  }
+}
+
 
 @media screen and (max-width: 568px) {
     

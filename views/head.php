@@ -7,11 +7,6 @@ require_once('open-records-generator/config/url.php');
 // site
 require_once('static/php/config.php');
 
-require_once("static/php/fix_mysql.php");		
-require_once("static/php/systemDatabase.php"); 
-require_once("static/php/displayMedia.php"); 
-require_once("static/php/systemCookie.php");	
-
 $db = db_connect("guest");
 $oo = new Objects();
 $mm = new Media();
@@ -87,10 +82,8 @@ $show_menu = false;
 // id
 
  
-
 $alt = $_REQUEST['alt'];
 $pop = $_REQUEST['pop'];
-
 
 $displaySearch = $_GET['displaysearch'];
 if(empty($displaySearch))
@@ -119,11 +112,13 @@ require_once('static/php/function.php');
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="/static/css/main.css">
-		<!-- <link rel="stylesheet" href="/static/css/sf-text.css"> -->
-		<!-- <link rel="stylesheet" href="/static/css/sf-mono.css"> -->
 		<link rel="apple-touch-icon" href="/media/png/touchicon.png" />
 		<script type="text/javascript" src="/static/js/global.js"></script>
 		<script type="text/javascript" src="/static/js/animatePunctuation.js"></script>
+        <script type="text/javascript" src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+		<script type="text/javascript" src="/static/js/audio-src.js"></script>
+		<script type="text/javascript" src="/static/js/audio.js"></script>
+		<script type="text/javascript" src="/static/js/ui.js"></script>
 	</head>
 	<body class = '<?= $bodyClass; ?>'>
 		<!-- Google Tag Manager -->

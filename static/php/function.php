@@ -40,15 +40,14 @@ function getRandomRecords($markedBold = false){
   global $db;
   global $oo;
 
+    $markedBold = false;
+
   // collect records
 
-  if(!$markedBold)
-  {
+  if(!$markedBold) {
     // ver 1: totally random
     $sql = "SELECT objects.id, objects.body FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.name1 NOT LIKE '.%' AND objects.name1 NOT LIKE '\_%' AND objects.body != '' AND objects.body != 'NULL'";
-  }
-  else
-  {
+  } else {
     $sql = "SELECT objects.id, objects.body FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.name1 NOT LIKE '.%' AND objects.name1 NOT LIKE '\_%' AND objects.body LIKE '%<b>%'";
   }
   $sql .= " ORDER BY RAND() LIMIT 100";
@@ -74,8 +73,7 @@ function getRandomRecords($markedBold = false){
 
   // build
 
-  foreach($items as $key => $item)
-  {
+  foreach($items as $key => $item) {
     $body = $item['body'];
     $id = $item['id'];
 /*
@@ -126,15 +124,16 @@ function getRandomRecords($markedBold = false){
     );
   }
 
-  /*
+    /*
   // testing
   foreach ($media as $m)
     echo "<img src='" . m_url($m) . "'>";
   die();
-  */
+    */
 
   return $output;
 }
+
 function build_children_search($oo, $ww, $query) {
   $query = preg_replace('/[^a-z0-9]+/i', ' ', $query);
   $query = addslashes($query);

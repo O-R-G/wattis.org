@@ -38,5 +38,15 @@
 			}
 
 		</script>
+
+        <script>
+            // init audio + ui only after DOM is loaded
+            // https://stackoverflow.com/questions/9899372/pure-javascript-equivalent-of-jquerys-ready-how-to-call-a-function-when-t
+            (function() {
+                console.log('** DOM ready **');
+                init_audio();
+                init_ui();
+            })();
+        </script>
 	</body>
 </html>

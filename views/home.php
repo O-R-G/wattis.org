@@ -1,7 +1,7 @@
 <?
 	// search for bold is default behavior
 	$rootname = 'Home';
-	$search_random = !(isset($_GET['random']));
+	// $search_random = !(isset($_GET['random']));
 	$randomRecords = getRandomRecords($search_random);
 	$logo_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 	$logo_item = $oo->get($logo_id);
@@ -28,8 +28,7 @@
 <!-- WEATHER -->
 <script type="text/javascript">
 el = document.getElementById("rss");
-if(!!el)
-{
+if(!!el) {
 	// requires <element id="rss">
 	showRSS(el, "http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
 }
@@ -100,19 +99,13 @@ if(!!el)
 		}
 	}, 5000);
 	window.addEventListener('keydown', function(e){
-		if(e.keyCode == '39')
-		{
+		if(e.keyCode == '39') {
 			current_index = nextPage(current_index);
-		}
-		else if(e.keyCode == '32')
-		{
-			if(homePlaying)
-			{
+		} else if(e.keyCode == '32') {
+			if(homePlaying) {
 				clearInterval(timer);
 				homePlaying = false;
-			}
-			else
-			{
+			} else {
 				timer = setInterval(function(){
 					current_index = nextPage(current_index);
 				}, 5000);
