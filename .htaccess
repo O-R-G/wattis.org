@@ -1,12 +1,15 @@
-AuthUserFile /Library/WebServer/Documents/.htpasswd
+# AuthUserFile /Library/WebServer/Documents/.htpasswd
 # AuthUserFile /var/www/.htpasswd
-AuthName "OPEN-RECORDS-GENERATOR"
-AuthType Basic
-Require valid-user
+# AuthName "OPEN-RECORDS-GENERATOR"
+# AuthType Basic
+# Require valid-user
 
-# order deny,allow
-# deny from all
-# allow from 74.65.222.17
+order deny,allow
+deny from all
+allow from 74.65.222.17
+allow from 74.65.216.134
+allow from 192.168.1.3
+allow from 1.162.109.227
 
 Options +FollowSymLinks -Indexes
 # Options +FollowSymLinks +Indexes
