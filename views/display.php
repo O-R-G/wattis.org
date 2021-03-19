@@ -1,10 +1,10 @@
 <?
+	require_once('static/php/displayMedia.php');
 	$rootid = $ids[1];
 	$root_item = $oo->get($rootid);
 	$rootname = nl2br($root_item["name1"]);
 	$rootbody = nl2br($root_item['body']);
 	$children = $oo->children($rootid);
-
 	$previous_id = '';
 ?>
 		<div class="mainContainer times big">
@@ -28,12 +28,12 @@
 				
 		        // SQL objects attached to object plus media plus rootname, rootbody
 
-			$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, (SELECT 
-		objects.name1 FROM objects WHERE objects.id = $rootid) AS rootname, (SELECT objects.body FROM objects WHERE objects.id = 
-		$rootid) AS rootbody, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active 
-		AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid = 
-		(SELECT objects.id FROM objects WHERE objects.id = $id AND objects.active = 1) AND wires.toid=objects.id AND wires.active = 
-		1 ORDER BY objects.rank, media.rank;";
+		// 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, (SELECT 
+		// objects.name1 FROM objects WHERE objects.id = $rootid) AS rootname, (SELECT objects.body FROM objects WHERE objects.id = 
+		// $rootid) AS rootbody, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active 
+		// AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid = 
+		// (SELECT objects.id FROM objects WHERE objects.id = $id AND objects.active = 1) AND wires.toid=objects.id AND wires.active = 
+		// 1 ORDER BY objects.rank, media.rank;";
 
 			// $result = MYSQL_QUERY($sql);
 		 //    $myrow = MYSQL_FETCH_ARRAY($result);

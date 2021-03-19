@@ -1,4 +1,5 @@
 <? 
+require_once('static/php/displayMedia.php');
 // $ids = $oo->urls_to_ids($uri);
 $isFound = false;
 // check if in main
@@ -39,10 +40,9 @@ if(!$isFound)
 	$rootid = $ids[0];
 }
 
-
-
 $root_item = $oo->get($rootid);
 $rootname = nl2br($root_item["name1"]);
+
 
 $name = $item['name1'];
 $body = $item['body'];
@@ -55,6 +55,8 @@ preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);
 $img_indexes = $out[1];
 $media = $oo->media($item['id']);
 
+
+
 $menu_tag = '[menu]';
 $isMenu = false;
 if(strpos($item['name1'], $menu_tag) !== false){
@@ -65,7 +67,12 @@ if(strpos($item['name1'], $menu_tag) !== false){
 else
 {
 	$uri_temp = $uri;
-	array_shift($uri_temp);
+	if(in_array( $uri_temp[1], $main_children_url))
+		$uri_temp[0] = 'main';
+	elseif(in_array( $uri_temp[1], $home_children_url))
+		$uri_temp[0] = 'home';
+	else
+		array_shift($uri_temp);
 	for($i = 0; $i < count($uri) ; $i++)
 	{
 		array_pop($uri_temp);
@@ -83,9 +90,9 @@ else
 	}
 }
 
-
 if($isMenu)
 {
+
 	$menu_items = array();
 	$menu_level_uri = $menu_items_level_uri;
 	array_pop($menu_level_uri);
@@ -117,6 +124,7 @@ if($isMenu)
 		$notes = $default['notes'];
 		$begin = $default['begin'];
 		$end = $default['end'];
+		$media = $oo->media($default['id']);
 	}
 }
 

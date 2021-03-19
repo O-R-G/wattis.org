@@ -18,12 +18,23 @@ $main_children = $oo->children($main_id);
 $main_children_url = array();
 foreach($main_children as $child)
 	$main_children_url[] = $child['url'];
+
+$home_id = end($oo->urls_to_ids(array('home')));
+$home_children = $oo->children($home_id);
+$home_children_url = array();
+foreach($home_children as $child)
+	$home_children_url[] = $child['url'];
+
+
+
 if($uu->id){
-	$item = $oo->get($uu->id);
 	$uri_temp = $uri;
+	if($date_argument || end($uri) == 'upcoming')
+		array_pop($uri_temp);
 	array_shift($uri_temp);
 	$ids = $oo->urls_to_ids($uri_temp);
 	$id = $uu->id;
+	$item = $oo->get($id);
 }
 elseif( in_array( $uri[1], $main_children_url ))
 {
@@ -33,6 +44,16 @@ elseif( in_array( $uri[1], $main_children_url ))
 	$uu->id = end($ids);
 	$item = $oo->get($uu->id);
 	$id = $uu->id;
+}
+elseif( in_array( $uri[1], $home_children_url ))
+{
+	$uri_temp = $uri;
+	$uri_temp[0] = 'home';
+	$ids = $oo->urls_to_ids($uri_temp);
+	$uu->id = end($ids);
+	$id = $uu->id;
+	$item = $oo->get($id);
+	
 }
 elseif($uri[1] == 'buy')
 {
@@ -47,30 +68,24 @@ elseif($uri[1] == 'buy')
 	$uu->id = end($ids);
 	$item = $oo->get($uu->id);
 }
-else
-	$item = $oo->get(0);
-$name = ltrim(strip_tags($item["name1"]), ".");
-$nav = $oo->nav($uu->ids);
-$show_menu = false;
-if($uu->id) {
-	$is_leaf = empty($oo->children_ids($uu->id));
-	$internal = (substr($_SERVER['HTTP_REFERER'], 0, strlen($host)) === $host);	
-	if(!$is_leaf && $internal)
-		$show_menu = true;
-} else  
-    if ($uri[1])  
-        $uu->id = -1; 
-
-// id
-if(!isset($ids))
+elseif(!isset($ids))
 {
 	$id = $_REQUEST['id'];		// no register globals	
 	if (!$id) $id = "0";
 	$ids = explode(",", $id);
 	$idFull = $id;
 	$id = $ids[count($ids) - 1];
+	$item = $oo->get($id);
 	// $pageName = basename($_SERVER['PHP_SELF'], ".php");
 }
+else
+	$item = $oo->get(0);
+$name = ltrim(strip_tags($item["name1"]), ".");
+$nav = $oo->nav($uu->ids);
+$show_menu = false;
+
+// id
+
  
 $alt = $_REQUEST['alt'];
 $pop = $_REQUEST['pop'];

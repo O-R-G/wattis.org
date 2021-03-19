@@ -1,4 +1,7 @@
 <? 
+/* 
+	php modify-links.php 1>>../bash/generate-redirects.log 2>&1 &
+*/
 echo "\nmodify-links.php ...\n";
 
 $cwd = getcwd();
@@ -122,7 +125,7 @@ $replacement_wattis = '/';
 	if $target_id = '', the code will run through the whole database
 */
 $target_id = '';
-// $target_id = 1170;
+// $target_id = 611;
 
 foreach($fields_to_check as $field)
 {
@@ -175,8 +178,12 @@ foreach($fields_to_check as $field)
 
 				$querystring = array();
 				$querystring_temp = $this_querystrings[$key];
-				if(strpos($querystring_temp, '&amp;') !== false )
+				if( strpos($querystring_temp, "&amp;") !== false )
 					$querystring = explode('&amp;', $querystring_temp);
+				elseif( strpos($querystring_temp, '&') !== false )
+				{
+					$querystring = explode('&', $querystring_temp);
+				}
 				else
 					$querystring[0] = $querystring_temp;
 				
@@ -226,10 +233,8 @@ foreach($fields_to_check as $field)
 			if($result_update)
 				echo "    >>> update successes\n";
 			else
-				echo "    >>> error!\n";
+				echo "# error! ";
 		}
-		else
-			echo "    >>> no needs to update\n";
 	}
 }
 

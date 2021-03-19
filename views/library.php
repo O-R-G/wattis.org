@@ -1,4 +1,5 @@
 <?
+require_once('static/php/displayMedia.php');
     $search = $_REQUEST['search'];
         $search_id = $_REQUEST['search_id'];
         if ($search && $search_id)
