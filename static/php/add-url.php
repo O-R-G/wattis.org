@@ -96,7 +96,7 @@ function addChildrenUrl($parentId, $db, $d = 0, $deep = false){
 		return true;
 	}
 	$processedIds[] = $parentId;
-	$sql = "SELECT objects.name1, objects.id, objects.url FROM objects, wires WHERE objects.id = wires.toid AND objects.active = '1' AND wires.active = '1' AND wires.fromid = '".$parentId."'";
+	$sql = "SELECT objects.name1, objects.id, objects.url FROM objects, wires WHERE objects.id = wires.toid AND wires.fromid = '".$parentId."'";
 	$result = $db->query($sql);
 	if(!$result)
 		throw new Exception($db->error);
@@ -121,7 +121,35 @@ function addChildrenUrl($parentId, $db, $d = 0, $deep = false){
 				/*
 					check url of siglings
 				*/
-				$this_url = slug($item['name1']);
+				// if( $item['id'] == '22' )
+				// 	$this_url = 'about';
+				// elseif( $item['id'] == '25' )
+				// 	$this_url = 'support';
+				// elseif( $item['id'] == '30' )
+				// 	$this_url = 'archive';
+				// elseif( $item['id'] == '23' )
+				// 	$this_url = 'visit';
+				// elseif( $item['id'] == '26' )
+				// 	$this_url = 'editions';
+				// elseif( $item['id'] == '31' )
+				// 	$this_url = 'capp';
+				// elseif( $item['id'] == '752' )
+				// 	$this_url = 'library';
+				// elseif( $item['id'] == '29' )
+				// 	$this_url = 'intern';
+				// elseif( $item['id'] == '28' )
+				// 	$this_url = 'follow';
+				// elseif( $item['id'] == '27' )
+				// 	$this_url = 'catalogs';
+				// elseif( $item['id'] == '24' )
+				// 	$this_url = 'contact';
+				// elseif( $item['id'] == '93' )
+				// 	$this_url = 'program';
+				// else
+				// 	$this_url = slug($item['name1']);
+
+				$this_url = slug(strip_tags($item['name1']));
+
 				if(in_array($this_url, $sibling_url))
 					$this_url = strval($item['id']);
 

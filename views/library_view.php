@@ -1,4 +1,5 @@
 <?
+require_once('static/php/displayMedia.php');
     $base_name = "Library";
     // $ids[0] is main
     $base_id = $ids[1];

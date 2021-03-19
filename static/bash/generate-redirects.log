@@ -1,38 +1,7 @@
-AuthUserFile /Library/WebServer/Documents/.htpasswd
-# AuthUserFile /var/www/.htpasswd
-AuthName "OPEN-RECORDS-GENERATOR"
-AuthType Basic
-Require valid-user
 
-# order deny,allow
-# deny from all
-# allow from 74.65.222.17
-
-Options +FollowSymLinks -Indexes
-# Options +FollowSymLinks +Indexes
-# IndexIgnore */*
-
-ErrorDocument 403 "you don't even *go* here."
-# ErrorDocument 500 "is *this* thing on?"
-
-# Turn on the RewriteEngine
-RewriteEngine On
-
-# delete trailing slash (not sure this works)
-# or maybe it works -- but not for directories?
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteCond %{REQUEST_URI} (.+)/$
-# RewriteRule ^ %1 [L,R=301]
-
-# remove .php
-# RewriteCond %{REQUEST_FILENAME}.php -f
-# RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [L]
-
-#RewriteCond %{QUERY_STRING} ^(.*)&?id=439&?(.*)$ [NC]
-#RewriteRule ^/?(.*)$ /about?%1%2 [R=301,L,NC]
-
-
-#--- START rewrite id-based urls
+# generate-redirects.php ...
+# execute with 
+# >php generate-redirects.php 1>>../bash/generate-redirects.log 2>&1 &
 
 RewriteCond %{QUERY_STRING} ^(.*)&?id=1(?:&(.*))?$ [NC]
 RewriteRule ^/?(.*)$ /home?%1%2 [R=301,L,NC]
@@ -1810,41 +1779,3 @@ RewriteCond %{QUERY_STRING} ^(.*)&?id=1203(?:&(.*))?$ [NC]
 RewriteRule ^/?(.*)$ /gallery/raven-chacon/collaborators?%1%2 [R=301,L,NC]
 RewriteCond %{QUERY_STRING} ^(.*)&?id=1204(?:&(.*))?$ [NC]
 RewriteRule ^/?(.*)$ /gallery/raven-chacon/menu-archive?%1%2 [R=301,L,NC]
-
-#--- END rewrite id-based urls
-
-#RewriteCond %{QUERY_STRING} ^id=.*752.*$
-#RewriteRule (.*) /library$2 [QSD,R=302,NC,L]
-#QSD works only on apache 2.4 or later
-
-# redirect /consult-the-archive to /archive
-# RewriteRule ^consult-the-archive$ /archive [R=302,NC,L]
-
-# relative path to absolute path
-# redirect all /xxx/xxx/editions to /editions
-RewriteRule ^.*/.*/editions$ /editions [R=302,NC,L]
-
-# direct everything to index.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ index.php [L]
-
-Redirect 301 /program /our-program
-Redirect 301 /about /read-about-us
-Redirect 301 /archive /consult-the-archive
-Redirect 301 /support /become-a-member
-Redirect 301 /visit /visit-the-wattis
-Redirect 301 /editions /buy-limited-editions
-Redirect 301 /capp /capp-street-project
-Redirect 301 /contact /contact-the-wattis
-Redirect 301 /catalogs /buy-catalogues
-Redirect 301 /catalogues /buy-catalogues
-Redirect 301 /intern /intern-at-the-wattis
-Redirect 301 /follow /follow-the-wattis
-Redirect 301 /library /browse-the-library
-Redirect 301 /gallery/raven-chacon /gallery/raven-chacon/home
-Redirect 301 /gallery/the-word-for-world-is-forest-2020/1053 /gallery/the-word-for-world-is-forest-2020/home
-
-# change upload limit
-php_value upload_max_filesize 100M
-php_value post_max_size 102M

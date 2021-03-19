@@ -14,9 +14,6 @@ x HELP ME! or WHERE AM I? or just HELP!
 + reimport db from live server, why do lowere level urls not work
 
 - o-r-g
-	- change the url of Consult the Archive to 'archive'
-	- change the url of Contact the Wattis to 'contact'
-	- change the url of Our Program to 'program'
 	- remove "Andrea Fraser is on our mind (2015-2016)" linked under "Introduction by Jamie Stevens" which causes an infinite loop in traverse()
 
 - Resolving "The Word for World is Forest (2020)"

@@ -1,4 +1,5 @@
 <?
+    require_once('static/php/displayMedia.php');
     // $ids[0] is main
     $rootid = $ids[1];
     $root_item = $oo->get($rootid);

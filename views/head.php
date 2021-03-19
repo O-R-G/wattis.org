@@ -25,12 +25,16 @@ $home_children_url = array();
 foreach($home_children as $child)
 	$home_children_url[] = $child['url'];
 
+
+
 if($uu->id){
-	$item = $oo->get($uu->id);
 	$uri_temp = $uri;
+	if($date_argument || end($uri) == 'upcoming')
+		array_pop($uri_temp);
 	array_shift($uri_temp);
 	$ids = $oo->urls_to_ids($uri_temp);
 	$id = $uu->id;
+	$item = $oo->get($id);
 }
 elseif( in_array( $uri[1], $main_children_url ))
 {
@@ -47,8 +51,9 @@ elseif( in_array( $uri[1], $home_children_url ))
 	$uri_temp[0] = 'home';
 	$ids = $oo->urls_to_ids($uri_temp);
 	$uu->id = end($ids);
-	$item = $oo->get($uu->id);
 	$id = $uu->id;
+	$item = $oo->get($id);
+	
 }
 elseif($uri[1] == 'buy')
 {
