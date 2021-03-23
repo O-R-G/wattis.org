@@ -187,21 +187,36 @@ require_once('static/php/displayMedia.php');
                     <div class='subheadContainer library'>Results</div>
                     <? foreach($search_result as $key => $r){
                         if(substr($r['name1'], 0, 1) != '.'){
-                            $this_url = '/library/' . $r['submenu_url'] . '/' . $r['category_url'] . '/' . $r['url'];
-                            $media = $oo->media($r['id'])[0];
-                            $mediaFile = m_url($media);
-                            $mediaCaption = strip_tags($media["caption"]);
-                            $mediaStyle = "width: 100%;";
-
-                            if($key == 0)
+                            $this_url = '/browse-the-library/' . $r['submenu_url'] . '/' . $r['category_url'] . '/' . $r['url'];
+                            $media = $oo->media($r['id']);
+                            if(count($media) != 0)
                             {
-                                $mediaFile_temp = "media/". m_pad($media['id']) .".". $media["type"];
-                                $specs  = getimagesize($mediaFile_temp);
-                                $use4xgrid = TRUE;      
+                                $m = $media[0];
+                                $mediaFile = m_url($m);
+                                $mediaCaption = strip_tags($m["caption"]);
+                                $mediaStyle = "width: 100%;";
+                                if(!$gotSpecs)
+                                {
+                                    $mediaFile_temp = "media/". m_pad($m['id']) .".". $m["type"];
+                                    $specs  = getimagesize($mediaFile_temp);
+                                    $gotSpecs = true;
+                                }
                             }
+                            // $mediaFile = m_url($media);
+                            // $mediaCaption = strip_tags($media["caption"]);
+                            // $mediaStyle = "width: 100%;";
+
+                            // if($key == 0)
+                            // {
+                            //     $mediaFile_temp = "media/". m_pad($media['id']) .".". $media["type"];
+                            //     $specs  = getimagesize($mediaFile_temp);
+                            //     $use4xgrid = TRUE;      
+                            // }
                             ?><a href='<?= $this_url; ?>'>
                                 <div id='image<?= $key; ?>' class = 'listContainer <?= ($use4xgrid) ? "fourcolumn" : "twocolumn"; ?>'>
-                                    <?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?>
+                                    <?php if(count($media) != 0){
+                                        echo displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+                                    } ?>
                                     <div class = 'captionContainer library helvetica small'><?= $r['name1']; ?></div>
                                 </div>
                                 </a>
@@ -229,73 +244,38 @@ require_once('static/php/displayMedia.php');
                 // SQL objects attached to category object plus media plus rootname, rootbody
     
                 $category_id = $c['id'];    
-       
-//         	    $sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, (SELECT 
-// objects.name1 FROM objects WHERE objects.id = $category_id) AS rootname, (SELECT objects.body FROM objects WHERE objects.id =    
-// $category_id) AS rootbody, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active 
-// AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid =     
-// (SELECT objects.id FROM objects WHERE objects.id = $category_id AND objects.active = 1) AND wires.toid=objects.id AND 
-// wires.active = 1 ORDER BY objects.rank;";
-//     	        $result = MYSQL_QUERY($sql);
-//                 $myrow = MYSQL_FETCH_ARRAY($result);
-//                 $rootname = $myrow['rootname'];
-//                 $rootbody = $myrow['rootbody'];
-//                 mysql_data_seek($result, 0);    // reset to row 0
-// 	            $html = "";
-//                 $images = [];
-//     	        $i=0;
-    
-// 	            while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-// 		            if ($myrow['mediaActive'] != null) {
-            
-// 			            $mediaFile = "media/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-// 			            $mediaCaption = strip_tags($myrow["caption"]);
-// 			            $mediaStyle = "width: 100%;";
-            
-// 	                    if ( $i == 0 ) {
-            
-// 				            $specs  = getimagesize($mediaFile);
-// 				            // $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;		       
-// 				            $use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;		       
-// 	                    }
-	                    
-// 			            $images[$i] .= "<a href='library_view.php?id=" . $base_id . "," . $submenu_id . "," . $category_id . "," . $myrow['objectsId'] . "'>";
-// 			            $images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
-// 			            $images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-// 			            $images[$i] .= "<div class = 'captionContainer library helvetica small'>";
-//                         $images[$i] .= $myrow['name1'];
-// 			            $images[$i] .= "</div>";
-// 			            $images[$i] .= "</div>";
-// 			            $images[$i] .= "</a>";
-		            
-// 			            if ( ( $i+1) % (($use4xgrid) ? 4 : 2) == 0) $images[$i] .= "<div class='clear'></div>";
-//              		            $i++;
-// 		            }
-// 	            }
                 $category_item = $oo->get($category_id);
                 $rootname = $category_item['name1'];
                 $rootbody = $category_item['body'];
                 $items = $oo->children($category_id);
                 $category_url = $c['url'];
+                $gotSpecs = false;
                 ?>
                 <div class = 'listContainer not-underlined library'>
                     <div class='subheadContainer library'><?= $c['name1']; ?></div>
                     <? foreach($items as $key => $item){
                         if(substr($item['name1'], 0, 1) != '.'){
                             $this_url = '/library/' . $submenu_url . '/' . $category_url . '/' . $item['url'];
-                            $media = $oo->media($item['id'])[0];
-                            $mediaFile = m_url($media);
-                            $mediaCaption = strip_tags($media["caption"]);
-                            $mediaStyle = "width: 100%;";
-                            if($key == 0)
+                            $media = $oo->media($item['id']);
+                            if(count($media) != 0)
                             {
-                                $mediaFile_temp = "media/". m_pad($media['id']) .".". $media["type"];
-                                $specs  = getimagesize($mediaFile_temp);
-                                $use4xgrid = ($rootname == "Buy Catalogs");  
+                                $m = $media[0];
+                                $mediaFile = m_url($m);
+                                $mediaCaption = strip_tags($m["caption"]);
+                                $mediaStyle = "width: 100%;";
+                                if(!$gotSpecs)
+                                {
+                                    $mediaFile_temp = "media/". m_pad($m['id']) .".". $m["type"];
+                                    $specs  = getimagesize($mediaFile_temp);
+                                    $gotSpecs = true;
+                                }
                             }
+                            $use4xgrid = ($rootname == "Buy Catalogs");
                             ?><a href='<?= $this_url; ?>'>
                                 <div id='image<?= $key; ?>' class = 'listContainer <?= ($use4xgrid) ? "fourcolumn" : "twocolumn"; ?>'>
-                                    <?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?>
+                                    <?php if(count($media) != 0){
+                                        echo displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+                                    } ?>
                                     <div class = 'captionContainer library helvetica small'><?= $item['name1']; ?></div>
                                 </div>
                                 </a>

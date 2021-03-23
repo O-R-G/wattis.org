@@ -2,10 +2,13 @@
 	require_once('static/php/displayMedia.php');
 	$hasFilter = false;
 	$isUpcoming = false;
+	$isToday = false;
 	if($uri[1] == 'calendar')
 		$hasFilter = true;
 	if(end($uri) == 'upcoming')
 		$isUpcoming = true;
+	if(end($uri) == 'today')
+		$isToday = true;
 	$rootid = $ids[0];
 	if(strpos($uri[2], 'past-exhibitions') !== false )
 		$rootid = $oo->urls_to_ids(array('gallery'))[0];
@@ -25,7 +28,7 @@
 	if($date_argument || $isUpcoming)
 	{
 		if($date_argument == 'today' || $isUpcoming){
-            $date_start = $date;
+            $date_start = date('Y-m-d') . ' 00:00:00';
             $day_count = 1;
         }
         else
@@ -33,7 +36,7 @@
             $date_start = $date_argument;
             $day_count = date('t', strtotime($date_argument))-1;
         }  
-        $children = build_filter_children($oo, $root_item, $date_start, NULL, $day_count, $isUpcoming);
+        $children = build_filter_children($oo, $root_item, $date_start, NULL, $day_count, $isUpcoming, $isToday);
 	}
 	$date_since = '2014-09-09';
 	for ($y = date('Y'); $y >= date('Y', strtotime($date_since)); $y--)
@@ -81,16 +84,10 @@
 				$now = time();
 				$begin = ($child['begin'] != null) ? strtotime($child['begin']) : $now;
 				$end = ($child['end'] != null) ? strtotime($child['end']) : $now;
-				if($uri[1] == 'calendar')
-				{
-					?>
-						<div class='listContainer'>
-							<a href='<?= $url; ?>'><?= $child['name1']; ?></a> 
-							<i><?= $child['deck']; ?></i>
-						</div>
-					<?
-				}
-				if ($alt && ($end < $now)) {
+				
+				if ( ($alt && ($end < $now)) ||
+					  $uri[1] == 'calendar'
+					) {
 					// archive
 					?>
 						<div class='listContainer'>
@@ -135,7 +132,8 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category)
 
                     ?><li class='month <? echo $month_active; ?>'><?
                         ?><a href="/<? echo $base_url . $year_month; ?>" class="month"><?
-                            echo date('M', mktime(0, 0, 0, $month, 10));
+                        echo strtoupper(date('M', mktime(0, 0, 0, $month, 10)));
+                            // echo date('M', mktime(0, 0, 0, $month, 10));
                         ?></a>
                     </li><?
                 }
@@ -144,7 +142,7 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category)
     </ul><?
 }
 
-function build_filter_children($oo, $root, $date, $archive = NULL, $days = 30, $isUpcoming=false) {
+function build_filter_children($oo, $root, $date, $archive = NULL, $days = 30, $isUpcoming=false, $isToday = false) {
 
     /*
         $children[] => "id", "name1", etc.
@@ -161,7 +159,9 @@ function build_filter_children($oo, $root, $date, $archive = NULL, $days = 30, $
     else
         $date_end = date('Y-m-d', strtotime($date));
     if($isUpcoming)
-      $date_compare = ["DATE(objects.begin) <= '$date_start'"];
+      $date_compare = ["DATE(objects.end) >= '$date_end'"];
+  	elseif($isToday)
+      $date_compare = ["DATE(objects.begin) < '$date_start'", "DATE(objects.end) >= '$date_end'"];
     else
       $date_compare = ["DATE(objects.begin) <= '$date_start'", "DATE(objects.end) >= '$date_end'"];
 
@@ -173,8 +173,7 @@ function build_filter_children($oo, $root, $date, $archive = NULL, $days = 30, $
                     "objects.active = '1'");
     if ($date)
         $where = array_merge($where, $date_compare);
-    if ($isCinema3)
-      $where[] = "objects.name1 NOT LIKE '%_watch%'";
+    
     $order  = array("objects.rank", "objects.begin", "objects.name1");
     $children = $oo->get_all($fields, $tables, $where, $order);
     

@@ -155,7 +155,7 @@ function build_children_search($oo, $ww, $query) {
 }
 function build_children_librarySearch($oo, $ww, $query) {
   $children_combined = array();
-  $library_id = end($oo->urls_to_ids(array('main', 'library')));
+  $library_id = end($oo->urls_to_ids(array('main', 'browse-the-library')));
   $submenu = $oo->children($library_id);
   $category_ids = '';
   $category_meta = array();
@@ -208,8 +208,51 @@ function build_children_librarySearch($oo, $ww, $query) {
     $this_child['submenu_url'] = $this_cat_meta['fromurl'];
     $children_combined[] = $this_child;
   }
-
   return $children_combined;
+}
+
+function getCompleteUrl($id){
+  /*
+    input:  id
+    output: a complete url of the reocrd with the given id based on o-r-g stucture
+  */
+  global $db;
+  $output = '';
+
+  $sql = "SELECT wires.fromid, objects.url FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.id = '" . $id . "'";
+  $result = $db->query($sql);
+  if(!$result)
+    throw new Exception($db->error);
+  $items = array();
+  while ($obj = $result->fetch_assoc())
+    $items[] = $obj;
+  $result->close();
+  if(!empty($items)){
+    $fromid = $items[0]['fromid'];
+    $output = '/' . $items[0]['url'];
+    while ($fromid != 0)
+    {
+      $sql = "SELECT wires.fromid, objects.url FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.id = '" . $fromid . "'";
+      $result = $db->query($sql);
+      if(!$result)
+        throw new Exception($db->error);
+      $items = array();
+      while ($obj = $result->fetch_assoc())
+        $items[] = $obj;
+      $result->close();
+      $fromid = $items[0]['fromid'];
+
+      /*
+        specific to wattis where "main" is hidden in url
+      */
+      if($items[0]['url'] != 'main')
+        $output = '/' . $items[0]['url'] . $output;
+      
+    }
+    return $output;
+  }
+  else
+    return false;
 }
 
 
