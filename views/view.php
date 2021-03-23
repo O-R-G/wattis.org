@@ -199,6 +199,8 @@ if($isMenu)
 		{
 			$image_files = array();
 			$image_captions = array();
+
+			$image_float = array();
 			foreach($media as $key => $m)
 			{
 				$mediaFile = m_url($m);
@@ -206,9 +208,10 @@ if($isMenu)
 				$mediaCaption = strip_tags($m["caption"]);
 				$mediaStyle = "width: 100%;";
 				if($m["type"] == "pdf")
-					$image_files[] = ("/media/pdf.gif");
+					$mediaFile = "/media/pdf.gif";
 				else
-					$image_files[] = $mediaFile;
+					$mediaFile = m_url($m);
+				$image_files[] = $mediaFile;
 			    $image_captions[] = $mediaCaption;		
 
 				if(in_array($key+1, $img_indexes))
@@ -238,14 +241,14 @@ if($isMenu)
 				}
 				else 
 				{
+
 					$randomPadding = rand(0, 150);
 					$randomWidth = rand(30, 50);
 					$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
-				
+					
 					if(!$isMobile)
 					{
 						$images[$key] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
-						// $images[$i] .= "<div id='image".$i."' class = 'imageContainer' style='padding-top:" . $randomPadding . "px; margin:40px;' onclick='expandImageContainerMargin(this, \"40px\", \"-80px\");'>";
 						$images[$key] .= "<div id='image".$key."' class = 'imageContainer' style='padding-top:{$randomPadding}px; margin:40px;' onclick='launch($key);'>";
 					}
 					else
@@ -253,12 +256,15 @@ if($isMenu)
 						$images[$key] .= "<div class='imageContainerWrapper'>";
 						$images[$key] .= "<div id='image".$key."' class = 'imageContainer'>";
 					}
-					$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-					$images[$i] .= "<div class='captionContainer caption helvetica small'>";
-					$images[$i] .= $mediaCaption;
-					$images[$i] .= "</div>";
-					$images[$i] .= "</div>";
-					$images[$i] .= "</div>";
+					$images[$key] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
+					// var_dump($mediaFile);
+					// var_dump(displayMedia($mediaFile, $mediaCaption, $mediaStyle));
+					// die();
+					$images[$key] .= "<div class='captionContainer caption helvetica small'>";
+					$images[$key] .= $mediaCaption;
+					$images[$key] .= "</div>";
+					$images[$key] .= "</div>";
+					$images[$key] .= "</div>";
 				}
 			}
 			
@@ -291,10 +297,8 @@ if($isMenu)
 		<div class='galleryContainer'><?php
 		if(is_array($images))
 		{
-			for($j = 0; $j < count($images); $j++)
-			{
-				echo $images[$j];
-			}
+			foreach($images as $image)
+				echo $image;
 		}
 
 		// video
