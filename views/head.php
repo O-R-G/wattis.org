@@ -109,7 +109,6 @@ if(!empty($displaySearch))
 	$bodyClass .= ' viewing-search';
 if($uri[2] == 'the-word-for-world-is-forest-2020' && count($uri) > 3)
 	$bodyClass .= ' the-word-for-world-is-forest-2020';
-var_dump($bodyClass);
 require_once('static/php/function.php');
 
 ?><!DOCTYPE html>
