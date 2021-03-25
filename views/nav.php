@@ -2,12 +2,11 @@
 	$wattis_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 	$wattis_item = $oo->get($wattis_id);
 	$wattis_intro = $wattis_item['body'];
-	$help_text = strictEmpty($item['notes']) ? 'WELL, YOU HAVE LANDED HERE ON THE WEBSITE FOR 
-                      THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.'. strtoupper($wattis_intro) : $item['notes'] ;
+	$help_text = strictEmpty($item['notes']) ? 'THIS IS THE WEB SITE OF THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.<br><br>'. strtoupper($wattis_intro) : $item['notes'] ;
 ?>
-<div id="logoContainer" class=" times big logo">
-	<!-- <div id="logo"><a href="/">.+* The Wattis Institute</a></div> -->
-	<div id="intro"><?= $wattis_intro; ?></div>
+<div id="logoContainer" class="times big logo">
+	<div id="logo">.+* The Wattis Institute</div>
+	<div id="logo_short">.+*</div>
 </div>
 
 <div id = 'search-btn'></div>
@@ -37,16 +36,16 @@
 			<a href='/buy-limited-editions' class='instructionContainer'>BUY LIMITED EDITIONS</a><br>
 			<a href='/capp-street-project' class='instructionContainer'>CAPP STREET PROJECT</a><br>
 		</div>
-		<br><div id = 'more-menu-btn' class='instructionContainer menu-more-btn'><a>MORE...</a></div>
+		<br><div id = 'more-menu-btn' class='instructionContainer'><a><span id="more-menu-btn-text">MORE</span>...</a></div>
 	</div>
 	<div id = 'close-menu-btn' class = ''></div>
 </div>
 <!-- <div id = 'help-btn' class="helvetica">HELP</div> -->
 <!-- <div id = 'help-btn' class="helvetica">HELP ME!</div> -->
-<div id = 'help-btn' class="helvetica"></div>
+<!-- <div id = 'help-btn' class="helvetica"></div> -->
 <div id="helpContainer" class="helvetica small-medium">
     <div id="help-txt"><?= $help_text; ?></div>
-    <div id = 'close-help-btn' class = ''></div>
+    <!-- <div id = 'close-help-btn' class = ''></div> -->
 </div>
 
 <!-- in views/nav for now, but should be done on body.onload and loaded in views/head -->

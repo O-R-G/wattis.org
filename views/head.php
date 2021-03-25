@@ -99,6 +99,8 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 				'|mobile|up\.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\b#i', $_SERVER['HTTP_USER_AGENT']);
 
 $bodyClass = '';
+if(!$uri[1])
+	$bodyClass .= ' home';
 if($uri[1] == 'search')
 	$bodyClass .= ' reverse';
 if($uri[1] == 'browse-the-library')
@@ -107,7 +109,7 @@ if(!empty($displaySearch))
 	$bodyClass .= ' viewing-search';
 if($uri[2] == 'the-word-for-world-is-forest-2020' && count($uri) > 3)
 	$bodyClass .= ' the-word-for-world-is-forest-2020';
-
+var_dump($bodyClass);
 require_once('static/php/function.php');
 
 ?><!DOCTYPE html>

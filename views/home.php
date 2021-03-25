@@ -1,24 +1,23 @@
 <?
 	// search for bold is default behavior
 	$rootname = 'Home';
-	// $search_random = !(isset($_GET['random']));
-	$randomRecords = getRandomRecords($search_random);
+	$search_bold = !isset($_GET['random']);
+	$randomRecords = getRandomRecords($search_bold);
 	$logo_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 	$logo_item = $oo->get($logo_id);
 ?>
 
 <!-- BLOCKS -->
 <div class="homeContainer times big">
-	<!-- <div class = 'blockContainer'><img><div id = 'paragraph'><?= $randomRecords['all'][0]["sentence"]; ?></div></div> -->
-	<div class = 'blockContainer'><div id = 'paragraph'>.+*The Wattis Institute</div></div>
 	<? foreach($randomRecords['all'] as $record){
+		$this_url = getCompleteUrl($record['id']);
 		if($record['image'])
 		{
-			?><div class = 'blockContainer displaying_image'><img src="<?= $record['image']; ?>"></div><?
+			?><div class="blockContainer displaying_image"><a href="<?php echo $this_url; ?>" class = ''><img src="<?= $record['image']; ?>"></a></div><?
 		}
 		else
 		{
-			?><div class = 'blockContainer'><div id = 'paragraph'><?= $record["sentence"]; ?></div></div><?
+			?><div class="blockContainer"><a href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $record["sentence"]; ?></div></a></div><?
 		}
 		?><?
 	} ?>
