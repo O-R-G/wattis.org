@@ -3,6 +3,7 @@
 		<!-- outside of #animatePunctuation, so dont animate punctuation -->
 		<script type="text/javascript">
 			var animate = checkCookie("animateCookie");
+			
 			delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
 
 			<?php
@@ -23,7 +24,26 @@
 			else
 			{
 				?>
-				initPunctuation('animatePunctuation', delay, true, animate);
+				var sLogoContainer = document.getElementById('logoContainer');
+				var sMenu_btn = document.getElementById('menu-btn');
+				var animtationIsInited = false;
+				sLogoContainer.addEventListener('click', ()=>{
+					if(!animtationIsInited)
+					{
+						initPunctuation('animatePunctuation', delay, true, true);
+						animtationIsInited = true;
+					}
+					
+				});
+				sMenu_btn.addEventListener('click', ()=>{
+					if(!animtationIsInited)
+					{
+						initPunctuation('animatePunctuation', delay, true, true);
+						animtationIsInited = true;
+					}
+					
+				});
+				
 				<?php
 			}
 			?>

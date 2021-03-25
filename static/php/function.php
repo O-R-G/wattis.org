@@ -36,11 +36,10 @@ function strictClean($str)
   return $str;
 }
 
-function getRandomRecords($markedBold = false){
+function getRandomRecords($markedBold = true){
   global $db;
   global $oo;
 
-    $markedBold = false;
 
   // collect records
 
@@ -50,6 +49,7 @@ function getRandomRecords($markedBold = false){
   } else {
     $sql = "SELECT objects.id, objects.body FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.name1 NOT LIKE '.%' AND objects.name1 NOT LIKE '\_%' AND objects.body LIKE '%<b>%'";
   }
+
   $sql .= " ORDER BY RAND() LIMIT 100";
 
   $res = $db->query($sql);
@@ -76,6 +76,7 @@ function getRandomRecords($markedBold = false){
   foreach($items as $key => $item) {
     $body = $item['body'];
     $id = $item['id'];
+
 /*
     $media = $oo->media($id);
     $isGif = false;
