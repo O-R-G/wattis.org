@@ -203,11 +203,13 @@ pre {
 .homeContainer {
     width: 100vw;
     max-width: 100%;
-    min-height: 100%;
     position: relative;
     padding-top: 180px;
     padding-bottom: 60px;
     box-sizing: border-box;
+
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 .mainContainer {
@@ -1102,11 +1104,7 @@ li ul.active
     text-align: right;
     width: 120%;
 }
-.home #color,
-.home #animatePunctuation
-{
-    min-height: 100%;
-}
+
 
 @keyframes svg-shadow {
   from {
