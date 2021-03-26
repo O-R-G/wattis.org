@@ -5,11 +5,25 @@
 	$randomRecords = getRandomRecords($search_bold);
 	$logo_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 	$logo_item = $oo->get($logo_id);
+
+	$urgent_id = end($oo->urls_to_ids(array('home', 'urgent')));
+	$urgent_children = $oo->children($urgent_id);
+
 ?>
 
 <!-- BLOCKS -->
 <div class="homeContainer times big">
-	<? foreach($randomRecords['all'] as $record){
+	<? 
+		if(count($urgent_children) > 0){
+			foreach($urgent_children as $child){
+				if(substr($child['name1'], 0, 1) != '.')
+				{
+					$this_url = getCompleteUrl($child['id']);
+					?><div class="blockContainer"><a href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $child["body"]; ?></div></a></div><?
+				}
+			}
+		} 
+		foreach($randomRecords['all'] as $record){
 		$this_url = getCompleteUrl($record['id']);
 		if($record['image'])
 		{
@@ -51,16 +65,14 @@ if(!!el) {
 		if(idx > records_length - 1)
 			idx = 0;
 		blockContainer[idx].style.display = 'block';
-		// var current_record = randomRecords_all[idx];
-		// if(current_record['image'])
-		// {
-		// 	block.classList.add('displaying_image');
-		// 	image.src = current_record['image'];
-		// }
-		// else{
-		// 	block.classList.remove('displaying_image');
-		// 	paragraph.innerHTML = current_record['sentence'];
-		// }
+		return idx;
+	}
+	function previousPage(idx){
+		blockContainer[idx].style.display = 'none';
+		idx--;
+		if(idx < 0)
+			idx = records_length - 1;
+		blockContainer[idx].style.display = 'block';
 		return idx;
 	}
 	function preloadImage(img, array_of_src, idx = 0, limit = false){
@@ -97,10 +109,17 @@ if(!!el) {
 			preloadImage(preload_image, randomRecords_image, preload_idx, 10);
 		}
 	}, 5000);
+
+	/* 
+		laptop keyboard control
+	*/
 	window.addEventListener('keydown', function(e){
 		if(e.keyCode == '39') {
 			current_index = nextPage(current_index);
-		} else if(e.keyCode == '32') {
+		} 
+		else if(e.keyCode == '37'){
+			current_index = previousPage(current_index);
+		}else if(e.keyCode == '32') {
 			if(homePlaying) {
 				clearInterval(timer);
 				homePlaying = false;
@@ -112,6 +131,60 @@ if(!!el) {
 			}
 		}
 	});
+	/* 
+		end laptop keyboard control
+	*/
+
+	/* 
+		mobile swipe control
+	*/
+	document.addEventListener('touchstart', handleTouchStart, false);        
+	document.addEventListener('touchmove', handleTouchMove, false);
+
+	var xDown = null;                                                        
+	var yDown = null;
+
+	function getTouches(evt) {
+	  return evt.touches ||             // browser API
+	         evt.originalEvent.touches; // jQuery
+	}                                                     
+
+	function handleTouchStart(evt) {
+	    const firstTouch = getTouches(evt)[0];                                      
+	    xDown = firstTouch.clientX;                                      
+	    yDown = firstTouch.clientY;                                      
+	};                                                
+
+	function handleTouchMove(evt) {
+	    if ( ! xDown || ! yDown ) {
+	        return;
+	    }
+
+	    var xUp = evt.touches[0].clientX;                                    
+	    var yUp = evt.touches[0].clientY;
+
+	    var xDiff = xDown - xUp;
+	    var yDiff = yDown - yUp;
+
+	    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+	        if ( xDiff > 0 ) {
+	            /* left swipe */ 
+	            console.log('left');
+	            current_index = nextPage(current_index);
+	        } else {
+	            /* right swipe */
+	            console.log('right');
+	            current_index = previousPage(current_index);
+	        }                       
+	    } 
+	    /* reset values */
+	    xDown = null;
+	    yDown = null;                                             
+	};
+	/* 
+		end mobile swipe control
+	*/
+
 	var s_click = document.getElementById('_click');
 	s_click.addEventListener('click', function(){
 			clickHandler();

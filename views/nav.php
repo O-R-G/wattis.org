@@ -5,9 +5,14 @@
 	$help_text = strictEmpty($item['notes']) ? 'THIS IS THE WEB SITE OF THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.<br><br>'. strtoupper($wattis_intro) : $item['notes'] ;
 ?>
 <div id="logoContainer" class="times big logo">
-	<div id="logo">.+* The Wattis Institute</div>
+	<div id="logo" class="fixed-black">.+* The Wattis Institute</div>
 	<div id="logo_short">.+*</div>
 </div>
+<div id="loadingLogoContainer" class="times big logo">
+	<div id="loading_mark"></div>
+	<div id="loadingLogo"><span class="transprent">.+*</span> The Wattis Institute</div>
+</div>
+<div id="close-help-btn"></div>
 
 <div id = 'search-btn'></div>
 <div id='searchPickerContainer' class = 'fullContainer'>
@@ -40,14 +45,8 @@
 	</div>
 	<div id = 'close-menu-btn' class = ''></div>
 </div>
-<!-- <div id = 'help-btn' class="helvetica">HELP</div> -->
-<!-- <div id = 'help-btn' class="helvetica">HELP ME!</div> -->
-<!-- <div id = 'help-btn' class="helvetica"></div> -->
+
 <div id="helpContainer" class="helvetica small-medium">
     <div id="help-txt"><?= $help_text; ?></div>
     <!-- <div id = 'close-help-btn' class = ''></div> -->
 </div>
-
-<!-- in views/nav for now, but should be done on body.onload and loaded in views/head -->
-<!-- <script type="text/javascript" src="/static/js/ui.js"></script> -->
-
