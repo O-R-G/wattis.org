@@ -38,4 +38,8 @@ Upgrading database to work with O-R-G 3.3.0
 	change $pattern to look for the targeted urls (e.g. http://wattis.org/list?id=1, /list?id=1)
 	change $pattern_wattis to look for the targeted absolute urls (e.g. http://wattis.org/list?id=1)
 	>php modify-links.php
+
+
++ afterwards..
+	check the link to catalog in homapge of The Word for World is Forest.
 	

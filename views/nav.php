@@ -5,12 +5,12 @@
 	$help_text = strictEmpty($item['notes']) ? 'THIS IS THE WEB SITE OF THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.<br><br>'. strtoupper($wattis_intro) : $item['notes'] ;
 ?>
 <div id="logoContainer" class="times big logo">
-	<div id="logo" class="fixed-black">.+* The Wattis Institute</div>
+	<div id="logo" class="fixed-black">.+* <span class="logo-text">The Wattis Institute</span></div>
 	<div id="logo_short">.+*</div>
 </div>
 <div id="loadingLogoContainer" class="times big logo">
 	<div id="loading_mark"></div>
-	<div id="loadingLogo"><span class="transprent">.+*</span> The Wattis Institute</div>
+	<div id="loadingLogo"><span class="transprent">.+*</span> <span class="logo-text">The Wattis Institute</span></div>
 </div>
 <div id="close-help-btn"></div>
 
