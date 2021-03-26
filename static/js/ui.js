@@ -25,20 +25,16 @@ function init_ui() {
     // help
     var sLogo = document.getElementById('logoContainer');
     sLogo.addEventListener('click', function(){
-        if(document.body.classList.contains('viewing-help'))
-            play_sound(4);
-        else
-            play_sound(3);
-        document.body.classList.toggle('viewing-help');
-        
+        play_sound(3);
+        document.body.classList.add('viewing-help');
     });
     
-    // var sClose_help_btn = document.getElementById('close-help-btn');
-    // sClose_help_btn.addEventListener('click', function(){
-    //     // off_sound.play();
-        
-    //     document.body.classList.remove('viewing-help');
-    // });
+    var sClose_help_btn = document.getElementById('close-help-btn');
+    sClose_help_btn.addEventListener('click', function(){
+        // off_sound.play();
+        play_sound(4);
+        document.body.classList.remove('viewing-help');
+    });
     
     // search
     var sSearch_btn = document.getElementById('search-btn');
