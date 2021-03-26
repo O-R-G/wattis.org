@@ -184,10 +184,20 @@ pre {
     color: #000;
     display: none;
 }
-.viewing-search .black #logoContainer,
-.viewing-menu .black #logoContainer
+.logo-text
+{
+    border-bottom: 3px solid #000;
+}
+.viewing-search .black #logoContainer .fixed-black,
+.viewing-menu .black #logoContainer .fixed-black
 {
     color: #fff;
+}
+.viewing-search .black #logoContainer .fixed-black .logo-text,
+.viewing-menu .black #logoContainer .fixed-black .logo-text
+
+{
+    border-bottom: 3px solid #fff;
 }
 
 .viewing-search .white #logoContainer,
