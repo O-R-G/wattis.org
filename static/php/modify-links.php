@@ -122,6 +122,28 @@ $pattern_wattis = '/https?:\/\/(?:www\.)?wattis\.org\/?/';
 $replacement_wattis = '/';
 
 /*
+	exceptions
+*/
+$exception_url_1 = '/gallery/the-word-for-world-is-forest-2020';
+$exception_ids_1 = array('1048', '1051', '1052', '1053', '1055', '1056', '1057', '1058', '1059', '1060', '1062');
+$exception_urls_1 = array('/from-our-place-of-shelter', '/artists/temp', '/exhibition', '/home', '/artists/sofia-cordova', '/artists/beatriz-cortez', '/artists/candice-lin', '/artists/allison-smith', '/artists/patrick-staff', '/contributers', '/exhibition/catalog');
+$exception_url_2 = '/gallery/raven-chacon';
+$exception_ids_2 = array('1180', '1181', '1182', '1183');
+$exception_urls_2 = array('', '/listen', '/collaborators', '/archive');
+
+$exception_ids = array();
+$exception_urls = array();
+foreach($exception_ids_1 as $key => $id)
+{
+	$exception_ids[] = $id;
+	$exception_urls[] = $exception_url_1 . $exception_urls_1[$key];
+}
+foreach($exception_ids_2 as $key => $id)
+{
+	$exception_ids[] = $id;
+	$exception_urls[] = $exception_url_2 . $exception_urls_2[$key];
+}
+/*
 	if $target_id = '', the code will run through the whole database
 */
 $target_id = '';
@@ -203,7 +225,17 @@ foreach($fields_to_check as $field)
 					}
 					$new_url .= $url_temp;
 
-					$new_url = getCompleteUrl(end($id_array));
+					$foundException = false;
+					foreach($exception_ids as $key => $ex_id)
+					{
+						if(end($id_array) == $ex_id)
+						{
+							$foundException = true;	
+							$new_url = $exception_urls[$key];
+						}
+					}
+					if(!$foundException)
+						$new_url = getCompleteUrl(end($id_array));
 				}
 				if(count($querystring) > 1)
 				{
