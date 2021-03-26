@@ -10,6 +10,21 @@ Upgrading database to work with O-R-G 3.3.0
 	change $parent_id
 		if $parent_id is set to 0, it will loop through all the records; otherwise it loops through all the descendants. 
 	>php add-url.php
++ remove the parent record link under a child to avoid infinite loop for traverse()
+	"Andrea Fraser is on our mind (2015-2016)" & "Introduction by Jamie Stevens"
+	>DELETE FROM wires WHERE fromid = '356' AND toid = '240';
+
++ add a record named \_urgent under HOME
+
++ resolve the two side menu cases
+
+	Gallery/The Word for World is Forest (2020)
+	'1048', '1051', '1052', '1053', '1055', '1056', '1057', '1058', '1059', '1060', '1062'
+
+	Gallery/+Raven Chacon Listen Collaborators Archive
+	Raven Chacon: '1180', '1181', '1182', '1183'
+
+	Update the column 'object' for media as well
 
 + run generate-redirects.php with command line to create a htaccess redirect file
 	change sql databese name, username, and password

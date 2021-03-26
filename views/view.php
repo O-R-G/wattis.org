@@ -63,6 +63,7 @@ if(strpos($item['name1'], $menu_tag) !== false){
 	$isMenu = true;
 	$menu_items_level_uri = $uri;
 	array_shift($menu_items_level_uri);
+	$this_menu_item_url = $item['url']; 
 }
 else
 {
@@ -83,6 +84,7 @@ else
 			if(strpos($this_ancestor_name1, $menu_tag) !== false){
 				$isMenu = true;
 				$menu_items_level_uri = $uri_temp;
+				$this_menu_item_url = end($uri_temp); 
 				break;
 			}
 		}
@@ -181,7 +183,10 @@ if($isMenu)
 			foreach($menu_items as $mi)
 			{
 				$menu_tag_length = strlen($menu_tag);
-				$item_name = substr($mi['name1'], $menu_tag_length);
+				if($this_menu_item_url == $mi['url'])
+					$item_name = '+' . substr($mi['name1'], $menu_tag_length);
+				else
+					$item_name = substr($mi['name1'], $menu_tag_length);
 
 				$item_url = $url_base . '/' . $mi['url'];
 				?>
