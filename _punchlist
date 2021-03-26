@@ -30,3 +30,12 @@ x HELP ME! or WHERE AM I? or just HELP!
 + add custom sounds
 - improve custom sounds, perhaps using sound sprites?
 - mobile css for views/home to match non-mobile
+
+- friday, march 29 --> database freeze from live wattis.org snapshot
+  anthony to start marking bold items, and editing text
+  month of april is T editing text to launch 1 may
+- filter months to all CAPS
+- add filter to /program (and other?)
+- help button always shows LOGO top left when clicked
+  then shows the help msg centered on black screen
+
