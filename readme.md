@@ -39,7 +39,12 @@ Upgrading database to work with O-R-G 3.3.0
 	change $pattern_wattis to look for the targeted absolute urls (e.g. http://wattis.org/list?id=1)
 	>php modify-links.php
 
-
-+ afterwards..
++ afterwards ...
 	check the link to catalog in homapge of The Word for World is Forest.
 	
+* finally, if edge cases (like MEDIA --> media), then use mysqldump, 
+
+	> mysqldump ... > this.sql
+
+	then find and replace in .sql and reupload
+	> mysql ... < this.sql
