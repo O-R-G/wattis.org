@@ -691,7 +691,7 @@ pre {
     max-width: 100%;
     background-color: #000;
     color: #fff;
-    min-height: 100vh;
+    min-height: 100%;
     display: none;
     overflow: hidden;
 }
