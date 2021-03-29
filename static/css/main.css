@@ -235,7 +235,7 @@ pre {
     box-sizing: border-box;
 
     height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-    height: calc(var(--vh, 1vh) * 100);
+    /*height: calc(var(--vh, 1vh) * 100);*/
 }
 
 .mainContainer {
@@ -268,6 +268,10 @@ pre {
     border-bottom: none;
     /*color: #000 !important;*/
     /* background-color: #F00; */
+}
+.homeContainer .blockContainer span
+{
+    color: #000 !important;
 }
 
 .homeContainer .blockContainer:first-of-type {
@@ -1163,6 +1167,96 @@ li ul.active
     top: -10px;
     animation: loading2 1.5s infinite linear;
 }
+
+/* 3/19 adjust font size of caption */
+.captionContainer.small {
+    font-size: 13px;
+    line-height: 16px;
+}
+
+#gallery_static_ctner{
+    /* background-color: #bbb; */
+    padding-bottom: 40px;
+}
+#gallery_control_ctner{
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, 0);  
+}
+#gallery_control_ctner > div{
+    display: inline-block;
+} 
+#btn_prev, #btn_next{
+    cursor: pointer;
+}
+#btn_prev{
+    margin-right: 20px;
+}
+#btn_next{
+    margin-left: 20px;
+}
+.nods{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid black;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.nods:last-child{
+    margin-right: 0;
+}
+.nods.active{
+    background-color: #000;
+}
+
+.captionContainer.library {
+    /* font-style: italic; */
+    padding-top: 0px;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.subheadContainer.library {
+    height: 3em;
+}
+
+#library-description {
+    width: 90%;
+    margin-bottom: 1em;
+}
+
+.listContainer.doublewide.library img {
+    width: 100%;
+}
+
+.listContainer.not-underlined.library img {
+    filter: grayscale(100%);
+}
+
+.listContainer.not-underlined.library img:hover {
+    filter: none;
+}
+
+.homeContainer .blockContainer img{
+    display: none;
+}
+.homeContainer .blockContainer.displaying_image{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.homeContainer .blockContainer.displaying_image img{
+    display: block;
+}
+.homeContainer .blockContainer.displaying_image #paragraph{
+    display: none;
+}
 @keyframes svg-shadow {
   from {
     filter: drop-shadow( 0 0 5px #fff) drop-shadow( 0 0 15px #e60073) drop-shadow( 0 0 20px #e60073);
@@ -1312,6 +1406,16 @@ li ul.active
         width: 100vw;
         max-width: 100%;
         box-sizing: border-box;
+    }
+    .homeContainer .blockContainer,
+    .homeContainer .blockContainer.displaying_image
+    {
+        position: fixed;
+        max-height: 90%;
+    }
+    .homeContainer
+    {
+        height: auto;
     }
     .homeContainer .blockContainer img,
     .homeContainer .blockContainer div {    
@@ -1476,95 +1580,7 @@ li ul.active
     }
 }
 
-/* 3/19 adjust font size of caption */
-.captionContainer.small {
-    font-size: 13px;
-    line-height: 16px;
-}
 
-#gallery_static_ctner{
-    /* background-color: #bbb; */
-    padding-bottom: 40px;
-}
-#gallery_control_ctner{
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translate(-50%, 0);  
-}
-#gallery_control_ctner > div{
-    display: inline-block;
-} 
-#btn_prev, #btn_next{
-    cursor: pointer;
-}
-#btn_prev{
-    margin-right: 20px;
-}
-#btn_next{
-    margin-left: 20px;
-}
-.nods{
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 2px solid black;
-    margin-right: 10px;
-    cursor: pointer;
-}
-.nods:last-child{
-    margin-right: 0;
-}
-.nods.active{
-    background-color: #000;
-}
-
-.captionContainer.library {
-    /* font-style: italic; */
-    padding-top: 0px;
-}
-
-.italic {
-    font-style: italic;
-}
-
-.subheadContainer.library {
-    height: 3em;
-}
-
-#library-description {
-    width: 90%;
-    margin-bottom: 1em;
-}
-
-.listContainer.doublewide.library img {
-    width: 100%;
-}
-
-.listContainer.not-underlined.library img {
-    filter: grayscale(100%);
-}
-
-.listContainer.not-underlined.library img:hover {
-    filter: none;
-}
-
-.homeContainer .blockContainer img{
-    display: none;
-}
-.homeContainer .blockContainer.displaying_image{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.homeContainer .blockContainer.displaying_image img{
-    display: block;
-}
-.homeContainer .blockContainer.displaying_image #paragraph{
-    display: none;
-}
 
 
 /* vertical iPad / horizontal iPhone */

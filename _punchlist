@@ -31,7 +31,7 @@ x Resolving "The Word for World is Forest (2020)"
 + help button always shows LOGO top left when clicked
   then shows the help msg centered on black screen
 
-/ mobile css for views/home to match non-mobile
++ mobile css for views/home to match non-mobile
   see servinglibrary.org
 / search magnifying glass flip
 / no red text on /home
