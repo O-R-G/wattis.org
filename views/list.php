@@ -49,7 +49,7 @@
 			?>
 	<div id = 'filter_container' class="helvetica medium">
 		
-		<div id='filter-2' class = 'item'>
+		<!-- <div id='filter-2' class = 'item'>
 			<ul class = 'year'>
 				<li class = 'sans <?= $isToday ? 'active' : '';  ?>'>
 					<a class = 'year' href = '<? echo '/'.$uri[1]; ?>/today'>Today</a>
@@ -60,7 +60,7 @@
 					<a class = "year" href = '<? echo '/'.$uri[1]; ?>/upcoming'>Upcoming</a>
 				</li>
 			</ul>
-		</div>
+		</div> -->
 		<div id='filter' class = 'item'>
 			<ul class = 'year'>
 				<li class = 'sans <? echo (!$uri[2] || ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
@@ -111,8 +111,8 @@
 </div>
 <?
 function display_filter($uri, $year, $date_since, $date_argument, $sub_category) {
-    $start = ($year == date("Y")) ? date("m") : 12;
-    $since = (date('Y', strtotime($date_since)) == $year) ? date('m', strtotime($date_since)) : 1;
+    $since = ($year == date("Y")) ? date("m") : 12;
+    $start = (date('Y', strtotime($date_since)) == $year) ? date('m', strtotime($date_since)) : 1;
     $base_url =  $uri[1] . '/';
     
     if($date_argument == 'today')
@@ -121,9 +121,9 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category)
       $year_active = ($year == date('Y', strtotime($date_argument))) ? 'active' : NULL;
     ?><ul class="year">
         <li class="<? echo $year_active; ?> sans">
-            <a href="/<? echo $base_url; ?>" onclick="hide_show('<? echo $year; ?>'); return false;" class="year"><? echo $year ?></a>
+            <a id="btn_<? echo $year; ?>" href="/<? echo $base_url; ?>" onclick="hide_show_year('<? echo $year; ?>'); return false;" class="year"><? echo $year ?></a>
             <ul id='<? echo $year; ?>' class='<? echo (!$year_active) ? "" : "active" ?>'><?
-                for ($month = $start; $month >= $since; $month--) {
+                for ($month = $start; $month <= $since; $month++) {
                   if($date_argument == 'today')
                     $month_active = NULL;
                   else
@@ -182,18 +182,26 @@ function build_filter_children($oo, $root, $date, $archive = NULL, $days = 30, $
 
 ?>
 <script>
-	function hide_show(id) {
+	function hide_show_year(id) {
 		var activeYear = document.querySelector('li ul.active');
 		if(activeYear != null)
 			activeYear.classList.remove('active');
+		var expandedBtn = document.querySelector('.year li a.expanded');
+		if(expandedBtn != null)
+			expandedBtn.classList.remove('expanded');
 
 		var x = document.getElementById(id);
+		var btn_x = document.getElementById('btn_'+id);
 		// if (x.style.display === "none")
 		//     x.style.display = "inline-block";
 		// else
 		//     x.style.display = "none";
 
 		if(activeYear == null || activeYear.id != id)
+		{
 			x.classList.add('active');
+			btn_x.classList.add('expanded');
+		}
+
 	}
 </script>

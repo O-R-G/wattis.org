@@ -35,7 +35,7 @@ x Resolving "The Word for World is Forest (2020)"
   see servinglibrary.org
 + search magnifying glass flip
 + no red text on /home
-- /calendar filter rm Upcoming / Today
++ /calendar filter rm Upcoming / Today
 - /program add filter (years only)
 - load more records in /home
   lazy loading? (see servinglibrary.org)

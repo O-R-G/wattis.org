@@ -1070,8 +1070,8 @@ body.reverse.viewing-search #search-btn
     width: auto;
     max-width: 75%;
     z-index: 1000;
-    float: right;
-    text-align: right;
+    /*float: right;*/
+    /*text-align: right;*/
     max-width: 65%;
 }
 
@@ -1079,6 +1079,7 @@ body.reverse.viewing-search #search-btn
     display: inline-block;
     padding-left: 0px;
     margin-right: 10px;
+    vertical-align: top;
 }
 #filter-2 .year
 {
@@ -1098,8 +1099,12 @@ body.reverse.viewing-search #search-btn
 .year > li
 {
     list-style-type: none;
+    /*position: relative;*/
 }
-
+a.year.expanded
+{
+    color: #999;
+}
 #filter-2
 {
     float: left;
@@ -1144,10 +1149,11 @@ li ul.active
 #filter .year ul
 {
     position: absolute;
-    right: 10px;
+    /*right: 10px;*/
+    left: 0;
     bottom: -100%;
-    text-align: right;
-    width: 120%;
+    /*text-align: right;*/
+    width: 75vw;
 }
 
 .loading .homeContainer,
