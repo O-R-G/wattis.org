@@ -9,6 +9,8 @@
 	$urgent_id = end($oo->urls_to_ids(array('home', 'urgent')));
 	$urgent_children = $oo->children($urgent_id);
 
+	$a_pattern = '/<a\s.*?(?:href.*?=.*?[\'"].*?[\'"].*?)?>(.*?)<\/a>/is';
+
 ?>
 
 <!-- BLOCKS -->
@@ -24,15 +26,18 @@
 			}
 		} 
 		foreach($randomRecords['all'] as $record){
-		$this_url = getCompleteUrl($record['id']);
-		if($record['image'])
-		{
-			?><div class="blockContainer displaying_image"><a href="<?php echo $this_url; ?>" class = ''><img src="<?= $record['image']; ?>"></a></div><?
-		}
-		else
-		{
-			?><div class="blockContainer"><a href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $record["sentence"]; ?></div></a></div><?
-		}
+			$this_url = getCompleteUrl($record['id']);
+			if($record['image'])
+			{
+				?><div class="blockContainer displaying_image"><a href="<?php echo $this_url; ?>" class = ''><img src="<?= $record['image']; ?>"></a></div><?
+			}
+			else
+			{
+				// $this_text = $record["sentence"];
+				$this_text = preg_replace($a_pattern, '<span class="pseudo-link">$1</span>', $record["sentence"]);
+
+				?><div class="blockContainer"><a class="block_link" href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $this_text; ?></div></a></div><?
+			}
 		?><?
 	} ?>
 </div>

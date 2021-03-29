@@ -269,9 +269,13 @@ pre {
     /*color: #000 !important;*/
     /* background-color: #F00; */
 }
-.homeContainer .blockContainer span
+.black .homeContainer .blockContainer span
 {
     color: #000 !important;
+}
+.white .homeContainer .blockContainer span
+{
+    color: #fff !important;
 }
 
 .homeContainer .blockContainer:first-of-type {
@@ -639,7 +643,7 @@ pre {
         }
 
 .white {
-        color: #FFF !important;
+        color: #FFF;
         }
 
 .white a {
@@ -1256,6 +1260,15 @@ li ul.active
 }
 .homeContainer .blockContainer.displaying_image #paragraph{
     display: none;
+}
+.block_link
+{
+    display: block;
+    border-bottom: none;
+}
+.pseudo-link
+{
+    border-bottom: 3px solid #000;
 }
 @keyframes svg-shadow {
   from {
