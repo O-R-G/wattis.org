@@ -1119,7 +1119,8 @@ a.year.expanded
 }
 .monthsContainer
 {
-    display: none;
+    
+    
 }
 .active .monthsContainer
 {
@@ -1131,11 +1132,11 @@ a.year.expanded
 }
 .monthsContainer
 {
+    display: none;
     position: absolute;
     /*right: 10px;*/
     left: 0;
-    bottom: -100%;
-    /*text-align: right;*/
+    transform: translate(0, 100%);
     width: 75vw;
 }
 
