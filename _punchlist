@@ -36,16 +36,16 @@ x Resolving "The Word for World is Forest (2020)"
 + search magnifying glass flip
 + no red text on /home
 + /calendar filter rm Upcoming / Today
-- /program add filter (years only)
-- load more records in /home
++ /program add filter (years only)
++ load more records in /home
   lazy loading? (see servinglibrary.org)
   http://servinglibrary.org/time
-- how to exclude a gif?
++ how to exclude a gif?
   list of all gifs and where they are
   not allow gifs with captions
   exclude * with certain prefix
   like sound / video gifs for ex
-- helvetica menu to pull from o-r-g
++ helvetica menu to pull from o-r-g
   add category Menu and link all in o-r-g
-- /bookstore /editions lines rm
++ /bookstore /editions lines rm
 - instructions email for anthony

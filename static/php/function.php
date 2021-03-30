@@ -36,7 +36,7 @@ function strictClean($str)
   return $str;
 }
 
-function getRandomRecords($markedBold = true){
+function getRandomRecords($markedBold = true, $fetched_ids_arr = array()){
   global $db;
   global $oo;
 
@@ -50,7 +50,14 @@ function getRandomRecords($markedBold = true){
     $sql = "SELECT objects.id, objects.body FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.name1 NOT LIKE '.%' AND objects.name1 NOT LIKE '\_%' AND objects.body LIKE '%<b>%'";
   }
 
-  $sql .= " ORDER BY RAND() LIMIT 100";
+  if(!empty($fetched_ids_arr))
+  {
+    $fetched_ids = '(' . implode(',', $fetched_ids_arr) . ')';
+    $sql .= ' AND objects.id NOT IN '. $fetched_ids;
+  }
+
+  $sql .= " ORDER BY RAND() LIMIT 50";
+  // $sql .= " ORDER BY RAND() LIMIT 4";
 
   $res = $db->query($sql);
   $items = array();
@@ -88,10 +95,16 @@ function getRandomRecords($markedBold = true){
       }
     }
 */
-
-    if($key % 2 == 0 && $key > 0 && !$insertImage)
+    $media = $oo->media($id);
+    $validHomeMedia = array();
+    foreach($media as $m){
+      if( strpos($m['caption'], '[hiddenfromhomepage]') === false)
+        $validHomeMedia[] = $m;
+    }
+    if($key % 2 == 0 && $key > 0 && !$insertImage && !empty($validHomeMedia))
       $insertImage = true;
-    if(!$insertImage || count($media) == 0)
+
+    if(!$insertImage)
     {
       if(!$markedBold)
         $sentences = preg_split('/(?<=[.?!])\s+(?=[a-z])/i', $body);
@@ -113,7 +126,7 @@ function getRandomRecords($markedBold = true){
     }
     else
     {
-      $image = m_url($media[array_rand($media)]);
+      $image = m_url($validHomeMedia[array_rand($validHomeMedia)]);
       $sentence = '';
       $insertImage = false;
       $output['image'][] = $image;
@@ -256,6 +269,16 @@ function getCompleteUrl($id){
     return false;
 }
 
-
+function clean_caption($str){
+  $output = $str;
+  $caption_tags = array(
+    '[hiddenfromhomepage]'
+  );
+  foreach($caption_tags as $tag)
+  {
+    $output = str_replace($tag, '', $output);
+  }
+  return $output;
+}
 
 ?>

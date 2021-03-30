@@ -79,7 +79,7 @@
 			// }
 			?>
 			<div class='listContainer times'><?= $rootname; ?><br><br><?= $rootbody; ?><br><br></div>
-			<div class = 'listContainer doublewide'>
+			<div class = 'listContainer doublewide displayContainer'>
 			<?
 			if(!empty($children))
 			{
@@ -93,7 +93,7 @@
 						{
 							$m = $media[0];
 		                    $mediaFile = m_url($m);
-		                    $mediaCaption = strip_tags($m["caption"]);
+		                    $mediaCaption = clean_caption(strip_tags($m["caption"]));
 		                    $mediaStyle = "width: 100%;";
 		                    if($key == 0)
 		                    {
@@ -101,7 +101,7 @@
 		                        $specs  = getimagesize($mediaFile_temp);
 		                        $use4xgrid = ($rootname == "Buy Catalogs");  
 		                    }
-		                    ?><a href='/buy/<?= $uri[1] . '/' . $child['url']; ?>'>
+		                    ?><a class="display-item" href='/buy/<?= $uri[1] . '/' . $child['url']; ?>'>
 		                    	<div id='image<?= $i; ?>' class = 'listContainer <?= (($use4xgrid) ? "fourcolumn" : "twocolumn"); ?>'>
 		                    		<?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?>
 		                    		<div class = 'captionContainer helvetica small'><?= nl2br($child['name1']); ?></div>

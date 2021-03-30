@@ -210,7 +210,7 @@ if($isMenu)
 			{
 				$mediaFile = m_url($m);
 				// $mediaFile = "/media/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-				$mediaCaption = strip_tags($m["caption"]);
+				$mediaCaption = clean_caption(strip_tags($m["caption"]));
 				$mediaStyle = "width: 100%;";
 				if($m["type"] == "pdf")
 					$mediaFile = "/media/pdf.gif";

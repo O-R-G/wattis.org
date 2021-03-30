@@ -11,6 +11,7 @@
 
 	$a_pattern = '/<a\s.*?(?:href.*?=.*?[\'"].*?[\'"].*?)?>(.*?)<\/a>/is';
 
+	$fetched_ids_arr = array();
 ?>
 
 <!-- BLOCKS -->
@@ -27,6 +28,7 @@
 		} 
 		foreach($randomRecords['all'] as $record){
 			$this_url = getCompleteUrl($record['id']);
+			$fetched_ids_arr[] = $record['id'];
 			if($record['image'])
 			{
 				?><div class="blockContainer displaying_image"><a href="<?php echo $this_url; ?>" class = ''><img src="<?= $record['image']; ?>"></a></div><?
@@ -44,6 +46,7 @@
 <div id="_click"></div>
 
 <!-- WEATHER -->
+<script type="text/javascript" src = "/static/js/ajax.js"></script>
 <script type="text/javascript">
 el = document.getElementById("rss");
 if(!!el) {
@@ -62,11 +65,19 @@ if(!!el) {
 	var records_length = randomRecords_all.length;
 	var randomRecords_bold = <?= json_encode($randomRecords_bold); ?>;
 	var blockContainer = document.getElementsByClassName('blockContainer');
-	console.log(records_length);
+	var fetched_ids_arr = <?= json_encode($fetched_ids_arr); ?>;
+	var isFullyLoaded = false;
+	var isRandom = !<?= json_encode($search_bold)?>;
+
 
 	function nextPage(idx){
 		blockContainer[idx].style.display = 'none';
 		idx++;
+		if(idx > records_length - 2 && !isFullyLoaded)
+		{
+			loadMore(fetched_ids_arr);
+			records_length = document.getElementsByClassName('blockContainer').length;
+		}
 		if(idx > records_length - 1)
 			idx = 0;
 		blockContainer[idx].style.display = 'block';

@@ -193,7 +193,7 @@ require_once('static/php/displayMedia.php');
                             {
                                 $m = $media[0];
                                 $mediaFile = m_url($m);
-                                $mediaCaption = strip_tags($m["caption"]);
+                                $mediaCaption = clean_caption(strip_tags($m["caption"]));
                                 $mediaStyle = "width: 100%;";
                                 if(!$gotSpecs)
                                 {

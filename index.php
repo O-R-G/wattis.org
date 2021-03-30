@@ -26,6 +26,7 @@ elseif( ($uri[1] == 'browse-the-library' && count($uri) >= 4) ||
 		 $uri[1] == 'library_view.php' )
 	require_once("views/library_view.php");
 elseif( $uri[1] == 'list' ||
+		$uri[1] == 'our-program' ||
 		($uri[1] == 'calendar' && count($uri) < 3)||
 		($uri[1] == 'calendar' && count($uri) == 3 && ($date_argument || end($uri) == 'upcoming'))||
 		// ($uri[1] == 'archive' && count($uri) == 3)

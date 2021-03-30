@@ -1,6 +1,8 @@
 /*
     user interface control
 */
+menu_level = 0;
+
 
 function init_ui() {
 
@@ -54,15 +56,22 @@ function init_ui() {
     var sMore_menu_btn = document.getElementById('more-menu-btn');
     var sMenu_wrapper = document.getElementById('menu-wrapper');
     var sMenu_level = document.getElementsByClassName('menu-level');
+    
     sMore_menu_btn.addEventListener('click', function(){
-        var currentLevel = parseInt(sMenu_wrapper.getAttribute('level'));
-        if(currentLevel < sMenu_level.length)
+        var menu_level_max = document.getElementsByClassName('menu-level').length;
+        console.log(menu_level, menu_level_max);
+        if(menu_level < menu_level_max)
         {
+            menu_level++;
             var btn_text = sMore_menu_btn.querySelector('#more-menu-btn-text').innerText;
             sMore_menu_btn.querySelector('#more-menu-btn-text').innerText = 'EVEN '+btn_text;
-            sMenu_wrapper.setAttribute('level', currentLevel+1);
-            if(currentLevel == sMenu_level.length-1)
+            sMenu_wrapper.setAttribute('level', menu_level+1);
+            var this_menu_level = document.getElementById('menu-level-'+menu_level);
+            this_menu_level.style.display = 'block';
+
+            if(menu_level == menu_level_max)
                 sMore_menu_btn.style.display = 'none';
+
         }
     });
 
