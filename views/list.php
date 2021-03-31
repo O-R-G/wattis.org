@@ -273,7 +273,7 @@ function build_filter_children($oo, $rootid, $date, $archive = NULL, $days = 30,
 function print_list_child($child, $root_url = false, $show_date = false, $show_deck = false) {
 	$title = $child['name1'];
 	if($root_url)
-		$url = '/' . $cat1_url . '/'.$child['url'];
+		$url = '/' . $root_url . '/'.$child['url'];
 	else
 		$url = '/'.$child['url'];
 	$formatted_date = false;
