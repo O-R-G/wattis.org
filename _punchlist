@@ -45,17 +45,20 @@ x Resolving "The Word for World is Forest (2020)"
 + /bookstore /editions lines rm
 x instructions email for anthony
 
-- ** graft new site onto old site, add sounds **
-- /
-  resurrect index
-  add menu
-  add search
-  add every click sound
-  add sounds v2
-- /random
-  only .gifs
-  otherwise random
-  confirm ?random endless
+/ ** graft new site onto old site, add sounds **
+/ /
+  + resurrect views/home from
+    f611fb107c1f43b54a90c028aba890ccffa0fbad
+  + reconcile css views/home & views/random
+  + add menu
+  + add search
+  / add sound every href on desktop
+    fix play all sound before load href
+  + add sounds v2
+/ /?random
+  + only .gifs
+  + only random
+  - confirm ?random endless
 - /search
   omit emails
 - /our-program
@@ -72,6 +75,7 @@ x instructions email for anthony
 - /* 
   non-english language encoding confirm
   https://dev.mysql.com/doc/refman/8.0/en/charset.html
-- reset staging database from live
+- database column breaks /// resolve (sql search first, use Notes?)
+- compare databases live, staging, local
+- reset staging database
 - o-r-g instructions 
-- database column breaks resolve (sql search first, use Notes?)

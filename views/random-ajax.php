@@ -12,8 +12,6 @@ $oo = new Objects();
 // else
 // 	$offset = 0;
 
-$search_bold = !isset($_GET['random']);
-
 require_once($_SERVER["DOCUMENT_ROOT"].'/static/php/function.php');
 
 $current_fetched_ids_arr = file_get_contents( "php://input" );
@@ -21,7 +19,7 @@ $current_fetched_ids_arr = json_decode($current_fetched_ids_arr);
 // $current_fetched_ids_arr_temp = file_get_contents( "php://input" );
 // $current_fetched_ids_arr_temp = json_decode($fetched_ids_arr_temp);
 $a_pattern = '/<a\s.*?(?:href.*?=.*?[\'"].*?[\'"].*?)?>(.*?)<\/a>/is';
-$randomRecords = getRandomRecords($search_bold, $current_fetched_ids_arr);
+$randomRecords = getRandomRecords(50, $current_fetched_ids_arr);
 $response_html = '';
 if(count($randomRecords['all']) != 0) 
 {

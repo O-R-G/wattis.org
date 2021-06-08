@@ -223,6 +223,7 @@ pre {
 #intro a:first-child {
     display: block;
 }
+
 .homeContainer {
     width: 100vw;
     max-width: 100%;
@@ -230,9 +231,6 @@ pre {
     padding-top: 180px;
     padding-bottom: 60px;
     box-sizing: border-box;
-
-    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-    /*height: calc(var(--vh, 1vh) * 100);*/
 }
 
 .mainContainer {
@@ -256,6 +254,17 @@ pre {
 }
 
 .homeContainer .blockContainer {
+}
+
+.random {
+    /* added to homeContainer when ?random */
+}
+
+.homeContainer.random {
+    height: 100vh; /* fallback for browsers that do not support custom properties */
+}
+
+.homeContainer.random .blockContainer {
     position: absolute;
     display: none;
     height: 50vh;
@@ -263,15 +272,13 @@ pre {
     left: 50%;
     transform: translate(-50%, -50%);
     border-bottom: none;
-    /*color: #000 !important;*/
-    /* background-color: #F00; */
 }
-.black .homeContainer .blockContainer span
-{
+
+.black .homeContainer .blockContainer span {
     color: #000 !important;
 }
-.white .homeContainer .blockContainer span
-{
+
+.white .homeContainer .blockContainer span {
     color: #fff !important;
 }
 

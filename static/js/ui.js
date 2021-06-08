@@ -75,20 +75,28 @@ function init_ui() {
         }
     });
 
-    /*
+    // ** not working yet, but getting close -- todo with 'this' and scope ** 
+    // also perhaps the createjs.Sound.play(soundID) from createJS should
+    // be async or else has an isPlaying property
+    // still cutting off the sound
+
     // href
     var e = document.getElementsByTagName('a');
     for(var i = 0, len = e.length; i < len; i++) {
         e[i].onclick = function () {
-            play_sound_random();
+            href = this.href;
+            play_sound_random_async(href).then(
+                function(href) {
+                    // console.log(href);
+                    location.href = href;
+                });
+            return false;   // squelch html href
         }
     }
-    */
     
     // clicks / taps
-    // (touchstart event for taps may be better)
     // document.body.addEventListener('click', function () {
-    document.body.addEventListener('touchstart', function () {
+    document.body.addEventListener('touchstart', function () {    
         play_sound_random();
     });
 

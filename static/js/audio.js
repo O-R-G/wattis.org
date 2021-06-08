@@ -28,6 +28,22 @@ function play_sound_random () {
     createjs.Sound.play(soundID);
 }
 
+async function play_sound_random_async (href) {
+    soundID = Math.floor(Math.random() * audio_src.length);
+    instance = createjs.Sound.play(soundID);
+    /*
+    // see https://createjs.com/docs/soundjs/classes/Sound.html#property_PLAY_FINISHED
+    // not working but on the right track probably
+    // maybe should be either async or use a callback
+    while (instance.playState !== 'playFinished') {
+        console.log(instance.playState);
+    }
+    // console.log(instance.playState);
+    */
+    console.log(instance);
+    return href;
+}
+
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
   while (0 !== currentIndex) {

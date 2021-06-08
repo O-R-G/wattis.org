@@ -10,8 +10,14 @@ foreach ($uri as $u)
 require_once("views/head.php");
 require_once("views/nav.php");
 
-if (!$uri[1])
+    
+$random = isset($_GET['random']);
+
+
+if (!$uri[1] && !$random)
     require_once("views/home.php");
+elseif( !$uri[1] && $random )
+	require_once("views/random.php");
 elseif( $uri[1] == 'main' ||
 		 $uri[1] == 'menu'
 		)

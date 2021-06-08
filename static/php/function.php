@@ -36,116 +36,62 @@ function strictClean($str)
   return $str;
 }
 
-function getRandomRecords($markedBold = true, $fetched_ids_arr = array()){
-  global $db;
-  global $oo;
+function getRandomRecords($records = '10', $fetched_ids_arr = array()){
+    global $db;
+    global $oo;
 
+    // collect objects
 
-  // collect records
-
-  if(!$markedBold) {
-    // ver 1: totally random
     $sql = "SELECT objects.id, objects.body FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.name1 NOT LIKE '.%' AND objects.name1 NOT LIKE '\_%' AND objects.body != '' AND objects.body != 'NULL'";
-  } else {
-    $sql = "SELECT objects.id, objects.body FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.name1 NOT LIKE '.%' AND objects.name1 NOT LIKE '\_%' AND objects.body LIKE '%<b>%'";
-  }
-
-  if(!empty($fetched_ids_arr))
-  {
-    $fetched_ids = '(' . implode(',', $fetched_ids_arr) . ')';
-    $sql .= ' AND objects.id NOT IN '. $fetched_ids;
-  }
-
-  $sql .= " ORDER BY RAND() LIMIT 50";
-  // $sql .= " ORDER BY RAND() LIMIT 4";
-
-  $res = $db->query($sql);
-  $items = array();
-  while ($obj = $res->fetch_assoc())
-    $items[] = $obj;
-  $res->close();
-  $output = array();
-  $output['all'] = array();
-  $output['image'] = array();
-  $insertImage = false;
-
-  // collect media, gif only
-
-  $sql = "SELECT * FROM media WHERE media.type = 'gif' ORDER BY RAND()";
-  $res = $db->query($sql);
-  $media = array();
-  while ($obj = $res->fetch_assoc())
-    $media[] = $obj;
-  $res->close();
-
-  // build
-
-  foreach($items as $key => $item) {
-    $body = $item['body'];
-    $id = $item['id'];
-
-/*
-    $media = $oo->media($id);
-    $isGif = false;
-    foreach($media as $m)
-    {
-      if($m['type'] == 'gif'){
-        $isGif = false;
-        break;
-      }
+    if(!empty($fetched_ids_arr)) {
+        $fetched_ids = '(' . implode(',', $fetched_ids_arr) . ')';
+        $sql .= ' AND objects.id NOT IN '. $fetched_ids;
     }
-*/
-    $media = $oo->media($id);
-    $validHomeMedia = array();
-    foreach($media as $m){
-      if( strpos($m['caption'], '[hiddenfromhomepage]') === false)
-        $validHomeMedia[] = $m;
-    }
-    if($key % 2 == 0 && $key > 0 && !$insertImage && !empty($validHomeMedia))
-      $insertImage = true;
+    // $sql .= " ORDER BY RAND() LIMIT 50;";
+    $sql .= " ORDER BY RAND() LIMIT " . $records . ";";
+    $res = $db->query($sql);
+    $items = array();
+    while ($obj = $res->fetch_assoc())
+        $items[] = $obj;
+    $res->close();
+    $output = array();
+    $output['all'] = array();
+    $output['image'] = array();
+    $insertImage = false;
 
-    if(!$insertImage)
-    {
-      if(!$markedBold)
-        $sentences = preg_split('/(?<=[.?!])\s+(?=[a-z])/i', $body);
-      else{
+    // collect media (gifs)
 
-        // $pattern = "/<b ?.*>(.*)<\/b>/i";
-        // preg_match_all($pattern, $body, $sentences);
-        $sentences_raw = explode('<b>', $body);
-        $sentences = array();
-        foreach($sentences_raw as $raw)
-        {
-          if(strpos($raw, '</b>') !== false){
-            $sentences[] = substr($raw, 0, strpos($raw, '</b>'));
-          }
+    $sql = "SELECT * FROM media WHERE media.type = 'gif' AND media.active = '1' ORDER BY RAND()";
+    $res = $db->query($sql);
+    $media = array();
+    while ($obj = $res->fetch_assoc())
+        $media[] = $obj;
+    $res->close();
+
+    // build $output
+
+    foreach($items as $key => $item) {
+        $body = $item['body'];
+        $id = $item['id'];
+        if ($key % 2 == 0 && $key > 0 && !$insertImage)
+            $insertImage = true;    
+        if ($insertImage) {
+            $image = m_url($media[array_rand($media)]);
+            $sentence = '';
+            $insertImage = false;
+            $output['image'][] = $image;
+        } else {
+            $sentences = preg_split('/(?<=[.?!])\s+(?=[a-z])/i', $body);
+            $sentence = $sentences[array_rand($sentences)];
+            $image = false;
         }
-      }
-      $sentence = $sentences[array_rand($sentences)];
-      $image = false;
+        $output['all'][] = array( 
+          'id'       => $id, 
+          'sentence' => $sentence,
+          'image'    => $image
+        );
     }
-    else
-    {
-      $image = m_url($validHomeMedia[array_rand($validHomeMedia)]);
-      $sentence = '';
-      $insertImage = false;
-      $output['image'][] = $image;
-    }
-    $output['all'][] = array( 
-      'id'       => $id, 
-      'sentence' => $sentence,
-      'image'    => $image
-    );
-  }
-
-    /*
-  // testing
-  foreach ($media as $m)
-    echo "<img src='" . m_url($m) . "'>";
-  die();
-    */
-
-  return $output;
+    return $output;
 }
 
 function build_children_search($oo, $ww, $query) {
