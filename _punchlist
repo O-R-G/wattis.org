@@ -47,22 +47,31 @@ x instructions email for anthony
 
 - ** graft new site onto old site, add sounds **
 - /
+  resurrect index
+  add menu
+  add search
+  add every click sound
+  add sounds v2
+- /random
   only .gifs
   otherwise random
   confirm ?random endless
+- /search
+  omit emails
 - /our-program
   default to 2021
-  exhibitions and on our mind both in reverse chron order
+  exhibitions and on our mind in reverse chron order
 - /on-our-mind 
   distinguish from /program
-  address events
   multiple columns?
-- /search
-  no emails
+  address events (calendar?)
 - /calendar
   default to all upcoming
   add filter by on-view / on-our-mind / other
   add pre-2014 to link to archive site
 - /* 
   non-english language encoding confirm
-- o-r-g instructions   
+  https://dev.mysql.com/doc/refman/8.0/en/charset.html
+- reset staging database from live
+- o-r-g instructions 
+- database column breaks resolve (sql search first, use Notes?)
