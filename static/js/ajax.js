@@ -70,6 +70,7 @@ function loadMore() {
     */
 
 	xmlhttp.open("POST", requestUrl, true);
+    // throws an error .local
 	// xmlhttp.setRequestHeader( "Content-Type", "application/json" );
 	xmlhttp.send(fetched_ids_arr_str);
 }
