@@ -59,8 +59,8 @@ x instructions email for anthony
   + only .gifs
   + only random
   + confirm ?random endless (using views/random-ajax)
-- /search
-  - omit emails
++ /search
+  + omit emails
 - /our-program
   - default to 2021
   - exhibitions and on our mind in reverse chron order

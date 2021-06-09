@@ -10,23 +10,13 @@ if (isset($_GET['query']) && $_GET['query'] != 'Search for...') {
 
 /* config */
 
-// $roots = build_roots($oo, 0);
-// $root_name = $uri[1];
-// $page_name = $o['name1'];
-// $page_name = trim_prefixes($page_name);
-// $media = $oo->media($uu->id);
-
-
 // limit loading if nothing
-
 $no_results_error = '<div class = "big">The search query did not return any results.<br />Please <a href="/?displaysearch=true" onclick="show_search();focusSearchInput();">try again</a>.</div>';
 
-?>
-<div id='searchContainer' class = ''>
-	<? if($hasQuery){
+?><div id='searchContainer' class = ''><? 
+    if($hasQuery){
 		$children = build_children_search($oo, $ww, $query);
-		if(count($children) > 0)
-		{
+		if(count($children) > 0) {
 			?><div class = 'search-item big'><?
 			foreach($children as $child){ 
 				if(substr($myrow['name1'], 0, 1) != '.'){
@@ -36,15 +26,10 @@ $no_results_error = '<div class = "big">The search query did not return any resu
 				}
 			}
 			?></div><?
-		}
-		else
-		{
+		} else {
 			echo $no_results_error;
 		}
-	?>
-
-	<?
-	}else{
+	} else {
 		echo $no_results_error;
-	} ?>
-</div>
+	}
+?></div>
