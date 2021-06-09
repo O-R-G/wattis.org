@@ -314,6 +314,10 @@ pre {
     width: 30%;
 }
 
+.columns {
+    columns: 2;
+}
+
 .listSmallContainer {  
 /*  float:left; */
     display: inline-block;
@@ -1497,16 +1501,20 @@ a.year.expanded
         padding: 20px;
         width: initial;
     }
-    
+
+    .columns {
+        columns: initial;
+    }
+
     .list_item {
         padding: 0px;
         padding-bottom: 27px;
     }
-/* 
+    /* 
     .menuContainer {
         position: relative;
     }
- */
+    */
     
     .galleryContainer {
         padding: 0px;

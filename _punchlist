@@ -45,7 +45,8 @@ x Resolving "The Word for World is Forest (2020)"
 + /bookstore /editions lines rm
 x instructions email for anthony
 
-/ ** graft new site onto old site, add sounds **
+** graft new site onto old site, add sounds **
+
 / /
   + resurrect views/home from
     f611fb107c1f43b54a90c028aba890ccffa0fbad
@@ -54,8 +55,7 @@ x instructions email for anthony
   + add search
   + add sounds v2
   / add sound every href on desktop
-    fix play all sound before load href
-/ /?random
++ /?random
   + only .gifs
   + only random
   + confirm ?random endless (using views/random-ajax)
@@ -64,14 +64,17 @@ x instructions email for anthony
 + /our-program
   + default to 2021
   x exhibitions and on our mind in reverse chron order
-/ /calendar
++ /calendar
   + default to all upcoming
-  - add filter by on-view / on-our-mind / other
-  - add pre-2014 to link to archive site
-- /on-our-mind 
-  - distinguish from /program
-  - multiple columns?
-  - address events (calendar?)
+  x add filter by on-view / on-our-mind / other
+  + add pre-2014 to link to archive site
+? /on-our-mind 
+  + distinguish from /program
+  + multiple columns?
+  x address events
+  ? use all three columns?
+  ? add On Our Mind in column 1
+- mobile css cleanup
 - /* 
   non-english language encoding confirm
   https://dev.mysql.com/doc/refman/8.0/en/charset.html

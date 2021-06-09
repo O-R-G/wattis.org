@@ -1,4 +1,4 @@
-<?php
+<?
 	require_once('static/php/displayMedia.php');
 	$hasFilter = false;
 	$twoCategories = false;
@@ -49,9 +49,8 @@
 		$rootid = $oo->urls_to_ids(array('gallery'))[0];
 	elseif(strpos($uri[2], 'research-seasons') !== false )
 		$rootid = $oo->urls_to_ids(array('on-our-mind'))[0];
-	elseif(strpos($uri[2], 'events') !== false ){
+	elseif(strpos($uri[2], 'events') !== false )
 		$rootid = $oo->urls_to_ids(array('calendar'))[0];
-	}
 	
 	$root_item = $oo->get($rootid);
 	$root_url = $root_item['url'];
@@ -65,30 +64,22 @@
 	    {
 	    	$cat1_children = $oo->children($cat1_rootid);
 			$cat2_children = $oo->children($cat2_rootid);
-	    }
-	    else
+	    } else
 	    	$children = $oo->children($rootid);
-	}
-	else
-	{
-		
+	} else {
 		$hasMonth = strpos($date_argument, '-');
-		if( $hasMonth ){
+		if ($hasMonth) {
 			$date_start = $date_argument;
 			$day_count = intval(date('t', strtotime($date_argument))) - 1;
-		}
-		else
-		{
+		} else {
 			$date_start = $date_argument . '-01';
 			$isLeapYear = date('L', strtotime($date_argument));
 			if($isLeapYear)
 				$day_count = 365;
 			else
 				$day_count = 364;
-		}
-		
-        if($twoCategories)
-        {
+		}		
+        if ($twoCategories) {
         	$cat1_children = build_filter_children($oo, $cat1_rootid, $date_start, NULL, $day_count);
         	$cat2_children = build_filter_children($oo, $cat2_rootid, $date_start, NULL, $day_count);
         }
@@ -103,22 +94,27 @@
     	$years[] = $y;
 
     $now = ($date_argument) ? strtotime($date_argument) : strtotime('now');
-?>
-<div class="mainContainer times big">
-	<? if($hasFilter){
-			?>
-	<div id = 'filter_container' class="helvetica medium">
-		<div id='filter' class = 'item'>
-			<ul id='yearsContainer'>
-				<li class = 'year sans <? echo (!$uri[2] || ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
-					<a class = "year-btn" href = '<? echo $sub_category ? '/'.$uri[1].'/' . $uri[2] : '/'.$uri[1]; ?>'>Now</a>
-				</li><?
-        foreach ($years as $year)
-            display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly);
-    ?></ul></div></div><? 
+
+?><div class="mainContainer times big"><? 
+    if($hasFilter){
+	    ?><div id = 'filter_container' class="helvetica medium">
+		    <div id='filter' class = 'item'>
+			    <ul id='yearsContainer'>
+				    <li class = 'year sans <? echo (!$uri[2] || ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
+					    <a class = "year-btn" href = '<? echo $sub_category ? '/'.$uri[1].'/' . $uri[2] : '/'.$uri[1]; ?>'>Now</a>
+				    </li><?
+                    foreach ($years as $year)
+                        display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly);
+                    if($uri[1] == 'our-program'){
+			            ?><li class = 'year sans'>
+				            <a class = "year-btn" href = 'http://archive.wattis.org'>before ...</a>
+			            </li><?
+                    }
+                ?></ul>
+            </div>
+        </div><? 
     } 
-    ?><div class='listContainer times title-bloc'><?= $name; ?></div>
-	<?php
+    ?><div class='listContainer times title-bloc'><?= $name; ?></div><?
 		if($twoCategories)
 		{
 			?><div class='listContainer times categoryContainer'>

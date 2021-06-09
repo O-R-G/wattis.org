@@ -6,6 +6,7 @@ $isFound = false;
 $main_id = end($oo->urls_to_ids(array('main')));
 $main_children = $oo->children($main_id);
 $id = end($ids);
+$use_columns = ($uri[1] == 'on-our-mind');
 foreach($main_children as $child)
 {
 	if($child['url'] == $uri[1] && count($uri) == 2)
@@ -133,10 +134,8 @@ if($isMenu)
 ?>
 <script type="text/javascript" src="/static/js/gallery.js"></script>
 	<div class="mainContainer times big">
-		<div class='listContainer times title-block'>
-		<?php
-		if ($begin || $end) 
-		{
+		<div class='listContainer times title-block'><?
+		if ($begin || $end) {
 			// build date display
 			$bstr = strtotime($begin);
 			$estr = strtotime($end); 
@@ -144,8 +143,7 @@ if($isMenu)
 			$displayYears = (date("Y",$bstr) != date("Y",$estr)) ? true : false;		
 			$displayDatesEnd = (date("z",$bstr) != date("z",$estr)) ? true : false;
 
-			if($begin)
-			{
+			if($begin) {
 				$beginDisplayHours = "g";
 				if (date("i",$bstr) != '00') $beginDisplayHours .= ".i";
 				if (!$end) $beginDisplayHours .= " a";
@@ -296,7 +294,7 @@ if($isMenu)
 		} 
 		else 
 		{
-			?><div class='listContainer doublewide centered times'><?php echo nl2br($body); ?></div><?php
+			?><div class='listContainer doublewide centered times <?= ($use_columns) ? "columns" : ""; ?>'><?php echo nl2br($body); ?></div><?php
 		}
 		?><div class='clear'></div>
 		<div class='galleryContainer'><?php
