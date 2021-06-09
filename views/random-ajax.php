@@ -47,7 +47,7 @@ if(count($randomRecords['all']) != 0)
 else
 	$response = array();
 
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 echo json_encode($response);
 
 // $response_test = array(

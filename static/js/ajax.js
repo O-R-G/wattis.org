@@ -14,8 +14,7 @@ window.onscroll = function(ev)
     }
 };
 
-function loadMore()
-{
+function loadMore() {
 	isWaiting = true;
 	if(window.XMLHttpRequest)
 	{
@@ -64,11 +63,13 @@ function loadMore()
 	}
 	var fetched_ids_arr_str = '[' + fetched_ids_arr.join(',') + ']';
 
-	var requestUrl = "views/home-ajax.php";
-	if(isRandom)
+	var requestUrl = "views/random-ajax.php";
+	/*
+    if(isRandom)
 		requestUrl += "?random";
+    */
 
 	xmlhttp.open("POST", requestUrl, true);
-	xmlhttp.setRequestHeader( "Content-Type", "application/json" );
+	// xmlhttp.setRequestHeader( "Content-Type", "application/json" );
 	xmlhttp.send(fetched_ids_arr_str);
 }

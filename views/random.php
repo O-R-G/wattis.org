@@ -1,48 +1,41 @@
 <?
     // get random sentences and gifs, show one at a time, randomly
 	$rootname = 'Home';
-	$randomRecords = getRandomRecords(250);
+	$randomRecords = getRandomRecords(50);
 	$logo_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 	$logo_item = $oo->get($logo_id);
 
     // rm urgent?
-	$urgent_id = end($oo->urls_to_ids(array('home', 'urgent')));
-	$urgent_children = $oo->children($urgent_id);
+	// $urgent_id = end($oo->urls_to_ids(array('home', 'urgent')));
+	// $urgent_children = $oo->children($urgent_id);
 
 	$a_pattern = '/<a\s.*?(?:href.*?=.*?[\'"].*?[\'"].*?)?>(.*?)<\/a>/is';
-
 	$fetched_ids_arr = array();
-?>
 
-<!-- BLOCKS -->
-<div class="homeContainer times big random">
-	<? 
-		if(count($urgent_children) > 0){
-			foreach($urgent_children as $child){
-				if(substr($child['name1'], 0, 1) != '.')
-				{
-					$this_url = getCompleteUrl($child['id']);
-					?><div class="blockContainer"><a href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $child["body"]; ?></div></a></div><?
-				}
+?><!-- BLOCKS -->
+<div class="homeContainer times big random"><? 
+    /*
+	if(count($urgent_children) > 0){
+		foreach($urgent_children as $child){
+			if(substr($child['name1'], 0, 1) != '.') {
+				$this_url = getCompleteUrl($child['id']);
+				?><div class="blockContainer"><a href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $child["body"]; ?></div></a></div><?
 			}
-		} 
-		foreach($randomRecords['all'] as $record){
-			$this_url = getCompleteUrl($record['id']);
-			$fetched_ids_arr[] = $record['id'];
-			if($record['image'])
-			{
-				?><div class="blockContainer displaying_image"><a href="<?php echo $this_url; ?>" class = ''><img src="<?= $record['image']; ?>"></a></div><?
-			}
-			else
-			{
-				// $this_text = $record["sentence"];
-				$this_text = preg_replace($a_pattern, '<span class="pseudo-link">$1</span>', $record["sentence"]);
-
-				?><div class="blockContainer"><a class="block_link" href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $this_text; ?></div></a></div><?
-			}
-		?><?
-	} ?>
-</div>
+		}
+	}
+    */
+	foreach($randomRecords['all'] as $record) {
+		$this_url = getCompleteUrl($record['id']);
+		$fetched_ids_arr[] = $record['id'];
+		if($record['image']) {
+			?><div class="blockContainer displaying_image"><a href="<?php echo $this_url; ?>" class = ''><img src="<?= $record['image']; ?>"></a></div><?
+		} else {
+			// $this_text = $record["sentence"];
+			$this_text = preg_replace($a_pattern, '<span class="pseudo-link">$1</span>', $record["sentence"]);
+			?><div class="blockContainer"><a class="block_link" href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $this_text; ?></div></a></div><?
+		}
+    } 
+?></div>
 <div id="_click"></div>
 
 <!-- WEATHER -->
@@ -53,7 +46,6 @@
 	    // requires <element id="rss">
     	showRSS(el, "http://www.nws.noaa.gov/data/current_obs/KSFO.rss");
     }
-
 	var homePlaying = true;
 	var block = document.querySelector('.homeContainer .blockContainer');
 	var image = block.querySelector('img');
@@ -68,7 +60,6 @@
 	var fetched_ids_arr = <?= json_encode($fetched_ids_arr); ?>;
 	var isFullyLoaded = false;
 	var isRandom = !<?= json_encode($search_bold)?>;
-
 
 	function nextPage(idx){
 		blockContainer[idx].style.display = 'none';
@@ -166,7 +157,7 @@
 	}                                                     
 
 	function handleTouchStart(evt) {
-	    const firstTouch = getTouches(evt)[0];                                      
+	    const firstTouch = getTouches(evt)[0];
 	    xDown = firstTouch.clientX;                                      
 	    yDown = firstTouch.clientY;                                      
 	};                                                
@@ -203,6 +194,6 @@
 
 	var s_click = document.getElementById('_click');
 	s_click.addEventListener('click', function(){
-			clickHandler();
+        clickHandler();
 	});
 </script>
