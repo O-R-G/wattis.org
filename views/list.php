@@ -13,6 +13,8 @@
 		$hasFilter = true;
 		$show_children_date = true;
 		$date_since = '2014-09-09';
+        if (!$date_argument)
+            $date_argument = valid_date('today');
 
 		$twoCategories = true;
 		$cat1_name = 'On view:';
@@ -23,20 +25,21 @@
     	$cat2_rootid = end($oo->urls_to_ids(array($cat2_url)));
 
     	$yearsOnly = true;
-	}
-	else if($uri[1] == 'calendar')
-	{
+	} else if($uri[1] == 'calendar') {
 		$hasFilter = true;
 		$show_children_deck = true;
 		$date_since = '2014-09-09';
-	}
-	else
+        if (!$date_argument)
+            $date_argument = valid_date('today');
+	} else
 		$show_children_deck = true;
 
-	// if(end($uri) == 'upcoming')
-	// 	$isUpcoming = true;
-	// if(end($uri) == 'today')
-	// 	$isToday = true;
+    /*
+	if(end($uri) == 'upcoming')
+	    $isUpcoming = true;
+	if(end($uri) == 'today')
+	    $isToday = true;
+    */
 
 	/*
 		exceptions for pages not fetching children by their urls
@@ -84,15 +87,6 @@
 				$day_count = 364;
 		}
 		
-		// if($date_argument == 'today' || $isUpcoming){
-  //           $date_start = date('Y-m-d') . ' 00:00:00';
-  //           $day_count = 1;
-  //       }
-  //       else
-  //       {
-  //           $date_start = $date_argument;
-  //           $day_count = date('t', strtotime($date_argument))-1;
-  //       }
         if($twoCategories)
         {
         	$cat1_children = build_filter_children($oo, $cat1_rootid, $date_start, NULL, $day_count);
@@ -117,14 +111,13 @@
 		<div id='filter' class = 'item'>
 			<ul id='yearsContainer'>
 				<li class = 'year sans <? echo (!$uri[2] || ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
-					<a class = "year-btn" href = '<? echo $sub_category ? '/'.$uri[1].'/' . $uri[2] : '/'.$uri[1]; ?>'>All</a>
-				</li>
-		<?
+					<a class = "year-btn" href = '<? echo $sub_category ? '/'.$uri[1].'/' . $uri[2] : '/'.$uri[1]; ?>'>Now</a>
+				</li><?
         foreach ($years as $year)
             display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly);
-    ?></ul></div></div>
-	<? } ?>
-	<div class='listContainer times title-bloc'><?= $name; ?></div>
+    ?></ul></div></div><? 
+    } 
+    ?><div class='listContainer times title-bloc'><?= $name; ?></div>
 	<?php
 		if($twoCategories)
 		{
@@ -188,15 +181,13 @@
 		}
 	?>
 	
-</div>
-<?
+</div><?
 function display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly = false) {
     $since = ($year == date("Y")) ? date("m") : 12;
     $start = (date('Y', strtotime($date_since)) == $year) ? date('m', strtotime($date_since)) : 1;
     $base_url =  $uri[1] . '/';
     
-    if($date_argument)
-    {
+    if($date_argument) {
     	$hasMonth = (strpos($date_argument, '-') !== false);
 	    if( !$hasMonth && $date_argument != 'today')
 	    	$date_argument = $date_argument . '-01';
@@ -206,8 +197,6 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
 	      $year_active = ($year == date('Y', strtotime($date_argument))) ? 'active' : NULL;
     }
     
-  	
-
     ?><li class="year sans <? echo (!$year_active) ? "" : "active" ?>">
             <a id="<? echo $year; ?>-btn" href="/<? echo $base_url . $year; ?>" class="year-btn"><? echo $year ?></a>
             <? if(!$yearsOnly){ ?>

@@ -2,17 +2,13 @@
 $request = $_SERVER['REQUEST_URI'];
 $requestclean = strtok($request,"?");
 $uri = explode('/', $requestclean);
-
+$random = isset($_GET['random']);
 $date_argument = false;
 foreach ($uri as $u)
-	$date_argument = valid_date(urldecode($u));
+    $date_argument = valid_date(urldecode($u));
 
 require_once("views/head.php");
 require_once("views/nav.php");
-
-    
-$random = isset($_GET['random']);
-
 
 if (!$uri[1] && !$random)
     require_once("views/home.php");

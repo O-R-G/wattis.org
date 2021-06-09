@@ -61,17 +61,17 @@ x instructions email for anthony
   + confirm ?random endless (using views/random-ajax)
 + /search
   + omit emails
-- /our-program
-  - default to 2021
-  - exhibitions and on our mind in reverse chron order
++ /our-program
+  + default to 2021
+  x exhibitions and on our mind in reverse chron order
+/ /calendar
+  + default to all upcoming
+  - add filter by on-view / on-our-mind / other
+  - add pre-2014 to link to archive site
 - /on-our-mind 
   - distinguish from /program
   - multiple columns?
   - address events (calendar?)
-- /calendar
-  - default to all upcoming
-  - add filter by on-view / on-our-mind / other
-  - add pre-2014 to link to archive site
 - /* 
   non-english language encoding confirm
   https://dev.mysql.com/doc/refman/8.0/en/charset.html
