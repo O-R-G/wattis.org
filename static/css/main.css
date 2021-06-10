@@ -207,7 +207,6 @@ pre {
     display: none;
 }
 
-
 #logo {
     /*position: absolute;
     top: 0;
@@ -316,6 +315,7 @@ pre {
 
 .columns {
     columns: 2;
+    column-gap: 50px;
 }
 
 .listSmallContainer {  
@@ -425,6 +425,11 @@ pre {
 
 .subdateContainer {
     padding-top: 1em;
+}
+
+#deck {
+    margin-top: 19px;
+    padding-right: 50px;
 }
 
 #gallery {
@@ -551,7 +556,6 @@ pre {
 #library-mode-switch a {
     border-bottom: none;
 }
-
 
 .center {
     top: 50%;

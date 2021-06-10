@@ -47,6 +47,7 @@ $rootname = nl2br($root_item["name1"]);
 
 $name = $item['name1'];
 $body = $item['body'];
+$deck = $item['deck'];
 $notes = $item['notes'];
 $begin = $item['begin'];
 $end = $item['end'];
@@ -173,10 +174,10 @@ if($isMenu)
 			echo nl2br($datesDisplay);
 			// if ($displayHours) $html .= $hoursDisplay;
 
-		} 
-		else if($isMenu)
-		{
-
+		    if($notes) {
+			    ?><div id='deck' class=''><?= $deck; ?></div><?
+		    }
+		} else if($isMenu) {
 			$url_base = '/' . implode($menu_level_uri, '/');
 			foreach($menu_items as $mi)
 			{
@@ -279,13 +280,11 @@ if($isMenu)
 		$columns[1] = strictClean($columns[1]);
 		if(!$columns[0] && !$columns[1])
 			$columns = false;
-
 		
 		// search for strings that match [\d+] where \d+ = n
 		// replace with image container = n
 		// remove image container n from array of images
 		// print out rest of images at the end (as normal images?)
-
 	
 		// body
 		if($columns) 
