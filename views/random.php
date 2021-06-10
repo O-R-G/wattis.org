@@ -4,26 +4,11 @@
 	$randomRecords = getRandomRecords(50);
 	$logo_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 	$logo_item = $oo->get($logo_id);
-
-    // rm urgent?
-	// $urgent_id = end($oo->urls_to_ids(array('home', 'urgent')));
-	// $urgent_children = $oo->children($urgent_id);
-
 	$a_pattern = '/<a\s.*?(?:href.*?=.*?[\'"].*?[\'"].*?)?>(.*?)<\/a>/is';
 	$fetched_ids_arr = array();
 
 ?><!-- BLOCKS -->
 <div class="homeContainer times big random"><? 
-    /*
-	if(count($urgent_children) > 0){
-		foreach($urgent_children as $child){
-			if(substr($child['name1'], 0, 1) != '.') {
-				$this_url = getCompleteUrl($child['id']);
-				?><div class="blockContainer"><a href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $child["body"]; ?></div></a></div><?
-			}
-		}
-	}
-    */
 	foreach($randomRecords['all'] as $record) {
 		$this_url = getCompleteUrl($record['id']);
 		$fetched_ids_arr[] = $record['id'];
