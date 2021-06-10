@@ -55,6 +55,7 @@ x instructions email for anthony
   + add search
   + add sounds v2
   / add sound every href on desktop (async || callback)
+  - animate punctuation / menu js click debug
 + /?random
   + only .gifs
   + only random
@@ -82,8 +83,8 @@ x instructions email for anthony
   > UPDATE objects SET body=REPLACE(body,'\r\n','<br>');
 + compare databases live, staging, local
 + reset staging database
-- update raven chacon from live
-- update Home from live
-- mobile css cleanup
-- sync media from live
++ update raven chacon o-r-g
++ update Home from live
++ mobile css cleanup
++ sync media from live
 - o-r-g instructions
