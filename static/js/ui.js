@@ -23,21 +23,7 @@ function init_ui() {
         play_sound(1);
         document.body.classList.remove('viewing-menu');
     });
-    
-    // help
-    var sLogo = document.getElementById('logoContainer');
-    sLogo.addEventListener('click', function(){
-        play_sound(3);
-        document.body.classList.add('viewing-help');
-    });
-    
-    var sClose_help_btn = document.getElementById('close-help-btn');
-    sClose_help_btn.addEventListener('click', function(){
-        // off_sound.play();
-        play_sound(4);
-        document.body.classList.remove('viewing-help');
-    });
-    
+
     // search
     var sSearch_btn = document.getElementById('search-btn');
     var sSearch_input = document.getElementById('search-input');
@@ -60,18 +46,15 @@ function init_ui() {
     sMore_menu_btn.addEventListener('click', function(){
         var menu_level_max = document.getElementsByClassName('menu-level').length;
         console.log(menu_level, menu_level_max);
-        if(menu_level < menu_level_max)
-        {
+        if(menu_level < menu_level_max) {
             menu_level++;
             var btn_text = sMore_menu_btn.querySelector('#more-menu-btn-text').innerText;
             sMore_menu_btn.querySelector('#more-menu-btn-text').innerText = 'EVEN '+btn_text;
             sMenu_wrapper.setAttribute('level', menu_level+1);
             var this_menu_level = document.getElementById('menu-level-'+menu_level);
             this_menu_level.style.display = 'block';
-
             if(menu_level == menu_level_max)
                 sMore_menu_btn.style.display = 'none';
-
         }
     });
 
@@ -80,6 +63,9 @@ function init_ui() {
     // be async or else has an isPlaying property
     // still cutting off the sound
 
+    // also breaks the More... click eventListener so commented out for now
+
+    /*
     // href
     var e = document.getElementsByTagName('a');
     for(var i = 0, len = e.length; i < len; i++) {
@@ -93,7 +79,8 @@ function init_ui() {
             return false;   // squelch html href
         }
     }
-    
+    */
+
     // clicks / taps
     // document.body.addEventListener('click', function () {
     document.body.addEventListener('touchstart', function () {    

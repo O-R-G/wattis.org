@@ -1,7 +1,12 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
+
+html {
+    height: -webkit-fill-available;
+}
+
 body { 
     /* workaround for fixed div rendering in safari */
     /*-webkit-font-smoothing: subpixel-antialiased;*/
@@ -18,25 +23,69 @@ body {
     touch-action: manipulation;
 }
 
+body.reverse {
+    background-color: #000;
+    color: #fff;
+}
+
+body.reverse .black a {
+    border-color: #fff;
+}
+
+body.reverse .black a,
+body.reverse .black {
+    color: #fff;
+}
+
+body.reverse .punctuation {
+    color: #fff;
+}
+
+body.reverse .round-btn {
+    background-color: #000;
+}
+
+body.reverse #search-btn {
+    background-image: url(../../media/svg/magnifying-glass-6-w.svg);
+}
+
+body.hideGeneralSearch #search-btn {
+    display: none;
+}
+
+body.home {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
 a {
-        color: #000;
-        text-decoration: none;
-        border-bottom: solid 3px #000;
-        }
+    color: #000;
+    text-decoration: none;
+    border-bottom: solid 3px #000;
+}
 
 a:active {
-        text-decoration: none;
-        border-bottom: solid 3px;
-        }
+    text-decoration: none;
+    border-bottom: solid 3px;
+}
 
 a:hover {
-        border-bottom: none;
-        }
+    border-bottom: none;
+}
 
-a:active {
-        color: #F00;
-        border-bottom: solid 3px #FFF;
-        }
+a:active {        
+    color: #F00;
+    border-bottom: solid 3px #FFF;
+}
+
+b {
+    font-weight: normal;
+}
+
+pre {
+    font-family: inherit;
+}
+
 
 
 /* types */
@@ -117,55 +166,13 @@ a:active {
     opacity:.5;
 }
 
+#news {
+    position: relative;
+}
 
 /* containers */
-body.reverse
-{
-    background-color: #000;
-    color: #fff;
-}
-body.reverse .black a
-{
-    border-color: #fff;
-}
-body.reverse .black a,
-body.reverse .black
-{
-    color: #fff;
-}
-body.reverse .punctuation
-{
-    color: #fff;
-}
-body.reverse .round-btn
-{
-    background-color: #000;
-}
-body.reverse #search-btn
-{
-    background-image: url(../../media/svg/magnifying-glass-6-w.svg);
-}
-body.hideGeneralSearch #search-btn
-{
-    display: none;
-}
-body.home
-{
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-}
-html
-{
-    height: -webkit-fill-available;
-}
-b {
-    font-weight: normal;
-}
-pre {
-    font-family: inherit;
-}
-#logoContainer
-{
+
+#logoContainer {
     position: fixed;
     top: 20px;
     left: 20px;

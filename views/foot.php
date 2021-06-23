@@ -1,6 +1,8 @@
 		    </div> <!-- end of #color -->
 		</div> <!-- end of #animatePunctuation -->
 		<!-- outside of #animatePunctuation, so dont animate punctuation -->
+
+        <!-- <div id="_click"></div> -->
 		<script type="text/javascript">
 			var animate = checkCookie("animateCookie");
 			
@@ -58,7 +60,6 @@
 			}
 
 		</script>
-
         <script>
             // init audio + ui only after DOM is loaded
             // https://stackoverflow.com/questions/9899372/pure-javascript-equivalent-of-jquerys-ready-how-to-call-a-function-when-t

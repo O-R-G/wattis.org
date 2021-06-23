@@ -1,16 +1,15 @@
 <?
-	$wattis_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
-	$wattis_item = $oo->get($wattis_id);
-	$wattis_intro = $wattis_item['body'];
-	$help_text = strictEmpty($item['notes']) ? 'THIS IS THE WEB SITE OF THE WATTIS INSTITUTE FOR CONTEMPORARY ARTS.<br><br>'. strtoupper($wattis_intro) : $item['notes'] ;
 
-	$main_id = end($oo->urls_to_ids(array('main')));
-	$id = $main_id;
-	$main_children = $oo->children($main_id);
-	$menu_level = 0;
-?>
-<div id="logoContainer" class="times big logo">
-	<div id="logo" class="fixed-black">.+* <span class="logo-text">The Wattis Institute</span></div>
+$wattis_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
+$wattis_item = $oo->get($wattis_id);
+$wattis_intro = $wattis_item['body'];
+$main_id = end($oo->urls_to_ids(array('main')));
+$id = $main_id;
+$main_children = $oo->children($main_id);
+$menu_level = 0;
+
+?><div id="logoContainer" class="times big logo">
+	<div id="logo" class="fixed-black">.+* <a href ="/"><span class="logo-text">The Wattis Institute</span></a></div>
 	<div id="logo_short">.+*</div>
 </div>
 <div id="loadingLogoContainer" class="times big logo">
@@ -31,31 +30,23 @@
 	<div id = 'menu-wrapper'>
 		<a href='/' class='menu-item'>HOME</a><br>
 		<? foreach($main_children as $key => $child){
-			if(substr($child['name1'],0,1) != '.')
-			{
+			if(substr($child['name1'],0,1) != '.') {
 				$this_url = '/' . $child['url'];
-				$this_title = strtoupper($child['name1']);
-				
-				if($child['rank'] > ($menu_level+1) * 25 )
-				{
-					if($menu_level > 0)
-					{
+				$this_title = strtoupper($child['name1']);				
+				if($child['rank'] > ($menu_level+1) * 25 ) {
+					if($menu_level > 0) {
 						?></div><?
 					}
 					$menu_level++;
 					?><div id = 'menu-level-<?= $menu_level; ?>' class='menu-level'><?
-					
-				}
-				
+				}			
 				?><a href="<?= $this_url; ?>" class='menu-item'><?= $this_title; ?></a><br><?
 			}			
 		} 
-
 		if($menu_level > 0)
 			echo '</div>';
-		?>
 		
-	<!-- 	<a href='/read-about-us' class='instructionContainer'>ABOUT</a> <br>
+        ?><a href='/read-about-us' class='instructionContainer'>ABOUT</a> <br>
 		<a href='/our-program' class='instructionContainer'>PROGRAM</a><br>
 		<a href='/calendar' class='instructionContainer'>CALENDAR</a><br>
 		<a href='/library' class='instructionContainer'>LIBRARY</a><br>
@@ -70,13 +61,8 @@
 			<a href='/become-a-member' class='instructionContainer'>BECOME A MEMBER</a><br>
 			<a href='/buy-limited-editions' class='instructionContainer'>BUY LIMITED EDITIONS</a><br>
 			<a href='/capp-street-project' class='instructionContainer'>CAPP STREET PROJECT</a><br>
-		</div> -->
+		</div>
 		<br><div id = 'more-menu-btn' class='instructionContainer'><a><span id="more-menu-btn-text">MORE</span>...</a></div>
 	</div>
 	<div id = 'close-menu-btn' class = ''></div>
-</div>
-
-<div id="helpContainer" class="helvetica small-medium">
-    <div id="help-txt"><?= $help_text; ?></div>
-    <!-- <div id = 'close-help-btn' class = ''></div> -->
 </div>

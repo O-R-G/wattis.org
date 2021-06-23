@@ -40,6 +40,11 @@ $res->close();
 foreach($items as $key =>$item)
 {
 	if($key == 0){
+        /*
+            first item under Home is The Wattis Institute, which includes 
+            the logo and the land acknowledgment. 'logoContainer' also is 
+            already written in views/nav so ** fix **
+        */
 		// var_dump($item);
 		?><div class = 'logoContainer'><?= nl2br($item["body"]); ?></div><?
 	}

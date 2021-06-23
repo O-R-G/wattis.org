@@ -87,7 +87,16 @@ x instructions email for anthony
 + update Home from live
 + mobile css cleanup
 + sync media from live
-- css cleanup (/home)
-- logo link to /home (rm help text)
-- shorten menu categories names (o-r-g)
+/ /home js debug
+  clickHandler(), #_click, etc
+  views/foot
+/ debug logoContainer (views/nav views/home etc)
+  add startStopAnimatePunctuation(); 
+  confirm placement
++ logo link to /home (rm help text)
+/ css cleanup (/home)
+/ menu debug more ... (static/js/ui) 
+- menu category names (o-r-g) shorter?
+- sync media/ from www
+- mobile css
 - o-r-g instructions
