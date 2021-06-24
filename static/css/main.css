@@ -185,6 +185,9 @@ pre {
 
 #logo_mark {
     display: inline-block;
+    width: 44px;
+    height: 27px;
+    cursor: pointer;
 }
 
 #loading_mark {
@@ -685,22 +688,22 @@ pre {
 }
 
 .white {
-        color: #FFF;
-        }
+    color: #FFF;
+}
 
 .white a {
-        color: #FFF;
-        }
-.
+    color: #FFF;        
+}
+
 .red {
-        color: #F00;
-        }
+    color: #F00;
+}
  
 .red a {
-        color: #F00;
-        text-decoration: none;
-        border-bottom: solid 3px #F00;
-        }
+    color: #F00;
+    text-decoration: none;
+    border-bottom: solid 3px #F00;
+}
 
 .red a:hover {
         border-bottom: solid 3px #FFF;

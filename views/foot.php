@@ -6,9 +6,11 @@
 			var animate = checkCookie("animateCookie");
             var home = <?= json_encode(!$uri[1]); ?>;    
 			delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
+            debug_();
             if (home)
 			    initPunctuation("animatePunctuation", delay, true, true);
 			else {
+                animate = false;    /* ugly but cant work out how to make cookies work consistently now */
                 swapClass("color","black","white");
 			    initPunctuation("animatePunctuation", delay, true, animate);
             }

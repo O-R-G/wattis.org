@@ -1,5 +1,4 @@
 <?
-
 $wattis_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
 $wattis_item = $oo->get($wattis_id);
 $wattis_intro = $wattis_item['body'];
@@ -12,7 +11,7 @@ $menu_level = 0;
     <div class="times big logo">
         <div id="loading_mark"></div>
 	    <div id="logo_mark">.+*</div>
-        <div id="logo" class="fixed-black underlined">
+        <div id="logo" class="fixed-black">
             <a href ="/"><span class="logo-text">The Wattis Institute</span></a>
         </div>
     </div>

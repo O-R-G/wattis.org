@@ -6,12 +6,10 @@ menu_level = 0;
 
 function init_ui() {
 
-    /*
-        this fixes an underline issue but can be done better in css ** fix **
     // logo
-    var logo = unescape(getCookie("logoCookie"));
-    if (logo) { document.getElementById("logo").textContent = logo; }
-    */
+    var logo_mark = unescape(getCookie("logoCookie"));
+    if (logo_mark) 
+        document.getElementById("logo_mark").innerHTML = logo_mark;
 
     // menu    
     var sMenu_btn = document.getElementById('menu-btn');

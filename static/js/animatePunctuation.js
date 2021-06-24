@@ -125,17 +125,21 @@ function animatePunctuation(divs,delay) {
 // 1. expire cookie
 
 function startStopAnimatePunctuation() {
-	console.log('--------> startStopAnimatePunctuation');
-	if(timeout == null) {						
+	if(timeout == null) {
+        swapClass("color","black","white");
+        swapClass("news","red","redwhite");
 		delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
 		initPunctuation("animatePunctuation", delay, false, true);			
 		document.cookie="animateCookie=true";
+        debug_();
 		return true;
 	} else {
 		clearTimeout(timeout);
 		timeout=null;
 		document.cookie = "animateCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-		document.cookie = "logoCookie=" + escape(document.getElementById("logo").textContent);
+		document.cookie = "logoCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		document.cookie = "logoCookie=" + escape(document.getElementById("logo_mark").innerHTML);
+        debug_();
 		return false;
 	}
 }
@@ -201,5 +205,11 @@ function checkCookie(name) {
 function updateControlDisplay(animate,delay,plus) {
 	if(document.getElementById("control"))
 		document.getElementById("control").textContent = animate + " : " + (400 - delay) + " " + plus; 
+}
 
+function debug_() {
+    console.log('---------');            
+    console.log('--------> animate : ' + animate);
+    console.log('--------> timeout : ' + timeout);
+    console.log('---------');            
 }

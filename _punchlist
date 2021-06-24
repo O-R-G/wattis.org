@@ -88,16 +88,20 @@ x instructions email for anthony
 + mobile css cleanup
 + sync media from live
 + /home js debug
-  clickHandler(), #_click, etc
   views/foot
   add startStopAnimatePunctuation(); 
   confirm placement
 + logo link to /home (rm help text)
 + css cleanup (/home)
 + menu debug more ... (static/js/ui) 
-
-/ debug #logoContainer (views/nav, ui.js)
++ debug #logoContainer (views/nav, ui.js)
+  menu cookie
++ _click(), #_click, etc
+/ .red / .redwhite swap debug (css?)
+- columms (///)
 - menu category names (o-r-g) shorter?
+- /home gif container show
 - sync media/ from www
 - mobile css
+- stage remote
 - o-r-g instructions
