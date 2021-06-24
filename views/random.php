@@ -178,6 +178,7 @@
 	*/
 
 	var s_click = document.getElementById('_click');
+    console.log('------------>' + s_click);
 	s_click.addEventListener('click', function(){
         clickHandler();
 	});

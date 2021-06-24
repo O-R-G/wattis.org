@@ -1,15 +1,18 @@
 /*
     user interface control
 */
-menu_level = 0;
 
+menu_level = 0;
 
 function init_ui() {
 
+    /*
+        this fixes an underline issue but can be done better in css ** fix **
     // logo
     var logo = unescape(getCookie("logoCookie"));
     if (logo) { document.getElementById("logo").textContent = logo; }
-    
+    */
+
     // menu    
     var sMenu_btn = document.getElementById('menu-btn');
     sMenu_btn.addEventListener('click', function(){

@@ -127,25 +127,24 @@ pre {
 /* styled */
 
 .underlined {
-        border-bottom: solid 3px;
-    }
+    border-bottom: solid 3px;    
+}
 
 .not-underlined a {
-        border-bottom: none;
-    }
-
+    border-bottom: none;
+}
 
 /* contents */
 
-.logo {
-        /* workaround for fixed div rendering in safari */
+.logo {        
+    /* workaround for fixed div rendering in safari */
     -webkit-font-smoothing: subpixel-antialiased;
-        }
+}
 
 .punctuation {
-        font-family: Monaco, "Lucida Console", monospace;
+    font-family: Monaco, "Lucida Console", monospace;
     color: #000;
-    }
+}
 
 
 /* ids */
@@ -153,7 +152,7 @@ pre {
 #control {
         position: fixed;
         top: 10px;
-        left: 10px;
+    left: 10px;
     height: 100px;
     width: 100px;
     cursor:pointer;
@@ -176,56 +175,66 @@ pre {
     position: fixed;
     top: 20px;
     left: 20px;
-    z-index: 1005;
+    z-index: 900;
     cursor: pointer;
 }
-#loadingLogoContainer
-{
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1005;
-    color: #000;
+
+#logo {
+    display: inline-block;
+}
+
+#logo_mark {
+    display: inline-block;
+}
+
+#loading_mark {
+    width: 50px;
+    height: 50px;
+    background-image: url(../../media/svg/loading-6-k.svg);
+    position: absolute;
+    left: 0;
+    top: -10px;
+    animation: loading2 1.5s infinite linear;
     display: none;
 }
-.logo-text
-{
-    border-bottom: 3px solid #000;
+
+.loading .homeContainer,
+.loading #search-btn,
+.loading #menu-btn {
+    display: none;
 }
+
+.loading #logo_mark {
+    visibility: hidden;
+}
+
+.loading #loading_mark {
+    display: inline-block;
+}
+
 .viewing-search .black #logoContainer .fixed-black,
-.viewing-menu .black #logoContainer .fixed-black
-{
+.viewing-menu .black #logoContainer .fixed-black {
     color: #fff;
 }
-.viewing-search .black #logoContainer .fixed-black .logo-text,
-.viewing-menu .black #logoContainer .fixed-black .logo-text
 
-{
+.viewing-search .black #logoContainer .fixed-black .logo-text,
+.viewing-menu .black #logoContainer .fixed-black .logo-text {
     border-bottom: 3px solid #fff;
 }
 
 .viewing-search .white #logoContainer,
-.viewing-menu .white #logoContainer
-{
+.viewing-menu .white #logoContainer {
     color: #000;
 }
-.viewing-help #logoContainer
-{
+
+.viewing-help #logoContainer {
     display: none;
 }
 
-#logo {
-    /*position: absolute;
-    top: 0;
-    left: 0;*/
-}
-#logo_short
-{
-    display: none;
-}
 #intro {
     display: none;
 }
+
 #intro a:first-child {
     display: block;
 }
@@ -666,14 +675,14 @@ pre {
 /* colors */
 
 .black,
-.fixed-black {
-        color: #000;
-        }
+.black a {
+    color: #000;
+}
 
-.black a,
+.fixed-black,
 .fixed-black a {
-        color: #000;
-        }
+    color: #000 !important;
+}
 
 .white {
         color: #FFF;
@@ -1047,13 +1056,14 @@ body.reverse.viewing-search #search-btn
 {
     /*padding-right: 10px;*/
 }
-#_click
-{
+#_click {
     width: 100vw;
     max-width: 100%;
     height: 100vh;
     position: fixed;
     z-index: 998;
+    background-color: #FF0;
+    opacity: 0.5;
 }
 /* temp */
 
@@ -1160,28 +1170,6 @@ a.year.expanded
     left: 0;
     transform: translate(0, 100%);
     width: 75vw;
-}
-
-.loading .homeContainer,
-.loading #search-btn,
-.loading #menu-btn,
-.loading #logoContainer
-{
-    display: none;
-}
-.loading #loadingLogoContainer
-{
-    display: block;
-}
-#loading_mark
-{
-    width: 50px;
-    height: 50px;
-    background-image: url(../../media/svg/loading-6-k.svg);
-    position: absolute;
-    left: 0;
-    top: -10px;
-    animation: loading2 1.5s infinite linear;
 }
 
 /* 3/19 adjust font size of caption */
@@ -1414,12 +1402,10 @@ a.year.expanded
         -webkit-box-sizing: border-box;
     }
     /* INDEX */
-    #logo
-    {
+    #logo {
         display: none;
     }
-    #logo_short
-    {
+    #logo_mark {
         display: block;
     }
     .logoContainer {
@@ -1606,10 +1592,6 @@ a.year.expanded
     }
 
     .title-block {
-    }
-
-    #loadingLogo {
-        display: none;
     }
 
     #filter_container {

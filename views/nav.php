@@ -8,13 +8,14 @@ $id = $main_id;
 $main_children = $oo->children($main_id);
 $menu_level = 0;
 
-?><div id="logoContainer" class="times big logo">
-	<div id="logo" class="fixed-black">.+* <a href ="/"><span class="logo-text">The Wattis Institute</span></a></div>
-	<div id="logo_short">.+*</div>
-</div>
-<div id="loadingLogoContainer" class="times big logo">
-	<div id="loading_mark"></div>
-	<div id="loadingLogo"><span class="transprent">.+*</span> <span class="logo-text">The Wattis Institute</span></div>
+?><div id="logoContainer">
+    <div class="times big logo">
+        <div id="loading_mark"></div>
+	    <div id="logo_mark">.+*</div>
+        <div id="logo" class="fixed-black underlined">
+            <a href ="/"><span class="logo-text">The Wattis Institute</span></a>
+        </div>
+    </div>
 </div>
 <div id="close-help-btn"></div>
 
