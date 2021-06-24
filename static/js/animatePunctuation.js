@@ -127,7 +127,7 @@ function animatePunctuation(divs,delay) {
 function startStopAnimatePunctuation() {
 	if(timeout == null) {
         swapClass("color","black","white");
-        swapClass("news","red","redwhite");
+        swapClass("news","redwhite","red");
 		delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
 		initPunctuation("animatePunctuation", delay, false, true);			
 		document.cookie="animateCookie=true";
@@ -138,7 +138,7 @@ function startStopAnimatePunctuation() {
 		timeout=null;
 		document.cookie = "animateCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 		document.cookie = "logoCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-		document.cookie = "logoCookie=" + escape(document.getElementById("logo_mark").innerHTML);
+ 		document.cookie = "logoCookie=" + escape(document.getElementById("logo_mark").innerHTML);
         debug_();
 		return false;
 	}
@@ -151,7 +151,7 @@ function _click() {
         swapClass class args order doesnt matter
     */
 	swapClass("color","black","white");
-	swapClass("news","red","redwhite");
+	swapClass("news","redwhite","red");
 	addRemoveClickDiv("_click", _click);
 }
 
