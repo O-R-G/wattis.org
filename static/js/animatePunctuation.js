@@ -126,8 +126,7 @@ function animatePunctuation(divs,delay) {
 
 function startStopAnimatePunctuation() {
 	if(timeout == null) {
-        swapClass("color","black","white");
-        swapClass("news","redwhite","red");
+        toggleColor("color", "white");
 		delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
 		initPunctuation("animatePunctuation", delay, false, true);			
 		document.cookie="animateCookie=true";
@@ -148,27 +147,15 @@ function _click() {
     /*
         exclusively called when div #_click is clicked
         then removes div #_click (and this listener)
-        swapClass class args order doesnt matter
+        toggles #color .white
     */
-	swapClass("color","black","white");
-	swapClass("news","redwhite","red");
-	addRemoveClickDiv("_click", _click);
+	toggleColor("color", "white");
+    addRemoveClickDiv("_click", _click);
 }
 
-function swapClass(id,class1,class2) {
-    if (document.getElementById(id)) { 
-        if (document.getElementById(id).className)
-	        document.getElementById(id).className = (document.getElementById(id).className != class1) ? class1 : class2;
-        else if (document.getElementsByClassName) {
-		    var elementsClass1 = document.getElementById(id).getElementsByClassName(class1);
-		    var elementsClass2 = document.getElementById(id).getElementsByClassName(class2);
-		    var elements = (elementsClass1.length) ? elementsClass1 : elementsClass2;
-		    var replace = (elementsClass1.length) ? class2 : class1;
-		    for (var i = 0; i < elements.length; i++) {
-			    elements[i].className = replace;
-		    }
-	    }
-    }     
+function toggleColor(id, color) {
+    var element = document.getElementById(id);
+    element.classList.toggle(color);
 }
 
 function addRemoveClickDiv(id, handler) {

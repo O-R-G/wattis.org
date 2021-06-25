@@ -102,15 +102,15 @@ x instructions email for anthony
 x convert columms (///) in views/list to css .columns
 + mobile css
 + rm #_click bgcolor
-/ .homeContainer (random) css resolve
++ change swapClass to toggle #color class .white
+/ .homeContainer (.random) css resolve
 / ?random css and swapClass 
+- #logo_text clear float or other to match wattis.org
+  may require reworking nesting in #logo etc
+
 + sync db local ---> staging
   backup staging
 + sync media/ local ---> staging
 + stage staging
-
-- change swapClass to toggle #color class black/white
-- #logo_text clear float or other to match wattis.org
-  may require reworking nesting in #logo etc
 
 - o-r-g instructions

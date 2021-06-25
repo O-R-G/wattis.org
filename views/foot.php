@@ -10,8 +10,8 @@
             if (home)
 			    initPunctuation("animatePunctuation", delay, true, true);
 			else {
-                animate = false;    /* ugly but cant work out how to make cookies work consistently now */
-                swapClass("color","black","white");
+                animate = false;    /* ugly */
+                toggleColor("color", "white");
 			    initPunctuation("animatePunctuation", delay, true, animate);
             }
             document.getElementById('logo_mark').addEventListener('click', ()=>{
