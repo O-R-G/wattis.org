@@ -720,38 +720,29 @@ pre {
 }
 
 .red a:hover {
-        border-bottom: solid 3px #FFF;
-        }
+    border-bottom: solid 3px #FFF;
+}
 
-.redwhite {
-        color: #FFF;
-        }
-
-.redwhite a {
-        color: #FFF;
-        text-decoration: none;
-        border-bottom: solid 3px #F00;
-        }
-
-.redwhite a:hover {
-        border-bottom: solid 3px #FFF;
-        }
+.white .red,
+.white .red a {
+    color: #FFF;
+}
 
 .greybox {
-        background-color: #EEE;
-        }
+    background-color: #EEE;
+}
 
 .redbox {
-        background-color: #FCC;
-        }
+    background-color: #FCC;
+}
 
 .bluebox {
-        background-color: #CCF;
-        }
+    background-color: #CCF;
+}
 
 .greenbox {
-        background-color: #CFC;
-        }
+    background-color: #CFC;
+}
 
 .transparent {
     opacity:0.5;

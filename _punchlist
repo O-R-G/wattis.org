@@ -104,6 +104,7 @@ x convert columms (///) in views/list to css .columns
 + rm #_click bgcolor
 + change swapClass to toggle #color class .white
 + #logo_text clear float or other to match wattis.org
++ news css .white
 / .homeContainer (.random) css resolve
 / ?random css and swapClass 
 
