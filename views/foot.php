@@ -5,9 +5,10 @@
 		<script type="text/javascript">
 			var animate = checkCookie("animateCookie");
             var home = <?= json_encode(!$uri[1]); ?>;    
+            var random = <?= json_encode($random); ?>;    
 			delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
             debug_();
-            if (home)
+            if (home || random)
 			    initPunctuation("animatePunctuation", delay, true, true);
 			else {
                 animate = false;    /* ugly */

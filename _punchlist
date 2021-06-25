@@ -99,18 +99,16 @@ x instructions email for anthony
 + _click(), #_click, etc
 + .red / .redwhite swap debug (css?)
 + /home gif container show
-x convert columms (///) in views/list to css .columns
 + mobile css
 + rm #_click bgcolor
 + change swapClass to toggle #color class .white
 + #logo_text clear float or other to match wattis.org
 + news css .white
-/ .homeContainer (.random) css resolve
-/ ?random css and swapClass 
-
 + sync db local ---> staging
   backup staging
 + sync media/ local ---> staging
 + stage staging
+x convert columms (///) in views/list to css .columns
+/ ?random css and toggleColor()
 
 - o-r-g instructions
