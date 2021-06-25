@@ -100,7 +100,7 @@ $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows
 
 $bodyClass = '';
 if(!$uri[1])
-	$bodyClass .= ' home loading hiding-type';
+	$bodyClass .= ' home loading';
 if($uri[1] == 'search')
 	$bodyClass .= ' reverse';
 if($uri[1] == 'browse-the-library')

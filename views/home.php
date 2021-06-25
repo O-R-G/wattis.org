@@ -47,7 +47,7 @@ foreach($items as $key =>$item)
             already written in views/nav so ** fix **
         */
 		// var_dump($item);
-		?><div id = 'logo_text'><?= nl2br($item["body"]); ?></div><?
+		?><div id = 'logo_text' class='logo_text_container'><?= nl2br($item["body"]); ?></div><?
 	}
 	else
 	{
