@@ -109,7 +109,8 @@ x instructions email for anthony
 + sync media/ local ---> staging
 + stage staging
 x convert columms (///) in views/list to css .columns
-+ fix encoding in /calendar 
++ reset to percussion sounds
++ fix encoding in /calendar and /program
   a bear! first looking more into encoding from above encoding fix 
   in the end, i did find and replace in database dump from 
   wattis_staging.sql, replacing:
@@ -119,15 +120,30 @@ x convert columms (///) in views/list to css .columns
     Há»“ng-Ã‚n TrÆ°Æ¡ng --> Hồng-Ân Trương
     Ã© --> é
     ØµØ±Ø®Ø© Ø´Ù…Ø³ÙŠØ© --> صرخة شمسية
-/ ?random css and toggleColor()
-- menu repeats About
-- ?random should start out not blank, but showing the letters plus punctuation
-- /calendar filter by on our mind
-- /calendar dates encoding
-- /calendar column space
-/ program
-- click sound on every href
-- reset to percussion sounds
-- use Notes as keywords for search
+
+- /?random should start out not blank (letters white), 
+  but showing letters plus punctuation
+- fix /?random css and update toggleColor() as necc
+- menu should not have both Read About Us and About (remove About)
+- add /calendar filter by "on our mind" and "our program"
+  (looking at what parent record)
+- add space between columns for /calendar (and wherever else) in views/list
+- review 3-columns here (for example) which use css columns
+  /on-our-mind/cecilia-vicua-a-is-on-our-mind-2020-2021
+  likely better inline-block with /// as column separator
+- trigger sound on every href (in process but not working in static/js/ui.js)'
+  sound needs to finish playing before the href link is followed
 - debug /search to look in Notes (etc)
-- o-r-g instructions
+  currently it doesnt seem to be searching Notes field. not sure if correctly
+  searching body, so to look into and make sure it is working as expected
+- add / use Notes field as keywords for search
+  this only means that for example you could add a term in there on a record
+  and search would then find that record, so if searching Notes then
+  this should work
+
+- o-r-g instructions (victor to do based on 
+
+  https://github.com/O-R-G/open-records-generator/blob/master/readme.md
+
+  referring to ICA version, adding whatever needs to be added specific
+  to wattis
