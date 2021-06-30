@@ -140,6 +140,9 @@ x convert columms (///) in views/list to css .columns
   this only means that for example you could add a term in there on a record
   and search would then find that record, so if searching Notes then
   this should work
+- o-r-g clean up any extra <br> at the tops of columns of text, 
+  for example, here:
+  /read-about-us
 
 - o-r-g instructions (victor to do based on 
 
