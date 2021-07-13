@@ -173,7 +173,7 @@ if($isMenu)
 			echo nl2br($datesDisplay);
 			// if ($displayHours) $html .= $hoursDisplay;
 
-		    if($notes) {
+		    if($deck) {
 			    ?><div id='deck' class=''><?= $deck; ?></div><?
 		    }
 		} else if($isMenu) {
@@ -291,12 +291,12 @@ if($isMenu)
 		{
 			foreach($columns as $key => $c){
 				$isLast = $key == count($columns) - 1;
-				?><div class='listContainer times <?= $isLast ? 'lastListContainer' : ''; ?>'><?php echo nl2br($c); ?></div><?
+				?><div class='listContainer times <?= $isLast ? 'lastListContainer' : ''; ?>'><?php echo $c; ?></div><?
 			}
 		} 
 		else 
 		{
-			?><div class='listContainer doublewide centered times <?= ($use_columns) ? "columns" : ""; ?>'><?php echo nl2br($body); ?></div><?php
+			?><div class='listContainer doublewide centered times <?= ($use_columns) ? "columns" : ""; ?>'><?php echo $body; ?></div><?php
 		}
 		?><div class='clear'></div>
 		<div class='galleryContainer'><?php

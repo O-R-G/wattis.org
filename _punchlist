@@ -125,8 +125,12 @@ x convert columms (///) in views/list to css .columns
   but showing letters plus punctuation
 - fix /?random css and update toggleColor() as necc
 + menu should not have both Read About Us and About (remove About)
+    - update ranks of menu items on staging:
+      our program --> 10
+      calendar    --> 15
 - add /calendar filter by "on our mind" and "our program"
   (looking at what parent record)
+    the children of calendar seem to be just children of calendar instead fetched from oom and op?
 + add space between columns for /calendar (and wherever else) in views/list
 + review 3-columns here (for example) which use css columns
   /on-our-mind/cecilia-vicua-a-is-on-our-mind-2020-2021
@@ -136,13 +140,14 @@ x convert columms (///) in views/list to css .columns
 + debug /search to look in Notes (etc)
   currently it doesnt seem to be searching Notes field. not sure if correctly
   searching body, so to look into and make sure it is working as expected
-- add / use Notes field as keywords for search
++ add / use Notes field as keywords for search
   this only means that for example you could add a term in there on a record
   and search would then find that record, so if searching Notes then
   this should work
-- o-r-g clean up any extra <br> at the tops of columns of text, 
++ o-r-g clean up any extra <br> at the tops of columns of text, 
   for example, here:
   /read-about-us
+    solved by remove nl2br(). Possibily need to check if it messes up some layout somewhere
 
 - o-r-g instructions (victor to do based on 
 

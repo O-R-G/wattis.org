@@ -47,9 +47,9 @@ $menu_level = 0;
 			echo '</div>';
 		
         ?>
-		<a href='/our-program' class='instructionContainer'>PROGRAM</a><br>
+        
+		<!-- <a href='/our-program' class='instructionContainer'>PROGRAM</a><br>
 		<a href='/calendar' class='instructionContainer'>CALENDAR</a><br>
-		<a href='/library' class='instructionContainer'>LIBRARY</a><br>
 		<div id = 'menu-level-1' class='menu-level'>
 			<a href='/consult-the-archive' class='instructionContainer'>ARCHIVE</a><br>
 			<a href='/visit-the-wattis' class='instructionContainer'>VISIT</a><br>
@@ -61,7 +61,8 @@ $menu_level = 0;
 			<a href='/become-a-member' class='instructionContainer'>BECOME A MEMBER</a><br>
 			<a href='/buy-limited-editions' class='instructionContainer'>BUY LIMITED EDITIONS</a><br>
 			<a href='/capp-street-project' class='instructionContainer'>CAPP STREET PROJECT</a><br>
-		</div>
+		</div> -->
+		
 		<br><div id = 'more-menu-btn' class='instructionContainer'><a><span id="more-menu-btn-text">MORE</span>...</a></div>
 	</div>
 	<div id = 'close-menu-btn' class = ''></div>
