@@ -136,4 +136,4 @@ require_once('static/php/function.php');
             });
 		</script>
 		<div id="animatePunctuation" class="animatePunctuation">
-    		<div id="color" class="white">
+    		<div id="color" class="<?= $random ? '' : 'white'; ?> ">

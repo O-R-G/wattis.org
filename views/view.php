@@ -6,7 +6,7 @@ $isFound = false;
 $main_id = end($oo->urls_to_ids(array('main')));
 $main_children = $oo->children($main_id);
 $id = end($ids);
-$use_columns = ($uri[1] == 'on-our-mind');
+
 foreach($main_children as $child)
 {
 	if($child['url'] == $uri[1] && count($uri) == 2)
@@ -56,7 +56,6 @@ $pattern = "/\[image(\d+)\]/";
 preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);
 $img_indexes = $out[1];
 $media = $oo->media($item['id']);
-
 
 
 $menu_tag = '[menu]';
@@ -276,20 +275,24 @@ if($isMenu)
 		$pattern = "/\/\/\//";
 		if(preg_match($pattern, $body) == 1) 
 			$columns = preg_split($pattern, $body);
-		$columns[0] = strictClean($columns[0]);
-		$columns[1] = strictClean($columns[1]);
-		if(!$columns[0] && !$columns[1])
-			$columns = false;
+		// $columns[0] = strictClean($columns[0]);
+		// $columns[1] = strictClean($columns[1]);
+		$columns = split_column($body);
 		
+		$use_columns = ($uri[1] == 'on-our-mind');
+
 		// search for strings that match [\d+] where \d+ = n
 		// replace with image container = n
 		// remove image container n from array of images
 		// print out rest of images at the end (as normal images?)
 	
 		// body
-		if($columns) 
+		if(count($columns) > 1) 
 		{
-			?><div class='listContainer times'><?php echo nl2br($columns[0]); ?></div><div class='listContainer times'><?php echo nl2br($columns[1]); ?></div><?   	
+			foreach($columns as $key => $c){
+				$isLast = $key == count($columns) - 1;
+				?><div class='listContainer times <?= $isLast ? 'lastListContainer' : ''; ?>'><?php echo nl2br($c); ?></div><?
+			}
 		} 
 		else 
 		{
@@ -302,15 +305,6 @@ if($isMenu)
 			foreach($images as $image)
 				echo $image;
 		}
-
-		// video
-		/*
-		if($notes)
-		{
-			?>
-			<span class=''><?php echo $notes; ?></span><?php
-		}
-		*/
 
 		?></div><?php
 		// echo nl2br($html);

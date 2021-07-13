@@ -114,7 +114,18 @@
             </div>
         </div><? 
     } 
-    ?><div class='listContainer times title-bloc'><?= $name; ?></div><?
+    ?><div class='listContainer times title-bloc'>
+    	<?= $name; ?>
+    	<? if($uri[1] == 'calendar')
+    	{
+    		?><div id="calender-mode-switch" class="mode-switch">
+	    		<br>
+	    		<button onClick="toggle_calendar_category(this);" class="hover" ><span class="small helvetica">On our mind</span></button>
+	    		<button onClick="toggle_calendar_category(this);" class="hover" ><span class="small helvetica">On view</span></button>
+	    	</div><?
+    	}
+    	?>
+	</div><?
 		if($twoCategories)
 		{
 			?><div class='listContainer times categoryContainer'>
@@ -124,7 +135,7 @@
 						print_list_child($child, $cat1_url, $show_children_date, $show_children_deck);
 					}
 				} ?>
-			</div><div class='listContainer times categoryContainer'>
+			</div><div class='listContainer times categoryContainer lastListContainer'>
 				<p><?= $cat2_name; ?></p><br>
 				<? foreach($cat2_children as $child){
 					if (substr($child['name1'], 0, 1) != '.') {
@@ -135,7 +146,7 @@
 		}
 		else
 		{
-		?><div class='listContainer doublewide times'>
+		?><div class='listContainer doublewide times lastListContainer'>
 		<?php
 		
 			foreach($children as $key => $child){
@@ -322,6 +333,13 @@ function print_list_child($child, $root_url = false, $show_date = false, $show_d
 			x.classList.add('active');
 			btn_x.classList.add('expanded');
 		}
-
+	}
+	function toggle_calendar_category(btn) {
+		btn.classList.remove('hover');
+		btn.classList.toggle('inactive');
+		btn.addEventListener('mouseout', function(){
+			btn.classList.add('hover');
+			btn.removeEventListener('mouseout');
+		}, false);
 	}
 </script>

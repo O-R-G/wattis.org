@@ -19,7 +19,7 @@ require_once('static/php/displayMedia.php');
         <a href='/library/<?= $submenu_url; ?>'><?= $base_name; ?></a><br><br>
         <span class="italic"><?= $category_name; ?><br></span>
     </div>
-    <div class = 'listContainer doublewide library'>
+    <div class = 'listContainer doublewide library lastListContainer'>
         <div class='subheadContainer'><?= $name; ?></div>
         <?= $body; ?>
     </div>

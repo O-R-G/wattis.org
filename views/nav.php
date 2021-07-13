@@ -46,7 +46,7 @@ $menu_level = 0;
 		if($menu_level > 0)
 			echo '</div>';
 		
-        ?><a href='/read-about-us' class='instructionContainer'>ABOUT</a> <br>
+        ?>
 		<a href='/our-program' class='instructionContainer'>PROGRAM</a><br>
 		<a href='/calendar' class='instructionContainer'>CALENDAR</a><br>
 		<a href='/library' class='instructionContainer'>LIBRARY</a><br>

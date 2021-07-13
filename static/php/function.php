@@ -112,7 +112,8 @@ function build_children_search($oo, $ww, $query) {
     $tables = array("objects", "wires");
     $where  = array("objects.active = '1'",
                   "(LOWER(CONVERT(BINARY objects.name1 USING utf8mb4)) LIKE '%" . $query .
-                  "%' OR LOWER(CONVERT(BINARY objects.deck USING utf8mb4)) LIKE '%" . $query . "%')",
+                  "%' OR LOWER(CONVERT(BINARY objects.deck USING utf8mb4)) LIKE '%" . $query . 
+                  "%' OR LOWER(CONVERT(BINARY objects.notes USING utf8mb4)) LIKE '%" . $query ."%')",
                   "objects.name1 NOT LIKE '.%'",
                   // "objects.name1 NOT LIKE '_%'",
                   "wires.toid = objects.id",
@@ -122,6 +123,7 @@ function build_children_search($oo, $ww, $query) {
                   "wires.fromid NOT IN " . $not_in . "" );
     $order  = array("objects.name1", "objects.begin", "objects.end");
     $children = $oo->get_all($fields, $tables, $where, $order);
+
     return $children;
 }
 
@@ -234,4 +236,25 @@ function clean_caption($str){
   return $output;
 }
 
+function get_single_tag($str){
+  $bracket_pattern = '/\[(.*?)\]/';
+  preg_match($bracket_pattern, $str, $output);
+  return $output[1];
+}
+
+function split_column($str){
+  $column_break = '///';
+  $output = array();
+  if(strpos($str, $column_break) !== false)
+  {
+    $columns_temp = explode($column_break, $str);
+    foreach($columns_temp as $c)
+      $output[] = $c;
+  }
+  else
+  {
+    $output[] = $str;
+  }
+  return $output;
+}
 ?>

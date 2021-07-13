@@ -121,14 +121,14 @@ x convert columms (///) in views/list to css .columns
     Ã© --> é
     ØµØ±Ø®Ø© Ø´Ù…Ø³ÙŠØ© --> صرخة شمسية
 
-- /?random should start out not blank (letters white), 
++ /?random should start out not blank (letters white), 
   but showing letters plus punctuation
 - fix /?random css and update toggleColor() as necc
-- menu should not have both Read About Us and About (remove About)
++ menu should not have both Read About Us and About (remove About)
 - add /calendar filter by "on our mind" and "our program"
   (looking at what parent record)
-- add space between columns for /calendar (and wherever else) in views/list
-- review 3-columns here (for example) which use css columns
++ add space between columns for /calendar (and wherever else) in views/list
++ review 3-columns here (for example) which use css columns
   /on-our-mind/cecilia-vicua-a-is-on-our-mind-2020-2021
   likely better inline-block with /// as column separator
 - trigger sound on every href (in process but not working in static/js/ui.js)'

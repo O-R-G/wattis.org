@@ -100,7 +100,7 @@ require_once('static/php/displayMedia.php');
                         <div id='library-description'>
                             <br/>Here there are videos of artists talking about their work as well as video and audio documentation of all past lectures, performances, and events. There are also essays about exhibitions, plus reviews, reading lists, and interviews to read. The Library is organized in two sections:
                         </div>
-                        <div id="library-mode-switch">
+                        <div id="library-mode-switch" class="mode-switch">
                             <? foreach($submenu as $s){
                                 if ($s['id'] == $submenu_id){
                                     ?><button class = "helvetica small"><?= $s['name1']; ?></button><?
@@ -183,7 +183,7 @@ require_once('static/php/displayMedia.php');
             
             $search_count = count($search_result);
             ?>
-                <div class='listContainer not-underlined library doublewide'>
+                <div class='listContainer not-underlined library doublewide lastListContainer'>
                     <div class='subheadContainer library'>Results</div>
                     <? foreach($search_result as $key => $r){
                         if(substr($r['name1'], 0, 1) != '.'){
@@ -239,7 +239,7 @@ require_once('static/php/displayMedia.php');
 
         } else {
 
-            foreach ($categories as $c) {
+            foreach ($categories as $key => $c) {
 
                 // SQL objects attached to category object plus media plus rootname, rootbody
     
@@ -250,8 +250,9 @@ require_once('static/php/displayMedia.php');
                 $items = $oo->children($category_id);
                 $category_url = $c['url'];
                 $gotSpecs = false;
+                $isLast = count($categories) - 1 == $key;
                 ?>
-                <div class = 'listContainer not-underlined library'>
+                <div class = 'listContainer not-underlined library <?= $isLast ? 'lastListContainer' : ''; ?>'>
                     <div class='subheadContainer library'><?= $c['name1']; ?></div>
                     <? foreach($items as $key => $item){
                         if(substr($item['name1'], 0, 1) != '.'){
