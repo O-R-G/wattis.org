@@ -133,7 +133,7 @@ x convert columms (///) in views/list to css .columns
   likely better inline-block with /// as column separator
 - trigger sound on every href (in process but not working in static/js/ui.js)'
   sound needs to finish playing before the href link is followed
-- debug /search to look in Notes (etc)
++ debug /search to look in Notes (etc)
   currently it doesnt seem to be searching Notes field. not sure if correctly
   searching body, so to look into and make sure it is working as expected
 - add / use Notes field as keywords for search
