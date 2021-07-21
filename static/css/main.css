@@ -308,6 +308,10 @@ pre {
     border-bottom: none;
 }
 
+.homeContainer.random img {
+    width: 100%;
+}
+
 .black .homeContainer .blockContainer span {
     color: #000 !important;
 }

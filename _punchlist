@@ -18,14 +18,13 @@ x Resolving "The Word for World is Forest (2020)"
 + update css in views/home for centered block
 + set random to default in getRandomRecords()
 + add custom sounds
-- improve custom sounds, perhaps using sound sprites?
+x improve custom sounds, perhaps using sound sprites?
 + friday, march 29 --> database freeze from live wattis.org snapshot
   anthony to start marking bold items, and editing text
   month of april is T editing text to launch 1 may
 + filter months to all CAPS
 + help button always shows LOGO top left when clicked
   then shows the help msg centered on black screen
-
 + mobile css for views/home to match non-mobile
   see servinglibrary.org
 + search magnifying glass flip
@@ -43,19 +42,17 @@ x Resolving "The Word for World is Forest (2020)"
 + helvetica menu to pull from o-r-g
   add category Menu and link all in o-r-g
 + /bookstore /editions lines rm
-x instructions email for anthony
-
++ instructions email for anthony
 ** graft new site onto old site, add sounds **
-
-/ /home
++ /home
   + resurrect views/home from
     f611fb107c1f43b54a90c028aba890ccffa0fbad
   + reconcile css views/home & views/random
   + add menu
   + add search
   + add sounds v2
-  / add sound every href on desktop (async || callback)
-  - animate punctuation / menu js click debug
+  x add sound every href on desktop (async || callback)
+  + animate punctuation / menu js click debug
 + /?random
   + only .gifs
   + only random
@@ -120,23 +117,17 @@ x convert columms (///) in views/list to css .columns
     Há»“ng-Ã‚n TrÆ°Æ¡ng --> Hồng-Ân Trương
     Ã© --> é
     ØµØ±Ø®Ø© Ø´Ù…Ø³ÙŠØ© --> صرخة شمسية
-
 + /?random should start out not blank (letters white), 
   but showing letters plus punctuation
-- fix /?random css and update toggleColor() as necc
++ fix /?random css and update toggleColor() as necc
 + menu should not have both Read About Us and About (remove About)
     - update ranks of menu items on staging:
       our program --> 10
       calendar    --> 15
-- add /calendar filter by "on our mind" and "our program"
-  (looking at what parent record)
-    the children of calendar seem to be just children of calendar instead fetched from oom and op?
 + add space between columns for /calendar (and wherever else) in views/list
 + review 3-columns here (for example) which use css columns
   /on-our-mind/cecilia-vicua-a-is-on-our-mind-2020-2021
   likely better inline-block with /// as column separator
-- trigger sound on every href (in process but not working in static/js/ui.js)'
-  sound needs to finish playing before the href link is followed
 + debug /search to look in Notes (etc)
   currently it doesnt seem to be searching Notes field. not sure if correctly
   searching body, so to look into and make sure it is working as expected
@@ -148,10 +139,19 @@ x convert columms (///) in views/list to css .columns
   for example, here:
   /read-about-us
     solved by remove nl2br(). Possibily need to check if it messes up some layout somewhere
-
-- o-r-g instructions (victor to do based on 
-
+/ add /calendar filter by "on our mind" and "our program"
+  (looking at what parent record)
+    the children of calendar seem to be just children of calendar instead 
+    fetched from oom and op?
+  will depend on _Events which is under specific On our mind season or 
+  On view exhibition. here is an example:    
+  http://wattis.o-r-g.net/open-records-generator/browse/on-our-mind/joan-jonas-is-on-our-mind-2014-2015/events
+  wattis will link these for all other events, so just need to adjust code
+  to filter on the ancestors of these linked records
+- trigger sound on every href (in process but not working in static/js/ui.js)'
+  sound needs to finish playing before the href link is followed
+/ o-r-g instructions (victor to do based on 
   https://github.com/O-R-G/open-records-generator/blob/master/readme.md
-
   referring to ICA version, adding whatever needs to be added specific
   to wattis
+x o-r-g default to html view
