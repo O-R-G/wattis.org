@@ -155,4 +155,10 @@ x convert columms (///) in views/list to css .columns
   https://github.com/O-R-G/open-records-generator/blob/master/readme.md
   referring to ICA version, adding whatever needs to be added specific
   to wattis
-x o-r-g default to html view
+
+- o-r-g default to html view
+- update all o-r-g records from .org since migration
+- fix all accents in Reading list in Library
+- current accurate best databse is on .local
+  this should be the same as remote but just in case
+- fix adding record to News (which does not work currently)
