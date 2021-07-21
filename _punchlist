@@ -148,8 +148,9 @@ x convert columms (///) in views/list to css .columns
   http://wattis.o-r-g.net/open-records-generator/browse/on-our-mind/joan-jonas-is-on-our-mind-2014-2015/events
   wattis will link these for all other events, so just need to adjust code
   to filter on the ancestors of these linked records
-- trigger sound on every href (in process but not working in static/js/ui.js)'
++ trigger sound on every href (in process but not working in static/js/ui.js)'
   sound needs to finish playing before the href link is followed
+  achieved by simply using the click event as the handler   
 / o-r-g instructions (victor to do based on 
   https://github.com/O-R-G/open-records-generator/blob/master/readme.md
   referring to ICA version, adding whatever needs to be added specific

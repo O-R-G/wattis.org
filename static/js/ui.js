@@ -74,7 +74,7 @@ function init_ui() {
             href = this.href;
             play_sound_random_async(href).then(
                 function(href) {
-                    // console.log(href);
+                    console.log(href);
                     location.href = href;
                 });
             return false;   // squelch html href
@@ -83,8 +83,8 @@ function init_ui() {
     */
 
     // clicks / taps
-    // document.body.addEventListener('click', function () {
-    document.body.addEventListener('touchstart', function () {    
+    document.body.addEventListener('click', function () {
+    // document.body.addEventListener('touchstart', function () {    
         play_sound_random();
     });
 
