@@ -159,7 +159,7 @@ x convert columms (///) in views/list to css .columns
 + current accurate best database is on .local
   this should be the same as remote but just in case
 + reconcile media 
-+ reconcile On our mind
+/ reconcile On our mind
 / fix all accents in Reading list in Library
 - o-r-g default to html view
 - fix adding record to News (which does not work currently)
