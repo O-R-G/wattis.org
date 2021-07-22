@@ -40,20 +40,20 @@ function db_connect($remote_user) {
 	} else {
 		// IF YOU ARE NOT USING ENVIRONMENTAL VARIABLES
 		$host = "localhost";
-		$dbse = "wattis_local";
+		$dbse = "wattis_live";
 
 		// full access
 		$creds['full']['db_user'] = "root";
-		$creds['full']['db_pass'] = "f3f4p4ax";
+		$creds['full']['db_pass'] = "";
 
 		// read / write access
 		// (can't create / drop tables)
 		$creds['rw']['db_user'] = "root";
-		$creds['rw']['db_pass'] = "f3f4p4ax";
+		$creds['rw']['db_pass'] = "";
 
 		// read-only access
 		$creds['r']['db_user'] = "root";
-		$creds['r']['db_pass'] = "f3f4p4ax";
+		$creds['r']['db_pass'] = "";
 	}
 
 	// users
@@ -124,12 +124,17 @@ $replacement_wattis = '/';
 /*
 	exceptions
 */
+/*
+    ignoring these for now
+*/
+/*
 $exception_url_1 = '/gallery/the-word-for-world-is-forest-2020';
 $exception_ids_1 = array('1048', '1051', '1052', '1053', '1055', '1056', '1057', '1058', '1059', '1060', '1062');
 $exception_urls_1 = array('/from-our-place-of-shelter', '/artists/temp', '/exhibition', '/home', '/artists/sofia-cordova', '/artists/beatriz-cortez', '/artists/candice-lin', '/artists/allison-smith', '/artists/patrick-staff', '/contributers', '/exhibition/catalog');
 $exception_url_2 = '/gallery/raven-chacon';
 $exception_ids_2 = array('1180', '1181', '1182', '1183');
 $exception_urls_2 = array('', '/listen', '/collaborators', '/archive');
+*/
 
 $exception_ids = array();
 $exception_urls = array();
