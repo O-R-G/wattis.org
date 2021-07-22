@@ -16,6 +16,8 @@
 *.tif
 *.tiff
 *.mp4
+*.webp
+*.doc
 
 # macos
 .DS_Store
