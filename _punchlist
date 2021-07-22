@@ -163,7 +163,7 @@ x convert columms (///) in views/list to css .columns
 + reconcile On our mind
 + fix all accents in Reading list in Library
 + add _Events to On our mind (at least Joan Jonas)
-- replace wattis.org/ links with relative in sql 
-- menu (where draws from?)
++ replace wattis.org/ links with relative in sql 
++ menu 
 - o-r-g default to html view
 - fix adding record to News (which does not work currently)

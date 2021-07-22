@@ -28,12 +28,13 @@ $menu_level = 0;
 <div id = 'menu-btn' class=""></div>
 <div id = 'menuContainer' class='menuContainer helvetica'>
 	<div id = 'menu-wrapper'>
-		<a href='/' class='menu-item'>HOME</a><br>
-		<? foreach($main_children as $key => $child){
+		<a href='/' class='menu-item'>HOME</a><br><? 
+        foreach($main_children as $key => $child){
 			if(substr($child['name1'],0,1) != '.') {
 				$this_url = '/' . $child['url'];
-				$this_title = strtoupper($child['name1']);				
-				if($child['rank'] > ($menu_level+1) * 25 ) {
+				$this_title = strtoupper($child['name1']);
+                // show 4 menu items at a time using rank
+				if($child['rank'] >= ($menu_level+1) * 40 ) {
 					if($menu_level > 0) {
 						?></div><?
 					}
@@ -46,24 +47,7 @@ $menu_level = 0;
 		if($menu_level > 0)
 			echo '</div>';
 		
-        ?>
-        
-		<!-- <a href='/our-program' class='instructionContainer'>PROGRAM</a><br>
-		<a href='/calendar' class='instructionContainer'>CALENDAR</a><br>
-		<div id = 'menu-level-1' class='menu-level'>
-			<a href='/consult-the-archive' class='instructionContainer'>ARCHIVE</a><br>
-			<a href='/visit-the-wattis' class='instructionContainer'>VISIT</a><br>
-			<a href='/contact-the-wattis' class='instructionContainer'>CONTACT</a><br>
-			<a href='/buy-catalogues' class='instructionContainer'>BOOKSHOP</a><br>
-		</div>
-		<div id = 'menu-level-2' class='menu-level'>
-			<a href='/thank-our-supporters' class='instructionContainer'>THANKS OUR SUPPORTERS</a><br>
-			<a href='/become-a-member' class='instructionContainer'>BECOME A MEMBER</a><br>
-			<a href='/buy-limited-editions' class='instructionContainer'>BUY LIMITED EDITIONS</a><br>
-			<a href='/capp-street-project' class='instructionContainer'>CAPP STREET PROJECT</a><br>
-		</div> -->
-		
-		<br><div id = 'more-menu-btn' class='instructionContainer'><a><span id="more-menu-btn-text">MORE</span>...</a></div>
+        ?><br><div id = 'more-menu-btn' class='instructionContainer'><a><span id="more-menu-btn-text">MORE</span>...</a></div>
 	</div>
 	<div id = 'close-menu-btn' class = ''></div>
 </div>
