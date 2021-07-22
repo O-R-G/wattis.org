@@ -44,10 +44,9 @@ if(!$isFound)
 $root_item = $oo->get($rootid);
 $rootname = nl2br($root_item["name1"]);
 
-
 $name = $item['name1'];
-$body = $item['body'];
-$deck = $item['deck'];
+$body = nl2br($item['body']);
+$deck = nl2br($item['deck']);
 $notes = $item['notes'];
 $begin = $item['begin'];
 $end = $item['end'];

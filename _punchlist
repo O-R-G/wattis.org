@@ -159,7 +159,11 @@ x convert columms (///) in views/list to css .columns
 + current accurate best database is on .local
   this should be the same as remote but just in case
 + reconcile media 
-/ reconcile On our mind
-/ fix all accents in Reading list in Library
++ fix line returns between paragraphs in db (using nl2br in views/view)  
++ reconcile On our mind
++ fix all accents in Reading list in Library
++ add _Events to On our mind (at least Joan Jonas)
+- replace wattis.org/ links with relative in sql 
+- menu (where draws from?)
 - o-r-g default to html view
 - fix adding record to News (which does not work currently)
