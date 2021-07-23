@@ -276,8 +276,7 @@ if($isMenu)
 		// $columns[0] = strictClean($columns[0]);
 		// $columns[1] = strictClean($columns[1]);
 		$columns = split_column($body);
-		
-		$use_columns = ($uri[1] == 'on-our-mind');
+		$use_columns = ($uri[2] == 'on-our-mind');
 
 		// search for strings that match [\d+] where \d+ = n
 		// replace with image container = n
