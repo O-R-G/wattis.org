@@ -47,7 +47,9 @@
 		$hasFilter = true;
 		$show_children_deck = true;
 		$date_since = '2014-09-09';
-        if (!$date_argument)
+		if (isset($_GET['filter']))
+			$date_argument = false;
+        else if (!$date_argument)
             $date_argument = valid_date('today');
 	} else if(strpos($uri[2], 'past-exhibitions') !== false ){
 		$rootid = end($oo->urls_to_ids(array('main','our-program','gallery')));
@@ -101,7 +103,34 @@
 				$cat['children'] = $oo->children($cat['id']);
 
 			unset($cat);
-	    } else
+	    } else if($hasFilter && $_GET['filter'])
+    	{
+    		if($_GET['filter'] == 'on-our-mind')
+    		{
+    			function build_filter_children_program($oo, $rootid){
+    				global $db;
+    				$children = $oo->children($rootid);
+    				$output = [];
+    				foreach($children as $child)
+    				{
+    					$sql = 'SELECT objects.* FROM objects, wires WHERE objects.active = "1" AND wires.active = "1" AND wires.toid = objects.id AND wires.fromid = (SELECT w.toid FROM objects AS o, wires AS w WHERE o.active = "1" AND w.active = "1" AND w.toid = o.id AND w.fromid = "'.$child['id'].'" AND o.url = "events")';
+    					$res = $db->query($sql);
+						if(!$res)
+							throw new Exception($db->error);
+						while ($obj = $res->fetch_assoc())
+							$output[] = $obj;
+						$res->close();
+						
+    				}
+    				return $output;
+    			}
+    			$oom_id = end($oo->urls_to_ids(array('main', 'our-program', 'on-our-mind')));
+    			$children = build_filter_children_program($oo, $oom_id);
+    		}
+    		else
+    			$children = $oo->children($rootid);
+    	}
+	    else
 	    	$children = $oo->children($rootid);
 	} else {
 		$hasMonth = strpos($date_argument, '-');
@@ -143,7 +172,7 @@
 	    ?><div id = 'filter_container' class="helvetica medium">
 		    <div id='filter' class = 'item'>
 			    <ul id='yearsContainer'>
-				    <li class = 'year sans <? echo (!$uri[2] || ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
+				    <li class = 'year sans <? echo (!$uri[2] || ($uri[2] && !$date_argument)) && !isset($_GET['filter']) ? 'active' : '' ?>'>
 					    <a class = "year-btn" href = '<? echo $sub_category ? '/'.$uri[1].'/' . $uri[2] : '/'.$uri[1]; ?>'>Now</a>
 				    </li><?
                     foreach ($years as $year)
@@ -161,10 +190,28 @@
     	<?= $name; ?>
     	<? if($uri[1] == 'calendar')
     	{
-    		?><div id="calender-mode-switch" class="mode-switch">
+    		$submenu = array(
+    			array(
+    				'name' => 'ON OUR MIND',
+    				'slug'  => 'on-our-mind'
+    			),
+    			array(
+    				'name' => 'ON VIEW',
+    				'slug'  => 'gallery'
+    			)
+    		);
+    		?><div id="calender-mode-switch-container" class="mode-switch-container">
 	    		<br>
-	    		<button onClick="toggle_calendar_category(this);" class="hover" ><span class="small helvetica">On our mind</span></button>
-	    		<button onClick="toggle_calendar_category(this);" class="hover" ><span class="small helvetica">On view</span></button>
+	    		<? foreach($submenu as $s){
+	    			$isActive = $_GET['filter'] == $s['slug'];
+	    			$name = $s['name'];
+	    			$url = $isActive ? '/calendar' : '/calendar?filter=' . $s['slug'];
+	    			$id = 'toggle-' . $s['slug'];
+	    			$class = 'mode-switch hover';
+	    			if(!$isActive)
+	    				$class .= ' inactive';
+	    			?><a href="<?= $url; ?>"><button id="<?= $id; ?>" onClick="toggle_calendar_category(this);" class="<?= $class; ?>"><span class="small helvetica"><?= $name; ?></span></button></a><?
+	    		} ?>
 	    	</div><?
     	}
     	?>
@@ -377,11 +424,22 @@ function print_list_child($child, $root_url = false, $show_date = false, $show_d
 		}
 	}
 	function toggle_calendar_category(btn) {
+		let siblings = btn.parentNode.querySelectorAll('button');
+		console.log(siblings);
+		[].forEach.call(siblings, function(el){
+			console.log(el.id);
+			if(el.id != btn.id){
+				let sibling = el;
+				if( !sibling.classList.contains('inactive') )
+					sibling.classList.add('inactive');
+			}
+		});
 		btn.classList.remove('hover');
 		btn.classList.toggle('inactive');
-		btn.addEventListener('mouseout', function(){
-			btn.classList.add('hover');
-			btn.removeEventListener('mouseout');
-		}, false);
+		btn.addEventListener('mouseout', toggle_calendar_category_hover(btn), false);
+	}
+	function toggle_calendar_category_hover(btn){
+		btn.classList.add('hover');
+		btn.removeEventListener('mouseout', toggle_calendar_category_hover);
 	}
 </script>

@@ -100,15 +100,15 @@ require_once('static/php/displayMedia.php');
                         <div id='library-description'>
                             <br/>Here there are videos of artists talking about their work as well as video and audio documentation of all past lectures, performances, and events. There are also essays about exhibitions, plus reviews, reading lists, and interviews to read. The Library is organized in two sections:
                         </div>
-                        <div id="library-mode-switch" class="mode-switch">
+                        <div id="library-mode-switch-container" class="mode-switch-container">
                             <? foreach($submenu as $s){
                                 if ($s['id'] == $submenu_id){
-                                    ?><button class = "helvetica small"><?= $s['name1']; ?></button><?
+                                    ?><button class = "mode-switch helvetica small"><?= $s['name1']; ?></button><?
                                 }
                                 else
                                 {
                                     $this_url = '/library/' . $s['url'];
-                                    ?><a href='<?= $this_url; ?>'><button class = 'helvetica small'><?= $s['name1']; ?></button></a><?
+                                    ?><a href='<?= $this_url; ?>'><button class = 'mode-switch helvetica small'><?= $s['name1']; ?></button></a><?
                                 }
                             } ?>
                         </div>

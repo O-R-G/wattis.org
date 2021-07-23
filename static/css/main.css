@@ -566,11 +566,11 @@ pre {
     /* border-bottom: 2px; */
 }
 
-#library-mode-switch {
+#library-mode-switch-container {
     margin-bottom: 2em;
 }
 
-.mode-switch button {
+.mode-switch {
   display: inline-block;
   width: 40%;
   height: 100px;
@@ -583,28 +583,28 @@ pre {
   cursor: pointer;
 }
 
-#library-mode-switch a button {
+#library-mode-switch-container a button {
     opacity: 0.5;
 }
 
-#library-mode-switch a button:hover {
+#library-mode-switch-container a button:hover {
     opacity: 1.0;
 }
 
-#library-mode-switch a {
+.mode-switch-container a {
     border-bottom: none;
 }
 
-#calender-mode-switch button.hover:hover,
-#calender-mode-switch button.inactive
+#calender-mode-switch-container button.hover:hover,
+#calender-mode-switch-container button.inactive
 {
     opacity: 0.5;
 }
-#calender-mode-switch button.hover.inactive:hover
+#calender-mode-switch-container button.hover.inactive:hover
 {
     opacity: 1;
 }
-#calender-mode-switch button:active
+#calender-mode-switch-container button:active
 {
     background-color: #ddd;
     transition: none;
