@@ -113,7 +113,7 @@
     				$output = [];
     				foreach($children as $child)
     				{
-    					$sql = 'SELECT objects.* FROM objects, wires WHERE objects.active = "1" AND wires.active = "1" AND wires.toid = objects.id AND wires.fromid = (SELECT w.toid FROM objects AS o, wires AS w WHERE o.active = "1" AND w.active = "1" AND w.toid = o.id AND w.fromid = "'.$child['id'].'" AND o.url = "events")';
+    					$sql = 'SELECT objects.* FROM objects, wires WHERE objects.active = "1" AND wires.active = "1" AND wires.toid = objects.id AND wires.fromid = (SELECT w.toid FROM objects AS o, wires AS w WHERE o.active = "1" AND w.active = "1" AND w.toid = o.id AND w.fromid = "'.$child['id'].'" AND o.url = "events") ORDER BY objects.rank DESC';
     					$res = $db->query($sql);
 						if(!$res)
 							throw new Exception($db->error);
@@ -122,7 +122,7 @@
 						$res->close();
 						
     				}
-    				return $output;
+    				return array_reverse($output);
     			}
     			$oom_id = end($oo->urls_to_ids(array('main', 'our-program', 'on-our-mind')));
     			$children = build_filter_children_program($oo, $oom_id);
