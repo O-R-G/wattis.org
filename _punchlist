@@ -165,7 +165,11 @@ x convert columms (///) in views/list to css .columns
 + add _Events to On our mind (at least Joan Jonas)
 + replace wattis.org/ links with relative in sql 
 + menu 
-
-+ fix views/view.php to show /our-program etc correctly now that it is moved in o-r-g
++ fix views/view.php to show /our-program etc correctly 
+  now that it is moved in o-r-g
 + o-r-g default to html view
 + fix adding record to News (which does not work currently)
++ adjust urls
+  + /our-program/gallery --> /our-program/on-view
+    o-r-g, .htaccess, .sql
+  x /main --> /menu
