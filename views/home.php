@@ -4,6 +4,7 @@
 $rootname = 'Home';
 
 // SQL objects attached to root by name
+/*
 $sql = "SELECT 
 			objects.id, objects.name1,
 			objects.body, objects.url, 
@@ -32,11 +33,9 @@ $items = array();
 while ($obj = $res->fetch_assoc())
 	$items[] = $obj;
 $res->close();
-// var_dump(count($items));
-// foreach($items as $item)
-// {
-// 	var_dump($item);
-// }
+*/
+$home_id = end($oo->urls_to_ids(array('home')));
+$items = $oo->children($home_id);
 foreach($items as $key =>$item)
 {
 	if($key == 0){
@@ -49,7 +48,7 @@ foreach($items as $key =>$item)
 		// var_dump($item);
 		?><div id = 'logo_text' class='logo_text_container'><?= nl2br($item["body"]); ?></div><?
 	}
-	else
+	else if(substr($item['name1'], 0, 1) != '.')
 	{
 		if(!$isMobile)
 		{
@@ -88,6 +87,7 @@ if(!!el)
 	<?
 		// SQL object with attached (News)
 		// could be written into main query with LEFTJOIN
+	/*
 		$sql = "SELECT objects.id, objects.name1, objects.body, objects.active, objects.rank, wires.active, 
 	wires.fromid, wires.toid FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 
 	LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = 
@@ -100,15 +100,17 @@ if(!!el)
 	while ($obj = $res_news->fetch_assoc())
 		$items[] = $obj;
 	$res_news->close();
-	foreach($items as $key => $item){
+	*/
+	$news_id = end($oo->urls_to_ids(array('home', 'news')));
+	$items = $oo->children($news_id);
+	foreach($items as $key => $item)
 		$newsItems[$key] = $item["body"];
-		
-	}
+	
 	?>
    	newsItem = new Array(
 		<?
 			foreach($newsItems as $key => $item){
-				echo "\"" . $item . "\"";
+				echo "\"" . strictClean($item) . "\"";
 
 				if ( $key < (count($newsItems) -1) )
 					echo ",\n";

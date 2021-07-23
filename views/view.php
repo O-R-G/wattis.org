@@ -76,7 +76,6 @@ else
 		array_shift($uri_temp);
 	for($i = 0; $i < count($uri) ; $i++)
 	{
-		array_pop($uri_temp);
 		if(!empty($uri_temp))
 		{
 			$this_ancestor_id = end($oo->urls_to_ids($uri_temp));

@@ -9,6 +9,8 @@
 	$show_children_date = false;
 	$show_children_deck = false;
 
+	$rootid = $item['id'];
+
 	if($uri[1] == 'our-program'){
 		$hasFilter = true;
 		$show_children_date = true;
@@ -17,12 +19,28 @@
             $date_argument = valid_date('today');
 
 		$twoCategories = true;
+		$children = $oo->children($item['id']);
+		$cats = [];
+		foreach($children as $child){
+			if(count($cats) > 2)
+				break;
+			else if( substr($child['name1'], 0, 1) != '.' && substr($child['name1'], 0, 1) != '_')
+			{
+				$cats[] = array(
+					'id'   => $child['id'],
+					'name' => $child['name1'] . ':',
+					'url'  => $uri[1] . '/' . $child['url']
+				);
+			}
+		}
+		/*
 		$cat1_name = 'On view:';
     	$cat1_url = 'gallery';
-    	$cat1_rootid = end($oo->urls_to_ids(array($cat1_url)));
+    	$cat1_rootid = end($oo->urls_to_ids(array('main', 'our-program', $cat1_url)));
     	$cat2_name = 'On our mind:';
     	$cat2_url = 'on-our-mind';
-    	$cat2_rootid = end($oo->urls_to_ids(array($cat2_url)));
+    	$cat2_rootid = end($oo->urls_to_ids(array('main', 'our-program', $cat2_url)));
+    	*/
 
     	$yearsOnly = true;
 	} else if($uri[1] == 'calendar') {
@@ -31,7 +49,15 @@
 		$date_since = '2014-09-09';
         if (!$date_argument)
             $date_argument = valid_date('today');
-	} else
+	} else if(strpos($uri[2], 'past-exhibitions') !== false ){
+		$rootid = end($oo->urls_to_ids(array('main','our-program','gallery')));
+		$show_children_deck = false;
+	} elseif(strpos($uri[2], 'research-seasons') !== false ){
+		$rootid = end($oo->urls_to_ids(array('main','our-program','on-our-mind')));
+		$show_children_deck = false;
+	} elseif(strpos($uri[2], 'events') !== false )
+		$rootid = end($oo->urls_to_ids(array('main','calendar')));
+	else
 		$show_children_deck = true;
 
     /*
@@ -44,13 +70,17 @@
 	/*
 		exceptions for pages not fetching children by their urls
 	*/
-	$rootid = $ids[0];
-	if(strpos($uri[2], 'past-exhibitions') !== false )
-		$rootid = $oo->urls_to_ids(array('gallery'))[0];
-	elseif(strpos($uri[2], 'research-seasons') !== false )
-		$rootid = $oo->urls_to_ids(array('on-our-mind'))[0];
+	$rootid = $item['id'];
+	if(strpos($uri[2], 'past-exhibitions') !== false ){
+		$rootid = end($oo->urls_to_ids(array('main','our-program','gallery')));
+		$show_children_deck = false;
+	}
+	elseif(strpos($uri[2], 'research-seasons') !== false ){
+		$rootid = end($oo->urls_to_ids(array('main','our-program','on-our-mind')));
+		$show_children_deck = false;
+	}
 	elseif(strpos($uri[2], 'events') !== false )
-		$rootid = $oo->urls_to_ids(array('calendar'))[0];
+		$rootid = end($oo->urls_to_ids(array('main','calendar')));
 	
 	$root_item = $oo->get($rootid);
 	$root_url = $root_item['url'];
@@ -62,8 +92,15 @@
 	if(!$date_argument){
 		if($twoCategories)
 	    {
+	    	/*
 	    	$cat1_children = $oo->children($cat1_rootid);
 			$cat2_children = $oo->children($cat2_rootid);
+			*/
+
+			foreach($cats as &$cat)
+				$cat['children'] = $oo->children($cat['id']);
+
+			unset($cat);
 	    } else
 	    	$children = $oo->children($rootid);
 	} else {
@@ -80,8 +117,14 @@
 				$day_count = 364;
 		}		
         if ($twoCategories) {
+        	/*
         	$cat1_children = build_filter_children($oo, $cat1_rootid, $date_start, NULL, $day_count);
         	$cat2_children = build_filter_children($oo, $cat2_rootid, $date_start, NULL, $day_count);
+        	*/
+        	foreach($cats as &$cat)
+				$cat['children'] = build_filter_children($oo, $cat['id'], $date_start, NULL, $day_count);
+
+			unset($cat);
         }
         else
         	$children = build_filter_children($oo, $rootid, $date_start, NULL, $day_count);
@@ -128,21 +171,20 @@
 	</div><?
 		if($twoCategories)
 		{
-			?><div class='listContainer times categoryContainer'>
-				<p><?= $cat1_name; ?></p><br>
-				<? foreach($cat1_children as $child){
+			foreach($cats as $key => $cat)
+			{
+				$container_class = 'listContainer times categoryContainer';
+				if( $key == count($cats) - 1 )
+					$container_class .= ' lastListContainer';
+				?><div class='<?= $container_class; ?>'>
+				<p><?= $cat['name']; ?></p><br>
+				<? foreach($cat['children'] as $child){
 					if (substr($child['name1'], 0, 1) != '.') {
-						print_list_child($child, $cat1_url, $show_children_date, $show_children_deck);
-					}
-				} ?>
-			</div><div class='listContainer times categoryContainer lastListContainer'>
-				<p><?= $cat2_name; ?></p><br>
-				<? foreach($cat2_children as $child){
-					if (substr($child['name1'], 0, 1) != '.') {
-						print_list_child($child, $cat2_url, $show_children_date, $show_children_deck);
+						print_list_child($child, $cat['url'], $show_children_date, $show_children_deck);
 					}
 				} ?>
 			</div><?
+			}
 		}
 		else
 		{

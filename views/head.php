@@ -25,7 +25,8 @@ $home_children_url = array();
 foreach($home_children as $child)
 	$home_children_url[] = $child['url'];
 
-
+foreach($home_children as $child)
+	$home_children_url[] = $child['url'];
 
 if($uu->id){
 	$uri_temp = $uri;
@@ -39,6 +40,8 @@ if($uu->id){
 elseif( in_array( $uri[1], $main_children_url ))
 {
 	$uri_temp = $uri;
+	if($date_argument || end($uri) == 'upcoming')
+		array_pop($uri_temp);
 	$uri_temp[0] = 'main';
 	$ids = $oo->urls_to_ids($uri_temp);
 	$uu->id = end($ids);
