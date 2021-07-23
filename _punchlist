@@ -146,7 +146,7 @@ x convert columms (///) in views/list to css .columns
   https://github.com/O-R-G/open-records-generator/blob/master/readme.md
   referring to ICA version, adding whatever needs to be added specific
   to wattis
-/ add /calendar filter by "on our mind" and "our program"
++ add /calendar filter by "on our mind" and "our program"
   (looking at what parent record)
     the children of calendar seem to be just children of calendar instead 
     fetched from oom and op?
@@ -167,5 +167,5 @@ x convert columms (///) in views/list to css .columns
 + menu 
 
 + fix views/view.php to show /our-program etc correctly now that it is moved in o-r-g
-- o-r-g default to html view
++ o-r-g default to html view
 + fix adding record to News (which does not work currently)
