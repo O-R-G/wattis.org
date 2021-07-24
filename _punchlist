@@ -178,7 +178,7 @@ x convert columms (///) in views/list to css .columns
   RewriteRule ^main/(.*) /$1 [NC,L]
   but this does:
   Redirect 301 /main/ /
-- fix window close x in image gallery
++ fix window close x in image gallery
 - /calendar should by default show all items -- on-view, and on-our-mind
   then work only as filters not as mode selectors.
   should these be styled differently since in /library these are 
