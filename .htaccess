@@ -1837,6 +1837,7 @@ Redirect 301 /library /browse-the-library
 # Redirect 301 /on-view/the-word-for-world-is-forest-2020/1053 /our-program/on-view/the-word-for-world-is-forest-2020/home
 
 # neglect 'main' in url
+Redirect 301 /main/ /
 Redirect 301 /on-view /our-program/on-view
 Redirect 301 /on-our-mind /our-program/on-our-mind
 Redirect 301 /apartment /our-program/apartment
