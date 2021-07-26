@@ -4,9 +4,8 @@ $requestclean = strtok($request,"?");
 $uri = explode('/', $requestclean);
 $random = isset($_GET['random']);
 $date_argument = false;
-foreach ($uri as $u){
+foreach ($uri as $u)
     $date_argument = valid_date(urldecode($u));
-}
 
 require_once("views/head.php");
 require_once("views/nav.php");

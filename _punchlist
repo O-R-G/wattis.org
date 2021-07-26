@@ -183,6 +183,6 @@ x convert columms (///) in views/list to css .columns
   then work only as filters for the selected dates
   this is different from how they work in /library
   should these be styled differently as are mode selectors not filters
-- mobile css check, adjust
-- clean up / confirm / test o-r-g html default view; add logic to master;
++ mobile css check, adjust
++ clean up / confirm / test o-r-g html default view; add logic to master;
   delete html branch

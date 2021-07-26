@@ -15,11 +15,10 @@ require_once('static/php/displayMedia.php');
     $date = date('F d, Y', strtotime($item['begin']));
 ?>
 <div class="mainContainer times big">
-    <div class='listContainer times'>
+    <div class='listContainer side-listContainer times'>
         <a href='/library/<?= $submenu_url; ?>'><?= $base_name; ?></a><br><br>
         <span class="italic"><?= $category_name; ?><br></span>
-    </div>
-    <div class = 'listContainer doublewide library lastListContainer'>
+    </div><div class = 'listContainer main-listContainer library lastListContainer'>
         <div class='subheadContainer'><?= $name; ?></div>
         <?= $body; ?>
     </div>

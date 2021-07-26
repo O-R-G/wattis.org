@@ -132,7 +132,7 @@ if($isMenu)
 ?>
 <script type="text/javascript" src="/static/js/gallery.js"></script>
 	<div class="mainContainer times big">
-		<div class='listContainer times title-block'><?
+		<div class='listContainer side-listContainer times title-block'><?
 		if ($begin || $end) {
 			// build date display
 			$bstr = strtotime($begin);
@@ -286,14 +286,22 @@ if($isMenu)
 		// body
 		if(count($columns) > 1) 
 		{
-			foreach($columns as $key => $c){
-				$isLast = $key == count($columns) - 1;
-				?><div class='listContainer times <?= $isLast ? 'lastListContainer' : ''; ?>'><?php echo $c; ?></div><?
-			}
+			if(count($columns) == 2)
+				$class = 'half-width';
+			else if(count($columns) == 3)
+				$class = 'third-width';
+			else if(count($columns) == 4)
+				$class = 'fourth-width';
+			?><div class='listContainer main-listContainer times'><?
+				foreach($columns as $key => $c){
+					$isLast = $key == count($columns) - 1;
+					?><div class='listContainer times <?= $class; ?> <?= $isLast ? 'lastListContainer' : ''; ?>'><?php echo $c; ?></div><?
+				}
+			?></div><?
 		} 
 		else 
 		{
-			?><div class='listContainer doublewide centered times <?= ($use_columns) ? "columns" : ""; ?>'><?php echo $body; ?></div><?php
+			?><div class='listContainer main-listContainer centered times <?= ($use_columns) ? "columns" : ""; ?>'><?php echo $body; ?></div><?php
 		}
 		?><div class='clear'></div>
 		<div class='galleryContainer'><?php

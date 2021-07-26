@@ -103,18 +103,7 @@
 				$cat['children'] = $oo->children($cat['id']);
 
 			unset($cat);
-	    } else if($hasFilter && $_GET['program'])
-    	{
-    		if($_GET['ccc'] == 'on-our-mind')
-    		{
-    			
-    			$oom_id = end($oo->urls_to_ids(array('main', 'our-program', 'on-our-mind')));
-    			$children = build_filter_children_program($oo, $oom_id);
-    		}
-    		else
-    			$children = $oo->children($rootid);
-    	}
-	    else
+	    } else
 	    	$children = $oo->children($rootid);
 	} else {
 		$hasMonth = strpos($date_argument, '-');
@@ -130,10 +119,6 @@
 				$day_count = 364;
 		}		
         if ($twoCategories) {
-        	/*
-        	$cat1_children = build_filter_children($oo, $cat1_rootid, $date_start, NULL, $day_count);
-        	$cat2_children = build_filter_children($oo, $cat2_rootid, $date_start, NULL, $day_count);
-        	*/
         	foreach($cats as &$cat)
 				$cat['children'] = build_filter_children($oo, $cat['id'], $date_start, NULL, $day_count);
 			unset($cat);
@@ -186,6 +171,13 @@
 			            </li><?
                     }
                 ?></ul>
+                <ul class="filter-placeholder"><?
+                	if(count($years) > 1)
+                		$placeholder_year = $years[1];
+                	else
+                		$placeholder_year = $years[0];
+	                display_filter($uri, $placeholder_year, $date_since, $date_argument, $sub_category, $yearsOnly, $filter_keep_query_string);
+	            ?></ul>
             </div>
             <? if($uri[1] == 'calendar')
 	    	{
@@ -217,14 +209,14 @@
 	    	?>
         </div><? 
     } 
-    ?><div class='listContainer times title-bloc'>
+    ?><div class='listContainer side-listContainer times title-block'>
     	<?= $name; ?>
-	</div><?
+	</div><div class='listContainer main-listContainer times'><?
 		if($twoCategories)
 		{
 			foreach($cats as $key => $cat)
 			{
-				$container_class = 'listContainer times categoryContainer';
+				$container_class = 'listContainer half-width times categoryContainer';
 				if( $key == count($cats) - 1 )
 					$container_class .= ' lastListContainer';
 				?><div class='<?= $container_class; ?>'>
@@ -239,43 +231,13 @@
 		}
 		else
 		{
-		?><div class='listContainer doublewide times lastListContainer'>
-		<?php
-		
 			foreach($children as $key => $child){
 				if (substr($child['name1'], 0, 1) != '.') {
 					$url =  "/" . $root_url . "/".$url ;
 					$now = time();
 					$begin = ($child['begin'] != null) ? strtotime($child['begin']) : $now;
 					$end = ($child['end'] != null) ? strtotime($child['end']) : $now;
-					
-					print_list_child($child, $root_url, $show_children_date, $show_children_deck);
-
-					/*
-					// keep the old code in case
-					if ( ($alt && ($end < $now)) ||
-						  $uri[1] == 'calendar'
-						) {
-						// archive
-
-						?>
-
-							<div class='listContainer'>
-								<a href='<?= $url; ?>'><?= $child['name1']; ?></a> 
-								<i><?= $child['deck']; ?></i>
-							</div>
-						<?
-					} else if (!$alt && (($begin >= $now) || ($end >= $now))) {
-						// upcoming
-						?>
-							<div class='listContainer'>
-								<a href='<?= $url; ?>'><?= $child['name1']; ?></a> 
-								<i><?= $child['deck']; ?></i>
-							</div>
-						<?
-					} 
-					*/
-
+					print_list_child($child, $root_url, $show_children_date, $show_children_deck, 'third-width');
 				}
 			}
 		}
@@ -383,7 +345,7 @@ function build_filter_children_program($oo, $rootid){
 	}
 	return array_reverse($output);
 }
-function print_list_child($child, $root_url = false, $show_date = false, $show_deck = false) {
+function print_list_child($child, $root_url = false, $show_date = false, $show_deck = false, $class = '') {
 	$title = $child['name1'];
 	if($root_url)
 		$url = '/' . $root_url . '/'.$child['url'];
@@ -417,10 +379,8 @@ function print_list_child($child, $root_url = false, $show_date = false, $show_d
 	}							
 	
 	if($show_deck)
-		$deck = $child['deck'];
-	
-	
-	?><div class='list-item'>
+		$deck = $child['deck'];	
+	?><div class='listContainer <?= $class; ?>'>
 		<a href='<?= $url; ?>'>
 			<?= ($formatted_date && $show_date) ? '<i>' . $formatted_date . '</i><br>' : ''; ?>
 			<?= $title; ?>

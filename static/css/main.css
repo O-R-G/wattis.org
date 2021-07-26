@@ -48,7 +48,9 @@ body.reverse .round-btn {
 body.reverse #search-btn {
     background-image: url(../../media/svg/magnifying-glass-6-w.svg);
 }
-
+body.reverse #menu-btn {
+    background-image: url(../../media/svg/hamburger-6-w.svg);
+}
 body.hideGeneralSearch #search-btn {
     display: none;
 }
@@ -114,7 +116,8 @@ pre {
         font-size:17px;
         line-height:19px;
         }
-.listContainer .medium
+.listContainer .medium,
+.col .medium
 {
     display: inline-block;
 }
@@ -341,15 +344,78 @@ pre {
 }
 
 .listContainer {  
-    display: inline-block;
+    /*display: inline-block;
     vertical-align: top;
     padding-right:1%;
     padding-bottom:40px;
-    width: 32%;
+    width: 32%*/;
+}
+.listContainer
+{
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom:40px;
+    box-sizing: border-box;
+}
+.side-listContainer
+{
+    width: 33.3%;
+    padding-right: 30px;
+}
+.main-listContainer
+{
+    width: 66.7%;
+}
+.half-width
+{
+    width: 50%;
+}
+.half-width:nth-of-type(odd)
+{
+    padding-right: 15px;
+}
+.half-width:nth-of-type(even)
+{
+    padding-left: 15px;
+}
+.third-width
+{
+    width: 33.3%;
+}
+.third-width:nth-of-type(3n+1)
+{
+    padding-right: 20px;
+}
+.third-width:nth-of-type(3n+2)
+{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.third-width:nth-of-type(3n)
+{
+    padding-left: 20px;
+}
+.fourth-width:nth-of-type(4n+1)
+{
+    padding-right: 20px;
+}
+.fourth-width:nth-of-type(4n+2)
+{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.fourth-width:nth-of-type(4n+3)
+{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.fourth-width:nth-of-type(4n)
+{
+    padding-left: 20px;
 }
 .listContainer.lastListContainer
 {
-    padding-right: 0;
+    /*padding-right: 0;*/
 }
 .columns {
     columns: 2;
@@ -1115,18 +1181,15 @@ body.reverse.viewing-search #search-btn
 .svg-shadow {
   animation: svg-shadow 1.5s ease-in-out infinite alternate;
 }
-
-#filter {
+.filter
+{
     position: relative;
-    display: block;
-    top: 0px;
-    left: 0px;
-    width: auto;
-    max-width: 75%;
+    max-width: 65%;
     z-index: 1000;
     float: left;
-    /*text-align: right;*/
-    max-width: 65%;
+}
+#filter-program {
+    max-width: 35%;
 }
 
 .filter .year {
@@ -1134,6 +1197,7 @@ body.reverse.viewing-search #search-btn
     padding-left: 0px;
     margin-right: 15px;
     vertical-align: top;
+    /*line-height: 26px;*/
 }
 
 .filter .month {
@@ -1156,13 +1220,15 @@ a.year.expanded
 }
 #filter_container
 {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
-#filter_container a
+.filter a
 {
     border-color: transparent;
+    display: inline-block;
+    vertical-align: top;
 }
-#filter_container li a:hover
+.filter li a:hover
 {
     border-bottom: 3px solid #000;
 }
@@ -1186,7 +1252,8 @@ a.year.expanded
 {
     display: inline-block;
 }
-#filter_container li.active > a
+
+.filter li.active > a
 {
     border-bottom: 3px solid #000;
 }
@@ -1194,12 +1261,17 @@ a.year.expanded
 {
     display: none;
     position: absolute;
-    /*right: 10px;*/
+    bottom: 0;
     left: 0;
-    transform: translate(0, 100%);
-    width: 75vw;
 }
-
+.filter-placeholder .monthsContainer
+{
+    position: static;
+    transform: none;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+}
 /* 3/19 adjust font size of caption */
 .captionContainer.small {
     font-size: 13px;
@@ -1303,6 +1375,10 @@ a.year.expanded
 .display-item
 {
     border-bottom: none;
+}
+.filter-placeholder a.year-btn
+{
+    display: none;
 }
 @keyframes svg-shadow {
   from {
@@ -1516,13 +1592,12 @@ a.year.expanded
     
     /* VIEW */
     .mainContainer {
-        left: 0px;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         width: 100%;
         margin-bottom: 52px;
-        padding: 100px 0 52px 0;
+        padding: 100px 20px 52px 20px;
     }
     
     .doublewide {
@@ -1530,6 +1605,11 @@ a.year.expanded
     }
     
     .listContainer {
+        display: block;
+        width: auto;
+    }
+    .col
+    {
         display: block;
         padding: 20px;
         width: initial;
@@ -1574,6 +1654,7 @@ a.year.expanded
 
     #library-search-container.top{
         top: 0px;
+        bottom: auto;
     }
 
     #library-search-container input[type=text]{
@@ -1626,13 +1707,29 @@ a.year.expanded
         top: 10px;
         width: auto;
     }
-
-    .title-block {
+    .monthsContainer
+    {
+        position: relative;
+        margin-top: 10px;
+        transform: none;
     }
-
-    #filter_container {
-        padding-left: 20px;
-        padding-right: 20px;
+    .filter,
+    .filter.right-filter,
+    #filter-program
+    {
+        max-width: none;
+        float: none;
+    }
+    
+    .filter.right-filter .year
+    {
+        margin-left: 0;
+        margin-right: 15px;
+        margin-top: 20px;
+    }
+    .filter-placeholder
+    {
+        display: none;
     }
 }
 
@@ -1640,7 +1737,64 @@ a.year.expanded
 
 
 /* vertical iPad / horizontal iPhone */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
+    
+    
+    
+
+    .list-item
+    {
+        /*display: block;
+        width: auto;
+        padding-right: 0;*/
+    }
+
+    .half-width,
+    .third-width,
+    .fourth-width
+    {
+        width: auto;
+    }
+    .half-width:nth-of-type(odd)
+    {
+        padding-right: 0;
+    }
+    .half-width:nth-of-type(even)
+    {
+        padding-left: 0;
+    }
+    .third-width:nth-of-type(3n+1)
+    {
+        padding-right: 0;
+    }
+    .third-width:nth-of-type(3n+2)
+    {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .third-width:nth-of-type(3n)
+    {
+        padding-left: 0;
+    }
+    .fourth-width:nth-of-type(4n+1)
+    {
+        padding-right: 0;
+    }
+    .fourth-width:nth-of-type(4n+2)
+    {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .fourth-width:nth-of-type(4n+3)
+    {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .fourth-width:nth-of-type(4n)
+    {
+        padding-left: 0;
+    }
+    
 }
 
 /* vertical iPhone */

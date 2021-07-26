@@ -84,7 +84,7 @@ require_once('static/php/displayMedia.php');
 	    // $html .= "</div>";	
 	    // echo nl2br($html);
         // $html = "";
-        ?><div class='sidemenu listContainer times'>
+        ?><div class='sidemenu listContainer side-listContainer times'>
             <div class='one-column'>
                 <?= $search ? "<a href='/library/<?= $submenu_url; ?>'>" . $base_name . "</a>" : $base_name ; ?>
                 <div id='library-search-container'>
@@ -183,7 +183,7 @@ require_once('static/php/displayMedia.php');
             
             $search_count = count($search_result);
             ?>
-                <div class='listContainer not-underlined library doublewide lastListContainer'>
+                <div class='listContainer main-listContainer not-underlined library doublewide lastListContainer'>
                     <div class='subheadContainer library'>Results</div>
                     <? foreach($search_result as $key => $r){
                         if(substr($r['name1'], 0, 1) != '.'){
@@ -238,7 +238,7 @@ require_once('static/php/displayMedia.php');
     	    // echo nl2br($html);
 
         } else {
-
+            ?><div class="listContainer main-listContainer"><?
             foreach ($categories as $key => $c) {
 
                 // SQL objects attached to category object plus media plus rootname, rootbody
@@ -251,8 +251,7 @@ require_once('static/php/displayMedia.php');
                 $category_url = $c['url'];
                 $gotSpecs = false;
                 $isLast = count($categories) - 1 == $key;
-                ?>
-                <div class = 'listContainer not-underlined library <?= $isLast ? 'lastListContainer' : ''; ?>'>
+                ?><div class = 'listContainer half-width not-underlined library <?= $isLast ? 'lastListContainer' : ''; ?>'>
                     <div class='subheadContainer library'><?= $c['name1']; ?></div>
                     <? foreach($items as $key => $item){
                         if(substr($item['name1'], 0, 1) != '.'){
@@ -272,31 +271,19 @@ require_once('static/php/displayMedia.php');
                                 }
                             }
                             $use4xgrid = ($rootname == "Buy Catalogs");
-                            ?><a href='<?= $this_url; ?>'>
-                                <div id='image<?= $key; ?>' class = 'listContainer <?= ($use4xgrid) ? "fourcolumn" : "twocolumn"; ?>'>
+                            ?><a href='<?= $this_url; ?>' class="listContainer <?= ($use4xgrid) ? "fourcolumn" : "half-width"; ?>">
+                                <div id='image<?= $key; ?>' class = ''>
                                     <?php if(count($media) != 0){
                                         echo displayMedia($mediaFile, $mediaCaption, $mediaStyle);
                                     } ?>
                                     <div class = 'captionContainer library helvetica small'><?= $item['name1']; ?></div>
                                 </div>
-                                </a>
-                            <?
+                            </a><?
                         }
-                    } ?>
-                </div>
-                <?
-        
-                // output $html
-                    
-    	        // $html .= "<div class = 'listContainer not-underlined library'>";
-             //    $html .= "<div class='subheadContainer library'>" . $c['name1'] . "</div>";
-             //    for ( $j = 0; $j < count($images); $j++){
-             //        $search_count++;
-             //        $html .= $images[$j];  
-             //    }
-	            // $html .= "</div>";
-    	        // echo nl2br($html);
-    	    }
+                    }
+                ?></div><?
+            }
+            ?></div><?
         }
     // 3/19 search position when mobile;
     if($isMobile){
