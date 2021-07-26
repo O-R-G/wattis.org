@@ -179,7 +179,7 @@ x convert columms (///) in views/list to css .columns
   but this does:
   Redirect 301 /main/ /
 + fix window close x in image gallery
-- /calendar should by default show all items -- on-view, and on-our-mind
++ /calendar should by default show all items -- on-view, and on-our-mind
   then work only as filters for the selected dates
   this is different from how they work in /library
   should these be styled differently as are mode selectors not filters

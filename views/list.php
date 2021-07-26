@@ -9,6 +9,8 @@
 	$show_children_date = false;
 	$show_children_deck = false;
 
+	$filter_keep_query_string = true;
+
 	$rootid = $item['id'];
 
 	if($uri[1] == 'our-program'){
@@ -47,9 +49,7 @@
 		$hasFilter = true;
 		$show_children_deck = true;
 		$date_since = '2014-09-09';
-		if (isset($_GET['filter']))
-			$date_argument = false;
-        else if (!$date_argument)
+		if (!$date_argument)
             $date_argument = valid_date('today');
 	} else if(strpos($uri[2], 'past-exhibitions') !== false ){
 		$rootid = end($oo->urls_to_ids(array('main','our-program','gallery')));
@@ -103,27 +103,11 @@
 				$cat['children'] = $oo->children($cat['id']);
 
 			unset($cat);
-	    } else if($hasFilter && $_GET['filter'])
+	    } else if($hasFilter && $_GET['program'])
     	{
-    		if($_GET['filter'] == 'on-our-mind')
+    		if($_GET['ccc'] == 'on-our-mind')
     		{
-    			function build_filter_children_program($oo, $rootid){
-    				global $db;
-    				$children = $oo->children($rootid);
-    				$output = [];
-    				foreach($children as $child)
-    				{
-    					$sql = 'SELECT objects.* FROM objects, wires WHERE objects.active = "1" AND wires.active = "1" AND wires.toid = objects.id AND wires.fromid = (SELECT w.toid FROM objects AS o, wires AS w WHERE o.active = "1" AND w.active = "1" AND w.toid = o.id AND w.fromid = "'.$child['id'].'" AND o.url = "events") ORDER BY objects.rank DESC';
-    					$res = $db->query($sql);
-						if(!$res)
-							throw new Exception($db->error);
-						while ($obj = $res->fetch_assoc())
-							$output[] = $obj;
-						$res->close();
-						
-    				}
-    				return array_reverse($output);
-    			}
+    			
     			$oom_id = end($oo->urls_to_ids(array('main', 'our-program', 'on-our-mind')));
     			$children = build_filter_children_program($oo, $oom_id);
     		}
@@ -152,10 +136,29 @@
         	*/
         	foreach($cats as &$cat)
 				$cat['children'] = build_filter_children($oo, $cat['id'], $date_start, NULL, $day_count);
-
 			unset($cat);
         }
-        else
+        else if(isset($_GET['program']))
+        {
+        	// $filter_keep_query_string = true;
+        	$children = array();
+        	$oom_id = end($oo->urls_to_ids(array('main', 'our-program', $_GET['program'])));
+        	$oom_children = $oo->children($oom_id);
+        	foreach($oom_children as $oom_child)
+        	{
+        		$event_id = false;
+        		$event_id_sql = '(SELECT w.toid FROM objects AS o, wires AS w WHERE o.active = "1" AND w.active = "1" AND w.toid = o.id AND w.fromid = "'.$oom_child['id'].'" AND o.url = "events")';
+        		$res = $db->query($event_id_sql);
+				if(!$res)
+					throw new Exception($db->error);
+				while ($obj = $res->fetch_assoc())
+					$event_id = $obj['toid'];
+				$res->close();
+				if($event_id)
+        			$children = array_merge($children, build_filter_children($oo, $event_id, $date_start, NULL, $day_count));
+        	}
+        }
+    	else
         	$children = build_filter_children($oo, $rootid, $date_start, NULL, $day_count);
 	}
 	/*
@@ -170,13 +173,13 @@
 ?><div class="mainContainer times big"><? 
     if($hasFilter){
 	    ?><div id = 'filter_container' class="helvetica medium">
-		    <div id='filter' class = 'item'>
+		    <div id='filter' class = 'filter'>
 			    <ul id='yearsContainer'>
-				    <li class = 'year sans <? echo (!$uri[2] || ($uri[2] && !$date_argument)) && !isset($_GET['filter']) ? 'active' : '' ?>'>
+				    <li class = 'year sans <? echo (!$uri[2] || ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
 					    <a class = "year-btn" href = '<? echo $sub_category ? '/'.$uri[1].'/' . $uri[2] : '/'.$uri[1]; ?>'>Now</a>
 				    </li><?
                     foreach ($years as $year)
-                        display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly);
+                        display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly, $filter_keep_query_string);
                     if($uri[1] == 'our-program'){
 			            ?><li class = 'year sans'>
 				            <a class = "year-btn" href = 'http://archive.wattis.org'>before ...</a>
@@ -184,37 +187,38 @@
                     }
                 ?></ul>
             </div>
+            <? if($uri[1] == 'calendar')
+	    	{
+	    		$submenu = array(
+	    			array(
+	    				'name' => 'ON OUR MIND',
+	    				'slug'  => 'on-our-mind'
+	    			),
+	    			array(
+	    				'name' => 'ON VIEW',
+	    				'slug'  => 'gallery'
+	    			)
+	    		);
+	    		?><div id="filter-program" class="filter right-filter">
+		    		<ul id='yearsContainer'>
+					    <?
+					    $base_url = implode('/', $uri);
+	                    foreach ($submenu as $s)
+                        {
+                        	$isActive = $_GET['program'] == $s['slug'];
+			    			$this_name = $s['name'];
+
+			    			$this_url = $isActive ? $base_url : $base_url . '?program=' . $s['slug'];
+			    			?><li class="sans year <?= $isActive ? 'active' : ''; ?>"><a class='year-btn' href="<?= $this_url; ?>"><?= $this_name; ?></a></li><?
+                        }
+	                ?></ul>
+		    	</div><?
+	    	}
+	    	?>
         </div><? 
     } 
     ?><div class='listContainer times title-bloc'>
     	<?= $name; ?>
-    	<? if($uri[1] == 'calendar')
-    	{
-    		$submenu = array(
-    			array(
-    				'name' => 'ON OUR MIND',
-    				'slug'  => 'on-our-mind'
-    			),
-    			array(
-    				'name' => 'ON VIEW',
-    				'slug'  => 'gallery'
-    			)
-    		);
-    		?><div id="calender-mode-switch-container" class="mode-switch-container">
-	    		<br>
-	    		<? foreach($submenu as $s){
-	    			$isActive = $_GET['filter'] == $s['slug'];
-	    			$name = $s['name'];
-	    			$url = $isActive ? '/calendar' : '/calendar?filter=' . $s['slug'];
-	    			$id = 'toggle-' . $s['slug'];
-	    			$class = 'mode-switch hover';
-	    			if(!$isActive)
-	    				$class .= ' inactive';
-	    			?><a href="<?= $url; ?>"><button id="<?= $id; ?>" onClick="toggle_calendar_category(this);" class="<?= $class; ?>"><span class="small helvetica"><?= $name; ?></span></button></a><?
-	    		} ?>
-	    	</div><?
-    	}
-    	?>
 	</div><?
 		if($twoCategories)
 		{
@@ -278,10 +282,11 @@
 	?>
 	
 </div><?
-function display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly = false) {
+function display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly = false, $keepQueryString = false) {
     $since = ($year == date("Y")) ? date("m") : 12;
     $start = (date('Y', strtotime($date_since)) == $year) ? date('m', strtotime($date_since)) : 1;
     $base_url =  $uri[1] . '/';
+    $queryString = '';
     
     if($date_argument) {
     	$hasMonth = (strpos($date_argument, '-') !== false);
@@ -292,9 +297,16 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
 	    else
 	      $year_active = ($year == date('Y', strtotime($date_argument))) ? 'active' : NULL;
     }
+
+    if($keepQueryString && count($_GET) != 0){
+    	$temp = array();
+    	foreach($_GET as $key => $val)
+    		$temp[] = empty($val) ? $key : $key . '=' . $val; 
+    	$queryString = '?' . implode('&', $temp);
+    }
     
     ?><li class="year sans <? echo (!$year_active) ? "" : "active" ?>">
-            <a id="<? echo $year; ?>-btn" href="/<? echo $base_url . $year; ?>" class="year-btn"><? echo $year ?></a>
+            <a id="<? echo $year; ?>-btn" href="/<? echo $base_url . $year . $queryString; ?>" class="year-btn"><? echo $year ?></a>
             <? if(!$yearsOnly){ ?>
 	            <ul id='<? echo $year; ?>' class='monthsContainer' ><?
 	                for ($month = $start; $month <= $since; $month++) {
@@ -305,7 +317,7 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
 	                    $year_month = $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT);
 
 	                    ?><li class='month <? echo $month_active; ?>'><?
-	                        ?><a href="/<? echo $base_url . $year_month; ?>" class="month"><?
+	                        ?><a href='/<? echo $base_url . $year_month . $queryString; ?>' class='month'><?
 	                        echo strtoupper(date('M', mktime(0, 0, 0, $month, 10)));
 	                            // echo date('M', mktime(0, 0, 0, $month, 10));
 	                        ?></a>
@@ -354,7 +366,23 @@ function build_filter_children($oo, $rootid, $date, $archive = NULL, $days = 30,
     
     return $children;
 }
-
+function build_filter_children_program($oo, $rootid){
+	global $db;
+	$children = $oo->children($rootid);
+	$output = [];
+	foreach($children as $child)
+	{
+		$sql = 'SELECT objects.* FROM objects, wires WHERE objects.active = "1" AND wires.active = "1" AND wires.toid = objects.id AND wires.fromid = (SELECT w.toid FROM objects AS o, wires AS w WHERE o.active = "1" AND w.active = "1" AND w.toid = o.id AND w.fromid = "'.$child['id'].'" AND o.url = "events") ORDER BY objects.rank DESC';
+		$res = $db->query($sql);
+		if(!$res)
+			throw new Exception($db->error);
+		while ($obj = $res->fetch_assoc())
+			$output[] = $obj;
+		$res->close();
+		
+	}
+	return array_reverse($output);
+}
 function print_list_child($child, $root_url = false, $show_date = false, $show_deck = false) {
 	$title = $child['name1'];
 	if($root_url)
