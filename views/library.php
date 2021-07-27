@@ -87,9 +87,8 @@ require_once('static/php/displayMedia.php');
         ?>
         <div id='library-search-container'>
             <form>
-                <input id='library-search-field' type='text' placeholder='Search The Wattis Library ...' name='search'>
                 <input type='hidden' id='id' name='search_id' value='<?= $search_id; ?>' >
-                <button type='submit'><img id='library-search-icon' src='/media/svg/magnifying-glass-6-k.svg'></button>
+                <input id='library-search-field' type='text' placeholder='Search The Wattis Library ...' name='search'><button type='submit'><img id='library-search-icon' src='/media/svg/magnifying-glass-6-k.svg'></button>
             </form>
         </div>
 

@@ -599,9 +599,6 @@ pre {
     z-index: 10;
 }
 
-#library-search-container form {
-}
-
 #library-search-container button {
     background-color: none;
     display: inline-block;
@@ -1750,11 +1747,11 @@ a.year.expanded
     }
 
     #library-search-container input[type=text]{
-        width: calc(100% - 80px);
+        width: calc(100% - 60px);
     }
 
     #library-search-container form {
-        padding-top: 20px;
+        padding-top: 10px;
         background-color: #FFF;
     }
 
