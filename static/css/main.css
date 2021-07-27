@@ -614,7 +614,7 @@ pre {
 }
 input[type=text]
 {
-    border-radius: none;
+    border-radius: 0;
 }
 #library-search-container input[type=text] {
     vertical-align: top;
