@@ -188,3 +188,5 @@ x convert columms (///) in views/list to css .columns
   delete html branch
 - /calendar throws an error when filter for on-view but no on-view available
   just stops loading the page 
+- ON OUR MIND and ON VIEW to upper and lowercase so they appear smaller
+- /calendar mobile filer css review, clean up
