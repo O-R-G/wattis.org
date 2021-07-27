@@ -186,3 +186,5 @@ x convert columms (///) in views/list to css .columns
 + mobile css check, adjust
 + clean up / confirm / test o-r-g html default view; add logic to master;
   delete html branch
+- /calendar throws an error when filter for on-view but no on-view available
+  just stops loading the page 
