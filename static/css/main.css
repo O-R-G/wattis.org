@@ -1847,6 +1847,10 @@ a.year.expanded
     {
         padding-right: 0;
     }
+    #library-description
+    {
+        width: auto;
+    }
 }
 
 
