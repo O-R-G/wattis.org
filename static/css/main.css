@@ -1227,6 +1227,8 @@ a.year.expanded
     border-color: transparent;
     display: inline-block;
     vertical-align: top;
+    line-height: 18px;
+    margin-bottom: 7px;
 }
 .filter li a:hover
 {
@@ -1380,6 +1382,12 @@ a.year.expanded
 {
     display: none;
 }
+.filter-placeholder > .year
+{ 
+    margin-right:0 
+}
+
+
 @keyframes svg-shadow {
   from {
     filter: drop-shadow( 0 0 5px #fff) drop-shadow( 0 0 15px #e60073) drop-shadow( 0 0 20px #e60073);
@@ -1499,6 +1507,83 @@ a.year.expanded
   }
 }
 
+@media screen and (max-width: 900px) {
+    
+    .list-item
+    {
+        /*display: block;
+        width: auto;
+        padding-right: 0;*/
+    }
+
+    .half-width,
+    .third-width,
+    .fourth-width
+    {
+        width: auto;
+    }
+    .half-width:nth-of-type(odd)
+    {
+        padding-right: 0;
+    }
+    .half-width:nth-of-type(even)
+    {
+        padding-left: 0;
+    }
+    .third-width:nth-of-type(3n+1)
+    {
+        padding-right: 0;
+    }
+    .third-width:nth-of-type(3n+2)
+    {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .third-width:nth-of-type(3n)
+    {
+        padding-left: 0;
+    }
+    .fourth-width:nth-of-type(4n+1)
+    {
+        padding-right: 0;
+    }
+    .fourth-width:nth-of-type(4n+2)
+    {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .fourth-width:nth-of-type(4n+3)
+    {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .fourth-width:nth-of-type(4n)
+    {
+        padding-left: 0;
+    }
+
+    .libraryMainContainer .side-listContainer,
+    .libraryMainContainer .main-listContainer
+    {
+        width: auto;
+    }
+    .libraryMainContainer .main-listContainer > .half-width,
+    .libraryMainContainer .main-listContainer > .half-width .half-width
+    {
+        width: 50%;
+    }
+    .libraryMainContainer .main-listContainer > .half-width .half-width:nth-of-type(odd),
+    .libraryMainContainer .main-listContainer > .half-width:nth-of-type(odd)
+    {
+        padding-right: 15px;
+    }
+    .libraryMainContainer .main-listContainer > .half-width .half-width:nth-of-type(even),
+    .libraryMainContainer .main-listContainer > .half-width:nth-of-type(even)
+    {
+        padding-left: 15px;
+    }
+    
+}
 
 @media screen and (max-width: 568px) {
     
@@ -1642,14 +1727,21 @@ a.year.expanded
     }
     /* 3/19 search bar for mobile */
 
-    #library-search-container form *{
-        vertical-align: middle;
-    }
+    
 
     #library-search-container{
-        /* top: 70px; */
-        /* top: 7px; */
+        /*position: -webkit-sticky;
+        position: sticky;*/
         top: 40px;
+        right: 0;
+        bottom: auto;
+        width: 100vw;
+        max-width: 100%;
+        padding: 0 40px 0 80px;
+        background-color: #fff;
+    }
+    #library-search-container form *{
+        vertical-align: middle;
     }
 
     #library-search-container.top{
@@ -1658,7 +1750,7 @@ a.year.expanded
     }
 
     #library-search-container input[type=text]{
-        width: calc(100vw - 80px);
+        width: calc(100% - 80px);
     }
 
     #library-search-container form {
@@ -1731,71 +1823,35 @@ a.year.expanded
     {
         display: none;
     }
+    .side-listContainer
+    {
+        padding-right: 0;
+    }
+    .libraryMainContainer
+    {
+        padding-top: 150px;
+    }
+    .libraryMainContainer .main-listContainer > .half-width .half-width
+    {
+        display: inline-block;
+    }
+    .libraryMainContainer .main-listContainer > .half-width
+    {
+        width: auto;
+    }
+    .libraryMainContainer .main-listContainer > .half-width:nth-of-type(even)
+    {
+        padding-left: 0;
+    }
+    .libraryMainContainer .main-listContainer > .half-width:nth-of-type(odd)
+    {
+        padding-right: 0;
+    }
 }
 
 
 
 
-/* vertical iPad / horizontal iPhone */
-@media screen and (max-width: 900px) {
-    
-    
-    
-
-    .list-item
-    {
-        /*display: block;
-        width: auto;
-        padding-right: 0;*/
-    }
-
-    .half-width,
-    .third-width,
-    .fourth-width
-    {
-        width: auto;
-    }
-    .half-width:nth-of-type(odd)
-    {
-        padding-right: 0;
-    }
-    .half-width:nth-of-type(even)
-    {
-        padding-left: 0;
-    }
-    .third-width:nth-of-type(3n+1)
-    {
-        padding-right: 0;
-    }
-    .third-width:nth-of-type(3n+2)
-    {
-        padding-right: 0;
-        padding-left: 0;
-    }
-    .third-width:nth-of-type(3n)
-    {
-        padding-left: 0;
-    }
-    .fourth-width:nth-of-type(4n+1)
-    {
-        padding-right: 0;
-    }
-    .fourth-width:nth-of-type(4n+2)
-    {
-        padding-right: 0;
-        padding-left: 0;
-    }
-    .fourth-width:nth-of-type(4n+3)
-    {
-        padding-right: 0;
-        padding-left: 0;
-    }
-    .fourth-width:nth-of-type(4n)
-    {
-        padding-left: 0;
-    }
-    
-}
 
 /* vertical iPhone */
 @media screen and (max-width: 500px) {

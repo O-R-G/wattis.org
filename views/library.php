@@ -46,7 +46,7 @@ require_once('static/php/displayMedia.php');
             currently passes $base_id and $sub_id as hidden value in form
         */
 ?>
-<div class="mainContainer times big">
+<div class="mainContainer libraryMainContainer times big">
 	<?
         
 
@@ -84,39 +84,40 @@ require_once('static/php/displayMedia.php');
 	    // $html .= "</div>";	
 	    // echo nl2br($html);
         // $html = "";
-        ?><div class='sidemenu listContainer side-listContainer times'>
-            <div class='one-column'>
-                <?= $search ? "<a href='/library/<?= $submenu_url; ?>'>" . $base_name . "</a>" : $base_name ; ?>
-                <div id='library-search-container'>
-                    <form>
-                        <input id='library-search-field' type='text' placeholder='Search The Wattis Library ...' name='search'>
-                        <input type='hidden' id='id' name='search_id' value='<?= $search_id; ?>' >
-                        <button type='submit'><img id='library-search-icon' src='/media/svg/magnifying-glass-6-k.svg'></button>
-                    </form>
-                </div>
-                <?=  $rootbody ? $rootbody . "<br><br>" : ''; ?>
-                <? if(!$search){
-                    ?>
-                        <div id='library-description'>
-                            <br/>Here there are videos of artists talking about their work as well as video and audio documentation of all past lectures, performances, and events. There are also essays about exhibitions, plus reviews, reading lists, and interviews to read. The Library is organized in two sections:
-                        </div>
-                        <div id="library-mode-switch-container" class="mode-switch-container">
-                            <? foreach($submenu as $s){
-                                if ($s['id'] == $submenu_id){
-                                    ?><button class = "mode-switch helvetica small"><?= $s['name1']; ?></button><?
-                                }
-                                else
-                                {
-                                    $this_url = '/library/' . $s['url'];
-                                    ?><a href='<?= $this_url; ?>'><button class = 'mode-switch helvetica small'><?= $s['name1']; ?></button></a><?
-                                }
-                            } ?>
-                        </div>
-                    <?
-                } else{
-                    ?><br><br>Search: <i><?= $search; ?></i><br/>matches...<?
-                } ?>
-            </div>
+        ?>
+        <div id='library-search-container'>
+            <form>
+                <input id='library-search-field' type='text' placeholder='Search The Wattis Library ...' name='search'>
+                <input type='hidden' id='id' name='search_id' value='<?= $search_id; ?>' >
+                <button type='submit'><img id='library-search-icon' src='/media/svg/magnifying-glass-6-k.svg'></button>
+            </form>
+        </div>
+
+        <div class='sidemenu listContainer side-listContainer times'>
+            <?= $search ? "<a href='/library/<?= $submenu_url; ?>'>" . $base_name . "</a>" : $base_name ; ?>
+            
+            <?=  $rootbody ? $rootbody . "<br><br>" : ''; ?>
+            <? if(!$search){
+                ?>
+                    <div id='library-description'>
+                        <br/>Here there are videos of artists talking about their work as well as video and audio documentation of all past lectures, performances, and events. There are also essays about exhibitions, plus reviews, reading lists, and interviews to read. The Library is organized in two sections:
+                    </div>
+                    <div id="library-mode-switch-container" class="mode-switch-container">
+                        <? foreach($submenu as $s){
+                            if ($s['id'] == $submenu_id){
+                                ?><button class = "mode-switch helvetica small"><?= $s['name1']; ?></button><?
+                            }
+                            else
+                            {
+                                $this_url = '/library/' . $s['url'];
+                                ?><a href='<?= $this_url; ?>'><button class = 'mode-switch helvetica small'><?= $s['name1']; ?></button></a><?
+                            }
+                        } ?>
+                    </div>
+                <?
+            } else{
+                ?><br><br>Search: <i><?= $search; ?></i><br/>matches...<?
+            } ?>
         </div><?
        
         // build objects per category
@@ -130,54 +131,6 @@ require_once('static/php/displayMedia.php');
             $category_1_id = $categories_search[1]['id'];
             $category_2_id = $categories_search[2]['id'];
             $category_3_id = $categories_search[3]['id'];
-            
-//             $sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, wires.fromid, 
-// wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active AS mediaActive FROM wires, objects LEFT 
-// JOIN media ON objects.id = media.object AND media.active = 1 WHERE (wires.fromid = (SELECT objects.id FROM objects WHERE 
-// objects.id = $category_0_id AND objects.active = 1) OR wires.fromid = (SELECT objects.id FROM objects WHERE
-// objects.id = $category_1_id AND objects.active = 1) OR wires.fromid = (SELECT objects.id FROM objects WHERE
-// objects.id = $category_2_id AND objects.active = 1) OR wires.fromid = (SELECT objects.id FROM objects WHERE
-// objects.id = $category_3_id AND objects.active = 1)) AND objects.name1 LIKE '%$search%' AND wires.toid=objects.id 
-// AND wires.active = 1 ORDER BY objects.rank;";
-
-//        	    $result = MYSQL_QUERY($sql);
-            // $myrow = MYSQL_FETCH_ARRAY($result);            
-
-	        // $html = "";
-         //    $images = [];
-    	    // $i=0;
-
-	        // while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-		       //  if ($myrow['mediaActive'] != null) {
-        
-			      //   $mediaFile = "media/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-			      //   $mediaCaption = strip_tags($myrow["caption"]);
-			      //   $mediaStyle = "width: 100%;";
-        
-	        //         if ( $i == 0 ) {
-        
-				     //    $specs  = getimagesize($mediaFile);
-				     //    // $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;
-				     //    // true for search results   
-				     //    $use4xgrid = TRUE;		       
-	        //         }
-	                
-	        //         // requires category id to build url (wires.fromid)
-	        //         $category_id = $myrow["fromid"];
-	                
-			      //   $images[$i] .= "<a href='library_view.php?id=" . $base_id . "," . $submenu_id . "," . $category_id . "," . $myrow['objectsId'] . "'>";
-			      //   $images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
-			      //   $images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-			      //   $images[$i] .= "<div class = 'captionContainer library helvetica small'>";
-         //            $images[$i] .= $myrow['name1'];
-			      //   $images[$i] .= "</div>";
-			      //   $images[$i] .= "</div>";
-			      //   $images[$i] .= "</a>";
-		        
-			      //   if ( ( $i+1) % (($use4xgrid) ? 4 : 2) == 0) $images[$i] .= "<div class='clear'></div>";
-         //     		        $i++;
-		       //  }
-	        // }
 
             $search_result = build_children_librarySearch($oo, $ww, $search);
             
@@ -286,15 +239,17 @@ require_once('static/php/displayMedia.php');
             ?></div><?
         }
     // 3/19 search position when mobile;
-    if($isMobile){
-        ?><script type = "text/javascript">
-            var ticking = false;
-            var scrollTop = window.scrollTop;
-            var sLibrary_search_container = document.getElementById("library-search-container");
+    ?><script type = "text/javascript">
+        var ticking = false;
+        var scrollTop = window.scrollTop;
+        var sLibrary_search_container = document.getElementById("library-search-container");
+        if(window.innerWidth < 568 && sLibrary_search_container != undefined)
+        {
             window.addEventListener('scroll', function(){
                 sTop = window.scrollY;
                 if (!ticking) {
                     window.requestAnimationFrame(function() {
+                        console.log(sTop);
                         if(sTop > 70){
                             sLibrary_search_container.classList.add("top");
                         }
@@ -307,8 +262,9 @@ require_once('static/php/displayMedia.php');
                     ticking = true;
                 }
             });
-        </script><?
-    }
+        }
+        
+    </script><?
     // 3/19 add search counts;
     if($search){
     ?>
