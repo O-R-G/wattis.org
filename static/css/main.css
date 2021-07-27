@@ -612,7 +612,10 @@ pre {
 #library-search-container button:hover {
     opacity: 0.5;
 }
-
+input[type=text]
+{
+    border-radius: none;
+}
 #library-search-container input[type=text] {
     vertical-align: top;
     display: inline-block;
