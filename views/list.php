@@ -183,11 +183,11 @@
 	    	{
 	    		$submenu = array(
 	    			array(
-	    				'name' => 'ON OUR MIND',
+	    				'name' => 'On Our Mind',
 	    				'slug'  => 'on-our-mind'
 	    			),
 	    			array(
-	    				'name' => 'ON VIEW',
+	    				'name' => 'On View',
 	    				'slug'  => 'gallery'
 	    			)
 	    		);

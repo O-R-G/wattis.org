@@ -13,13 +13,15 @@ $mm = new Media();
 $ww = new Wires();
 $uu = new URL();
 
-$main_id = end($oo->urls_to_ids(array('main')));
+$tmp = $oo->urls_to_ids(array('main'));
+$main_id = end($tmp);
 $main_children = $oo->children($main_id);
 $main_children_url = array();
 foreach($main_children as $child)
 	$main_children_url[] = $child['url'];
 
-$home_id = end($oo->urls_to_ids(array('home')));
+$tmp = $oo->urls_to_ids(array('home'));
+$home_id = end($tmp);
 $home_children = $oo->children($home_id);
 $home_children_url = array();
 foreach($home_children as $child)

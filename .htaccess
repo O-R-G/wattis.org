@@ -1820,7 +1820,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ index.php [L]
 
-Redirect 301 /program /our-program
+RedirectMatch 301 ^/program(\/.*)? /our-program$1
 Redirect 301 /about /read-about-us
 Redirect 301 /archive /consult-the-archive
 Redirect 301 /support /become-a-member
