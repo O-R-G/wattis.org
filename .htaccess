@@ -1,8 +1,8 @@
 # AuthUserFile /Library/WebServer/Documents/.htpasswd
-# AuthUserFile /var/www/.htpasswd
-# AuthName "STAGING"
-# AuthType Basic
-# Require valid-user
+AuthUserFile /var/www/.htpasswd
+AuthName "STAGING"
+AuthType Basic
+Require valid-user
 
 # order deny,allow
 # deny from all
