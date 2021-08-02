@@ -1802,7 +1802,8 @@ a.year.expanded
     .monthsContainer
     {
         position: relative;
-        margin-top: 10px;
+        margin: 10px 0;
+        padding-left: 20px;
         transform: none;
     }
     .filter,

@@ -188,7 +188,7 @@
 	    			),
 	    			array(
 	    				'name' => 'On View',
-	    				'slug'  => 'gallery'
+	    				'slug'  => 'on-view'
 	    			)
 	    		);
 	    		?><div id="filter-program" class="filter right-filter">
@@ -198,7 +198,7 @@
 	                    foreach ($submenu as $s)
                         {
                         	$isActive = $_GET['program'] == $s['slug'];
-			    			$this_name = $s['name'];
+			    			$this_name = ucfirst($s['name']);
 
 			    			$this_url = $isActive ? $base_url : $base_url . '?program=' . $s['slug'];
 			    			?><li class="sans year <?= $isActive ? 'active' : ''; ?>"><a class='year-btn' href="<?= $this_url; ?>"><?= $this_name; ?></a></li><?
