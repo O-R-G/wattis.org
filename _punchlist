@@ -189,4 +189,9 @@ x convert columms (///) in views/list to css .columns
 - /calendar throws an error when filter for on-view but no on-view available
   just stops loading the page 
 - ON OUR MIND and ON VIEW to upper and lowercase so they appear smaller
-- /calendar mobile filer css review, clean up
+- /calendar 
+  - mobile filter css clean up, consistent feeling line-height
+  - catch error if no event but filter selected such as 
+    http://wattis.o-r-g.net/calendar/2017?program=gallery
+  - provide instructions for adding events to on our mind or on view record
+    (link under _Events in that record)
