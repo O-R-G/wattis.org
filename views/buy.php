@@ -93,7 +93,6 @@ $id AND objects.active ORDER BY media.rank;";
 
                 $mediaFile = m_url($m);
                 $mediaCaption = strip_tags($m["caption"]);
-
                 ?><div id='image<?= $key; ?>' class = 'buy_images <?= (($use4xgrid) ? "listContainer half-width" : ""); ?>'><?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?></div><?
             }
         ?>
@@ -152,34 +151,29 @@ $id AND objects.active ORDER BY media.rank;";
         $html .= "</div>";
 	// echo nl2br($html);
 	?>
-<script src = '/JS/gallery_static.js'></script>
+<script src = '/static/js/gallery_static.js'></script>
 <script>
         var image_tallest_index = <?php echo $image_tallest; ?>;
         var image1 = document.getElementById('image1');
         if(image1 != null){
-                image_ctner = image1.parentElement;
-                image_ctner.style.position = 'relative';
-                var images = document.querySelectorAll('.buy_images img');
-                // console.log(images);
-                if(images.length > 1){
-                        image_tallest = images[image_tallest_index];
-                        image_tallest.style.position = 'relative';
-                        image_tallest.style.top = 0;
-                        image_tallest.style.transform = 'translate(0, 0)';
-
-                        var sGallery_control_ctner = document.getElementById('gallery_control_ctner');
-                        sGallery_control_ctner.style.display = 'block';
-                        var nods_ctner = document.getElementById('nods_ctner');
-                        for(i = 0; i< images.length ; i++){
-                                console.log(images.length);
-                                var nod = document.createElement('div');
-                                nod.className = 'nods';
-                                nods_ctner.appendChild(nod);
-                        }
-                        var sNods = document.getElementsByClassName('nods');
-                        launch_static(0);
+            image_ctner = image1.parentElement;
+            image_ctner.style.position = 'relative';
+            var images = document.querySelectorAll('.buy_images img');
+            var sBuy_images = document.querySelectorAll('.buy_images');
+            // console.log(images);
+            if(images.length > 1){
+                image_tallest = sBuy_images[image_tallest_index];
+                var sGallery_control_ctner = document.getElementById('gallery_control_ctner');
+                sGallery_control_ctner.style.display = 'block';
+                var nods_ctner = document.getElementById('nods_ctner');
+                for(i = 0; i< images.length ; i++){
+                        var nod = document.createElement('div');
+                        nod.className = 'nods';
+                        nods_ctner.appendChild(nod);
                 }
-                
+                var sNods = document.getElementsByClassName('nods');
+                gallery_static.launch(sBuy_images, sGallery_control_ctner, image_tallest_index);
+            }
         }else{
                var image1 = document.getElementById('image0');
                if(image0 != null){
