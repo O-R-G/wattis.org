@@ -460,9 +460,9 @@ pre {
 
 }
 .inline-img-container {
-    display:inline-block;
-    vertical-align: text-top;
-    padding: 10px
+    /*display:inline-block;*/
+    /*vertical-align: text-top;*/
+    /*padding: 10px*/
 }
 
 .captionContainer {
@@ -1335,8 +1335,9 @@ a.year.expanded
     width: 90%;
     margin-bottom: 1em;
 }
-
-.listContainer.doublewide.library img {
+.listContainer.doublewide.library img,
+.listContainer img
+{
     width: 100%;
 }
 

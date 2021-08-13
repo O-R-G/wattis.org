@@ -106,13 +106,13 @@ function build_children_search($oo, $ww, $query) {
     foreach ($emails as $email)
         $ids[] = $email['id'];
     $not_in = '(' . implode(', ', $ids) . ')';
-
     // search
     $fields = array("objects.*");
     $tables = array("objects", "wires");
     $where  = array("objects.active = '1'",
                   "(LOWER(CONVERT(BINARY objects.name1 USING utf8mb4)) LIKE '%" . $query .
                   "%' OR LOWER(CONVERT(BINARY objects.deck USING utf8mb4)) LIKE '%" . $query . 
+                  "%' OR LOWER(CONVERT(BINARY objects.body USING utf8mb4)) LIKE '%" . $query . 
                   "%' OR LOWER(CONVERT(BINARY objects.notes USING utf8mb4)) LIKE '%" . $query ."%')",
                   "objects.name1 NOT LIKE '.%'",
                   // "objects.name1 NOT LIKE '_%'",
