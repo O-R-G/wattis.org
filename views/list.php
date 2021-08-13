@@ -167,7 +167,7 @@
                         display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly, $filter_keep_query_string);
                     if($uri[1] == 'our-program'){
 			            ?><li class = 'year sans'>
-				            <a class = "year-btn" href = 'http://archive.wattis.org'>before ...</a>
+				            <a class = "year-btn" href = 'http://archive.wattis.org/exhibitions/archive' target="_blank">before ...</a>
 			            </li><?
                     }
                 ?></ul>
@@ -381,8 +381,8 @@ function print_list_child($child, $root_url = false, $show_date = false, $show_d
 	if($show_deck)
 		$deck = $child['deck'];	
 	?><div class='listContainer <?= $class; ?>'>
+		<?= ($formatted_date && $show_date) ? '<i>' . $formatted_date . '</i><br>' : ''; ?>
 		<a href='<?= $url; ?>'>
-			<?= ($formatted_date && $show_date) ? '<i>' . $formatted_date . '</i><br>' : ''; ?>
 			<?= $title; ?>
 		</a> 
 		<?= $deck ? '<i>' . $deck . '</i>' : ''; ?>
