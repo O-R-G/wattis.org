@@ -381,8 +381,8 @@ function print_list_child($child, $root_url = false, $show_date = false, $show_d
 	if($show_deck)
 		$deck = $child['deck'];	
 	?><div class='listContainer <?= $class; ?>'>
+		<?= ($formatted_date && $show_date) ? '<i>' . $formatted_date . '</i><br>' : ''; ?>
 		<a href='<?= $url; ?>'>
-			<?= ($formatted_date && $show_date) ? '<i>' . $formatted_date . '</i><br>' : ''; ?>
 			<?= $title; ?>
 		</a> 
 		<?= $deck ? '<i>' . $deck . '</i>' : ''; ?>

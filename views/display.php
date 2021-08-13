@@ -78,8 +78,7 @@
 			// 	}
 			// }
 			?>
-			<div class='listContainer times'><?= $rootname; ?><br><br><?= $rootbody; ?><br><br></div>
-			<div class = 'listContainer doublewide displayContainer'>
+			<div class='listContainer times side-listContainer'><?= $rootname; ?><br><br><?= $rootbody; ?><br><br></div><div class = 'listContainer displayContainer main-listContainer'>
 			<?
 			if(!empty($children))
 			{
@@ -101,8 +100,8 @@
 		                        $specs  = getimagesize($mediaFile_temp);
 		                        $use4xgrid = ($rootname == "Buy Catalogs");  
 		                    }
-		                    ?><a class="display-item" href='/buy/<?= $uri[1] . '/' . $child['url']; ?>'>
-		                    	<div id='image<?= $i; ?>' class = 'listContainer <?= (($use4xgrid) ? "fourcolumn" : "twocolumn"); ?>'>
+		                    ?><a class="display-item listContainer <?= (($use4xgrid) ? "fourth-with" : "half-width"); ?>" href='/buy/<?= $uri[1] . '/' . $child['url']; ?>'>
+		                    	<div id='image<?= $i; ?>' class = ' '>
 		                    		<?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?>
 		                    		<div class = 'captionContainer helvetica small'><?= nl2br($child['name1']); ?></div>
 		                    	</div>

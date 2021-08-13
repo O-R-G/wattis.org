@@ -79,8 +79,7 @@ $id AND objects.active ORDER BY media.rank;";
    //              }
    //      }
    ?>
-   <div class='listContainer times'><?= $name; ?></div>
-   <div class='listContainer doublewide'>
+   <div class='listContainer times side-listContainer'><?= $name; ?></div><div class='listContainer main-listContainer'>
        <div id = 'gallery_static_ctner'>
         <?
             foreach($media as $key => $m)
@@ -95,7 +94,7 @@ $id AND objects.active ORDER BY media.rank;";
                 $mediaFile = m_url($m);
                 $mediaCaption = strip_tags($m["caption"]);
 
-                ?><div id='image<?= $key; ?>' class = 'buy_images <?= (($use4xgrid) ? "listContainer twocolumn" : ""); ?>'><?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?></div><?
+                ?><div id='image<?= $key; ?>' class = 'buy_images <?= (($use4xgrid) ? "listContainer half-width" : ""); ?>'><?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?></div><?
             }
         ?>
             <div id = 'gallery_control_ctner' style = 'display:none;'>
@@ -104,13 +103,11 @@ $id AND objects.active ORDER BY media.rank;";
                 <div id = 'btn_next' class = 'gallery_control'>&gt;</div>
             </div>
        </div>
-       <div class='listContainer twocolumn doublewide helvetica small'></div>
-       <div class='listContainer twocolumn helvetica small'>
+       <div class='listContainer half-width doublewide helvetica small'></div><div class='listContainer half-width helvetica small'>
             <?= $mediaCaption; ?><br>
             <?= $deck; ?><br><br>
             <a href='mailto:jgerrity@cca.edu'>Please email for international orders</a>
-        </div>
-        <div class='listContainer twocolumn times'><?= $body; ?></div>
+        </div><div class='listContainer half-width times'><?= $body; ?></div>
 
    </div>
    <?
