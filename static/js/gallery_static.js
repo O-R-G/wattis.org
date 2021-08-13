@@ -14,7 +14,7 @@ var gallery_static = {
 		nods[this.current_index].classList.add('active');
 		Array.prototype.forEach.call(sNods, function(el, i){
 			el.addEventListener('click', function(){
-				this.jump(i);
+				self.jump(i);
 			});
 		});
 		[].forEach.call(divs, function(el, i){
@@ -55,10 +55,14 @@ var gallery_static = {
 		this.current_index = index;
 	},
 	jump: function(to_index){
-		images[index].style.opacity = 0;
-		sNods[index].classList.remove('active');
+		let index = this.current_index;
+		let images_divs = this.divs;
+		let nods = this.nods;
+		images_divs[index].style.opacity = 0;
+		nods[index].classList.remove('active');
 		index = to_index;
-		images[index].style.opacity = 1;
-		sNods[index].classList.add('active');
+		images_divs[index].style.opacity = 1;
+		nods[index].classList.add('active');
+		this.current_index = index;
 	}
 }
