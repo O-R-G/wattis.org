@@ -73,7 +73,7 @@ elseif($uri[1] == 'buy')
 	$uu->id = end($ids);
 	$item = $oo->get($uu->id);
 }
-elseif(!isset($ids))
+elseif(!isset($ids) && isset($_REQUEST['id']))
 {
 	$id = $_REQUEST['id'];		// no register globals	
 	if (!$id) $id = "0";
@@ -85,26 +85,30 @@ elseif(!isset($ids))
 }
 else
 	$item = $oo->get(0);
-$name = ltrim(strip_tags($item["name1"]), ".");
+/*
+if(isset($item['name1']))
+	$name = ltrim(strip_tags($item["name1"]), ".");
+else
+	$name = '';
+*/
 $nav = $oo->nav($uu->ids);
 $show_menu = false;
 
 // id
 
  
-$alt = $_REQUEST['alt'];
-$pop = $_REQUEST['pop'];
+$alt = isset($_REQUEST['alt']) ? $_REQUEST['alt'] : '';
+$pop = isset($_REQUEST['pop']) ? $_REQUEST['pop'] : '';
 
-$displaySearch = $_GET['displaysearch'];
-if(empty($displaySearch))
-	$displaySearch = false;
+$displaySearch = isset($_GET['displaysearch']) ? $_GET['displaysearch'] : false;
+
 // detect mobile
 $isMobile = (bool)preg_match('#\b(ip(hone|od|ad)|android|opera m(ob|in)i|windows (phone|ce)|blackberry|tablet'.
 				'|s(ymbian|eries60|amsung)|p(laybook|alm|rofile/midp|laystation portable)|nokia|fennec|htc[\-_]'.
 				'|mobile|up\.browser|[1-4][0-9]{2}x[1-4][0-9]{2})\b#i', $_SERVER['HTTP_USER_AGENT']);
 
 $bodyClass = '';
-if(!$uri[1])
+if(count($uri) == 1)
 	$bodyClass .= ' home loading';
 if($uri[1] == 'search')
 	$bodyClass .= ' reverse';
@@ -112,7 +116,7 @@ if($uri[1] == 'browse-the-library')
 	$bodyClass .= ' hideGeneralSearch';
 if(!empty($displaySearch))
 	$bodyClass .= ' viewing-search';
-if($uri[2] == 'the-word-for-world-is-forest-2020' && count($uri) > 3)
+if(count($uri) > 3 && $uri[2] == 'the-word-for-world-is-forest-2020')
 	$bodyClass .= ' the-word-for-world-is-forest-2020';
 require_once('static/php/function.php');
 

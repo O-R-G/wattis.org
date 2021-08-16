@@ -12,6 +12,7 @@
 	$filter_keep_query_string = true;
 
 	$rootid = $item['id'];
+	$sub_category = false;
 
 	if($uri[1] == 'our-program'){
 		$hasFilter = true;
@@ -73,16 +74,19 @@
 		exceptions for pages not fetching children by their urls
 	*/
 	$rootid = $item['id'];
-	if(strpos($uri[2], 'past-exhibitions') !== false ){
-		$rootid = end($oo->urls_to_ids(array('main','our-program','gallery')));
-		$show_children_deck = false;
+	if(isset($uri[2]))
+	{
+		if(strpos($uri[2], 'past-exhibitions') !== false ){
+			$rootid = end($oo->urls_to_ids(array('main','our-program','gallery')));
+			$show_children_deck = false;
+		}
+		elseif(strpos($uri[2], 'research-seasons') !== false ){
+			$rootid = end($oo->urls_to_ids(array('main','our-program','on-our-mind')));
+			$show_children_deck = false;
+		}
+		elseif(strpos($uri[2], 'events') !== false )
+			$rootid = end($oo->urls_to_ids(array('main','calendar')));
 	}
-	elseif(strpos($uri[2], 'research-seasons') !== false ){
-		$rootid = end($oo->urls_to_ids(array('main','our-program','on-our-mind')));
-		$show_children_deck = false;
-	}
-	elseif(strpos($uri[2], 'events') !== false )
-		$rootid = end($oo->urls_to_ids(array('main','calendar')));
 	
 	$root_item = $oo->get($rootid);
 	$root_url = $root_item['url'];
@@ -127,7 +131,8 @@
         {
         	// $filter_keep_query_string = true;
         	$children = array();
-        	$oom_id = end($oo->urls_to_ids(array('main', 'our-program', $_GET['program'])));
+        	$temp = $oo->urls_to_ids(array('main', 'our-program', $_GET['program']));
+        	$oom_id = end($temp);
         	$oom_children = $oo->children($oom_id);
         	foreach($oom_children as $oom_child)
         	{
@@ -160,7 +165,7 @@
 	    ?><div id = 'filter_container' class="helvetica medium">
 		    <div id='filter' class = 'filter'>
 			    <ul id='yearsContainer'>
-				    <li class = 'year sans <? echo (!$uri[2] || ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
+				    <li class = 'year sans <? echo (!isset($uri[2]) || ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
 					    <a class = "year-btn" href = '<? echo $sub_category ? '/'.$uri[1].'/' . $uri[2] : '/'.$uri[1]; ?>'>Now</a>
 				    </li><?
                     foreach ($years as $year)
@@ -197,7 +202,7 @@
 					    $base_url = implode('/', $uri);
 	                    foreach ($submenu as $s)
                         {
-                        	$isActive = $_GET['program'] == $s['slug'];
+                        	$isActive = isset($_GET['program']) && $_GET['program'] == $s['slug'];
 			    			$this_name = ucfirst($s['name']);
 
 			    			$this_url = $isActive ? $base_url : $base_url . '?program=' . $s['slug'];
@@ -233,7 +238,7 @@
 		{
 			foreach($children as $key => $child){
 				if (substr($child['name1'], 0, 1) != '.') {
-					$url =  "/" . $root_url . "/".$url ;
+					$url =  "/" . $root_url . "/". $child['url'] ;
 					$now = time();
 					$begin = ($child['begin'] != null) ? strtotime($child['begin']) : $now;
 					$end = ($child['end'] != null) ? strtotime($child['end']) : $now;
@@ -356,8 +361,8 @@ function print_list_child($child, $root_url = false, $show_date = false, $show_d
 	if($show_date)
 	{
 		if( $child['begin'] && $child['end']){
-			$begin_year = date('Y', $child['begin']);
-			$end_year = date('Y', $child['end']);
+			$begin_year = date('Y', strtotime($child['begin']));
+			$end_year = date('Y', strtotime($child['end']));
 
 			if($begin_year == $end_year)
 				$begin = date('F j', strtotime($child['begin']));

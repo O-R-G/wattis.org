@@ -196,4 +196,12 @@ x convert columms (///) in views/list to css .columns
   + provide instructions for adding events to on our mind or on view record
     (link under _Events in that record)
 
+- Library: can the images be added in the “normal” way? (this is a longer / technical conversation)
++ img { width:100%; }
++ o-r-g: display line breaks (\n) added to html in rich text mode
+- When you add an image in RTF mode, it doesn’t show up in HTML mode...and vice-versa. Makes it hard to know how to use the new RTF mode for images
++ search body as well
++ Fix slideshow for books/catalogues
++ Fix [image*] in html mode
++ /our-program, remove underlines from the dates
 

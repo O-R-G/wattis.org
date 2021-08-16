@@ -18,6 +18,7 @@ require_once('static/php/displayMedia.php');
     preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);
     $img_indexes = $out[1];
     $media = $oo->media($item['id']);
+    $images = array();
     if(!empty($media))
         {
             $image_files = array();
@@ -43,14 +44,9 @@ require_once('static/php/displayMedia.php');
                     $width = 100;    // 90% of text column
 
                     if(!$isMobile)
-                    {
-                        $images[$key] .= "<div id='image".$key."' class = 'inline-img-container' style='width: $width%;' onclick='launch($key);'>";
-                    }
+                        $images[$key] = "<div id='image".$key."' class = 'inline-img-container' style='width: $width%;' onclick='launch($key);'>";
                     else
-                    {               
-                        // $images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
-                        $images[$key] .= "<div id='image".$key."' class = 'imageContainer'>";
-                    }
+                        $images[$key] = "<div id='image".$key."' class = 'imageContainer'>";
                     
                     $images[$key] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
                     $images[$key] .= "<div class='captionContainer monaco small'>" . $image_captions[$key] . "</div>";
@@ -71,12 +67,12 @@ require_once('static/php/displayMedia.php');
                     
                     if(!$isMobile)
                     {
-                        $images[$key] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
+                        $images[$key] = "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
                         $images[$key] .= "<div id='image".$key."' class = 'imageContainer' style='padding-top:{$randomPadding}px; margin:40px;' onclick='launch($key);'>";
                     }
                     else
                     {
-                        $images[$key] .= "<div class='imageContainerWrapper'>";
+                        $images[$key] = "<div class='imageContainerWrapper'>";
                         $images[$key] .= "<div id='image".$key."' class = 'imageContainer'>";
                     }
                     $images[$key] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);

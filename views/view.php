@@ -1,9 +1,8 @@
 <? 
 require_once('static/php/displayMedia.php');
-// $ids = $oo->urls_to_ids($uri);
 $isFound = false;
-// check if in main
-$main_id = end($oo->urls_to_ids(array('main')));
+$temp = $oo->urls_to_ids(array('main'));
+$main_id = end($temp);
 $main_children = $oo->children($main_id);
 $id = end($ids);
 
@@ -33,8 +32,12 @@ if(!$isFound)
 
 if(!$isFound)
 {
-	$id = $_REQUEST['id'];		// no register globals	
-	if (!$id) $id = "0";
+	if( isset($_REQUEST['id']) )
+		$id = $_REQUEST['id'];
+	else if(isset($item['id']))
+		$id = $item['id'];
+	else
+		$id = 0;
 	$ids = explode(",", $id);
 	$idFull = $id;
 	$id = $ids[count($ids) - 1];
@@ -44,12 +47,12 @@ if(!$isFound)
 $root_item = $oo->get($rootid);
 $rootname = nl2br($root_item["name1"]);
 
-$name = $item['name1'];
-$body = nl2br($item['body']);
-$deck = nl2br($item['deck']);
-$notes = $item['notes'];
-$begin = $item['begin'];
-$end = $item['end'];
+$name  = isset($item['name1']) ? $item['name1'] : '';
+$body  = isset($item['body']) ? nl2br($item['body']) : '';
+$deck  = isset($item['deck']) ? nl2br($item['deck']) : '';
+$notes = isset($item['notes']) ? nl2br($item['notes']) : '';
+$begin = isset($item['begin']) ? $item['begin'] : '';
+$end   = isset($item['end']) ? $item['end'] : '';
 
 $pattern = "/\[image(\d+)\]/";
 preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);
@@ -78,7 +81,8 @@ else
 	{
 		if(!empty($uri_temp))
 		{
-			$this_ancestor_id = end($oo->urls_to_ids($uri_temp));
+			$temp = $oo->urls_to_ids($uri_temp);
+			$this_ancestor_id = end($temp);
 			$this_ancestor_name1 = $oo->name($this_ancestor_id);
 			if(strpos($this_ancestor_name1, $menu_tag) !== false){
 				$isMenu = true;
@@ -195,7 +199,7 @@ if($isMenu)
 			echo nl2br($name);	
 		}
 		?></div><?
-
+		$images = array();
 		if(!empty($media))
 		{
 			$image_files = array();
@@ -221,14 +225,9 @@ if($isMenu)
 					$width = 90;    // 90% of text column
 
 					if(!$isMobile)
-					{
-						$images[$key] .= "<div id='image".$key."' class = 'inline-img-container' style='width: $width%;' onclick='launch($key);'>";
-					}
+						$images[$key] = "<div id='image".$key."' class = 'inline-img-container' style='width: $width%;' onclick='launch($key);'>";
 					else
-					{				
-						// $images[$i] .= "<div id='image".$i."' class = 'imageContainer'>";
-						$images[$key] .= "<div id='image".$key."' class = 'imageContainer'>";
-					}
+						$images[$key] = "<div id='image".$key."' class = 'imageContainer'>";
 					
 					$images[$key] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
 					$images[$key] .= "<div class='captionContainer monaco small'>" . $image_captions[$key] . "</div>";
@@ -249,12 +248,12 @@ if($isMenu)
 					
 					if(!$isMobile)
 					{
-						$images[$key] .= "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
+						$images[$key] = "<div class = 'imageContainerWrapper' style='width:" . $randomWidth . "%; float:" . $randomFloat . ";'>";
 						$images[$key] .= "<div id='image".$key."' class = 'imageContainer' style='padding-top:{$randomPadding}px; margin:40px;' onclick='launch($key);'>";
 					}
 					else
 					{
-						$images[$key] .= "<div class='imageContainerWrapper'>";
+						$images[$key] = "<div class='imageContainerWrapper'>";
 						$images[$key] .= "<div id='image".$key."' class = 'imageContainer'>";
 					}
 					$images[$key] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
@@ -270,13 +269,14 @@ if($isMenu)
 			}
 			
 		}
+			
 		$pattern = "/\/\/\//";
 		if(preg_match($pattern, $body) == 1) 
 			$columns = preg_split($pattern, $body);
 		// $columns[0] = strictClean($columns[0]);
 		// $columns[1] = strictClean($columns[1]);
 		$columns = split_column($body);
-		$use_columns = ($uri[2] == 'on-our-mind');
+		$use_columns = (isset($uri[2]) && $uri[2] == 'on-our-mind');
 
 		// search for strings that match [\d+] where \d+ = n
 		// replace with image container = n
@@ -305,7 +305,7 @@ if($isMenu)
 		}
 		?><div class='clear'></div>
 		<div class='galleryContainer'><?php
-		if(is_array($images))
+		if(is_array($images) && !empty($images))
 		{
 			foreach($images as $image)
 				echo $image;

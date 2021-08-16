@@ -1,8 +1,10 @@
 <?
-$wattis_id = end($oo->urls_to_ids(array('home', 'the-wattis-institute')));
+$temp = $oo->urls_to_ids(array('home', 'the-wattis-institute'));
+$wattis_id = end($temp);
 $wattis_item = $oo->get($wattis_id);
 $wattis_intro = $wattis_item['body'];
-$main_id = end($oo->urls_to_ids(array('main')));
+$temp = $oo->urls_to_ids(array('main'));
+$main_id = end($temp);
 $id = $main_id;
 $main_children = $oo->children($main_id);
 $menu_level = 0;
