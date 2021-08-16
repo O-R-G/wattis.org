@@ -1,7 +1,7 @@
 <?
 require_once('static/php/displayMedia.php');
-    $search = $_REQUEST['search'];
-        $search_id = $_REQUEST['search_id'];
+    $search = isset($_REQUEST['search']) ? $_REQUEST['search'] : '';
+        $search_id = isset($_REQUEST['search_id']) ? $_REQUEST['search_id'] : false;
         if ($search && $search_id)
             $ids = explode(",", $search_id);
         $base_name = "Library";
@@ -9,7 +9,7 @@ require_once('static/php/displayMedia.php');
         $search_count = 0;
         
         $submenu = $oo->children($base_id);
-        $submenu_id = ($ids[2]) ? $ids[2] : $submenu[0]['id'];
+        $submenu_id = isset($ids[2]) ? $ids[2] : $submenu[0]['id'];
         $submenu_url = $oo->get($submenu_id)['url'];
         if ($search) {
 
@@ -95,7 +95,7 @@ require_once('static/php/displayMedia.php');
         <div class='sidemenu listContainer side-listContainer times'>
             <?= $search ? "<a href='/library/<?= $submenu_url; ?>'>" . $base_name . "</a>" : $base_name ; ?>
             
-            <?=  $rootbody ? $rootbody . "<br><br>" : ''; ?>
+            <?=  isset($rootbody) ? $rootbody . "<br><br>" : ''; ?>
             <? if(!$search){
                 ?>
                     <div id='library-description'>

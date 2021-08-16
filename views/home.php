@@ -34,7 +34,8 @@ while ($obj = $res->fetch_assoc())
 	$items[] = $obj;
 $res->close();
 */
-$home_id = end($oo->urls_to_ids(array('home')));
+$temp = $oo->urls_to_ids(array('home'));
+$home_id = end($temp);
 $items = $oo->children($home_id);
 foreach($items as $key =>$item)
 {
