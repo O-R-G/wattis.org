@@ -115,14 +115,17 @@ function build_children_search($oo, $ww, $query) {
                   "%' OR LOWER(CONVERT(BINARY objects.body USING utf8mb4)) LIKE '%" . $query . 
                   "%' OR LOWER(CONVERT(BINARY objects.notes USING utf8mb4)) LIKE '%" . $query ."%')",
                   "objects.name1 NOT LIKE '.%'",
-                  // "objects.name1 NOT LIKE '_%'",
                   "wires.toid = objects.id",
                   "wires.active = '1'",
-                  // "wires.fromid = '10'" );
-                  // "wires.fromid != '" . $emails_id . "'" );
                   "wires.fromid NOT IN " . $not_in . "" );
     $order  = array("objects.name1", "objects.begin", "objects.end");
-    $children = $oo->get_all($fields, $tables, $where, $order);
+    $children = $oo->get_all($fields, $tables, $where, $order, '', false, true);
+    foreach($children as &$child)
+    {
+      $this_url = get_full_url($child);
+      $child['url'] = $this_url;
+    }
+    unset($child);
 
     return $children;
 }
@@ -255,6 +258,27 @@ function split_column($str){
   {
     $output[] = $str;
   }
+  return $output;
+}
+
+function get_full_url($item){
+  global $db;
+  $this_id = $item['id'];
+  $this_url = $item['url'];
+  // $output = '/' . $this_url;
+  
+  while($this_id != 0)
+  {
+    $sql = "SELECT wires.fromid, objects.url FROM wires, objects WHERE objects.id = wires.toid AND wires.active = '1' AND objects.active = '1' AND objects.id='".$this_id."' LIMIT 1";
+    $res = $db->query($sql);
+    if($res == null || $res->num_rows == 0)
+      break;
+    else
+      $a = $res->fetch_assoc();
+    $this_id = $a['fromid'];
+    $output = '/' . $a['url'] . $output;
+  }
+  $res->close();
   return $output;
 }
 ?>

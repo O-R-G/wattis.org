@@ -188,25 +188,27 @@
 	    	{
 	    		$submenu = array(
 	    			array(
-	    				'name' => 'On Our Mind',
+	    				'name' => 'Research Events',
 	    				'slug'  => 'on-our-mind'
 	    			),
 	    			array(
-	    				'name' => 'On View',
+	    				'name' => 'Exhibition/Other Events',
 	    				'slug'  => 'on-view'
 	    			)
 	    		);
 	    		?><div id="filter-program" class="filter right-filter">
-		    		<ul id='yearsContainer'>
+		    		<ul id='yearsContainer'>Filters: 
 					    <?
 					    $base_url = implode('/', $uri);
-	                    foreach ($submenu as $s)
+	                    foreach ($submenu as $key => $s)
                         {
                         	$isActive = isset($_GET['program']) && $_GET['program'] == $s['slug'];
 			    			$this_name = ucfirst($s['name']);
 
 			    			$this_url = $isActive ? $base_url : $base_url . '?program=' . $s['slug'];
-			    			?><li class="sans year <?= $isActive ? 'active' : ''; ?>"><a class='year-btn' href="<?= $this_url; ?>"><?= $this_name; ?></a></li><?
+			    			?><li class="sans year <?= $isActive ? 'active' : ''; ?>"><a class='year-btn' href="<?= $this_url; ?>"><?= $this_name; ?></a></li><? 
+			    			if($key != count($submenu) - 1)
+		    				{ ?> or <? }
                         }
 	                ?></ul>
 		    	</div><?
@@ -328,7 +330,7 @@ function build_filter_children($oo, $rootid, $date, $archive = NULL, $days = 30,
     if ($date)
         $where = array_merge($where, $date_compare);
     
-    $order  = array("objects.rank", "objects.begin", "objects.name1");
+    $order  = array("objects.rank", "objects.begin DESC", "objects.name1");
     $children = $oo->get_all($fields, $tables, $where, $order);
     
     return $children;

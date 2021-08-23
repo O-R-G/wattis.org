@@ -2,38 +2,6 @@
 <div class="homeContainer times big"><?
 
 $rootname = 'Home';
-
-// SQL objects attached to root by name
-/*
-$sql = "SELECT 
-			objects.id, objects.name1,
-			objects.body, objects.url, 
-			objects.begin, objects.end 
-		FROM 
-			objects, wires 
-		WHERE 
-			wires.fromid IN
-			(
-				SELECT objects.id 
-				FROM objects 
-				WHERE 
-					objects.name1 LIKE '$rootname' 
-					AND objects.active = 1
-			) 
-			AND objects.name1 NOT LIKE '.%' 
-			AND wires.toid = objects.id 
-			AND objects.active = '1' 
-			AND wires.active = '1' 
-		ORDER BY objects.rank;";
-
-$res = $db->query($sql);
-if(!$res)
-	throw new Exception($db->error);
-$items = array();
-while ($obj = $res->fetch_assoc())
-	$items[] = $obj;
-$res->close();
-*/
 $temp = $oo->urls_to_ids(array('home'));
 $home_id = end($temp);
 $items = $oo->children($home_id);
