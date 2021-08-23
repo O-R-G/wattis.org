@@ -73,13 +73,12 @@ if(!!el)
 	$news_id = end($oo->urls_to_ids(array('home', 'news')));
 	$items = $oo->children($news_id);
 	foreach($items as $key => $item)
-		$newsItems[$key] = $item["body"];
-	
+		$newsItems[$key] = addslashes(strictClean($item["body"]));
 	?>
    	newsItem = new Array(
 		<?
 			foreach($newsItems as $key => $item){
-				echo "\"" . strictClean($item) . "\"";
+				echo "\"" . $item . "\"";
 
 				if ( $key < (count($newsItems) -1) )
 					echo ",\n";
