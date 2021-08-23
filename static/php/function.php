@@ -115,14 +115,17 @@ function build_children_search($oo, $ww, $query) {
                   "%' OR LOWER(CONVERT(BINARY objects.body USING utf8mb4)) LIKE '%" . $query . 
                   "%' OR LOWER(CONVERT(BINARY objects.notes USING utf8mb4)) LIKE '%" . $query ."%')",
                   "objects.name1 NOT LIKE '.%'",
-                  // "objects.name1 NOT LIKE '_%'",
                   "wires.toid = objects.id",
                   "wires.active = '1'",
-                  // "wires.fromid = '10'" );
-                  // "wires.fromid != '" . $emails_id . "'" );
                   "wires.fromid NOT IN " . $not_in . "" );
     $order  = array("objects.name1", "objects.begin", "objects.end");
-    $children = $oo->get_all($fields, $tables, $where, $order);
+    $children = $oo->get_all($fields, $tables, $where, $order, '', false, true);
+    foreach($children as &$child)
+    {
+      $this_url = getCompleteUrl($child['id']);
+      $child['url'] = $this_url;
+    }
+    unset($child);
 
     return $children;
 }
@@ -257,4 +260,5 @@ function split_column($str){
   }
   return $output;
 }
+
 ?>

@@ -20,8 +20,9 @@ $no_results_error = '<div class = "big">The search query did not return any resu
 			?><div class = 'search-item big'><?
 			foreach($children as $child){ 
 				if(substr($myrow['name1'], 0, 1) != '.'){
-					$URL = $myrow["url"];
-					$URL = ($URL) ? "/calendar/".$URL : "view_?id=".$child['id'];
+					$URL = $child["url"];
+					// var_dump($URL);
+					# $URL = ($URL) ? "/calendar/".$URL : "view_?id=".$child['id'];
 				?><a href = "<?= $URL; ?>"><?= $child['name1']; ?></a></div><div class = 'search-item big'><? 
 				}
 			}

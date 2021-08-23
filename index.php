@@ -5,8 +5,14 @@ $requestclean = strtok($request,"?");
 $uri = explode('/', $requestclean);
 $random = isset($_GET['random']);
 $date_argument = false;
-foreach ($uri as $u)
-    $date_argument = valid_date(urldecode($u));
+if(isset($uri[1]) && 
+	($uri[1] == 'calendar') || 
+	($uri[1] == 'our-program')
+){
+	foreach ($uri as $u)
+    	$date_argument = valid_date(urldecode($u));
+}
+
 
 require_once("views/head.php");
 require_once("views/nav.php");

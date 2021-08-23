@@ -1242,7 +1242,7 @@ a.year.expanded
 }
 .filter.right-filter .year
 {
-    margin-left: 15px;
+    /*margin-left: 15px;*/
     margin-right: 0;
 }
 .monthsContainer
