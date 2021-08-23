@@ -33,7 +33,36 @@ foreach($items as $key =>$item)
 			$randomMargin = rand(20, 50);
 			$randomFloat = (rand(0, 1) == 0) ? 'left' : 'right';
 		}
-		?><div class = 'blockContainer' style='width:<?= $randomWidth; ?>%; float: <?= $randomFloat; ?>; padding-top:<?= $randomPadding; ?>px; margin: <?= $randomMargin; ?>px'><?= nl2br($item['body']); ?></div><?
+		if($item['url'] == 'random-sentences')
+		{
+			$search_bold = !isset($_GET['random']);
+			$randomRecords = getRandomRecords();
+			?><div id="random-records-container" class = 'blockContainer' style='width:<?= $randomWidth; ?>%; float: <?= $randomFloat; ?>; padding-top:<?= $randomPadding; ?>px; margin: <?= $randomMargin; ?>px'><?
+			$fetched_ids_arr = array();
+			$a_pattern = '/<a\s.*?(?:href.*?=.*?[\'"].*?[\'"].*?)?>(.*?)<\/a>/is';
+			foreach($randomRecords['all'] as $record)
+			{
+				$this_url = getCompleteUrl($record['id']);
+				$fetched_ids_arr[] = $record['id'];
+				if($record['image'])
+				{
+					?><div class="blockContainer displaying_image"><a href="<?php echo $this_url; ?>" class = ''><img src="<?= $record['image']; ?>"></a></div><?
+				}
+				else
+				{
+					// $this_text = $record["sentence"];
+					$this_text = preg_replace($a_pattern, '<span class="pseudo-link">$1</span>', $record["sentence"]);
+
+					?><div class="blockContainer"><a class="block_link" href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $this_text; ?></div></a></div><?
+				}
+			}
+			?></div><?
+		}
+		else
+		{
+			?><div class = 'blockContainer' style='width:<?= $randomWidth; ?>%; float: <?= $randomFloat; ?>; padding-top:<?= $randomPadding; ?>px; margin: <?= $randomMargin; ?>px'><?= nl2br($item['body']); ?></div><?
+		}
+		
 	}
 }
 
@@ -56,20 +85,6 @@ if(!!el)
 	<?
 		// SQL object with attached (News)
 		// could be written into main query with LEFTJOIN
-	/*
-		$sql = "SELECT objects.id, objects.name1, objects.body, objects.active, objects.rank, wires.active, 
-	wires.fromid, wires.toid FROM objects, wires WHERE wires.fromid=(SELECT objects.id FROM objects WHERE objects.name1 
-	LIKE 'News' AND objects.active='1' LIMIT 1) AND wires.toid = objects.id AND objects.active = '1' AND wires.active = 
-	'1' ORDER BY objects.rank;";
-
-	$res_news = $db->query($sql);
-	if(!$res_news)
-		throw new Exception($db->error);
-	$items = array();
-	while ($obj = $res_news->fetch_assoc())
-		$items[] = $obj;
-	$res_news->close();
-	*/
 	$news_id = end($oo->urls_to_ids(array('home', 'news')));
 	$items = $oo->children($news_id);
 	foreach($items as $key => $item)
@@ -88,4 +103,69 @@ if(!!el)
 		?>
 	);
 	animateNewsTicker(newsItem[0]);
+
+	var randomRecords = <?= json_encode($randomRecords); ?>;
+	var randomRecords_all = randomRecords['all'];
+	var randomRecords_image = randomRecords['image'];
+	var fetched_ids_arr = <?= isset($fetched_ids_arr) ? json_encode($fetched_ids_arr) : '[]'; ?>;
+	var isFullyLoaded = false;
+	var isRandom = !<?= json_encode($search_bold)?>;
+	// var blockContainer = document.getElementsByClassName('blockContainer');
+	var randomRecord = document.querySelectorAll('#random-records-container ');
+
+	function nextPage(idx){
+		blockContainer[idx].style.display = 'none';
+		idx++;
+		if(idx > records_length - 2 && !isFullyLoaded)
+		{
+			loadMore(fetched_ids_arr);
+			records_length = document.getElementsByClassName('blockContainer').length;
+		}
+		if(idx > records_length - 1)
+			idx = 0;
+		blockContainer[idx].style.display = 'block';
+		return idx;
+	}
+	function previousPage(idx){
+		blockContainer[idx].style.display = 'none';
+		idx--;
+		if(idx < 0)
+			idx = records_length - 1;
+		blockContainer[idx].style.display = 'block';
+		return idx;
+	}
+	function preloadImage(img, array_of_src, idx = 0, limit = false){
+		img.onload = function(){
+			if(limit)
+			{
+				if(limit == 1)
+					return true;
+				else{
+					limit--;
+					idx++;
+					if(idx < array_of_src.length)
+						preloadImage(img, array_of_src, idx, limit);
+					else
+						return false;
+				}
+			}
+		};
+		img.src = array_of_src[idx];		
+	}
+	var preload_image = new Image;
+	var preload_idx = 0;
+	var test = preloadImage(preload_image, randomRecords_image, preload_idx, 10);
+
+	var timer = setInterval(function(){
+		current_index = nextPage(current_index);
+		if(current_index == 30){
+			preload_idx = 11;
+			preloadImage(preload_image, randomRecords_image, preload_idx, 10);
+		}
+		else if(current_index == 70)
+		{
+			preload_idx = 11;
+			preloadImage(preload_image, randomRecords_image, preload_idx, 10);
+		}
+	}, 5000);
 </script>
