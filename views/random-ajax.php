@@ -16,11 +16,11 @@ if(count($randomRecords['all']) != 0) {
 		$this_url = getCompleteUrl($record['id']);
 		$current_fetched_ids_arr[] = $record['id'];
 		if($record['image']) {
-			$response_html .= '<div class="blockContainer displaying_image"><a href="'. $this_url.'" ><img src="'.$record['image'].'"></a></div>';
+			$response_html .= '<div class="random-record blockContainer displaying_image"><a href="'. $this_url.'" ><img src="'.$record['image'].'"></a></div>';
 		} else {
 			// $this_text = $record["sentence"];
 			$this_text = preg_replace($a_pattern, '<span class="pseudo-link">$1</span>', $record["sentence"]);
-			$response_html .= '<div class="blockContainer"><a class="block_link" href="'.$this_url.'" ><div id = "paragraph">'. $this_text.'</div></a></div>';
+			$response_html .= '<div class="random-record blockContainer"><a class="block_link" href="'.$this_url.'" ><div id = "paragraph">'. $this_text.'</div></a></div>';
 		}
 	}
 	$response = array(
