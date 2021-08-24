@@ -1,20 +1,7 @@
 // implement infinite scrolling via ajax
-var page = 1;
 var isWaiting = false;
-window.onscroll = function(ev) 
-{
-	var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
-	// make this so that it is *before* scrolled 
-	// all the way to the bottom of the page
-	var scrolledToBottom = (scrollTop + window.innerHeight) >= document.body.scrollHeight;
-	if(!isWaiting && scrolledToBottom)
-	{
-	   	loadMore();
-	   	console.log("bottom");
-    }
-};
 
-function loadMore() {
+function loadMore(fetched_ids_arr = []) {
 	isWaiting = true;
 	if(window.XMLHttpRequest)
 	{
@@ -47,7 +34,7 @@ function loadMore() {
 				{
 					console.log(response);
 					document.querySelector(".homeContainer").innerHTML += response['this_html'];
-					fetched_ids_arr = response['current_fetched_ids_arr'];
+					return response['current_fetched_ids_arr'];
 				}
 				else
 					isFullyLoaded = true;
