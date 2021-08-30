@@ -36,7 +36,7 @@ function strictClean($str)
   return $str;
 }
 
-function getRandomRecords($records = '10', $fetched_ids_arr = array()){
+function getRandomRecords($amount = 10, $fetched_ids_arr = array()){
     global $db;
     global $oo;
 
@@ -48,7 +48,7 @@ function getRandomRecords($records = '10', $fetched_ids_arr = array()){
         $sql .= ' AND objects.id NOT IN '. $fetched_ids;
     }
     // $sql .= " ORDER BY RAND() LIMIT 50;";
-    $sql .= " ORDER BY RAND() LIMIT " . $records . ";";
+    $sql .= " ORDER BY RAND() LIMIT " . $amount . ";";
     $res = $db->query($sql);
     $items = array();
     while ($obj = $res->fetch_assoc())
@@ -61,7 +61,7 @@ function getRandomRecords($records = '10', $fetched_ids_arr = array()){
 
     // collect media (gifs)
 
-    $sql = "SELECT * FROM media WHERE media.type = 'gif' AND media.active = '1' ORDER BY RAND()";
+    $sql = "SELECT * FROM media WHERE (media.type = 'gif' OR media.type = 'jpg' OR media.type = 'png') AND media.active = '1' ORDER BY RAND()";
     $res = $db->query($sql);
     $media = array();
     while ($obj = $res->fetch_assoc())
