@@ -36,7 +36,7 @@ function strictClean($str)
   return $str;
 }
 
-function getRandomRecords($records = '10', $fetched_ids_arr = array()){
+function getRandomRecords($amount = 10, $fetched_ids_arr = array()){
     global $db;
     global $oo;
 
@@ -47,8 +47,38 @@ function getRandomRecords($records = '10', $fetched_ids_arr = array()){
         $fetched_ids = '(' . implode(',', $fetched_ids_arr) . ')';
         $sql .= ' AND objects.id NOT IN '. $fetched_ids;
     }
+
+    // _Emails
+    $sql_email_childrens_ids = "SELECT toid FROM wires WHERE fromid = (SELECT id FROM objects as o WHERE o.name1 = '_Emails')";
+    $res = $db->query($sql_email_childrens_ids);
+    if($res != null)
+    {
+      $items = array();
+      while ($obj = $res->fetch_assoc())
+          $items[] = $obj['toid'];
+      $email_children_ids = '(' . implode(',', $items) . ')';
+      $sql .= ' AND wires.fromid NOT IN '. $email_children_ids;
+      $sql .= ' AND objects.id NOT IN '. $email_children_ids;
+      $res->close();
+    }
+
+    // Home
+    $sql_home_childrens_ids = "SELECT toid FROM wires WHERE fromid = (SELECT id FROM objects as o WHERE o.name1 = 'Home')";
+    $res = $db->query($sql_home_childrens_ids);
+    if($res != null)
+    {
+      $items = array();
+      while ($obj = $res->fetch_assoc())
+          $items[] = $obj['toid'];
+      $home_children_ids = '(' . implode(',', $items) . ')';
+      $sql .= ' AND wires.fromid NOT IN '. $home_children_ids;
+      $sql .= ' AND objects.id NOT IN '. $home_children_ids;
+      $res->close();
+    }
+    
+
     // $sql .= " ORDER BY RAND() LIMIT 50;";
-    $sql .= " ORDER BY RAND() LIMIT " . $records . ";";
+    $sql .= " ORDER BY RAND() LIMIT " . $amount . ";";
     $res = $db->query($sql);
     $items = array();
     while ($obj = $res->fetch_assoc())
@@ -61,7 +91,7 @@ function getRandomRecords($records = '10', $fetched_ids_arr = array()){
 
     // collect media (gifs)
 
-    $sql = "SELECT * FROM media WHERE media.type = 'gif' AND media.active = '1' ORDER BY RAND()";
+    $sql = "SELECT * FROM media WHERE (media.type = 'gif' OR media.type = 'jpg' OR media.type = 'png') AND media.active = '1' ORDER BY RAND()";
     $res = $db->query($sql);
     $media = array();
     while ($obj = $res->fetch_assoc())
@@ -71,24 +101,36 @@ function getRandomRecords($records = '10', $fetched_ids_arr = array()){
     // build $output
 
     foreach($items as $key => $item) {
-        $body = $item['body'];
-        $id = $item['id'];
         if ($key % 2 == 0 && $key > 0 && !$insertImage)
             $insertImage = true;    
         if ($insertImage) {
-            $image = m_url($media[array_rand($media)]);
-            $sentence = '';
+            $this_media = $media[$key];
+            $image = m_url($this_media);
+            $id = $this_media['object'];
+            $sentence = 'cccc';
             $insertImage = false;
             $output['image'][] = $image;
         } else {
+            $id = $item['id'];
+            $body = $item['body'];
             $sentences = preg_split('/(?<=[.?!])\s+(?=[a-z])/i', $body);
             $sentence = $sentences[array_rand($sentences)];
             $image = false;
         }
+
+        $url = getCompleteUrl($id);
+        /* 
+          some records of delected parent will be fetched as well since its active is still 1
+          these records yield incomplete url with getCompleteUrl())
+        */
+        if( substr($url , 0, 1) != '/')
+          continue;
+
         $output['all'][] = array( 
           'id'       => $id, 
           'sentence' => $sentence,
-          'image'    => $image
+          'image'    => $image,
+          'url'      => $url
         );
     }
     return $output;

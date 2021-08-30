@@ -100,7 +100,7 @@
 		                        $specs  = getimagesize($mediaFile_temp);
 		                        $use4xgrid = ($rootname == "Buy Catalogs");  
 		                    }
-		                    ?><a class="display-item listContainer <?= (($use4xgrid) ? "fourth-with" : "half-width"); ?>" href='/buy/<?= $uri[1] . '/' . $child['url']; ?>'>
+		                    ?><a class="display-item listContainer <?= (($use4xgrid) ? "fourth-with" : "half-width"); ?>" href='/<?= $uri[1] . '/' . $child['url']; ?>'>
 		                    	<div id='image<?= $i; ?>' class = ' '>
 		                    		<?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?>
 		                    		<div class = 'captionContainer helvetica small'><?= nl2br($child['name1']); ?></div>

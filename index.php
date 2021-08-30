@@ -43,15 +43,17 @@ elseif( $uri[1] == 'list' ||
 		($uri[1] == 'consult-the-archive' && count($uri) == 3)
 	  )
 	require_once("views/list.php");
-elseif( $uri[1] == 'buy-catalogues' ||
+elseif( ( $uri[1] == 'buy-catalogues' && count($uri) < 3 ) ||
 		// $uri[1] == 'catalogues' ||
 		// $uri[1] == 'editions' ||
-		$uri[1] == 'buy-limited-editions' ||
+		( $uri[1] == 'buy-limited-editions' && count($uri) < 3 ) ||
 		$uri[1] == 'display'
 	   )
 	require_once("views/display.php");
 else if ( 
 		$uri[1] == 'buy'  ||
+		$uri[1] == 'buy-catalogues' ||
+		$uri[1] == 'buy-limited-editions' || 
 		$uri[1] == 'buy_.php')
     require_once("views/buy.php");
 elseif($uri[1] == 'search')
