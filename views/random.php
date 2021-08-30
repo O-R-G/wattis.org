@@ -6,18 +6,18 @@
 	$logo_item = $oo->get($logo_id);
 	$a_pattern = '/<a\s.*?(?:href.*?=.*?[\'"].*?[\'"].*?)?>(.*?)<\/a>/is';
 	$fetched_ids_arr = array();
-
+	
 ?><!-- BLOCKS -->
 <div class="homeContainer times big random"><? 
 	foreach($randomRecords['all'] as $record) {
-		$this_url = getCompleteUrl($record['id']);
+		// $this_url = getCompleteUrl($record['id']);
 		$fetched_ids_arr[] = $record['id'];
 		if($record['image']) {
-			?><div class="blockContainer displaying_image"><a href="<?php echo $this_url; ?>" class = ''><img src="<?= $record['image']; ?>"></a></div><?
+			?><div class="blockContainer displaying_image"><a href="<?php echo $record['url']; ?>" class = ''><img src="<?= $record['image']; ?>"></a></div><?
 		} else {
 			// $this_text = $record["sentence"];
 			$this_text = preg_replace($a_pattern, '<span class="pseudo-link">$1</span>', $record["sentence"]);
-			?><div class="blockContainer"><a class="block_link" href="<?php echo $this_url; ?>" class = ''><div id = 'paragraph'><?= $this_text; ?></div></a></div><?
+			?><div class="blockContainer"><a class="block_link" href="<?php echo $record['url']; ?>" class = ''><div id = 'paragraph'><?= $this_text; ?></div></a></div><?
 		}
     } 
 ?></div>
