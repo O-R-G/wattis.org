@@ -44,7 +44,6 @@
 	var blockContainer = document.getElementsByClassName('blockContainer');
 	var fetched_ids_arr = <?= json_encode($fetched_ids_arr); ?>;
 	var isFullyLoaded = false;
-	var isRandom = !<?= json_encode($search_bold)?>;
 
 	function nextPage(idx){
 		blockContainer[idx].style.display = 'none';
