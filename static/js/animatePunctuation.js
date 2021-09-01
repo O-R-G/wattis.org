@@ -155,7 +155,8 @@ function _click() {
 
 function toggleColor(id, color) {
     var element = document.getElementById(id);
-    element.classList.toggle(color);
+    if(element != null)
+    	element.classList.toggle(color);
 }
 
 function addRemoveClickDiv(id, handler) {

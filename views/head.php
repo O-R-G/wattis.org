@@ -94,8 +94,7 @@ else
 $nav = $oo->nav($uu->ids);
 $show_menu = false;
 
-// id
-
+$email = ( isset($uri[1]) && $uri[1] == 'emails' );
  
 $alt = isset($_REQUEST['alt']) ? $_REQUEST['alt'] : '';
 $pop = isset($_REQUEST['pop']) ? $_REQUEST['pop'] : '';

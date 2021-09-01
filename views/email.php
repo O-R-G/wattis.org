@@ -1,14 +1,34 @@
 <?php
-	// Parse $id
-        require_once("_Library/systemDatabase.php");
-        require_once("_Library/displayMedia.php");
+        date_default_timezone_set('America/Los_Angeles');
+        // open-records-generator
+        require_once('open-records-generator/config/config.php');
+        require_once('open-records-generator/config/url.php');
 
+        // site
+        require_once('static/php/config.php');
+
+        $db = db_connect("guest");
+        $oo = new Objects();
+        $mm = new Media();
+        $ww = new Wires();
+        $uu = new URL();
+
+        $item = $oo->get($uu->id);
+
+	// Parse $id
+        // require_once("static/php/systemDatabase.php");
+        require_once("static/php/displayMedia.php");
+
+        /* outdated
         $id = $_REQUEST['id'];          // no register globals
         if (!$id) $id = "0";
         $ids = explode(",", $id);
         $idFull = $id;
         $id = $ids[count($ids) - 1];
         $pageName = basename($_SERVER['PHP_SELF'], ".php");
+        */
+
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
@@ -68,8 +88,36 @@ a:active {
 
 <body>
 <div id="animatePunctuation" class="animatePunctuation">
-<?php
+<?
+        $html = '';
+        $i = 0;
+        $name = $item['name1'];
+        if (!$found)
+                $body = $item['body'];
+        $deck = $item['deck'];
+        $notes = $item['notes'];
+        $images = array();
+        $media = $oo->media($item['id']);
+        if(count($media) > 0)
+        {
+                $media_style = 'width: 75%; padding: 5%; display:inline-block; vertical-align: text-top;';
+                foreach($media as $key => $m)
+                {
+                        $this_url = m_url($m);
+                        $this_caption = $m['caption'];
+                        $images[$key] .= displayMedia($this_url, $this_caption, $media_style);
+                        $pattern = "/\[image".($key+1)."\]/";
 
+                        if (preg_match($pattern, $body)) {
+                                $body = preg_replace($pattern, $images[$key], $body, 1);
+                                unset($images[$key]);
+                        }
+                }
+        }
+
+?>
+<?php
+/*
 	// SQL object plus media
 
 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, 
@@ -113,6 +161,7 @@ objects.active ORDER BY media.rank;";
         }
         $i++;
     }
+*/
 ?>
 <center>
 <table border="0" cellspacing="0" style="width: 335px;">
@@ -170,7 +219,7 @@ echo nl2br($notes);
 </center>
 </div>
 
-<script type="text/javascript" src="JS/animatePunctuation.js"></script>
+<script type="text/javascript" src="/static/js/animatePunctuation.js"></script>
 <script type="text/javascript">
 
 	delay = 200;	// default value
