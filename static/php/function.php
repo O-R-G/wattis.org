@@ -43,9 +43,13 @@ function getRandomRecords($amount = 10, $fetched_ids_arr = array()){
     // collect objects
 
     $sql = "SELECT objects.id, objects.body FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.name1 NOT LIKE '.%' AND objects.name1 NOT LIKE '\_%' AND objects.body != '' AND objects.body != 'NULL'";
+
+    $sql_media = "SELECT media.* FROM media, objects, wires WHERE objects.active = '1' AND media.active = '1' AND wires.active = '1' AND media.object = objects.id AND media.object = wires.toid AND (media.type = 'gif' OR media.type = 'jpg' OR media.type = 'png')";
+
     if(!empty($fetched_ids_arr)) {
         $fetched_ids = '(' . implode(',', $fetched_ids_arr) . ')';
         $sql .= ' AND objects.id NOT IN '. $fetched_ids;
+        $sql_media .= ' AND objects.id NOT IN '. $fetched_ids;
     }
 
     // _Emails
@@ -59,6 +63,8 @@ function getRandomRecords($amount = 10, $fetched_ids_arr = array()){
       $email_children_ids = '(' . implode(',', $items) . ')';
       $sql .= ' AND wires.fromid NOT IN '. $email_children_ids;
       $sql .= ' AND objects.id NOT IN '. $email_children_ids;
+      $sql_media .= ' AND wires.fromid NOT IN '. $email_children_ids;
+      $sql_media .= ' AND objects.id NOT IN '. $email_children_ids;
       $res->close();
     }
 
@@ -73,6 +79,8 @@ function getRandomRecords($amount = 10, $fetched_ids_arr = array()){
       $home_children_ids = '(' . implode(',', $items) . ')';
       $sql .= ' AND wires.fromid NOT IN '. $home_children_ids;
       $sql .= ' AND objects.id NOT IN '. $home_children_ids;
+      $sql_media .= ' AND wires.fromid NOT IN '. $home_children_ids;
+      $sql_media .= ' AND objects.id NOT IN '. $home_children_ids;
       $res->close();
     }
     
@@ -91,8 +99,8 @@ function getRandomRecords($amount = 10, $fetched_ids_arr = array()){
 
     // collect media (gifs)
 
-    $sql = "SELECT * FROM media WHERE (media.type = 'gif' OR media.type = 'jpg' OR media.type = 'png') AND media.active = '1' ORDER BY RAND()";
-    $res = $db->query($sql);
+    $sql_media .= " ORDER BY RAND();";
+    $res = $db->query($sql_media);
     $media = array();
     while ($obj = $res->fetch_assoc())
         $media[] = $obj;
@@ -118,7 +126,7 @@ function getRandomRecords($amount = 10, $fetched_ids_arr = array()){
             $image = false;
         }
 
-        $url = getCompleteUrl($id);
+        $url = getCompleteUrl($id, false, false);
         /* 
           some records of delected parent will be fetched as well since its active is still 1
           these records yield incomplete url with getCompleteUrl())
@@ -225,7 +233,7 @@ function build_children_librarySearch($oo, $ww, $query) {
     return $children_combined;
 }
 
-function getCompleteUrl($id){
+function getCompleteUrl($id, $includeHome = true, $includeEmail = true){
   /*
     input:  id
     output: a complete url of the reocrd with the given id based on o-r-g stucture
@@ -234,6 +242,42 @@ function getCompleteUrl($id){
   $output = '';
 
   $sql = "SELECT wires.fromid, objects.url FROM objects, wires WHERE objects.active = '1' AND wires.active = '1' AND objects.id = wires.toid AND objects.id = '" . $id . "'";
+
+  // _Emails
+  if(!$includeEmail)
+  {
+    $sql_email_childrens_ids = "SELECT toid FROM wires WHERE fromid = (SELECT id FROM objects as o WHERE o.name1 = '_Emails')";
+    $res = $db->query($sql_email_childrens_ids);
+    if($res != null)
+    {
+      $items = array();
+      while ($obj = $res->fetch_assoc())
+          $items[] = $obj['toid'];
+      $email_children_ids = '(' . implode(',', $items) . ')';
+      $sql .= ' AND wires.fromid NOT IN '. $email_children_ids;
+      $sql .= ' AND objects.id NOT IN '. $email_children_ids;
+      $res->close();
+    }
+  }
+  
+
+  // Home
+  if(!$includeHome)
+  {
+    $sql_home_childrens_ids = "SELECT toid FROM wires WHERE fromid = (SELECT id FROM objects as o WHERE o.name1 = 'Home')";
+    $res = $db->query($sql_home_childrens_ids);
+    if($res != null)
+    {
+      $items = array();
+      while ($obj = $res->fetch_assoc())
+          $items[] = $obj['toid'];
+      $home_children_ids = '(' . implode(',', $items) . ')';
+      $sql .= ' AND wires.fromid NOT IN '. $home_children_ids;
+      $sql .= ' AND objects.id NOT IN '. $home_children_ids;
+      $res->close();
+    }
+  }  
+
   $result = $db->query($sql);
   if(!$result)
     throw new Exception($db->error);

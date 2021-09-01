@@ -26,6 +26,15 @@
 <!-- WEATHER -->
 <script type="text/javascript" src = "/static/js/ajax.js"></script>
 <script type="text/javascript">
+	<? foreach($randomRecords['all'] as $r){
+		if(strpos($r['url'], '/emails/') !== false || strpos($r['url'], '/home/') !== false)
+		{
+			?>
+			console.log('<?= $r['url']; ?>');
+			console.log('<?= $r['image']; ?>');
+			<?
+		}
+	} ?>
     el = document.getElementById("rss");
     if(!!el) {
 	    // requires <element id="rss">
