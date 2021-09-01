@@ -53,38 +53,45 @@ function getRandomRecords($amount = 10, $fetched_ids_arr = array()){
     }
 
     // _Emails
-    $sql_email_childrens_ids = "SELECT toid FROM wires WHERE fromid = (SELECT id FROM objects as o WHERE o.name1 = '_Emails')";
-    $res = $db->query($sql_email_childrens_ids);
-    if($res != null)
+    $sql_emails_id = "SELECT id FROM objects WHERE name1 = '_Emails' AND active = '1'";
+    $res = $db->query($sql_emails_id);
+    if($res !== false)
     {
-      $items = array();
+      $emails_id = '';
       while ($obj = $res->fetch_assoc())
-          $items[] = $obj['toid'];
-      $email_children_ids = '(' . implode(',', $items) . ')';
-      $sql .= ' AND wires.fromid NOT IN '. $email_children_ids;
-      $sql .= ' AND objects.id NOT IN '. $email_children_ids;
-      $sql_media .= ' AND wires.fromid NOT IN '. $email_children_ids;
-      $sql_media .= ' AND objects.id NOT IN '. $email_children_ids;
+          $emails_id = $obj['id'];
       $res->close();
+      $emails_descendant_ids = getDescendantIds( $emails_id, true, true, false );
+      if(!empty($emails_descendant_ids))
+      {
+        $emails_descendant_ids = '(' . $emails_descendant_ids . ')';
+
+        $sql .= ' AND wires.fromid NOT IN '. $emails_descendant_ids;
+        $sql .= ' AND objects.id NOT IN '. $emails_descendant_ids;
+        $sql_media .= ' AND wires.fromid NOT IN '. $emails_descendant_ids;
+        $sql_media .= ' AND objects.id NOT IN '. $emails_descendant_ids;
+      }
     }
 
     // Home
-    $sql_home_childrens_ids = "SELECT toid FROM wires WHERE fromid = (SELECT id FROM objects as o WHERE o.name1 = 'Home')";
-    $res = $db->query($sql_home_childrens_ids);
-    if($res != null)
+    $sql_home_id = "SELECT id FROM objects WHERE name1 = 'Home' AND active = '1'";
+    $res = $db->query($sql_home_id);
+    if($res !== false)
     {
-      $items = array();
+      $home_id = '';
       while ($obj = $res->fetch_assoc())
-          $items[] = $obj['toid'];
-      $home_children_ids = '(' . implode(',', $items) . ')';
-      $sql .= ' AND wires.fromid NOT IN '. $home_children_ids;
-      $sql .= ' AND objects.id NOT IN '. $home_children_ids;
-      $sql_media .= ' AND wires.fromid NOT IN '. $home_children_ids;
-      $sql_media .= ' AND objects.id NOT IN '. $home_children_ids;
+          $home_id = $obj['id'];
       $res->close();
+      $home_descendant_ids = getDescendantIds( $home_id, true, true, false );
+      if(!empty($home_descendant_ids))
+      {
+        $home_descendant_ids = '(' . $home_descendant_ids . ')';
+        $sql .= ' AND wires.fromid NOT IN '. $home_descendant_ids;
+        $sql .= ' AND objects.id NOT IN '. $home_descendant_ids;
+        $sql_media .= ' AND wires.fromid NOT IN '. $home_descendant_ids;
+        $sql_media .= ' AND objects.id NOT IN '. $home_descendant_ids;
+      }
     }
-    
-
     // $sql .= " ORDER BY RAND() LIMIT 50;";
     $sql .= " ORDER BY RAND() LIMIT " . $amount . ";";
     $res = $db->query($sql);
@@ -248,7 +255,7 @@ function getCompleteUrl($id, $includeHome = true, $includeEmail = true){
   {
     $sql_email_childrens_ids = "SELECT toid FROM wires WHERE fromid = (SELECT id FROM objects as o WHERE o.name1 = '_Emails')";
     $res = $db->query($sql_email_childrens_ids);
-    if($res != null)
+    if($res !== false)
     {
       $items = array();
       while ($obj = $res->fetch_assoc())
@@ -266,7 +273,7 @@ function getCompleteUrl($id, $includeHome = true, $includeEmail = true){
   {
     $sql_home_childrens_ids = "SELECT toid FROM wires WHERE fromid = (SELECT id FROM objects as o WHERE o.name1 = 'Home')";
     $res = $db->query($sql_home_childrens_ids);
-    if($res != null)
+    if($res !== false)
     {
       $items = array();
       while ($obj = $res->fetch_assoc())
@@ -346,5 +353,51 @@ function split_column($str){
   }
   return $output;
 }
-
+function getDescendantIds($this_id, $removeLastComma = true, $activeOnly=true, $excludeLinked = false)
+{
+  global $db;
+  $output = '';
+  $sql = "SELECT wires.toid FROM wires, objects WHERE objects.id = wires.toid AND wires.fromid = '".$this_id."'";
+  if($activeOnly)
+    $sql .= " AND wires.active = '1' AND objects.active = '1'";
+  $res = $db->query($sql);
+  if($res !== false)
+  {
+    // $hasChildren = true;
+    $items = array();
+    while ($obj = $res->fetch_assoc()){
+      if($obj['toid'] != '')
+      {
+        $items[] = $obj['toid'];
+        if($excludeLinked)
+        {
+          $sql_2 = "SELECT wires.fromid FROM wires, objects WHERE objects.id = wires.toid AND wires.toid = '".$obj['toid']."' AND wires.active = '1' AND objects.active = '1'";
+          $res_2 = $db->query($sql_2);
+          if($res_2 !== false)
+          {
+            $items_2 = array();
+            while ($obj_2 = $res_2->fetch_assoc()){
+              $items_2[] = $obj_2['fromid'];
+            }
+          }
+          if(count($items_2) == 1)
+            $output .= $obj['toid'] . ',';
+        }
+        else
+          $output .= $obj['toid'] . ',';
+      }
+    }
+    $res->close();
+    foreach($items as $this_id)
+    {
+      $descendant = getDescendantIds($this_id, false, $activeOnly, $excludeLinked);
+      if(!empty($descendant)){
+        $output .= $descendant;
+      }
+    }
+  }
+  if($removeLastComma && substr($output, strlen($output) - 1, 1) == ',')
+    $output = substr($output, 0, -1);
+  return $output;
+}
 ?>

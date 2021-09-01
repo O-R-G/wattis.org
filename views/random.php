@@ -6,7 +6,6 @@
 	$logo_item = $oo->get($logo_id);
 	$a_pattern = '/<a\s.*?(?:href.*?=.*?[\'"].*?[\'"].*?)?>(.*?)<\/a>/is';
 	$fetched_ids_arr = array();
-	
 ?><!-- BLOCKS -->
 <div class="homeContainer times big random"><? 
 	foreach($randomRecords['all'] as $record) {
