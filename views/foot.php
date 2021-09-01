@@ -7,7 +7,7 @@
             var home = <?= json_encode(!$uri[1]); ?>;    
             var random = <?= json_encode($random); ?>;
             var email = <?= json_encode(isset($uri[1]) && $uri[1] == 'emails'); ?>; 
-            console.log(email);
+
 			delay = (checkCookie("delayCookie")) ? ((getCookie("delayCookie")) * 1) : 200;
             debug_();
             if (home || random)
@@ -30,7 +30,6 @@
                     init_audio();
                     init_ui();
                 }
-                
             })();
         </script>
 	</body>
