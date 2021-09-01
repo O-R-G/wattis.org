@@ -13,13 +13,16 @@ if(isset($uri[1]) &&
     	$date_argument = valid_date(urldecode($u));
 }
 
+if(!isset($uri[1]) || $uri[1] != 'emails')
+{
+	require_once("views/head.php");
+	require_once("views/nav.php");
+}
 
-require_once("views/head.php");
-require_once("views/nav.php");
 
-if (!$uri[1] && !$random)
+if ( (count($uri) == 1 || !$uri[1]) && !$random)
     require_once("views/home.php");
-elseif( !$uri[1] && $random )
+elseif( (count($uri) == 1 || !$uri[1]) && $random )
 	require_once("views/random.php");
 elseif( $uri[1] == 'main' ||
 		 $uri[1] == 'menu'
@@ -58,6 +61,8 @@ else if (
     require_once("views/buy.php");
 elseif($uri[1] == 'search')
 	require_once('views/search.php');
+elseif($uri[1] == 'emails')
+	require_once('views/email.php');
 else 
     require_once("views/view.php");
 
