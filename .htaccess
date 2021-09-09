@@ -1,23 +1,9 @@
-# AuthUserFile /Library/WebServer/Documents/.htpasswd
-AuthUserFile /var/www/.htpasswd
-AuthName "STAGING"
-AuthType Basic
-Require valid-user
-
-# order deny,allow
-# deny from all
-# allow from 74.65.222.17
-# allow from 74.65.216.134
-# allow from 192.168.1.3
-# allow from 1.162.109.227
-# allow from 1.162.107.235
-# allow from 114.36.128.171
-
 Options +FollowSymLinks -Indexes
 # Options +FollowSymLinks +Indexes
 # IndexIgnore */*
 
-ErrorDocument 403 "you don't even *go* here."
+ErrorDocument 403 "Updating, back soon."
+# ErrorDocument 403 "you don't even *go* here."
 # ErrorDocument 500 "is *this* thing on?"
 
 # Turn on the RewriteEngine
@@ -1846,3 +1832,5 @@ Redirect 301 /our-program/raven-chacon-radio-coyote /our-program/on-view/raven-c
 # change upload limit
 php_value upload_max_filesize 100M
 php_value post_max_size 102M
+php_value short_open_tag 1
+php_value default_charset utf-8
