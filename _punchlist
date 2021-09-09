@@ -204,3 +204,60 @@ x convert columms (///) in views/list to css .columns
 + Fix slideshow for books/catalogues
 + Fix [image*] in html mode
 + /our-program, remove underlines from the dates
++ ** launch v2 **
+  + backup o-r-g
+  + cleanup branches (v2)
+  + backup cca
+    backup cca sql
+  + turn off cca
+    .htaccess
+  + cp /media o-r-g -> cca
+  + git clone
+    git checkout
+    git submodule
+  + .htaccess
+  + php ini short open tags
+  + upload sql o-r-g -> cca
+
+  + fix database encoding issues, latin1 --> utf8
+    see above (find 'encoding')
+
+    1. set database to use utf8, previously used latin1
+
+  	https://stackoverflow.com/questions/22572558/how-to-set-character-set-database-and-collation-database-to-utf8-in-my-ini
+
+  	> SHOW VARIABLES LIKE '%character%';
+	> SHOW CREATE DATABASE databasename;
+
+    2. update actual sql using mysql, more or less by hand
+       database should not include accented (utf8) character,
+       (at least not in name1 or url, body seems ok) so instead 
+       should use the correctly encoded utf8 string:
+
+	generic
+
+	Ã¡ = á
+	Ã© = é
+	Ã­ = í
+	Ã³ = ó
+	Ã± = ñ
+	Ã¡ = Á
+	â€“ = –
+    
+	specific
+
+	Há»“-Ã‚n TrÆ°Æ¡ng = Hồng-Ân Trương
+	ØµØ±Ø®Ø© Ø´Ù…Ø³ÙŠØ© = صرخة شمسية
+
+	replace using msql following:
+
+	https://stackoverflow.com/questions/1476356/detecting-utf8-broken-characters-in-mysql
+
+	> UPDATE `objects` SET `name1` = REPLACE(`name1` ,'Ã¡','á');
+	> UPDATE `objects` SET `name1` = REPLACE(`name1` ,'Ã©','é');
+
+	etc.
+
+  + backup wattis_live.sql
+
+
