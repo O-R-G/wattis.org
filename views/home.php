@@ -1,5 +1,5 @@
 <!-- BLOCKS -->
-<div class="homeContainer times big"><?
+<div class="homeContainer times big"><?php
 
 $rootname = 'Home';
 $temp = $oo->urls_to_ids(array('home'));
@@ -16,7 +16,7 @@ foreach($items as $key =>$item)
             already written in views/nav so ** fix **
         */
 		// var_dump($item);
-		?><div id = 'logo_text' class='logo_text_container'><?= nl2br($item["body"]); ?></div><?
+		?><div id = 'logo_text' class='logo_text_container'><?php echo nl2br($item["body"]); ?></div><?php
 	}
 	else if(substr($item['name1'], 0, 1) != '.')
 	{

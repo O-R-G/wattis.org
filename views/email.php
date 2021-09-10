@@ -88,12 +88,11 @@ a:active {
 
 <body>
 <div id="animatePunctuation" class="animatePunctuation">
-<?
+<?php
         $html = '';
         $i = 0;
         $name = $item['name1'];
-        if (!$found)
-                $body = $item['body'];
+        $body = $item['body'];
         $deck = $item['deck'];
         $notes = $item['notes'];
         $images = array();
@@ -103,20 +102,19 @@ a:active {
                 $media_style = 'width: 75%; padding: 5%; display:inline-block; vertical-align: text-top;';
                 foreach($media as $key => $m)
                 {
-                        $this_url = m_url($m);
+                        $this_url_old = m_url($m);
+                        $this_url = '/media/' . m_pad($m['id']) . '.' . $m['type'];
                         $this_caption = $m['caption'];
-                        $images[$key] .= displayMedia($this_url, $this_caption, $media_style);
+                        $images[$key] = displayMedia($this_url, $this_caption, $media_style);
                         $pattern = "/\[image".($key+1)."\]/";
-
                         if (preg_match($pattern, $body)) {
                                 $body = preg_replace($pattern, $images[$key], $body, 1);
                                 unset($images[$key]);
                         }
                 }
         }
-
-?>
-<?php
+        if(!empty($images))
+                $images = array_values($images);
 /*
 	// SQL object plus media
 
@@ -180,7 +178,7 @@ echo nl2br($deck);
 <?php
 	// images
 
-	if ( $images ) {
+	if ( !empty($images) ) {
 
 		$html .= "<br />";
 
@@ -231,11 +229,10 @@ echo nl2br($notes);
 	var renderedHTML;
 	var find;
 	var replace;
-
+        // console.log(document.getElementById('animatePunctuation').innerHTML);
 	renderedHTML = "<html>\n<body>";
 	renderedHTML += document.getElementById('animatePunctuation').innerHTML;
 	renderedHTML += "</body>\n</html>";
-
 	find = /(class=[\"\']punctuation[\"\'])/g;
 	replace = "style=\"font-family: Monaco, 'Lucida Console', monospace;\"";
 	renderedHTML=renderedHTML.replace(find, replace);
@@ -247,7 +244,6 @@ echo nl2br($notes);
   	find = /<img src=[\"\'](MEDIA\/.*)[\"\']>/g;
 	replace = "<img src=\"http://www.wattis.org/$1\">";
 	renderedHTML=renderedHTML.replace(find, replace);
-
 </script>
 
 <button type="button" onclick="prompt('Press command-C to copy rendered html:',renderedHTML);">Render html</button>
