@@ -169,9 +169,10 @@ function displayMediaJPEG($file, $caption, $style) {
 	$media .= "'";
 	
 	if ($caption) {
-
-		$media .= " alt='$caption'";
-		$media .= " title='$caption'";
+		$pattern_duoquote = '/"/';
+		$caption = preg_replace($pattern_duoquote, "'", $caption);
+		$media .= ' alt="'.$caption.'"';
+		$media .= ' title="' . $caption . '"';
 	}
 
 	$media .= " />";

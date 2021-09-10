@@ -102,7 +102,6 @@ a:active {
                 $media_style = 'width: 75%; padding: 5%; display:inline-block; vertical-align: text-top;';
                 foreach($media as $key => $m)
                 {
-                        $this_url_old = m_url($m);
                         $this_url = '/media/' . m_pad($m['id']) . '.' . $m['type'];
                         $this_caption = $m['caption'];
                         $images[$key] = displayMedia($this_url, $this_caption, $media_style);
@@ -233,7 +232,7 @@ echo nl2br($notes);
 	renderedHTML = "<html>\n<body>";
 	renderedHTML += document.getElementById('animatePunctuation').innerHTML;
 	renderedHTML += "</body>\n</html>";
-	find = /(class=[\"\']punctuation[\"\'])/g;
+	find = /(class=[\"\']punctuation[\"\'])/gi;
 	replace = "style=\"font-family: Monaco, 'Lucida Console', monospace;\"";
 	renderedHTML=renderedHTML.replace(find, replace);
 
@@ -241,8 +240,10 @@ echo nl2br($notes);
         replace = "<a style='color:#000; text-decoration: none; border-bottom: solid 3px;' href";
 	renderedHTML=renderedHTML.replace(find, replace);
 
-  	find = /<img src=[\"\'](MEDIA\/.*)[\"\']>/g;
-	replace = "<img src=\"http://www.wattis.org/$1\">";
+  	// find = /<img (?:.*? )src\s?=\s?[\"\'](media\/.*)[\"\']/gi;
+        find = /<img (?:.*? )?src\s?=\s?[\"\'](\/media\/.*?)[\"\'](.*?)>/gi;
+	replace = "<img src=\"https:\/\/wattis.org$1\"$2>";
+        // replace = 'cccc';
 	renderedHTML=renderedHTML.replace(find, replace);
 </script>
 
