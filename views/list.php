@@ -18,9 +18,12 @@
 		$hasFilter = true;
 		$show_children_date = true;
 		$date_since = '2014-09-09';
-        if (!$date_argument)
+        if (!$date_argument){
         	$date_argument = valid_date('today');
         	// $date_argument = date('Y-m-d', strtotime('today'));
+        	$isToday = true;
+        }
+        	
 		$twoCategories = true;
 		$children = $oo->children($item['id']);
 		$cats = [];
@@ -50,10 +53,11 @@
 		$hasFilter = true;
 		$show_children_deck = true;
 		$date_since = '2014-09-09';
-		if (!$date_argument)
+		if (!$date_argument){
 			$date_argument = valid_date('today');
 			// $date_argument = date('Y-m-d', strtotime('today'));
-
+			$isToday = true;
+		}
 	} else if(strpos($uri[2], 'past-exhibitions') !== false ){
 		$rootid = end($oo->urls_to_ids(array('main','our-program','gallery')));
 		$show_children_deck = false;
@@ -116,11 +120,13 @@
 		if ($hasMonth) {
 			$date_start = $date_argument;
 			$day_count = intval(date('t', strtotime($date_argument))) - 1;
-		} else {
-			if($date_argument == 'today')
-				$date_start = date('Y-m-d', strtotime($date_argument));
-			else
-				$date_start = $date_argument . '-01';
+		} else if($isToday){
+			$date_start = date('Y-m-d', strtotime($date_argument));
+			$day_count = 1;
+		}
+		else {
+			// year only
+			$date_start = $date_argument . '-01';
 
 			$isLeapYear = date('L', strtotime($date_argument));
 			if($isLeapYear)
@@ -130,7 +136,7 @@
 		}		
         if ($twoCategories) {
         	foreach($cats as &$cat)
-				$cat['children'] = build_filter_children($oo, $cat['id'], $date_start, NULL, $day_count);
+				$cat['children'] = build_filter_children($oo, $cat['id'], $date_start, NULL, $day_count, false, $isToday);
 			unset($cat);
         }
         else if(isset($_GET['program']))
@@ -151,11 +157,11 @@
 					$event_id = $obj['toid'];
 				$res->close();
 				if($event_id)
-        			$children = array_merge($children, build_filter_children($oo, $event_id, $date_start, NULL, $day_count));
+        			$children = array_merge($children, build_filter_children($oo, $event_id, $date_start, NULL, $day_count, false, $isToday));
         	}
         }
     	else
-        	$children = build_filter_children($oo, $rootid, $date_start, NULL, $day_count);
+        	$children = build_filter_children($oo, $rootid, $date_start, NULL, $day_count, false, $isToday);
 	}
 	/*
 		end build children
@@ -322,8 +328,9 @@ function build_filter_children($oo, $rootid, $date, $archive = NULL, $days = 30,
         $date_end = date('Y-m-d', strtotime($date));
     if($isUpcoming)
       $date_compare = ["DATE(objects.end) >= '$date_end'"];
-  	elseif($isToday)
+  	elseif($isToday){
       $date_compare = ["DATE(objects.begin) < '$date_start'", "DATE(objects.end) >= '$date_end'"];
+  	}
     else
       $date_compare = ["DATE(objects.begin) <= '$date_start'", "DATE(objects.end) >= '$date_end'"];
 
