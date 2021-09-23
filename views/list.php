@@ -19,8 +19,8 @@
 		$show_children_date = true;
 		$date_since = '2014-09-09';
         if (!$date_argument)
-            $date_argument = valid_date('today');
-
+        	$date_argument = valid_date('today');
+        	// $date_argument = date('Y-m-d', strtotime('today'));
 		$twoCategories = true;
 		$children = $oo->children($item['id']);
 		$cats = [];
@@ -51,7 +51,9 @@
 		$show_children_deck = true;
 		$date_since = '2014-09-09';
 		if (!$date_argument)
-            $date_argument = valid_date('today');
+			$date_argument = valid_date('today');
+			// $date_argument = date('Y-m-d', strtotime('today'));
+
 	} else if(strpos($uri[2], 'past-exhibitions') !== false ){
 		$rootid = end($oo->urls_to_ids(array('main','our-program','gallery')));
 		$show_children_deck = false;
@@ -115,7 +117,11 @@
 			$date_start = $date_argument;
 			$day_count = intval(date('t', strtotime($date_argument))) - 1;
 		} else {
-			$date_start = $date_argument . '-01';
+			if($date_argument == 'today')
+				$date_start = date('Y-m-d', strtotime($date_argument));
+			else
+				$date_start = $date_argument . '-01';
+
 			$isLeapYear = date('L', strtotime($date_argument));
 			if($isLeapYear)
 				$day_count = 365;
