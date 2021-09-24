@@ -54,9 +54,10 @@
 		$show_children_deck = true;
 		$date_since = '2014-09-09';
 		if (!$date_argument){
-			$date_argument = valid_date('today');
+			$date_argument = 'upcoming';
 			// $date_argument = date('Y-m-d', strtotime('today'));
-			$isToday = true;
+			// $isToday = true;
+			$isUpcoming = true;
 		}
 	} else if(strpos($uri[2], 'past-exhibitions') !== false ){
 		$rootid = end($oo->urls_to_ids(array('main','our-program','gallery')));
@@ -101,6 +102,7 @@
 	/*
 		build children
 	*/
+
 	if(!$date_argument){
 		if($twoCategories)
 	    {
@@ -113,8 +115,9 @@
 				$cat['children'] = $oo->children($cat['id']);
 
 			unset($cat);
-	    } else
+	    } else{
 	    	$children = $oo->children($rootid);
+	    }
 	} else {
 		$hasMonth = strpos($date_argument, '-');
 		if ($hasMonth) {
@@ -126,7 +129,10 @@
 		}
 		else {
 			// year only
-			$date_start = $date_argument . '-01';
+			if($isUpcoming)
+				$date_start = date('Y-m-d', strtotime('today'));
+			else
+				$date_start = $date_argument . '-01';
 
 			$isLeapYear = date('L', strtotime($date_argument));
 			if($isLeapYear)
@@ -136,7 +142,7 @@
 		}		
         if ($twoCategories) {
         	foreach($cats as &$cat)
-				$cat['children'] = build_filter_children($oo, $cat['id'], $date_start, NULL, $day_count, false, $isToday);
+				$cat['children'] = build_filter_children($oo, $cat['id'], $date_start, NULL, $day_count, $isUpcoming, $isToday);
 			unset($cat);
         }
         else if(isset($_GET['program']))
@@ -157,11 +163,12 @@
 					$event_id = $obj['toid'];
 				$res->close();
 				if($event_id)
-        			$children = array_merge($children, build_filter_children($oo, $event_id, $date_start, NULL, $day_count, false, $isToday));
+        			$children = array_merge($children, build_filter_children($oo, $event_id, $date_start, NULL, $day_count, $isUpcoming, $isToday));
         	}
         }
-    	else
-        	$children = build_filter_children($oo, $rootid, $date_start, NULL, $day_count, false, $isToday);
+    	else{
+    		$children = build_filter_children($oo, $rootid, $date_start, NULL, $day_count, $isUpcoming, $isToday);
+    	}
 	}
 	/*
 		end build children
