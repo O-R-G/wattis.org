@@ -19,6 +19,7 @@
 		$show_children_date = true;
 		$date_since = '2014-09-09';
         if (!$date_argument){
+        	$isUpcoming = true;
         	$date_argument = valid_date('today');
         	// $date_argument = date('Y-m-d', strtotime('today'));
         	$isToday = true;
