@@ -18,6 +18,7 @@
 *.mp4
 *.webp
 *.doc
+*.mov
 
 # macos
 .DS_Store
