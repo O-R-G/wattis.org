@@ -127,6 +127,7 @@ require_once('static/php/function.php');
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="/static/css/main.css">
 		<link rel="apple-touch-icon" href="/media/png/touchicon.png" />
+		<link rel="icon" type="image/x-icon" href="/media/jpg/favicon.gif">
 		<script type="text/javascript" src="/static/js/global.js"></script>
 		<script type="text/javascript" src="/static/js/animatePunctuation.js"></script>
         <script type="text/javascript" src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
