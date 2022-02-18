@@ -1824,8 +1824,8 @@ a.year.expanded
     .filter.right-filter .year
     {
         margin-left: 0;
-        margin-right: 15px;
-        margin-top: 20px;
+        /*margin-right: 15px;*/
+        /*margin-top: 20px;*/
     }
     .filter-placeholder
     {
