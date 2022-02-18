@@ -345,13 +345,6 @@ pre {
     float:left;
 }
 
-.listContainer {  
-    /*display: inline-block;
-    vertical-align: top;
-    padding-right:1%;
-    padding-bottom:40px;
-    width: 32%*/;
-}
 .listContainer
 {
     display: inline-block;
@@ -418,6 +411,10 @@ pre {
 .listContainer.lastListContainer
 {
     /*padding-right: 0;*/
+}
+.block
+{
+    display: block;
 }
 .columns {
     columns: 2;

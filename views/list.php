@@ -250,7 +250,7 @@
 				<p><?= $cat['name']; ?></p><br>
 				<? foreach($cat['children'] as $child){
 					if (substr($child['name1'], 0, 1) != '.') {
-						print_list_child($child, $cat['url'], $show_children_date, $show_children_deck);
+						print_list_child($child, $cat['url'], $show_children_date, $show_children_deck, 'block');
 					}
 				} ?>
 			</div><?
