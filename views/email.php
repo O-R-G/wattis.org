@@ -110,6 +110,14 @@ a:active {
                                 $body = preg_replace($pattern, $images[$key], $body, 1);
                                 unset($images[$key]);
                         }
+                        else if(preg_match($pattern, $deck)) {
+                                $body = preg_replace($pattern, $images[$key], $deck, 1);
+                                unset($images[$key]);
+                        }
+                        else if(preg_match($pattern, $notes)) {
+                                $body = preg_replace($pattern, $images[$key], $notes, 1);
+                                unset($images[$key]);
+                        }
                 }
         }
         if(!empty($images))
