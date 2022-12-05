@@ -20,7 +20,10 @@ function load_sounds () {
 }
     
 function play_sound (soundID) {
-    createjs.Sound.play(soundID);
+    if(createjs)
+        createjs.Sound.play(soundID);
+    else
+        console.log('createjs not loaded . . .');
 }
 
 function play_sound_random () {

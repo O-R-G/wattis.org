@@ -58,8 +58,8 @@ if(!!el)
 	<?
 		// SQL object with attached (News)
 		// could be written into main query with LEFTJOIN
-	$news_id = end($oo->urls_to_ids(array('home', 'news')));
-	$items = $oo->children($news_id);
+	$temp = $oo->urls_to_ids(array('home', 'news'));
+	$items = $oo->children(end($temp));
 	foreach($items as $key => $item)
 		$newsItems[$key] = addslashes(strictClean($item["body"]));
 	?>

@@ -13,11 +13,15 @@ function init_ui() {
 
     // menu    
     var sMenu_btn = document.getElementById('menu-btn');
-    sMenu_btn.addEventListener('click', function(){
-        // play_sound_random();
-        play_sound(0);
-        document.body.classList.add('viewing-menu');
-    });
+    if(sMenu_btn)
+    {
+        sMenu_btn.addEventListener('click', function(){            
+            document.body.classList.add('viewing-menu');
+            play_sound(0);
+        });
+    }
+    else console.log('missing #menu-btn . . .');
+    
     
     var sClose_menu_btn = document.getElementById('close-menu-btn');
     sClose_menu_btn.addEventListener('click', function(){
