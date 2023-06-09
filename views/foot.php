@@ -27,7 +27,7 @@
                 if(!email)
                 {
                     console.log('** DOM ready **');
-                    init_audio();
+                    if(typeof init_audio !== 'undefined') init_audio();
                     init_ui();
                 }
             })();

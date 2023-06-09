@@ -119,6 +119,8 @@ if(count($uri) > 3 && $uri[2] == 'the-word-for-world-is-forest-2020')
 	$bodyClass .= ' the-word-for-world-is-forest-2020';
 require_once('static/php/function.php');
 
+$playDrumSound = isset($_GET['drumSound']) ? $_GET['drumSound'] : false;
+
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -131,8 +133,13 @@ require_once('static/php/function.php');
 		<script type="text/javascript" src="/static/js/global.js"></script>
 		<script type="text/javascript" src="/static/js/animatePunctuation.js"></script>
         <script type="text/javascript" src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-		<script type="text/javascript" src="/static/js/audio-src.js"></script>
-		<script type="text/javascript" src="/static/js/audio.js"></script>
+		<?php
+			if($playDrumSound) { ?>
+			<script type="text/javascript" src="/static/js/audio-src.js"></script>
+			<script type="text/javascript" src="/static/js/audio.js"></script>
+			<? }
+		?>
+		
 		<script type="text/javascript" src="/static/js/ui.js"></script>
 	</head>
 	<body class = '<?= $bodyClass; ?>'>
