@@ -12,7 +12,7 @@
 
 // 	globals
 
-var timeout;
+var timeout = null;
 
 function initPunctuation(id, delay, replace, animate) {
 	var divs = document.getElementsByClassName(id);

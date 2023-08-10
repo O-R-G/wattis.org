@@ -350,7 +350,6 @@ function build_filter_children($oo, $rootid, $date, $archive = NULL, $days = 30,
                     "objects.active = '1'");
     if ($date)
         $where = array_merge($where, $date_compare);
-    var_dump($date_compare);
     $order  = array("objects.begin", "objects.name1");
     $children = $oo->get_all($fields, $tables, $where, $order);
     
