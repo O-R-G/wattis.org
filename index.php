@@ -4,13 +4,8 @@ $request = $_SERVER['REQUEST_URI'];
 $requestclean = strtok($request,"?");
 $uri = explode('/', $requestclean);
 $random = isset($_GET['random']);
-$date_argument = false;
-if(($uri[1] == 'calendar') || 
-	($uri[1] == 'our-program')
-){
-	$date_argument = isset($_GET['date']) ? isset($_GET['date']) : false;
-    
-}
+$pages_with_date_argument = array('calendar', 'our-program');
+$date_argument = in_array($uri[1], $pages_with_date_argument) && isset($_GET['date']) ? $_GET['date'] : false;
 
 if(!isset($uri[1]) || $uri[1] != 'emails')
 {

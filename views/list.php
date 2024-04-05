@@ -98,6 +98,7 @@
 	
 	$root_item = $oo->get($rootid);
 	$root_url = $root_item['url'];
+	var_dump($item);
 	$name = $item['name1'];
 
 	/*
@@ -177,8 +178,8 @@
 
 	for ($y = date('Y'); $y >= date('Y', strtotime($date_since)); $y--)
     	$years[] = $y;
-
-    $now = ($date_argument) ? strtotime($date_argument) : strtotime('now');
+	var_dump($date_argument);
+    $now = $date_argument ? strtotime($date_argument) : strtotime('now');
 
 ?><div class="mainContainer times big"><? 
     if($hasFilter){
@@ -274,7 +275,7 @@
 function display_filter($uri, $year, $date_since, $date_argument, $sub_category, $yearsOnly = false, $keepQueryString = false) {
     $since = ($year == date("Y")) ? date("m") : 12;
     $start = (date('Y', strtotime($date_since)) == $year) ? date('m', strtotime($date_since)) : 1;
-    $base_url =  $uri[1] . '/';
+    $base_url =  $uri[1];
     $queryString = '';
     
     if($date_argument) {
@@ -299,7 +300,7 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
     ?><li class="year sans <? echo (!$year_active) ? "" : "active" ?>">
 			<?php 
 				$params = $keepQueryString ? array_merge($_GET, array('date' => $year)) : array('date' => $year);
-				$queryString = $glue_query_param($params);
+				$queryString = glue_query_param($params);
 			?>
             <a id="<? echo $year; ?>-btn" href="/<? echo $base_url . $queryString; ?>" class="year-btn"><? echo $year ?></a>
             <? if(!$yearsOnly){ ?>
@@ -311,7 +312,7 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
 						$month_active = ($month == date('m', strtotime($date_argument)) && $year_active) && $hasMonth ? 'active' : NULL;
 					$year_month = $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT);
 					$params = $keepQueryString ? array_merge($_GET, array('date' => $year_month)) : array('date' => $year_month);
-					$queryString = $glue_query_param($params);
+					$queryString = glue_query_param($params);
 					?><li class='month <? echo $month_active; ?>'><?
 						?><a href='/<? echo $base_url . $queryString; ?>' class='month'><?
 							echo strtoupper(date('M', mktime(0, 0, 0, $month, 10)));
