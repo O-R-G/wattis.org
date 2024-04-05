@@ -1834,6 +1834,7 @@ Redirect 301 /catalogues /buy-catalogues
 Redirect 301 /intern /intern-at-the-wattis
 Redirect 301 /follow /follow-the-wattis
 Redirect 301 /library /browse-the-library
+Redirect 301 /resonance-of-place /our-program/our-program/on-view/cca-exhibitions-2022/resonance-of-place
 
 # Redirect 301 /on-view/the-word-for-world-is-forest-2020/1053 /our-program/on-view/the-word-for-world-is-forest-2020/home
 
