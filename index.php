@@ -5,12 +5,11 @@ $requestclean = strtok($request,"?");
 $uri = explode('/', $requestclean);
 $random = isset($_GET['random']);
 $date_argument = false;
-if(isset($uri[1]) && 
-	($uri[1] == 'calendar') || 
+if(($uri[1] == 'calendar') || 
 	($uri[1] == 'our-program')
 ){
-	foreach ($uri as $u)
-    	$date_argument = valid_date(urldecode($u));
+	$date_argument = isset($_GET['date']) ? isset($_GET['date']) : false;
+    
 }
 
 if(!isset($uri[1]) || $uri[1] != 'emails')
@@ -29,12 +28,10 @@ elseif( $uri[1] == 'main' ||
 		)
 	require_once("views/menu.php");
 elseif( ($uri[1] == 'browse-the-library' && count($uri) < 4)|| 
-		// ($uri[1] == 'library' && count($uri) < 4)|| 
 		 $uri[1] == 'library_.php' 
 	  )
 	require_once("views/library.php");
 elseif( ($uri[1] == 'browse-the-library' && count($uri) >= 4) ||
-		// ($uri[1] == 'library' && count($uri) >= 4) ||
 		 $uri[1] == 'library_view.php' )
 	require_once("views/library_view.php");
 elseif( $uri[1] == 'list' ||
@@ -42,13 +39,10 @@ elseif( $uri[1] == 'list' ||
 		($uri[1] == 'our-program' && count($uri) == 3 && ($date_argument || end($uri) == 'upcoming'))||
 		($uri[1] == 'calendar' && count($uri) < 3)||
 		($uri[1] == 'calendar' && count($uri) == 3 && ($date_argument || end($uri) == 'upcoming'))||
-		// ($uri[1] == 'archive' && count($uri) == 3)
 		($uri[1] == 'consult-the-archive' && count($uri) == 3)
 	  )
 	require_once("views/list.php");
 elseif( ( $uri[1] == 'buy-catalogues' && count($uri) < 3 ) ||
-		// $uri[1] == 'catalogues' ||
-		// $uri[1] == 'editions' ||
 		( $uri[1] == 'buy-limited-editions' && count($uri) < 3 ) ||
 		$uri[1] == 'display'
 	   )
@@ -69,8 +63,7 @@ else
 require_once("views/foot.php");
 
 function valid_date($date) {
-    if ((bool)strtotime($date))
-        return $date;
+	return (bool)strtotime($date) ? $date : false;
 }
 
 ?>

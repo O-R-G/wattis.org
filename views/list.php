@@ -289,34 +289,47 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
 
     if($keepQueryString && count($_GET) != 0){
     	$temp = array();
+		$queryString = $_GET;
+		$queryString['filter-date'] = $year;
     	foreach($_GET as $key => $val)
     		$temp[] = empty($val) ? $key : $key . '=' . $val; 
     	$queryString = '?' . implode('&', $temp);
     }
     
     ?><li class="year sans <? echo (!$year_active) ? "" : "active" ?>">
-            <a id="<? echo $year; ?>-btn" href="/<? echo $base_url . $year . $queryString; ?>" class="year-btn"><? echo $year ?></a>
+			<?php 
+				$params = $keepQueryString ? array_merge($_GET, array('date' => $year)) : array('date' => $year);
+				$queryString = $glue_query_param($params);
+			?>
+            <a id="<? echo $year; ?>-btn" href="/<? echo $base_url . $queryString; ?>" class="year-btn"><? echo $year ?></a>
             <? if(!$yearsOnly){ ?>
 	            <ul id='<? echo $year; ?>' class='monthsContainer' ><?
 	                for ($month = $start; $month <= $since; $month++) {
-	                  if($date_argument == 'today')
-	                    $month_active = NULL;
-	                  else
-	                    $month_active = ($month == date('m', strtotime($date_argument)) && $year_active) && $hasMonth ? 'active' : NULL;
-	                    $year_month = $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT);
-
-	                    ?><li class='month <? echo $month_active; ?>'><?
-	                        ?><a href='/<? echo $base_url . $year_month . $queryString; ?>' class='month'><?
-	                        echo strtoupper(date('M', mktime(0, 0, 0, $month, 10)));
-	                            // echo date('M', mktime(0, 0, 0, $month, 10));
-	                        ?></a>
-	                    </li><?
+					if($date_argument == 'today')
+						$month_active = NULL;
+					else
+						$month_active = ($month == date('m', strtotime($date_argument)) && $year_active) && $hasMonth ? 'active' : NULL;
+					$year_month = $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT);
+					$params = $keepQueryString ? array_merge($_GET, array('date' => $year_month)) : array('date' => $year_month);
+					$queryString = $glue_query_param($params);
+					?><li class='month <? echo $month_active; ?>'><?
+						?><a href='/<? echo $base_url . $queryString; ?>' class='month'><?
+							echo strtoupper(date('M', mktime(0, 0, 0, $month, 10)));
+						?></a>
+					</li><?
 	                }
 	            ?></ul>
         	<? } ?>
     </li><?
 }
-
+function glue_query_param($query_param){
+	if(empty($query_param)) return '';
+	$output = array();
+	foreach($query_param as $key => $val) {
+		$output[] = $val ? $key . '=' . $val : $key;
+	}
+	return '?' . implode('&', $output);
+}
 function build_filter_children($oo, $rootid, $date, $archive = NULL, $days = 30, $isUpcoming=false, $isToday = false) {
 
     /*
