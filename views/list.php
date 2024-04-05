@@ -98,7 +98,6 @@
 	
 	$root_item = $oo->get($rootid);
 	$root_url = $root_item['url'];
-	var_dump($item);
 	$name = $item['name1'];
 
 	/*
@@ -178,7 +177,6 @@
 
 	for ($y = date('Y'); $y >= date('Y', strtotime($date_since)); $y--)
     	$years[] = $y;
-	var_dump($date_argument);
     $now = $date_argument ? strtotime($date_argument) : strtotime('now');
 
 ?><div class="mainContainer times big"><? 
@@ -186,7 +184,7 @@
 	    ?><div id = 'filter_container' class="helvetica medium">
 		    <div id='filter' class = 'filter'>
 			    <ul id='yearsContainer'>
-				    <li class = 'year sans <? echo (!isset($uri[2]) || ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
+				    <li class = 'year sans <? echo (!isset($uri[2]) && !isset($_GET['date'])|| ($uri[2] && !$date_argument)) ? 'active' : '' ?>'>
 					    <a class = "year-btn" href = '<? echo $sub_category ? '/'.$uri[1].'/' . $uri[2] : '/'.$uri[1]; ?>'>Now</a>
 				    </li><?
                     foreach ($years as $year)
@@ -225,8 +223,10 @@
                         {
                         	$isActive = isset($_GET['program']) && $_GET['program'] == $s['slug'];
 			    			$this_name = ucfirst($s['name']);
-
-			    			$this_url = $isActive ? $base_url : $base_url . '?program=' . $s['slug'];
+							$params = $_GET;
+							if($isActive) unset($params['program']);
+							else $params['program'] = $s['slug'];
+			    			$this_url = $base_url . glue_query_params($params);
 			    			?><li class="sans year <?= $isActive ? 'active' : ''; ?>"><a class='year-btn' href="<?= $this_url; ?>"><?= $this_name; ?></a></li><? 
 			    			if($key != count($submenu) - 1)
 		    				{ ?> or <? }
@@ -300,7 +300,7 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
     ?><li class="year sans <? echo (!$year_active) ? "" : "active" ?>">
 			<?php 
 				$params = $keepQueryString ? array_merge($_GET, array('date' => $year)) : array('date' => $year);
-				$queryString = glue_query_param($params);
+				$queryString = glue_query_params($params);
 			?>
             <a id="<? echo $year; ?>-btn" href="/<? echo $base_url . $queryString; ?>" class="year-btn"><? echo $year ?></a>
             <? if(!$yearsOnly){ ?>
@@ -312,7 +312,7 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
 						$month_active = ($month == date('m', strtotime($date_argument)) && $year_active) && $hasMonth ? 'active' : NULL;
 					$year_month = $year . '-' . str_pad($month, 2, '0', STR_PAD_LEFT);
 					$params = $keepQueryString ? array_merge($_GET, array('date' => $year_month)) : array('date' => $year_month);
-					$queryString = glue_query_param($params);
+					$queryString = glue_query_params($params);
 					?><li class='month <? echo $month_active; ?>'><?
 						?><a href='/<? echo $base_url . $queryString; ?>' class='month'><?
 							echo strtoupper(date('M', mktime(0, 0, 0, $month, 10)));
@@ -323,7 +323,7 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
         	<? } ?>
     </li><?
 }
-function glue_query_param($query_param){
+function glue_query_params($query_param){
 	if(empty($query_param)) return '';
 	$output = array();
 	foreach($query_param as $key => $val) {
