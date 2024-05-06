@@ -13,7 +13,7 @@ function displayMedia($file = null, $caption = null, $style = null, $link = null
 
 	$temp = explode(".", $file);
 	$type = strtolower($temp[sizeof($temp) - 1]);
-	$link = htmlspecialchars($link);
+	$link = $link ? htmlspecialchars($link) : $link;
 
 	if ($type == "swf") 			$status = displayMediaFlash($file, $caption, $style, $link);
 	if ($type == "gif") 			$status = displayMediaGIF($file, $caption, $style);
