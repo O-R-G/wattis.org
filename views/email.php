@@ -169,7 +169,7 @@ objects.active ORDER BY media.rank;";
 */
 ?>
 <center>
-<table border="0" cellspacing="0" style="width: 335px;">
+<table border="0" cellspacing="0" style="max-width: 500px;">
 
 <tr>
 <td style="font-family: 'Times New Roman', Times, serif; font-size:24px; line-height:27px; color:#000;">
