@@ -323,14 +323,7 @@ function display_filter($uri, $year, $date_since, $date_argument, $sub_category,
         	<? } ?>
     </li><?
 }
-function glue_query_params($query_param){
-	if(empty($query_param)) return '';
-	$output = array();
-	foreach($query_param as $key => $val) {
-		$output[] = $val ? $key . '=' . $val : $key;
-	}
-	return '?' . implode('&', $output);
-}
+
 function build_filter_children($oo, $rootid, $date, $archive = NULL, $days = 30, $isUpcoming=false, $isToday = false) {
 
     /*

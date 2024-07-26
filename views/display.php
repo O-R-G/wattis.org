@@ -6,83 +6,56 @@
 	$rootbody = nl2br($root_item['body']);
 	$children = $oo->children($rootid);
 	$previous_id = '';
+
+	$submenu = array();
+	$hasFilter = false;
+	if($uri[1] === 'shop') {
+		$catalogues_id = $uu->ids[0];
+		$submenu = $oo->children($catalogues_id);
+		$current = count($uri) === 2 ? $submenu[0] : $item;
+		$submenu_base_url = '/' . $uri[1] . '/';
+		$children = $oo->children($current['id']);
+		foreach($submenu as &$submenu_item) {
+			$submenu_item['name'] = $submenu_item['name1'];
+			$submenu_item['slug'] = $submenu_item['url'];
+		}
+		unset($submenu_item);
+		$hasFilter = true;
+	}
+
 ?>
 		<div class="mainContainer times big">
-
-			<?php
-				// if($uri[1] == 'editions')
-				// {
-				// 	$ids = $oo->urls_to_ids(array('main', 'editions'));
-				// 	unset($ids[0]);
-				// 	$ids = array_values($ids);
-				// 	$id = $ids[0];
-				// }
-				// elseif($uri[1] == 'catalogues')
-				// {
-				// 	$ids = $oo->urls_to_ids(array('main', 'catalogues'));
-				// 	unset($ids[0]);
-				// 	$ids = array_values($ids);
-				// 	$id = $ids[0];
-				// }
-				
-				
-		        // SQL objects attached to object plus media plus rootname, rootbody
-
-		// 	$sql = "SELECT objects.id AS objectsId, objects.name1, objects.deck, objects.body, objects.rank, (SELECT 
-		// objects.name1 FROM objects WHERE objects.id = $rootid) AS rootname, (SELECT objects.body FROM objects WHERE objects.id = 
-		// $rootid) AS rootbody, wires.fromid, wires.toid, media.id AS mediaId, media.object, media.caption, media.type, media.active 
-		// AS mediaActive FROM wires, objects LEFT JOIN media ON objects.id = media.object AND media.active = 1 WHERE wires.fromid = 
-		// (SELECT objects.id FROM objects WHERE objects.id = $id AND objects.active = 1) AND wires.toid=objects.id AND wires.active = 
-		// 1 ORDER BY objects.rank, media.rank;";
-
-			// $result = MYSQL_QUERY($sql);
-		 //    $myrow = MYSQL_FETCH_ARRAY($result);
-		 //    $rootname = $myrow['rootname'];
-		 //    $rootbody = $myrow['rootbody'];
-		 //    mysql_data_seek($result, 0);    // reset to row 0
-			// $html = "";
-			// $i=0;
-
-			// collect images
-
-			// while ( $myrow  =  MYSQL_FETCH_ARRAY($result) ) {
-
-			// 	if ($myrow['objectsId'] != $previous_objectsId) { 
-
-			// 		if ($myrow['mediaActive'] != null) {
-			
-			// 			$mediaFile = "MEDIA/". str_pad($myrow["mediaId"], 5, "0", STR_PAD_LEFT) .".". $myrow["type"];
-			// 			$mediaCaption = strip_tags($myrow["caption"]);
-			// 			$mediaStyle = "width: 100%;";
-			
-			//                 	if ( $i == 0 ) {
-			
-			// 				$specs  = getimagesize($mediaFile);
-			// 				// $use4xgrid = (($specs[0]/$specs[1]) < 1) ? TRUE : FALSE;		       
-			// 				$use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;		       
-			//                 	}
-			
-			// 			$images[$i] .= "<a href='buy_.php?id=" . $rootid . "," . $myrow['objectsId'] . "'>";
-			// 			$images[$i] .= "<div id='image".$i."' class = 'listContainer " . (($use4xgrid) ? "fourcolumn" : "twocolumn") . "'>";
-			// 			$images[$i] .= displayMedia($mediaFile, $mediaCaption, $mediaStyle);
-			// 			$images[$i] .= "<div class = 'captionContainer helvetica small'>";
-			// 			$images[$i] .= $myrow['name1'];
-			// 			$images[$i] .= "</div>";
-			// 			$images[$i] .= "</div>";
-			// 			$images[$i] .= "</a>";
-					
-			// 			if ( ( $i+1) % (($use4xgrid) ? 4 : 2) == 0) $images[$i] .= "<div class='clear'></div>";
-		 //             			$i++;
-			// 		}
-			// 		$previous_objectsId = $myrow['objectsId'];
-			// 	}
-			// }
-			?>
+			<?php if($hasFilter):?>
+			<div id = 'filter_container' class="helvetica medium"><?php
+				?><div id="filter-shop" class="filter right-filter">
+					<ul id='yearsContainer'>Filters: 
+						<?
+						$temp = $uri;
+						array_pop($temp);
+						// $submenu_base_url = implode('/', $temp);
+						foreach ($submenu as $key => $s)
+						{
+							$isActive = $s['id'] === $current['id'];
+							$this_name = ucfirst($s['name']);
+							$params = $_GET;
+							if($isActive) unset($params['program']);
+							else $params['program'] = $s['slug'];
+							// $this_url = $base_url . glue_query_params($params);
+							$this_url = $submenu_base_url .  $s['slug'];
+							?><li class="sans year <?= $isActive ? 'active' : ''; ?>"><a class='year-btn' href="<?= $this_url; ?>"><?= $this_name; ?></a></li><? 
+							if($key != count($submenu) - 1)
+							{ ?> or <? }
+						}
+					?></ul>
+				</div>
+			</div>
+			<?php endif; ?>
 			<div class='listContainer times side-listContainer'><?= $rootname; ?><br><br><?= $rootbody; ?><br><br></div><div class = 'listContainer displayContainer main-listContainer'>
 			<?
 			if(!empty($children))
 			{
 				$i = 0;
+				$base_url = $uri[1] === 'shop' ? '/' . $uri[1] . '/' . $current['url'] . '/' : '/' . $uri[1] . '/';
 				foreach($children as $child)
 				{
 					$media = $oo->media($child['id']);
@@ -100,7 +73,7 @@
 		                        $specs  = getimagesize($mediaFile_temp);
 		                        $use4xgrid = ($rootname == "Buy Catalogs");  
 		                    }
-		                    ?><a class="display-item listContainer <?= (($use4xgrid) ? "fourth-with" : "half-width"); ?>" href='/<?= $uri[1] . '/' . $child['url']; ?>'>
+		                    ?><a class="display-item listContainer <?= (($use4xgrid) ? "fourth-with" : "half-width"); ?>" href='<?= $base_url . $child['url']; ?>'>
 		                    	<div id='image<?= $i; ?>' class = ' '>
 		                    		<?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?>
 		                    		<div class = 'captionContainer helvetica small'><?= nl2br($child['name1']); ?></div>

@@ -400,4 +400,12 @@ function getDescendantIds($this_id, $removeLastComma = true, $activeOnly=true, $
     $output = substr($output, 0, -1);
   return $output;
 }
+function glue_query_params($query_param){
+	if(empty($query_param)) return '';
+	$output = array();
+	foreach($query_param as $key => $val) {
+		$output[] = $val ? $key . '=' . $val : $key;
+	}
+	return '?' . implode('&', $output);
+}
 ?>

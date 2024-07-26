@@ -42,12 +42,12 @@ if($uu->id){
 elseif( in_array( $uri[1], $main_children_url ))
 {
 	$uri_temp = $uri;
-	// if($date_argument || end($uri) == 'upcoming')
-	// 	array_pop($uri_temp);
 	$uri_temp[0] = 'main';
 	$ids = $oo->urls_to_ids($uri_temp);
 	$uu->id = end($ids);
 	$item = $oo->get($uu->id);
+	$uu->ids = $ids;
+	array_shift($uu->ids);
 	$id = $uu->id;
 }
 elseif( in_array( $uri[1], $home_children_url ))

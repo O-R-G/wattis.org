@@ -12,7 +12,7 @@ require_once('static/php/displayMedia.php');
 
     $name = nl2br($item['name1']);
     $body = nl2br($item['body']);
-    $date = date('F d, Y', strtotime($item['begin']));
+    $date = $item['begin'] ? date('F d, Y', strtotime($item['begin'])) : null;
 
     $pattern = "/\[image(\d+)\]/";
     preg_match_all($pattern, $body, $out, PREG_PATTERN_ORDER);

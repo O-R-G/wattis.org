@@ -16,7 +16,7 @@
 
     $use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;
     $mediaStyle = "width: 100%; padding: 10px;";
-
+    $html = '';
 ?>
 <div class="mainContainer times big">
 
