@@ -6,7 +6,6 @@ $uri = explode('/', $requestclean);
 if(empty(end($uri)) && count($uri) > 2){
 	array_pop($uri);
 }
-	
 $random = isset($_GET['random']);
 $pages_with_date_argument = array('calendar', 'our-program');
 $date_argument = in_array($uri[1], $pages_with_date_argument) && isset($_GET['date']) ? $_GET['date'] : false;
