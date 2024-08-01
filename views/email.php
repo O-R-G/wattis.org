@@ -99,7 +99,7 @@ a:active {
         $media = $oo->media($item['id']);
         if(count($media) > 0)
         {
-                $media_style = 'width: 75%; padding: 5%; display:inline-block; vertical-align: text-top;';
+                $media_style = 'width: 100%; display:inline-block; vertical-align: text-top;';
                 foreach($media as $key => $m)
                 {
                         $this_url = '/media/' . m_pad($m['id']) . '.' . $m['type'];
@@ -169,7 +169,7 @@ objects.active ORDER BY media.rank;";
 */
 ?>
 <center>
-<table border="0" cellspacing="0" style="max-width: 500px;">
+<table border="0" cellspacing="0" style="max-width: 600px; padding: 20px;">
 
 <tr>
 <td style="font-family: 'Times New Roman', Times, serif; font-size:24px; line-height:27px; color:#000;">
@@ -240,6 +240,7 @@ echo nl2br($notes);
 	renderedHTML = "<html>\n<body>";
 	renderedHTML += document.getElementById('animatePunctuation').innerHTML;
 	renderedHTML += "</body>\n</html>";
+        console.log(renderedHTML);
 	find = /(class=[\"\']punctuation[\"\'])/gi;
 	replace = "style=\"font-family: Monaco, 'Lucida Console', monospace;\"";
 	renderedHTML=renderedHTML.replace(find, replace);
@@ -253,9 +254,10 @@ echo nl2br($notes);
 	replace = "<img src=\"https:\/\/wattis.org$1\"$2>";
         // replace = 'cccc';
 	renderedHTML=renderedHTML.replace(find, replace);
+        console.log(renderedHTML);
 </script>
 
-<button type="button" onclick="prompt('Press command-C to copy rendered html:',renderedHTML);">Render html</button>
+<button type="button" onclick="console.log(renderedHTML); prompt('Press command-C to copy rendered html:',renderedHTML);">Render html</button>
 
 </body>
 </html>

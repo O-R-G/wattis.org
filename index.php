@@ -16,8 +16,6 @@ if(!isset($uri[1]) || $uri[1] != 'emails')
 	require_once("views/head.php");
 	require_once("views/nav.php");
 }
-
-
 if ( (count($uri) == 1 || !$uri[1]) && !$random)
     require_once("views/home.php");
 elseif( (count($uri) == 1 || !$uri[1]) && $random )
