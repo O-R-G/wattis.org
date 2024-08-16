@@ -137,6 +137,7 @@ if($isMenu)
 <script type="text/javascript" src="/static/js/gallery.js"></script>
 	<div class="mainContainer times big">
 		<div class='listContainer side-listContainer times title-block'><?
+		// echo 'view.php<br>';
 		if ($begin || $end) {
 			// build date display
 			$bstr = strtotime($begin);
@@ -197,6 +198,9 @@ if($isMenu)
 		else
 		{
 			echo nl2br($name);	
+			if($deck) {
+			    ?><div id='deck' class=''><?= $deck; ?></div><?
+		    }
 		}
 		?></div><?
 		$images = array();
