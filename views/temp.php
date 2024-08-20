@@ -22,20 +22,34 @@ function modifyText($str){
     return $output;
 }
 $fields = array('deck', 'body');
-foreach($children as $child) {
-    echo '<br>' . $child['name1'] . '<br>'; 
-    foreach($fields as $field) {
-        $modified = modifyText($child[$field]);
-        $toUpdate = $modified != $child[$field];
-        echo $field . ' ';
-        if(!$toUpdate) {
-            echo '>> no need to update<br>';
-            continue;
+function loopChildren($children){
+    global $fields;
+    global $oo;
+    global $db;
+    foreach($children as $child) {
+        echo '<br>' . $child['name1'] . '<br>'; 
+        foreach($fields as $field) {
+            echo $field . ' ';
+            if(!$child[$field]) {
+                echo '>> empty!<br>';
+                continue;
+            }
+            $modified = modifyText($child[$field]);
+            $toUpdate = $modified != $child[$field];
+            
+            if(!$toUpdate) {
+                echo '>> no need to update<br>';
+                continue;
+            }
+            $sql = "UPDATE objects SET $field = '" . addslashes($modified) . "' WHERE id = " .$child['id']. "";
+            $result = $db->query($sql);
+            if($result) echo '>> updated<br>';
+            else echo '>> error<br>';
         }
-        $sql = "UPDATE objects SET $field = '" . addslashes($modified) . "' WHERE id = " .$child['id']. "";
-        $result = $db->query($sql);
-        if($result == 1) echo '>> updated<br>';
-        else echo '>> error<br>';
+        $grandChildren = $oo->children($child['id']);
+        if($grandChildren)
+            loopChildren($grandChildren);
     }
 }
+loopChildren($children);
 ?></main>
