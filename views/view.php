@@ -48,9 +48,9 @@ $root_item = $oo->get($rootid);
 $rootname = nl2br($root_item["name1"]);
 
 $name  = isset($item['name1']) ? $item['name1'] : '';
-$body  = isset($item['body']) ? nl2br($item['body']) : '';
-$deck  = isset($item['deck']) ? nl2br($item['deck']) : '';
-$notes = isset($item['notes']) ? nl2br($item['notes']) : '';
+$body  = isset($item['body']) ? nl2br(trim($item['body'])) : '';
+$deck  = isset($item['deck']) ? nl2br(trim($item['deck'])) : '';
+$notes = isset($item['notes']) ? nl2br(trim($item['notes'])) : '';
 $begin = isset($item['begin']) ? $item['begin'] : '';
 $end   = isset($item['end']) ? $item['end'] : '';
 
