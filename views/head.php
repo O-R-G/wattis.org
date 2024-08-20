@@ -70,6 +70,7 @@ elseif($uri[1] == 'buy')
 		array_unshift($uri_temp, 'main');
 	}
 	$ids = $oo->urls_to_ids($uri_temp);
+	$uu->ids = $ids;
 	$uu->id = end($ids);
 	$item = $oo->get($uu->id);
 }
@@ -91,7 +92,8 @@ if(isset($item['name1']))
 else
 	$name = '';
 */
-$nav = $oo->nav($uu->ids);
+if($uu->ids)
+	$nav = $oo->nav($uu->ids);
 $show_menu = false;
 
 $email = ( isset($uri[1]) && $uri[1] == 'emails' );

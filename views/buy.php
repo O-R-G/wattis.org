@@ -1,10 +1,10 @@
 <?
     require_once('static/php/displayMedia.php');
     // $ids[0] is main
-    $rootid = $ids[1];
+    $rootid = $uri[1] === 'shop' ? $ids[2] : $ids[1];
     $root_item = $oo->get($rootid);
     $rootname = nl2br($root_item["name1"]);
-    $rootbody = nl2br($root_item['body']);
+    $rootbody = $root_item['body'] ? nl2br($root_item['body']) : '';
 
     $name = nl2br($item['name1']);
     $deck = nl2br($item['deck']);
@@ -14,7 +14,8 @@
     $image_ratio = 0;
     $image_tallest = 0;
 
-    $use4xgrid = ($rootname == "Buy Catalogs") ? TRUE : FALSE;
+    // $use4xgrid = ($rootname == "Buy Catalogs" || $rootname == 'Books') ? TRUE : FALSE;
+    $use4xgrid = FALSE;
     $mediaStyle = "width: 100%; padding: 10px;";
     $html = '';
 ?>

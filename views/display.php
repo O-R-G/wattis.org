@@ -3,7 +3,7 @@
 	$rootid = $ids[1];
 	$root_item = $oo->get($rootid);
 	$rootname = nl2br($root_item["name1"]);
-	$rootbody = nl2br($root_item['body']);
+	$rootbody = $root_item['body'] ? nl2br($root_item['body']) : '';
 	$children = $oo->children($rootid);
 	$previous_id = '';
 
