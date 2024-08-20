@@ -173,7 +173,7 @@ if($isMenu)
 				if ($displayDatesEnd) $datesDisplay = $beginDates . ' –<br />' . $endDates;
 			}		
 
-			echo nl2br($datesDisplay);
+			echo nl2br($datesDisplay); 
 			// if ($displayHours) $html .= $hoursDisplay;
 
 		    if($deck) {
