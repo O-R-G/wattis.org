@@ -45,12 +45,12 @@ if(!$isFound)
 }
 
 $root_item = $oo->get($rootid);
-$rootname = nl2br($root_item["name1"]);
+$rootname = $root_item["name1"];
 
 $name  = isset($item['name1']) ? $item['name1'] : '';
-$body  = isset($item['body']) ? nl2br(trim($item['body'])) : '';
-$deck  = isset($item['deck']) ? nl2br(trim($item['deck'])) : '';
-$notes = isset($item['notes']) ? nl2br(trim($item['notes'])) : '';
+$body  = isset($item['body']) ? trim($item['body']) : '';
+$deck  = isset($item['deck']) ? trim($item['deck']) : '';
+$notes = isset($item['notes']) ? trim($item['notes']) : '';
 $begin = isset($item['begin']) ? $item['begin'] : '';
 $end   = isset($item['end']) ? $item['end'] : '';
 
@@ -173,7 +173,7 @@ if($isMenu)
 				if ($displayDatesEnd) $datesDisplay = $beginDates . ' –<br />' . $endDates;
 			}		
 
-			echo nl2br($datesDisplay);
+			echo $datesDisplay;
 			// if ($displayHours) $html .= $hoursDisplay;
 
 		    if($deck) {
@@ -197,7 +197,7 @@ if($isMenu)
 		}
 		else
 		{
-			echo nl2br($name);	
+			echo $name;	
 			if($deck) {
 			    ?><div id='deck' class=''><?= $deck; ?></div><?
 		    }
