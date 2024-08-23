@@ -60,20 +60,12 @@ if(!!el)
 		// could be written into main query with LEFTJOIN
 	$temp = $oo->urls_to_ids(array('home', 'news'));
 	$items = $oo->children(end($temp));
-	foreach($items as $key => $item)
-		$newsItems[$key] = addslashes(strictClean($item["body"]));
+	foreach($items as $key => $item) {
+		if(substr($item['name1'], 0, 1) === '.') continue;
+		$newsItems[] = addslashes(strictClean($item["body"]));
+	}
 	?>
-   	newsItem = new Array(
-		<?
-			foreach($newsItems as $key => $item){
-				echo "\"" . $item . "\"";
-
-				if ( $key < (count($newsItems) -1) )
-					echo ",\n";
-				else
-					echo "\n";
-			}
-		?>
-	);
+   	newsItem = <?php echo json_encode($newsItems); ?>;
+	console.log(newsItem);
 	animateNewsTicker(newsItem[0]);
 </script>
