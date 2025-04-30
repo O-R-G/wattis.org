@@ -61,7 +61,7 @@ if(!!el)
 	$temp = $oo->urls_to_ids(array('home', 'news'));
 	$items = $oo->children(end($temp));
 	foreach($items as $key => $item)
-		$newsItems[$key] = addslashes(strictClean($item["body"]));
+		$newsItems[$key] = strictClean($item["body"]);
 	?>
    	newsItem = new Array(
 		<?
