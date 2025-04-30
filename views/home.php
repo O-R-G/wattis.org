@@ -62,8 +62,7 @@ if(!!el)
 	$items = $oo->children(end($temp));
 	foreach($items as $key => $item) {
 		if(substr($item['name1'], 0, 1) === '.') continue;
-		$newsItems[] = addslashes(strictClean($item["body"]));
-	}
+		$newsItems[$key] = strictClean($item["body"]);
 	?>
    	newsItem = <?php echo json_encode($newsItems); ?>;
 	console.log(newsItem);

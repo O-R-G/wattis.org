@@ -14,26 +14,26 @@ function strictEmpty($str){
 }
 function strictClean($str)
 {
-  while(ord(substr($str, 0, 1)) == '9' || 
-        ord(substr($str, 0, 1)) == '10' || 
-        ord(substr($str, 0, 1)) == '13' || 
-        ord(substr($str, 0, 1)) == '32'
-       )
-  {
-    $str = substr($str, 1);
-  }
-  if(!empty($str))
-  {
-    while(ord(substr($str, strlen($str) - 1)) == '9' || 
-          ord(substr($str, strlen($str) - 1)) == '10' || 
-          ord(substr($str, strlen($str) - 1)) == '13' || 
-          ord(substr($str, strlen($str) - 1)) == '32'
-         )
-    {
-      $str = substr($str, 0, strlen($str) - 1);
-    }
-  }
-  return $str;
+  // while(ord(substr($str, 0, 1)) == '9' || 
+  //       ord(substr($str, 0, 1)) == '10' || 
+  //       ord(substr($str, 0, 1)) == '13' || 
+  //       ord(substr($str, 0, 1)) == '32'
+  //      )
+  // {
+  //   $str = substr($str, 1);
+  // }
+  // if(!empty($str))
+  // {
+  //   while(ord(substr($str, strlen($str) - 1)) == '9' || 
+  //         ord(substr($str, strlen($str) - 1)) == '10' || 
+  //         ord(substr($str, strlen($str) - 1)) == '13' || 
+  //         ord(substr($str, strlen($str) - 1)) == '32'
+  //        )
+  //   {
+  //     $str = substr($str, 0, strlen($str) - 1);
+  //   }
+  // }
+  return trim($str);
 }
 
 function getRandomRecords($amount = 10, $fetched_ids_arr = array()){

@@ -10,8 +10,8 @@ require_once('static/php/displayMedia.php');
     $category_url = $uri[3];
     $category_name = $oo->name($category_id);
 
-    $name = nl2br($item['name1']);
-    $body = nl2br($item['body']);
+    $name = $item['name1'];
+    $body = $item['body'];
     $date = $item['begin'] ? date('F d, Y', strtotime($item['begin'])) : null;
 
     $pattern = "/\[image(\d+)\]/";
