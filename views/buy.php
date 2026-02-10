@@ -3,12 +3,12 @@
     // $ids[0] is main
     $rootid = $uri[1] === 'shop' ? $ids[2] : $ids[1];
     $root_item = $oo->get($rootid);
-    $rootname = nl2br($root_item["name1"]);
-    $rootbody = $root_item['body'] ? nl2br($root_item['body']) : '';
+    $rootname = $root_item["name1"];
+    $rootbody = $root_item['body'] ? $root_item['body'] : '';
 
-    $name = nl2br($item['name1']);
-    $deck = nl2br($item['deck']);
-    $body = nl2br($item['body']);
+    $name = $item['name1'];
+    $deck = $item['deck'];
+    $body = $item['body'];
 
     $media = $oo->media($item['id']);
     $image_ratio = 0;
@@ -37,9 +37,9 @@ $id AND objects.active ORDER BY media.rank;";
    //      $result = MYSQL_QUERY($sql);
    //      $myrow = MYSQL_FETCH_ARRAY($result);
    //      $rootname = $myrow['rootname'];
-   //      $name = nl2br($myrow['name1']);
-   //      $deck = nl2br($myrow['deck']);
-   //      $body = nl2br($myrow['body']);
+   //      $name = $myrow['name1']);
+   //      $deck = $myrow['deck']);
+   //      $body = $myrow['body']);
    //      mysql_data_seek($result, 0);    // reset to row 0
    //      $html = "";
    //      $i=0;
@@ -106,7 +106,7 @@ $id AND objects.active ORDER BY media.rank;";
        <div class='listContainer half-width doublewide helvetica small'></div><div class='listContainer half-width helvetica small'>
             <?= $mediaCaption; ?><br>
             <?= $deck; ?><br><br>
-            <a href='mailto:jgerrity@cca.edu'>Please email for international orders</a>
+            <a href='mailto:mackenzie.stevens@cca.edu'>Please email for international orders</a>
         </div><div class='listContainer half-width times'><?= $body; ?></div>
 
    </div>
@@ -150,7 +150,7 @@ $id AND objects.active ORDER BY media.rank;";
         $html .= "</div>";
 
         $html .= "</div>";
-	// echo nl2br($html);
+	// echo $html);
 	?>
 <script src = '/static/js/gallery_static.js'></script>
 <script>

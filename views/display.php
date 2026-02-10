@@ -2,8 +2,8 @@
 	require_once('static/php/displayMedia.php');
 	$rootid = $ids[1];
 	$root_item = $oo->get($rootid);
-	$rootname = nl2br($root_item["name1"]);
-	$rootbody = $root_item['body'] ? nl2br($root_item['body']) : '';
+	$rootname = $root_item["name1"];
+	$rootbody = $root_item['body'] ? $root_item['body'] : '';
 	$children = $oo->children($rootid);
 	$previous_id = '';
 
@@ -76,7 +76,7 @@
 		                    ?><a class="display-item listContainer <?= (($use4xgrid) ? "fourth-with" : "half-width"); ?>" href='<?= $base_url . $child['url']; ?>'>
 		                    	<div id='image<?= $i; ?>' class = ' '>
 		                    		<?= displayMedia($mediaFile, $mediaCaption, $mediaStyle); ?>
-		                    		<div class = 'captionContainer helvetica small'><?= nl2br($child['name1']); ?></div>
+		                    		<div class = 'captionContainer helvetica small'><?= $child['name1']; ?></div>
 		                    	</div>
 		                    </a><?
 		                	$i++;

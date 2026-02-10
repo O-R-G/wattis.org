@@ -53,6 +53,8 @@ elseif($uri[1] == 'search')
 	require_once('views/search.php');
 elseif($uri[1] == 'emails')
 	require_once('views/email.php');
+elseif($uri[1] == 'temp')
+	require_once('views/temp.php');
 else 
     require_once("views/view.php");
 
