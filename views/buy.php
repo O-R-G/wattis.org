@@ -106,7 +106,7 @@ $id AND objects.active ORDER BY media.rank;";
        <div class='listContainer half-width doublewide helvetica small'></div><div class='listContainer half-width helvetica small'>
             <?= $mediaCaption; ?><br>
             <?= $deck; ?><br><br>
-            <a href='mailto:jgerrity@cca.edu'>Please email for international orders</a>
+            <a href='mailto:mackenzie.stevens@cca.edu'>Please email for international orders</a>
         </div><div class='listContainer half-width times'><?= $body; ?></div>
 
    </div>
