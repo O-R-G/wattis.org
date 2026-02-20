@@ -1,5 +1,17 @@
 <?
     require_once('static/php/displayMedia.php');
+    function getShopConfig($db){
+        $sql = "SELECT o.* 
+        FROM objects o
+        JOIN wires w ON w.toid = o.id AND w.active = 1
+        JOIN objects o1 ON w.fromid = o1.id AND o1.active = 1 AND o1.url = 'settings'
+        JOIN wires w1 ON w1.toid = o1.id AND w1.fromid = 0 AND w1.active = 1
+        WHERE o.url = 'shop' AND o.active = 1";
+        $result = $db->query($sql);
+        $output = $result->fetch_assoc();
+        return $output ?? array();
+    }
+    $config = getShopConfig($db);
     // $ids[0] is main
     $rootid = $uri[1] === 'shop' ? $ids[2] : $ids[1];
     $root_item = $oo->get($rootid);
@@ -106,7 +118,7 @@ $id AND objects.active ORDER BY media.rank;";
        <div class='listContainer half-width doublewide helvetica small'></div><div class='listContainer half-width helvetica small'>
             <?= $mediaCaption; ?><br>
             <?= $deck; ?><br><br>
-            <a href='mailto:mackenzie.stevens@cca.edu'>Please email for international orders</a>
+            <a href='mailto:<?php echo $config['state'] ?? 'mackenzie.stevens@cca.edu'; ?>'>Please email for international orders</a>
         </div><div class='listContainer half-width times'><?= $body; ?></div>
 
    </div>
